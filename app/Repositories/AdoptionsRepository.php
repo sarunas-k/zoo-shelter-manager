@@ -25,15 +25,15 @@ class AdoptionsRepository implements IAdoptionsRepository {
         return Adoption::where('person_id', $personId)->get();
     }
 
-    public function addFromInput($request) {
+    public function addFromInput($formFields) {
         // Add new animal adoptions entry to existing animal
-        $animal = Animal::find($request->input('animal'));
-        $person = Person::find($request->input('person'));
+        $animal = Animal::find($formFields['animal']);
+        $person = Person::find($formFields['person']);
         if ($animal !== null && $person !== null) {
             $animal->adopters()->attach(
                 $person->id, 
-                ['adoption_date' => $request->input('adoption-date'),
-                 'notes' => $request->input('notes')
+                ['adoption_date' => $formFields['adoption-date'],
+                 'notes' => $formFields['notes']
                 ]);
             return true;
         } else {
@@ -41,7 +41,13 @@ class AdoptionsRepository implements IAdoptionsRepository {
         }
     }
 
-    public function delete($id) {
-        $this->get($id)->delete();
+    public function updateFromInput($adoption, $formFields) {
+        $adoption->update(['notes' => $formFields['notes']]);
+    }
+
+    public function delete($adoption) {
+        if ($adoption == null)
+            return;
+        $adoption->delete();
     }
 }

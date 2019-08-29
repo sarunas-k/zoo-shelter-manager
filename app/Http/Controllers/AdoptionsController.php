@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Repositories\Interfaces\IAdoptionsRepository;
 use App\Repositories\Interfaces\IAnimalsRepository;
 use App\Repositories\Interfaces\IPeopleRepository;
+use App\Adoption;
+use App\Animal;
 
 class AdoptionsController extends Controller
 {
@@ -43,15 +45,15 @@ class AdoptionsController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource from animal id.
+     * Show the form for creating a new adoption for animal.
      *
+     * @param Animal  $animal
      * @return \Illuminate\Http\Response
      */
-    public function createWithAnimalID($id)
+    public function createWithAnimalID(Animal $animal)
     {
         return view('adoptions/create')->with([
-            'animal' => $this->animalsRepo->get($id),
-            'animals' => $this->animalsRepo->all(),
+            'animal' => $this->animalsRepo->formatFieldsForPresentation($animal),
             'people' => $this->peopleRepo->all()
         ]);
     }
@@ -64,13 +66,14 @@ class AdoptionsController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
+        $formFields = $this->validate($request, [
             'animal' => 'required|numeric',
             'adoption-date' => 'required|date',
             'person' => 'required|numeric',
+            'notes' => 'string|nullable'
         ]);
 
-        $result = $this->adoptionsRepo->addFromInput($request);
+        $result = $this->adoptionsRepo->addFromInput($formFields);
         if ($result)
             return redirect('/adoptions/')->with('success', 'Adoption was added');
         else
@@ -80,45 +83,56 @@ class AdoptionsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  Adoption  $adoption
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Adoption $adoption)
     {
-        return view('adoptions/show')->with('adoption', $this->adoptionsRepo->get($id));
+        return view('adoptions/show')->with('adoption', $adoption);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  Adoption  $adoption
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Adoption $adoption)
     {
-        return view('adoptions/edit')->with('adoption', $this->adoptionsRepo->get($id));
+        return view('adoptions/edit')->with([
+            'adoption' => $adoption,
+            'animal' => $this->animalsRepo->formatFieldsForPresentation($adoption->animal),
+            'adopter' => $adoption->person,
+            'people' => $this->peopleRepo->all()
+            ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  Adoption  $adoption
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Adoption $adoption)
     {
-        //
+        $formFields = $this->validate($request, [
+            'notes' => 'string|nullable'
+        ]);
+
+        $this->adoptionsRepo->updateFromInput($adoption, $formFields);
+
+        return redirect('/adoptions/')->with('success', 'Adoption was updated');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  Adoption  $adoption
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Adoption $adoption)
     {
-        //
+        $this->adoptionsRepo->delete($adoption);
     }
 }

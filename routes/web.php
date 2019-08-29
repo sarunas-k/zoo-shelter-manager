@@ -25,7 +25,7 @@ Route::get('/procedures/create/{id}', 'ProceduresController@createWithAnimalID')
 
 // ADOPTIONS ROUTES
 Route::resource('adoptions', 'AdoptionsController')->middleware('auth');
-Route::get('/adoptions/create/{id}', 'AdoptionsController@createWithAnimalID')->middleware('auth')->name('adoptions.create.for.animal');
+Route::get('/adoptions/create/{animal}', 'AdoptionsController@createWithAnimalID')->middleware('auth')->name('adoptions.create.for.animal');
 
 // FOSTERS ROUTES
 Route::resource('fosters', 'FostersController')->middleware('auth');

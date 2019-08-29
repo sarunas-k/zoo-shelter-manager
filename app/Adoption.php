@@ -10,6 +10,7 @@ class Adoption extends Model
     protected $table = 'animal_adoptions';
     // Primary key
     public $primaryKey = 'id';
+    protected $guarded = [];
 
     public function animal() {
         return $this->belongsTo(Animal::class);
