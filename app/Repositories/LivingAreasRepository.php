@@ -25,9 +25,9 @@ class LivingAreasRepository implements ILivingAreasRepository {
         $livingArea->save();
     }
 
-    public function updateFromInput($id, $request) {
+    public function updateFromInput($id, $formFields) {
         $livingArea = $this->get($id);
-        $livingArea->name = $request->input('area-name');
+        $livingArea->name = $formFields['area-name'];
         $livingArea->save();
     }
 

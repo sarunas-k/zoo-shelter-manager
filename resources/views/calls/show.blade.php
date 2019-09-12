@@ -50,13 +50,15 @@
 
 @section('scripts')
     <script>
-        $('table td:first').css('width', '15%');
-        // SET MENU ITEM AS ACTIVE
-        $('.sidebar .nav-link').each((i, element) => {
-            if ($(element).text().indexOf('Calls') >= 0)
-                $(element).addClass('active');
-            else
-                $(element).removeClass('active');
-        });
+        window.onload = function () {
+            $('table td:first').css('width', '15%');
+            // SET MENU ITEM AS ACTIVE
+            $('.sidebar .nav-link').each((i, element) => {
+                if ($(element).text().indexOf('Calls') >= 0)
+                    $(element).addClass('active');
+                else
+                    $(element).removeClass('active');
+            });
+        }
     </script>
 @endsection

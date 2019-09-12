@@ -41,6 +41,9 @@ Route::resource('living-areas', 'LivingAreasController')->middleware('auth');
 // PEOPLE ROUTES
 Route::resource('people', 'PeopleController')->middleware('auth');
 
+// REPORTS ROUTES
+Route::resource('reports', 'ReportsController')->only(['index', 'show'])->middleware('auth');
+
 
 Route::get('/search', 'SearchController@index')->middleware('auth');
 

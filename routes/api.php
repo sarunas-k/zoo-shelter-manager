@@ -18,3 +18,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/animals', 'AnimalsController@getAnimalsAsJson')->middleware('auth:api');
+Route::get('/reports', 'ReportsController@getReportJSON')->middleware('auth:api');

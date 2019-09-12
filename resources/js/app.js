@@ -23,6 +23,7 @@ window.Vue = require('vue');
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('search-field', require('./components/SearchField.vue').default);
 Vue.component('animals-list', require('./components/AnimalsList.vue').default);
+Vue.component('reports', require('./components/Reports.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

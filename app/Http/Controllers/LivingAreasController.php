@@ -71,7 +71,7 @@ class LivingAreasController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('living-areas/edit')->with('livingArea', $this->areasRepo->get($id));
     }
 
     /**
@@ -83,7 +83,13 @@ class LivingAreasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $formFields = $this->validate($request, [
+            'area-name' => 'required',
+        ]);
+
+        $this->areasRepo->updateFromInput($id, $formFields);
+
+        return redirect('/living-areas')->with('success', 'Living area was edited');
     }
 
     /**

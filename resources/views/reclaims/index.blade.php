@@ -35,12 +35,14 @@
 
 @section('scripts')
     <script>
-        // SET MENU ITEM AS ACTIVE
-        $('.sidebar .nav-link').each((i, element) => {
-            if ($(element).text().indexOf('Reclaims') >= 0)
-                $(element).addClass('active');
-            else
-                $(element).removeClass('active');
-        });
+        window.onload = function () {
+            // SET MENU ITEM AS ACTIVE
+            $('.sidebar .nav-link').each((i, element) => {
+                if ($(element).text().indexOf('Reclaims') >= 0)
+                    $(element).addClass('active');
+                else
+                    $(element).removeClass('active');
+            });
+        }
     </script>
 @endsection

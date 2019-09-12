@@ -74,7 +74,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/reports">
+              <a class="nav-link" href="{{route('reports.index')}}">
                 <span data-feather="bar-chart-2"></span>
                 Reports
               </a>
