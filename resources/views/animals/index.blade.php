@@ -10,7 +10,7 @@
 @if(!isset($animals))
 <p>No animal records found.</p>
 @else
-<animals-list></animals-list>
+<animals-list csrf="{{ csrf_token() }}"></animals-list>
 {{-- {{ $animals->appends(request()->input())->links() }}
 <div class="filters">
     <a href="{{route('animals.index', ['gender[]' => 'Male'])}}" class="btn btn-primary">Males</a>

@@ -18,6 +18,12 @@ class AnimalsRepository implements IAnimalsRepository {
         return $animals->paginate($perPage);
     }
 
+    public function allFilteredAndPaginatedJSON($request, $perPage = 10) {
+        $animals = Animal::with(['species', 'color', 'living_area'])->latest();
+        $this->applyFilters($animals, $request);
+        return $animals->paginate($perPage)->appends($request->input());
+    }
+
     public function getLatest($number = null) {
         $latestAnimals = Animal::latest();
         if (isset($number) && is_numeric($number)) {
@@ -117,7 +123,7 @@ class AnimalsRepository implements IAnimalsRepository {
     public function delete($animal) {
         $animal->images()->detach();
         $animal->breeds()->detach();
-        $animal->procedures()->detach();
+        $animal->procedures()->delete();
         $animal->adopters()->detach();
         $animal->fosterers()->detach();
         $animal->reclaimers()->detach();
@@ -160,7 +166,7 @@ class AnimalsRepository implements IAnimalsRepository {
     }
 
     private function applyFilters($animals, $request) {
-        if (empty($request->gender) && empty($request->species) && empty($request->color))
+        if (empty($request->gender) && empty($request->species) && empty($request->color) && empty($request->size))
             return;
             
         // Filter by gender
@@ -173,6 +179,10 @@ class AnimalsRepository implements IAnimalsRepository {
                 $q->whereIn('name', $request->species);
             });
         }
+
+        // Filter by size
+        if(!empty($request->size))
+            $animals->whereIn('size', $request->size);
 
         // Filter by color
         if(!empty($request->color)) {

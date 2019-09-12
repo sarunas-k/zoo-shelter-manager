@@ -6,19 +6,6 @@
     export default {
         mounted() {
             console.log('Vue: SearchField Component mounted.')
-            axios.get('/api/animals')
-                .then(function (response) {
-                    // handle success
-                    console.log(response);
-                })
-                .catch(function (error) {
-                    // handle error
-                    console.log(error);
-                })
-                .finally(function () {
-                    // always executed
-                    console.log('Finished axios request');
-                });
         },
         data: function() {
             return {

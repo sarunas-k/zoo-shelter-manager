@@ -1688,6 +1688,300 @@ module.exports = {
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AnimalsList.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/AnimalsList.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  mounted: function mounted() {
+    console.log('Vue: AnimalsList Component mounted.');
+    var url = '/api/animals';
+    this.fetch(url);
+  },
+  data: function data() {
+    return {
+      animals: [],
+      response: [],
+      isLoading: false,
+      checkedFilterItems: {
+        species: [],
+        gender: [],
+        size: [],
+        color: []
+      }
+    };
+  },
+  methods: {
+    checkedFilter: function checkedFilter(event, filterColumn) {
+      var target = event.currentTarget;
+      var filterValue = target.getAttribute('data-animal-filter');
+      var isFiltered = this.checkedFilterItems[filterColumn].includes(filterValue);
+      if (!isFiltered) this.checkedFilterItems[filterColumn].push(filterValue);else this.checkedFilterItems[filterColumn].splice(this.checkedFilterItems[filterColumn].indexOf(filterValue), 1);
+      this.fetch('/api/animals', this.checkedFilterItems);
+    },
+    submitFilter: function submitFilter() {
+      // Make XMLHttpRequest to get animal records and pass animal record filters
+      this.fetch('/api/animals', this.checkedFilterItems);
+    },
+    routeAnimalDetailsPage: function routeAnimalDetailsPage(id) {
+      return '/animals/' + id;
+    },
+    routeAnimalEditPage: function routeAnimalEditPage(id) {
+      return '/animals/' + id + '/edit';
+    },
+    routeAnimalDelete: function routeAnimalDelete(id) {
+      return '/animals/' + id;
+    },
+    fetch: function fetch(url, params) {
+      var _this = this;
+
+      if (!url) return;
+      this.isLoading = true;
+      console.log("Fetching URL: " + url);
+      axios.get(url, params ? {
+        params: params
+      } : null).then(function (response) {
+        // success
+        console.log("Response:");
+        console.log(response);
+        _this.response = response.data;
+        _this.animals = response.data.data;
+      })["catch"](function (error) {
+        // error
+        // handle error
+        console.log(error);
+      }).then(function () {
+        // finally
+        // always executed
+        console.log('Finished axios request');
+        _this.isLoading = false;
+      });
+    }
+  },
+  props: ['csrf'],
+  computed: {
+    tableOpacity: function tableOpacity() {
+      return this.isLoading ? 0.6 : 1;
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ExampleComponent.vue?vue&type=script&lang=js&":
 /*!***************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ExampleComponent.vue?vue&type=script&lang=js& ***!
@@ -1737,16 +2031,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     console.log('Vue: SearchField Component mounted.');
-    axios.get('/api/animals').then(function (response) {
-      // handle success
-      console.log(response);
-    })["catch"](function (error) {
-      // handle error
-      console.log(error);
-    })["finally"](function () {
-      // always executed
-      console.log('Finished axios request');
-    });
   },
   data: function data() {
     return {
@@ -37042,6 +37326,849 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AnimalsList.vue?vue&type=template&id=f24648cc&":
+/*!**************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/AnimalsList.vue?vue&type=template&id=f24648cc& ***!
+  \**************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "animals-list" }, [
+    _c(
+      "nav",
+      {
+        staticClass: "float-left",
+        attrs: { "aria-label": "Page navigation example" }
+      },
+      [
+        _c("ul", { staticClass: "pagination" }, [
+          _c(
+            "li",
+            { staticClass: "page-item", staticStyle: { cursor: "pointer" } },
+            [
+              _c(
+                "a",
+                {
+                  staticClass: "page-link",
+                  attrs: { "aria-label": "Previous" },
+                  on: {
+                    click: function($event) {
+                      return _vm.fetch(_vm.response.prev_page_url)
+                    }
+                  }
+                },
+                [
+                  _c("span", { attrs: { "aria-hidden": "true" } }, [
+                    _vm._v("«")
+                  ]),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "sr-only" }, [_vm._v("Previous")])
+                ]
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c("li", { staticClass: "page-item" }, [
+            _c("span", { staticClass: "page-link" }, [
+              _vm._v(
+                "Page " +
+                  _vm._s(_vm.response.current_page) +
+                  " of " +
+                  _vm._s(_vm.response.last_page)
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c(
+            "li",
+            { staticClass: "page-item", staticStyle: { cursor: "pointer" } },
+            [
+              _c(
+                "a",
+                {
+                  staticClass: "page-link",
+                  attrs: { "aria-label": "Next" },
+                  on: {
+                    click: function($event) {
+                      return _vm.fetch(_vm.response.next_page_url)
+                    }
+                  }
+                },
+                [
+                  _c("span", { attrs: { "aria-hidden": "true" } }, [
+                    _vm._v("»")
+                  ]),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "sr-only" }, [_vm._v("Next")])
+                ]
+              )
+            ]
+          )
+        ])
+      ]
+    ),
+    _vm._v(" "),
+    _c("div", { staticClass: "animals-list-filters float-left ml-3 mt-1" }, [
+      _c("span", { staticClass: "dropdown filter-species" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-primary btn-sm dropdown-toggle",
+            attrs: {
+              type: "button",
+              id: "menuButtonSpecies",
+              "data-toggle": "dropdown",
+              "aria-haspopup": "true",
+              "aria-expanded": "false"
+            }
+          },
+          [_vm._v("\n                SPECIES\n            ")]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "dropdown-menu px-2",
+            attrs: { "aria-labelledby": "menuButtonSpecies" },
+            on: {
+              click: function($event) {
+                return $event.stopPropagation()
+              }
+            }
+          },
+          [
+            _c("div", { staticClass: "form-check dropdown-item" }, [
+              _c("input", {
+                staticClass: "form-check-input filter-species-checkbox",
+                attrs: {
+                  type: "checkbox",
+                  value: "",
+                  id: "checkboxDogs",
+                  "data-animal-filter": "Dogs"
+                },
+                on: {
+                  change: function($event) {
+                    return _vm.checkedFilter($event, "species")
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c(
+                "label",
+                {
+                  staticClass: "form-check-label",
+                  attrs: { for: "checkboxDogs" }
+                },
+                [_vm._v("\n                        Dogs\n                    ")]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-check dropdown-item" }, [
+              _c("input", {
+                staticClass: "form-check-input filter-species-checkbox",
+                attrs: {
+                  type: "checkbox",
+                  value: "",
+                  id: "checkboxCats",
+                  "data-animal-filter": "Cats"
+                },
+                on: {
+                  change: function($event) {
+                    return _vm.checkedFilter($event, "species")
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c(
+                "label",
+                {
+                  staticClass: "form-check-label",
+                  attrs: { for: "checkboxCats" }
+                },
+                [_vm._v("\n                        Cats\n                    ")]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-check dropdown-item" }, [
+              _c("input", {
+                staticClass: "form-check-input filter-species-checkbox",
+                attrs: {
+                  type: "checkbox",
+                  value: "",
+                  id: "checkboxTurtles",
+                  "data-animal-filter": "Turtles"
+                },
+                on: {
+                  change: function($event) {
+                    return _vm.checkedFilter($event, "species")
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c(
+                "label",
+                {
+                  staticClass: "form-check-label",
+                  attrs: { for: "checkboxTurtles" }
+                },
+                [
+                  _vm._v(
+                    "\n                        Turtles\n                    "
+                  )
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "dropdown-item" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-secondary btn-sm btn-block",
+                  attrs: { type: "button", id: "filter-species-button" },
+                  on: {
+                    click: function($event) {
+                      return _vm.submitFilter("species")
+                    }
+                  }
+                },
+                [_vm._v("SET")]
+              )
+            ])
+          ]
+        )
+      ]),
+      _vm._v(" "),
+      _c("span", { staticClass: "dropdown filter-gender" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-primary btn-sm dropdown-toggle",
+            attrs: {
+              type: "button",
+              id: "menuButtonGender",
+              "data-toggle": "dropdown",
+              "aria-haspopup": "true",
+              "aria-expanded": "false"
+            }
+          },
+          [_vm._v("\n                GENDER\n            ")]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "dropdown-menu px-2",
+            attrs: { "aria-labelledby": "menuButtonGender" },
+            on: {
+              click: function($event) {
+                return $event.stopPropagation()
+              }
+            }
+          },
+          [
+            _c("div", { staticClass: "form-check dropdown-item" }, [
+              _c("input", {
+                staticClass: "form-check-input",
+                attrs: {
+                  type: "checkbox",
+                  id: "checkboxMale",
+                  "data-animal-filter": "Male"
+                },
+                on: {
+                  change: function($event) {
+                    return _vm.checkedFilter($event, "gender")
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c(
+                "label",
+                {
+                  staticClass: "form-check-label",
+                  attrs: { for: "checkboxMale" }
+                },
+                [_vm._v("\n                        Male\n                    ")]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-check dropdown-item" }, [
+              _c("input", {
+                staticClass: "form-check-input",
+                attrs: {
+                  type: "checkbox",
+                  id: "checkboxFemale",
+                  "data-animal-filter": "Female"
+                },
+                on: {
+                  change: function($event) {
+                    return _vm.checkedFilter($event, "gender")
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c(
+                "label",
+                {
+                  staticClass: "form-check-label",
+                  attrs: { for: "checkboxFemale" }
+                },
+                [
+                  _vm._v(
+                    "\n                        Female\n                    "
+                  )
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "dropdown-item" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-secondary btn-sm btn-block",
+                  attrs: { type: "button", id: "filter-gender-button" },
+                  on: {
+                    click: function($event) {
+                      return _vm.submitFilter("gender")
+                    }
+                  }
+                },
+                [_vm._v("SET")]
+              )
+            ])
+          ]
+        )
+      ]),
+      _vm._v(" "),
+      _c("span", { staticClass: "dropdown filter-size" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-primary btn-sm dropdown-toggle",
+            attrs: {
+              type: "button",
+              id: "menuButtonSize",
+              "data-toggle": "dropdown",
+              "aria-haspopup": "true",
+              "aria-expanded": "false"
+            }
+          },
+          [_vm._v("\n                SIZE\n            ")]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "dropdown-menu px-2",
+            attrs: { "aria-labelledby": "menuButtonSize" },
+            on: {
+              click: function($event) {
+                return $event.stopPropagation()
+              }
+            }
+          },
+          [
+            _c("div", { staticClass: "form-check dropdown-item" }, [
+              _c("input", {
+                staticClass: "form-check-input",
+                attrs: {
+                  type: "checkbox",
+                  id: "checkboxSizeSmall",
+                  "data-animal-filter": "Small"
+                },
+                on: {
+                  change: function($event) {
+                    return _vm.checkedFilter($event, "size")
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c(
+                "label",
+                {
+                  staticClass: "form-check-label",
+                  attrs: { for: "checkboxSizeSmall" }
+                },
+                [
+                  _vm._v(
+                    "\n                        Small\n                    "
+                  )
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-check dropdown-item" }, [
+              _c("input", {
+                staticClass: "form-check-input",
+                attrs: {
+                  type: "checkbox",
+                  id: "checkboxSizeMedium",
+                  "data-animal-filter": "Medium"
+                },
+                on: {
+                  change: function($event) {
+                    return _vm.checkedFilter($event, "size")
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c(
+                "label",
+                {
+                  staticClass: "form-check-label",
+                  attrs: { for: "checkboxSizeMedium" }
+                },
+                [
+                  _vm._v(
+                    "\n                        Medium\n                    "
+                  )
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-check dropdown-item" }, [
+              _c("input", {
+                staticClass: "form-check-input",
+                attrs: {
+                  type: "checkbox",
+                  id: "checkboxSizeLarge",
+                  "data-animal-filter": "Large"
+                },
+                on: {
+                  change: function($event) {
+                    return _vm.checkedFilter($event, "size")
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c(
+                "label",
+                {
+                  staticClass: "form-check-label",
+                  attrs: { for: "checkboxSizeLarge" }
+                },
+                [
+                  _vm._v(
+                    "\n                        Large\n                    "
+                  )
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-check dropdown-item" }, [
+              _c("input", {
+                staticClass: "form-check-input",
+                attrs: {
+                  type: "checkbox",
+                  id: "checkboxSizeXLarge",
+                  "data-animal-filter": "Very large"
+                },
+                on: {
+                  change: function($event) {
+                    return _vm.checkedFilter($event, "size")
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c(
+                "label",
+                {
+                  staticClass: "form-check-label",
+                  attrs: { for: "checkboxSizeXLarge" }
+                },
+                [
+                  _vm._v(
+                    "\n                        Very large\n                    "
+                  )
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "dropdown-item" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-secondary btn-sm btn-block",
+                  attrs: { type: "button", id: "filter-size-button" },
+                  on: {
+                    click: function($event) {
+                      return _vm.submitFilter("size")
+                    }
+                  }
+                },
+                [_vm._v("SET")]
+              )
+            ])
+          ]
+        )
+      ]),
+      _vm._v(" "),
+      _c("span", { staticClass: "dropdown filter-color" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-primary btn-sm dropdown-toggle",
+            attrs: {
+              type: "button",
+              id: "menuButtonColor",
+              "data-toggle": "dropdown",
+              "aria-haspopup": "true",
+              "aria-expanded": "false"
+            }
+          },
+          [_vm._v("\n                COLOR\n            ")]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "dropdown-menu px-2",
+            attrs: { "aria-labelledby": "menuButtonColor" },
+            on: {
+              click: function($event) {
+                return $event.stopPropagation()
+              }
+            }
+          },
+          [
+            _c("div", { staticClass: "form-check dropdown-item" }, [
+              _c("input", {
+                staticClass: "form-check-input",
+                attrs: {
+                  type: "checkbox",
+                  id: "checkboxColorBlack",
+                  "data-animal-filter": "Black"
+                },
+                on: {
+                  change: function($event) {
+                    return _vm.checkedFilter($event, "color")
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c(
+                "label",
+                {
+                  staticClass: "form-check-label",
+                  attrs: { for: "checkboxColorBlack" }
+                },
+                [
+                  _vm._v(
+                    "\n                        Black\n                    "
+                  )
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-check dropdown-item" }, [
+              _c("input", {
+                staticClass: "form-check-input",
+                attrs: {
+                  type: "checkbox",
+                  id: "checkboxColorBrown",
+                  "data-animal-filter": "Brown"
+                },
+                on: {
+                  change: function($event) {
+                    return _vm.checkedFilter($event, "color")
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c(
+                "label",
+                {
+                  staticClass: "form-check-label",
+                  attrs: { for: "checkboxColorBrown" }
+                },
+                [
+                  _vm._v(
+                    "\n                        Brown\n                    "
+                  )
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-check dropdown-item" }, [
+              _c("input", {
+                staticClass: "form-check-input",
+                attrs: {
+                  type: "checkbox",
+                  id: "checkboxColorWhite",
+                  "data-animal-filter": "White"
+                },
+                on: {
+                  change: function($event) {
+                    return _vm.checkedFilter($event, "color")
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c(
+                "label",
+                {
+                  staticClass: "form-check-label",
+                  attrs: { for: "checkboxColorWhite" }
+                },
+                [
+                  _vm._v(
+                    "\n                        White\n                    "
+                  )
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-check dropdown-item" }, [
+              _c("input", {
+                staticClass: "form-check-input",
+                attrs: {
+                  type: "checkbox",
+                  id: "checkboxColorBrownBlack",
+                  "data-animal-filter": "Black and brown"
+                },
+                on: {
+                  change: function($event) {
+                    return _vm.checkedFilter($event, "color")
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c(
+                "label",
+                {
+                  staticClass: "form-check-label",
+                  attrs: { for: "checkboxColorBrownBlack" }
+                },
+                [
+                  _vm._v(
+                    "\n                        Black and brown\n                    "
+                  )
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "dropdown-item" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-secondary btn-sm btn-block",
+                  attrs: { type: "button", id: "filter-color-button" },
+                  on: {
+                    click: function($event) {
+                      return _vm.submitFilter("color")
+                    }
+                  }
+                },
+                [_vm._v("SET")]
+              )
+            ])
+          ]
+        )
+      ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "table",
+      {
+        staticClass: "table table-sm table-bordered my-4 table-animals-list",
+        style: { opacity: _vm.tableOpacity }
+      },
+      [
+        _vm._m(0),
+        _vm._v(" "),
+        _c(
+          "tbody",
+          _vm._l(_vm.animals, function(animal, index) {
+            return _c("tr", { key: index }, [
+              _c("th", { attrs: { scope: "row" } }, [
+                _c(
+                  "a",
+                  { attrs: { href: _vm.routeAnimalDetailsPage(animal.id) } },
+                  [_vm._v(_vm._s(animal.list_number))]
+                )
+              ]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(animal.species.name))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(animal.gender))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(animal.color.name))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(animal.name))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(animal.birthdate))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(animal.size))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(animal.intake_date.substr(0, 11)))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(animal.chip_number))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(animal.living_area.name))]),
+              _vm._v(" "),
+              _c("td", [
+                _c(
+                  "a",
+                  {
+                    staticClass: "btn btn-primary btn-sm",
+                    attrs: { href: _vm.routeAnimalEditPage(animal.id) }
+                  },
+                  [_vm._v("Edit")]
+                )
+              ]),
+              _vm._v(" "),
+              _c("td", [
+                _c(
+                  "form",
+                  {
+                    attrs: {
+                      method: "POST",
+                      action: _vm.routeAnimalDelete(animal.id)
+                    }
+                  },
+                  [
+                    _c("input", {
+                      attrs: { type: "hidden", name: "_token" },
+                      domProps: { value: _vm.csrf }
+                    }),
+                    _vm._v(" "),
+                    _c("input", {
+                      attrs: {
+                        type: "hidden",
+                        name: "_method",
+                        value: "DELETE"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-danger btn-sm",
+                        attrs: { type: "submit" }
+                      },
+                      [_vm._v("Delete")]
+                    )
+                  ]
+                )
+              ])
+            ])
+          }),
+          0
+        )
+      ]
+    ),
+    _vm._v(" "),
+    _c("nav", { attrs: { "aria-label": "Page navigation example" } }, [
+      _c("ul", { staticClass: "pagination" }, [
+        _c(
+          "li",
+          { staticClass: "page-item", staticStyle: { cursor: "pointer" } },
+          [
+            _c(
+              "a",
+              {
+                staticClass: "page-link",
+                attrs: { "aria-label": "Previous" },
+                on: {
+                  click: function($event) {
+                    return _vm.fetch(_vm.response.prev_page_url)
+                  }
+                }
+              },
+              [
+                _c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("«")]),
+                _vm._v(" "),
+                _c("span", { staticClass: "sr-only" }, [_vm._v("Previous")])
+              ]
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c("li", { staticClass: "page-item" }, [
+          _c("span", { staticClass: "page-link" }, [
+            _vm._v(
+              "Page " +
+                _vm._s(_vm.response.current_page) +
+                " of " +
+                _vm._s(_vm.response.last_page)
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c(
+          "li",
+          { staticClass: "page-item", staticStyle: { cursor: "pointer" } },
+          [
+            _c(
+              "a",
+              {
+                staticClass: "page-link",
+                attrs: { "aria-label": "Next" },
+                on: {
+                  click: function($event) {
+                    return _vm.fetch(_vm.response.next_page_url)
+                  }
+                }
+              },
+              [
+                _c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("»")]),
+                _vm._v(" "),
+                _c("span", { staticClass: "sr-only" }, [_vm._v("Next")])
+              ]
+            )
+          ]
+        )
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", { staticClass: "thead-dark" }, [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Nr")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Species")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Gender")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Color")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Name")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Date of Birth")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Size")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Intake Date")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Microchip")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Living area")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } })
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ExampleComponent.vue?vue&type=template&id=299e239e&":
 /*!*******************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ExampleComponent.vue?vue&type=template&id=299e239e& ***!
@@ -49310,6 +50437,7 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 
 Vue.component('example-component', __webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue")["default"]);
 Vue.component('search-field', __webpack_require__(/*! ./components/SearchField.vue */ "./resources/js/components/SearchField.vue")["default"]);
+Vue.component('animals-list', __webpack_require__(/*! ./components/AnimalsList.vue */ "./resources/js/components/AnimalsList.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -49384,6 +50512,75 @@ if (window.Laravel && window.Laravel.apiToken) window.axios.defaults.headers.com
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     encrypted: true
 // });
+
+/***/ }),
+
+/***/ "./resources/js/components/AnimalsList.vue":
+/*!*************************************************!*\
+  !*** ./resources/js/components/AnimalsList.vue ***!
+  \*************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _AnimalsList_vue_vue_type_template_id_f24648cc___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AnimalsList.vue?vue&type=template&id=f24648cc& */ "./resources/js/components/AnimalsList.vue?vue&type=template&id=f24648cc&");
+/* harmony import */ var _AnimalsList_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AnimalsList.vue?vue&type=script&lang=js& */ "./resources/js/components/AnimalsList.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _AnimalsList_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _AnimalsList_vue_vue_type_template_id_f24648cc___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _AnimalsList_vue_vue_type_template_id_f24648cc___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/AnimalsList.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/AnimalsList.vue?vue&type=script&lang=js&":
+/*!**************************************************************************!*\
+  !*** ./resources/js/components/AnimalsList.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AnimalsList_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./AnimalsList.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AnimalsList.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AnimalsList_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/AnimalsList.vue?vue&type=template&id=f24648cc&":
+/*!********************************************************************************!*\
+  !*** ./resources/js/components/AnimalsList.vue?vue&type=template&id=f24648cc& ***!
+  \********************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AnimalsList_vue_vue_type_template_id_f24648cc___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./AnimalsList.vue?vue&type=template&id=f24648cc& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AnimalsList.vue?vue&type=template&id=f24648cc&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AnimalsList_vue_vue_type_template_id_f24648cc___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AnimalsList_vue_vue_type_template_id_f24648cc___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
 
 /***/ }),
 

@@ -153,6 +153,7 @@ class AnimalsController extends Controller
     }
 
     public function getAnimalsAsJson(Request $request) {
-        return response()->json($this->animalsRepo->allFilteredAndPaginated($request));
+        // return $this->animalsRepo->allFilteredAndPaginatedJSON($request);
+        return response()->json($this->animalsRepo->allFilteredAndPaginatedJSON($request)->toArray());
     }
 }
