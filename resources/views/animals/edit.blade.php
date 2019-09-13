@@ -21,12 +21,12 @@
     @csrf
     @method('PUT')
     <div class="form-row">
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-4">
             <label for="animal-number">Animal number</label>
             <input type="text" class="form-control" id="animal-number" name="animal-number"
                 value="{{$animal->list_number}}">
         </div>
-        <div class="form-group col-md-3">
+        <div class="form-group col-md-4">
             <label for="species">Species</label>
             <select class="form-control" id="species" name="species">
                 <option>---</option>
@@ -36,7 +36,7 @@
                 @endforeach
             </select>
         </div>
-        <div class="form-group col-md-3">
+        <div class="form-group col-md-4">
             <label for="gender">Gender</label>
             <select class="form-control" id="gender" name="gender" value="{{$animal->gender}}">
                 <option>---</option>
@@ -84,9 +84,14 @@
                 @endforeach
             </select>
         </div>
+        <div class="form-group col-md-4">
+            <label for="intake-date">Intake Date</label>
+            <input type="datetime-local" class="form-control" id="intake-date" name="intake-date"
+                value="{{str_replace(' ', 'T', $animal->intake_date)}}">
+        </div>
     </div>
     <div class="form-row">
-        <div class="form-group col-md-2">
+        <div class="form-group col-md-4">
             <label for="size">Size</label>
             <select class="form-control" id="size" name="size">
                 <option>---</option>
@@ -96,12 +101,8 @@
                 <option @if($animal->size == 'Very large') selected @endif>Very large</option>
             </select>
         </div>
+        
         <div class="form-group col-md-4">
-            <label for="intake-date">Intake Date</label>
-            <input type="datetime-local" class="form-control" id="intake-date" name="intake-date"
-                value="{{str_replace(' ', 'T', $animal->intake_date)}}">
-        </div>
-        <div class="form-group col-md-3">
             <label for="living-area">Living area</label>
             <select class="form-control" id="living-area" name="living-area">
                 <option>---</option>
@@ -111,7 +112,7 @@
                 @endforeach
             </select>
         </div>
-        <div class="form-group col-md-3">
+        <div class="form-group col-md-4">
             <label for="color">Color</label>
             <select class="form-control" id="color" name="color">
                 <option>---</option>
