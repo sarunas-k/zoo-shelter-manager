@@ -1894,18 +1894,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     console.log('Vue: AnimalsList Component mounted.');
@@ -2104,7 +2092,13 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     createReport: function createReport() {
-      // Make XMLHttpRequest to get animal records and pass animal record filters
+      if (!this.params.dateFrom || !this.params.dateTo) {
+        this.label = '';
+        this.content = 'Incorrect dates';
+        return;
+      } // Make XMLHttpRequest to get animal records and pass animal record filters
+
+
       this.fetch('/api/reports');
     },
     fetch: function fetch(url) {
@@ -2161,6 +2155,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
 //
 //
 //
@@ -37662,22 +37658,6 @@ var render = function() {
                   )
                 ]
               )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "dropdown-item" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-secondary btn-sm btn-block",
-                  attrs: { type: "button", id: "filter-species-button" },
-                  on: {
-                    click: function($event) {
-                      return _vm.submitFilter("species")
-                    }
-                  }
-                },
-                [_vm._v("SET")]
-              )
             ])
           ]
         )
@@ -37762,22 +37742,6 @@ var render = function() {
                     "\n                        Female\n                    "
                   )
                 ]
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "dropdown-item" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-secondary btn-sm btn-block",
-                  attrs: { type: "button", id: "filter-gender-button" },
-                  on: {
-                    click: function($event) {
-                      return _vm.submitFilter("gender")
-                    }
-                  }
-                },
-                [_vm._v("SET")]
               )
             ])
           ]
@@ -37926,22 +37890,6 @@ var render = function() {
                   )
                 ]
               )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "dropdown-item" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-secondary btn-sm btn-block",
-                  attrs: { type: "button", id: "filter-size-button" },
-                  on: {
-                    click: function($event) {
-                      return _vm.submitFilter("size")
-                    }
-                  }
-                },
-                [_vm._v("SET")]
-              )
             ])
           ]
         )
@@ -38088,22 +38036,6 @@ var render = function() {
                     "\n                        Black and brown\n                    "
                   )
                 ]
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "dropdown-item" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-secondary btn-sm btn-block",
-                  attrs: { type: "button", id: "filter-color-button" },
-                  on: {
-                    click: function($event) {
-                      return _vm.submitFilter("color")
-                    }
-                  }
-                },
-                [_vm._v("SET")]
               )
             ])
           ]
@@ -38520,41 +38452,42 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("input", {
-    directives: [
-      {
-        name: "model",
-        rawName: "v-model",
-        value: _vm.query,
-        expression: "query"
-      }
-    ],
-    staticClass: "form-control form-control-dark w-100",
-    attrs: {
-      type: "text",
-      placeholder:
-        "Enter animal number, name, date of birth, microchip number...",
-      "aria-label": "Search"
-    },
-    domProps: { value: _vm.query },
-    on: {
-      keyup: function($event) {
-        if (
-          !$event.type.indexOf("key") &&
-          _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
-        ) {
-          return null
+  return _c("div", { staticClass: "search-field w-100" }, [
+    _c("input", {
+      directives: [
+        {
+          name: "model",
+          rawName: "v-model",
+          value: _vm.query,
+          expression: "query"
         }
-        return _vm.submitSearch($event)
+      ],
+      staticClass: "form-control form-control-dark",
+      attrs: {
+        type: "text",
+        placeholder: "Enter animal number, name, microchip number...",
+        "aria-label": "Search"
       },
-      input: function($event) {
-        if ($event.target.composing) {
-          return
+      domProps: { value: _vm.query },
+      on: {
+        keyup: function($event) {
+          if (
+            !$event.type.indexOf("key") &&
+            _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+          ) {
+            return null
+          }
+          return _vm.submitSearch($event)
+        },
+        input: function($event) {
+          if ($event.target.composing) {
+            return
+          }
+          _vm.query = $event.target.value
         }
-        _vm.query = $event.target.value
       }
-    }
-  })
+    })
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true

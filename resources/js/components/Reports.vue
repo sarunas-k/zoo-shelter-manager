@@ -79,6 +79,11 @@
                 
             },
             createReport: function() {
+                if (!this.params.dateFrom || !this.params.dateTo) {
+                    this.label = '';
+                    this.content = 'Incorrect dates';
+                    return;
+                }
                 // Make XMLHttpRequest to get animal records and pass animal record filters
                 this.fetch('/api/reports');
             },
