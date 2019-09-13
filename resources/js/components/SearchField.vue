@@ -1,5 +1,7 @@
 <template>
-    <input class="form-control form-control-dark w-100" type="text" placeholder="Enter animal number, name, date of birth, microchip number..." aria-label="Search" @keyup.enter="submitSearch" v-model="query">
+    <div class="search-field w-100">
+        <input class="form-control form-control-dark" type="text" placeholder="Enter animal number, name, microchip number..." aria-label="Search" @keyup.enter="submitSearch" v-model="query">
+    </div>
 </template>
 
 <script>
