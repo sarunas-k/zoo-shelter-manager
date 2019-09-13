@@ -44,9 +44,6 @@
                             Turtles
                         </label>
                     </div>
-                    <div class="dropdown-item">
-                        <button type="button" class="btn btn-secondary btn-sm btn-block" id="filter-species-button" @click="submitFilter('species')">SET</button>
-                    </div>
                 </div>
             </span>
             <span class="dropdown filter-gender">
@@ -66,9 +63,6 @@
                         <label class="form-check-label" for="checkboxFemale">
                             Female
                         </label>
-                    </div>
-                    <div class="dropdown-item">
-                        <button type="button" class="btn btn-secondary btn-sm btn-block" id="filter-gender-button" @click="submitFilter('gender')">SET</button>
                     </div>
                 </div>
             </span>
@@ -102,9 +96,6 @@
                             Very large
                         </label>
                     </div>
-                    <div class="dropdown-item">
-                        <button type="button" class="btn btn-secondary btn-sm btn-block" id="filter-size-button" @click="submitFilter('size')">SET</button>
-                    </div>
                 </div>
             </span>
             <span class="dropdown filter-color">
@@ -136,9 +127,6 @@
                         <label class="form-check-label" for="checkboxColorBrownBlack">
                             Black and brown
                         </label>
-                    </div>
-                    <div class="dropdown-item">
-                        <button type="button" class="btn btn-secondary btn-sm btn-block" id="filter-color-button" @click="submitFilter('color')">SET</button>
                     </div>
                 </div>
             </span>
