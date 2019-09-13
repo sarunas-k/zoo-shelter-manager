@@ -59,6 +59,9 @@ class AnimalsController extends Controller
      */
     public function store(Request $request)
     {
+        if ($request['is-neutered'] == 'on')
+            $request['is-neutered'] = '1';
+
         $formFields = $this->validate($request, [
             'animal-number' => 'required',
             'species' => 'required',
@@ -119,6 +122,9 @@ class AnimalsController extends Controller
      */
     public function update(Request $request, Animal $animal)
     {
+        if ($request['is-neutered'] == 'on')
+            $request['is-neutered'] = '1';
+
         $formFields = $this->validate($request, [
             'animal-number' => 'required',
             'species' => 'required',
@@ -153,7 +159,6 @@ class AnimalsController extends Controller
     }
 
     public function getAnimalsAsJson(Request $request) {
-        // return $this->animalsRepo->allFilteredAndPaginatedJSON($request);
         return response()->json($this->animalsRepo->allFilteredAndPaginatedJSON($request)->toArray());
     }
 }
