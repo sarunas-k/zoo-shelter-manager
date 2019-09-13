@@ -115,15 +115,15 @@
 @endsection
 
 @section('scripts')
-<script>
-    window.onload = function () {
-        // SET MENU ITEM AS ACTIVE
-        $('.sidebar .nav-link').each((i, element) => {
-            if ($(element).text().indexOf('Calls') >= 0)
-                $(element).addClass('active');
-            else
-                $(element).removeClass('active');
-        });
-    }
-</script>
+    <script>
+        window.onload = function () {
+            // SET MENU ITEM AS ACTIVE
+            $('.sidebar .nav-link').each((i, element) => {
+                if ($(element).text().indexOf('People') >= 0)
+                    $(element).addClass('active');
+                else
+                    $(element).removeClass('active');
+            });
+        }
+    </script>
 @endsection

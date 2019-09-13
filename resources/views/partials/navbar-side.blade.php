@@ -62,11 +62,17 @@
               </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{route('living-areas.index')}}">
-                  <span data-feather="grid"></span>
-                  Living Areas
-                </a>
-              </li>
+              <a class="nav-link" href="{{route('living-areas.index')}}">
+                <span data-feather="grid"></span>
+                Living Areas
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{route('people.index')}}">
+                <span data-feather="user"></span>
+                People
+              </a>
+            </li>
             <li class="nav-item">
               <a class="nav-link" href="/settings">
                 <span data-feather="sliders"></span>
