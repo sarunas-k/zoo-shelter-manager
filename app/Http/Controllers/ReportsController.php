@@ -109,7 +109,7 @@ class ReportsController extends Controller
             'dateTo' => $dateTo,
         ];
         if ($reportId == '0') {
-            $resp->animalsCount = $this->animalsRepo->all()->count();
+            $resp->animalsCount = $this->animalsRepo->all(true)->count();
             return response()->json($resp);
         } else if ($reportId == '1') {
             $resp->animalsCount = $this->animalsRepo->all()->where('intake_date', '>=', $dateFrom)->where('intake_date', '<', $dateTo)->count();

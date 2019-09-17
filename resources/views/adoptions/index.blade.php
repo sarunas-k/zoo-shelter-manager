@@ -13,21 +13,21 @@
     <thead class="thead-dark">
         <tr>
             <th scope="col">Adoption date</th>
+            <th scope="col">Return date</th>
             <th scope="col">Animal</th>
             <th scope="col">Adopter</th>
-            <th scope="col">Returned</th>
         </tr>
     </thead>
     <tbody>
         @foreach($adoptions as $adoption)
         <tr>
-            <td scope="row" style="width: 15%"><a
-                    href="{{route('adoptions.show', ['id' => $adoption->id])}}">{{ $adoption->adoption_date }}</a></td>
+            <td scope="row" style="width: 10%">
+                <a href="{{route('adoptions.show', ['id' => $adoption->id])}}">{{ $adoption->adoption_date }}</a></td>
+            <td style="width: 10%"> {{ $adoption->return_date }}</td>
             <td><a href="{{route('animals.show', ['id' => $adoption->animal->id])}}">{{ $adoption->animal->list_number }}
-                    {{$adoption->animal->name}}</a></td>
+                {{$adoption->animal->name}}</a></td>
             <td><a href="{{route('people.show', ['id' => $adoption->person->id])}}">{{ $adoption->person->first_name }}
-                    {{$adoption->person->last_name}}</a></td>
-            <td>{{ $adoption->return_date ? 'Yes' : 'No' }}</td>
+                {{$adoption->person->last_name}}</a></td>
         </tr>
         @endforeach
     </tbody>

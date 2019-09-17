@@ -14,7 +14,7 @@
         <table class="table table-bordered table-sm my-4">
             <thead class="thead-dark">
               <tr>
-                <th scope="col">Date</th>
+                <th scope="col" style="width: 10%">Date</th>
                 <th scope="col">Name</th>
                 <th scope="col">Phone</th>
                 <th scope="col">Address</th>

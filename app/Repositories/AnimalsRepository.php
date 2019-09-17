@@ -8,28 +8,59 @@ use App\Repositories\Interfaces\IAnimalsRepository;
 
 class AnimalsRepository implements IAnimalsRepository {
 
-    public function all() {
-        return Animal::all();
+    public function all($includeNonShelterAnimals = false) {
+        $animals = Animal::all();
+        if (!$includeNonShelterAnimals) {
+            $animals = Animal::
+                whereDoesntHave('activeAdoptions')
+                ->whereDoesntHave('activeFosters')
+                ->whereDoesntHave('activeReclaims')
+                ->get();
+        }
+            
+        return $animals;
     }
 
-    public function allFilteredAndPaginated($request, $perPage = 10) {
-        $animals = Animal::latest();
+    public function latest() {
+        return Animal::latest();
+    }
+
+    public function allFilteredAndPaginated($request, $includeNonShelterAnimals = false, $perPage = 10) {
+        $animals = $this->latest();
+        if (!$includeNonShelterAnimals)
+            $animals
+                ->whereDoesntHave('activeAdoptions')
+                ->whereDoesntHave('activeFosters')
+                ->whereDoesntHave('activeReclaims');
+
         $this->applyFilters($animals, $request);
         return $animals->paginate($perPage);
     }
 
-    public function allFilteredAndPaginatedJSON($request, $perPage = 10) {
-        $animals = Animal::with(['species', 'color', 'living_area'])->latest();
+    public function allFilteredAndPaginatedJSON($request, $includeNonShelterAnimals = false, $perPage = 10) {
+        $animals = $this->latest()->with(['species', 'color', 'living_area']);
+        if (!$includeNonShelterAnimals)
+            $animals
+                ->whereDoesntHave('activeAdoptions')
+                ->whereDoesntHave('activeFosters')
+                ->whereDoesntHave('activeReclaims');
+        
         $this->applyFilters($animals, $request);
         return $animals->paginate($perPage)->appends($request->input());
     }
 
-    public function getLatest($number = null) {
-        $latestAnimals = Animal::latest();
+    public function getLatest($number = null, $includeNonShelterAnimals = false) {
+        $animals = Animal::latest();
+        if (!$includeNonShelterAnimals)
+            $animals
+                ->whereDoesntHave('activeAdoptions')
+                ->whereDoesntHave('activeFosters')
+                ->whereDoesntHave('activeReclaims');
+                
         if (isset($number) && is_numeric($number)) {
-            return $latestAnimals->take($number)->get();
+            return $animals->take($number)->get();
         } 
-        return $latestAnimals->get();
+        return $animals->get();
     }
 
     public function addFromInput($formFields) {

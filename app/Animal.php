@@ -52,6 +52,18 @@ class Animal extends Model
         return $this->hasMany(Adoption::class);
     }
 
+    public function activeAdoptions() {
+        return $this->adoptions()->whereNull('return_date');
+    }
+
+    public function activeFosters() {
+        return $this->fosters()->whereNull('foster_end_date');
+    }
+
+    public function activeReclaims() {
+        return $this->reclaims()->whereNull('return_date');
+    }
+
     public function fosterers() {
         return $this->belongsToMany(Person::class, 'animal_fosters')->withPivot('foster_start_date', 'foster_end_date', 'notes');
     }
@@ -61,7 +73,7 @@ class Animal extends Model
     }
 
     public function reclaimers() {
-        return $this->belongsToMany(Person::class, 'animal_reclaims')->withPivot('date');
+        return $this->belongsToMany(Person::class, 'animal_reclaims')->withPivot('date', 'return_date', 'notes');
     }
 
     public function reclaims() {
