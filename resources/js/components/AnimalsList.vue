@@ -3,7 +3,7 @@
         <nav aria-label="Page navigation example" class="float-left">
             <ul class="pagination">
               <li class="page-item" style="cursor: pointer">
-                <a class="page-link" aria-label="Previous" @click="fetch(response.prev_page_url)">
+                <a class="page-link" aria-label="Previous" @click="navigatePrev()">
                   <span aria-hidden="true">&laquo;</span>
                   <span class="sr-only">Previous</span>
                 </a>
@@ -12,7 +12,7 @@
               <!-- <li class="page-item"><a class="page-link" href="#">2</a></li>
               <li class="page-item"><a class="page-link" href="#">3</a></li> -->
               <li class="page-item" style="cursor: pointer">
-                <a class="page-link" aria-label="Next" @click="fetch(response.next_page_url)">
+                <a class="page-link" aria-label="Next" @click="navigateNext()">
                   <span aria-hidden="true">&raquo;</span>
                   <span class="sr-only">Next</span>
                 </a>
@@ -175,7 +175,7 @@
         <nav aria-label="Page navigation example">
             <ul class="pagination">
               <li class="page-item" style="cursor: pointer">
-                <a class="page-link" aria-label="Previous" @click="fetch(response.prev_page_url)">
+                <a class="page-link" aria-label="Previous" @click="navigatePrev()">
                   <span aria-hidden="true">&laquo;</span>
                   <span class="sr-only">Previous</span>
                 </a>
@@ -184,7 +184,7 @@
               <!-- <li class="page-item"><a class="page-link" href="#">2</a></li>
               <li class="page-item"><a class="page-link" href="#">3</a></li> -->
               <li class="page-item" style="cursor: pointer">
-                <a class="page-link" aria-label="Next" @click="fetch(response.next_page_url)">
+                <a class="page-link" aria-label="Next" @click="navigateNext()">
                   <span aria-hidden="true">&raquo;</span>
                   <span class="sr-only">Next</span>
                 </a>
@@ -201,6 +201,10 @@
             console.log('Vue: AnimalsList Component mounted.');
             var url = '/api/animals';
             this.fetch(url);
+            window.onpopstate = (event) => {
+                console.log("location: " + document.location + ", state: " + JSON.stringify(event.state));
+                this.fetch(url, event.state);
+            };
         },
         data: function() {
             return {
@@ -225,10 +229,27 @@
                 else
                     this.checkedFilterItems[filterColumn].splice(this.checkedFilterItems[filterColumn].indexOf(filterValue), 1);
                 this.fetch('/api/animals', this.checkedFilterItems);
+                history.pushState(this.checkedFilterItems, null, null);
+                    console.log("History: pushed state: " + JSON.stringify(this.checkedFilterItems));
             },
-            submitFilter: function() {
-                // Make XMLHttpRequest to get animal records and pass animal record filters
-                this.fetch('/api/animals', this.checkedFilterItems);
+            navigateNext: function() {
+                if (!this.response.next_page_url)
+                    return;
+                
+                this.fetch(this.response.next_page_url);
+                let params = Object.assign({'page': this.response.current_page + 1}, this.checkedFilterItems);
+                    history.pushState(params, null, null);
+                    console.log("History: pushed state: " + JSON.stringify(params));
+            },
+            navigatePrev: function() {
+                if (!this.response.prev_page_url)
+                    return;
+                
+                this.fetch(this.response.prev_page_url);
+                // MAYBE no need to add history item when going BACK a page.
+                // let params = Object.assign({'page': this.response.current_page - 1}, this.checkedFilterItems);
+                //     history.pushState(params, null, null);
+                //     console.log("History: pushed state: " + JSON.stringify(params));
             },
             routeAnimalDetailsPage: function(id) {
                 return '/animals/' + id;
@@ -245,6 +266,7 @@
                 
                 this.isLoading = true;
                 console.log("Fetching URL: " + url);
+                console.log("Parameters: " + params);
 
                 axios.get(url, params ? { params: params } : null)
                 .then((response) => { // success
@@ -257,8 +279,7 @@
                     // handle error
                     console.log(error);
                 })
-                .then(() => { // finally
-                    // always executed
+                .then(() => { // always executed
                     console.log('Finished axios request');
                     this.isLoading = false;
                 });

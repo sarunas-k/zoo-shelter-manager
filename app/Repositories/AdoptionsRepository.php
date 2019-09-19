@@ -42,7 +42,7 @@ class AdoptionsRepository implements IAdoptionsRepository {
     }
 
     public function updateFromInput($adoption, $formFields) {
-        $adoption->update(['notes' => $formFields['notes']]);
+        $adoption->update(['notes' => $formFields['notes'], 'return_date' => $formFields['return-date']]);
     }
 
     public function delete($adoption) {

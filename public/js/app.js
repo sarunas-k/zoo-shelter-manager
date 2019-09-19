@@ -1896,9 +1896,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
+    var _this = this;
+
     console.log('Vue: AnimalsList Component mounted.');
     var url = '/api/animals';
     this.fetch(url);
+
+    window.onpopstate = function (event) {
+      console.log("location: " + document.location + ", state: " + JSON.stringify(event.state));
+
+      _this.fetch(url, event.state);
+    };
   },
   data: function data() {
     return {
@@ -1920,10 +1928,24 @@ __webpack_require__.r(__webpack_exports__);
       var isFiltered = this.checkedFilterItems[filterColumn].includes(filterValue);
       if (!isFiltered) this.checkedFilterItems[filterColumn].push(filterValue);else this.checkedFilterItems[filterColumn].splice(this.checkedFilterItems[filterColumn].indexOf(filterValue), 1);
       this.fetch('/api/animals', this.checkedFilterItems);
+      history.pushState(this.checkedFilterItems, null, null);
+      console.log("History: pushed state: " + JSON.stringify(this.checkedFilterItems));
     },
-    submitFilter: function submitFilter() {
-      // Make XMLHttpRequest to get animal records and pass animal record filters
-      this.fetch('/api/animals', this.checkedFilterItems);
+    navigateNext: function navigateNext() {
+      if (!this.response.next_page_url) return;
+      this.fetch(this.response.next_page_url);
+      var params = Object.assign({
+        'page': this.response.current_page + 1
+      }, this.checkedFilterItems);
+      history.pushState(params, null, null);
+      console.log("History: pushed state: " + JSON.stringify(params));
+    },
+    navigatePrev: function navigatePrev() {
+      if (!this.response.prev_page_url) return;
+      this.fetch(this.response.prev_page_url); // MAYBE no need to add history item when going BACK a page.
+      // let params = Object.assign({'page': this.response.current_page - 1}, this.checkedFilterItems);
+      //     history.pushState(params, null, null);
+      //     console.log("History: pushed state: " + JSON.stringify(params));
     },
     routeAnimalDetailsPage: function routeAnimalDetailsPage(id) {
       return '/animals/' + id;
@@ -1935,28 +1957,28 @@ __webpack_require__.r(__webpack_exports__);
       return '/animals/' + id;
     },
     fetch: function fetch(url, params) {
-      var _this = this;
+      var _this2 = this;
 
       if (!url) return;
       this.isLoading = true;
       console.log("Fetching URL: " + url);
+      console.log("Parameters: " + params);
       axios.get(url, params ? {
         params: params
       } : null).then(function (response) {
         // success
         console.log("Response:");
         console.log(response);
-        _this.response = response.data;
-        _this.animals = response.data.data;
+        _this2.response = response.data;
+        _this2.animals = response.data.data;
       })["catch"](function (error) {
         // error
         // handle error
         console.log(error);
       }).then(function () {
-        // finally
         // always executed
         console.log('Finished axios request');
-        _this.isLoading = false;
+        _this2.isLoading = false;
       });
     }
   },
@@ -37494,7 +37516,7 @@ var render = function() {
                   attrs: { "aria-label": "Previous" },
                   on: {
                     click: function($event) {
-                      return _vm.fetch(_vm.response.prev_page_url)
+                      return _vm.navigatePrev()
                     }
                   }
                 },
@@ -37531,7 +37553,7 @@ var render = function() {
                   attrs: { "aria-label": "Next" },
                   on: {
                     click: function($event) {
-                      return _vm.fetch(_vm.response.next_page_url)
+                      return _vm.navigateNext()
                     }
                   }
                 },
@@ -38147,7 +38169,7 @@ var render = function() {
                 attrs: { "aria-label": "Previous" },
                 on: {
                   click: function($event) {
-                    return _vm.fetch(_vm.response.prev_page_url)
+                    return _vm.navigatePrev()
                   }
                 }
               },
@@ -38182,7 +38204,7 @@ var render = function() {
                 attrs: { "aria-label": "Next" },
                 on: {
                   click: function($event) {
-                    return _vm.fetch(_vm.response.next_page_url)
+                    return _vm.navigateNext()
                   }
                 }
               },

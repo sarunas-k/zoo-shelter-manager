@@ -16,14 +16,20 @@
 
 @include('partials/animal-card')
 <p><strong>Date:</strong> {{$adoption->adoption_date}}</p>
-<p><strong>Person:</strong> {{$adopter->first_name}} {{$adopter->last_name}} - {{$adopter->id}}</p>
+<p><strong>Person:</strong> {{$adoption->person->first_name}} {{$adoption->person->last_name}} - {{$adoption->person->id}}</p>
 <form method="POST" action="{{route('adoptions.update', ['id' => $adoption->id])}}" enctype="multipart/form-data">
     @csrf
     @method('PATCH')
     <div class="form-row">
         <div class="form-group col-md-8">
-            <label for="notes">Notes</label>
+            <label for="notes"><strong>Notes:</strong></label>
             <textarea class="form-control" rows="4" id="notes" name="notes">{{$adoption->notes}}</textarea>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-8">
+            <label for="return-date"><strong>Return date:</strong></label>
+            <input type="date" class="form-control" id="return-date" name="return-date" value="{{$adoption->return_date}}">
         </div>
     </div>
     <button type="submit" class="btn btn-success">Save</button>

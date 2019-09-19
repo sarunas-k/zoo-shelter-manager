@@ -88,7 +88,10 @@ class AdoptionsController extends Controller
      */
     public function show(Adoption $adoption)
     {
-        return view('adoptions/show')->with('adoption', $adoption);
+        return view('adoptions/show')->with([
+            'adoption' => $adoption,
+            'animal' => $this->animalsRepo->formatFieldsForPresentation($adoption->animal)
+            ]);
     }
 
     /**
@@ -101,9 +104,7 @@ class AdoptionsController extends Controller
     {
         return view('adoptions/edit')->with([
             'adoption' => $adoption,
-            'animal' => $this->animalsRepo->formatFieldsForPresentation($adoption->animal),
-            'adopter' => $adoption->person,
-            'people' => $this->peopleRepo->all()
+            'animal' => $this->animalsRepo->formatFieldsForPresentation($adoption->animal)
             ]);
     }
 
@@ -117,7 +118,8 @@ class AdoptionsController extends Controller
     public function update(Request $request, Adoption $adoption)
     {
         $formFields = $this->validate($request, [
-            'notes' => 'string|nullable'
+            'notes' => 'string|nullable',
+            'return-date' => 'date|nullable'
         ]);
 
         $this->adoptionsRepo->updateFromInput($adoption, $formFields);
