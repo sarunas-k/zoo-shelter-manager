@@ -130,6 +130,11 @@
                     </div>
                 </div>
             </span>
+            <br>
+        </div>
+        <br>
+        <div class="filter-badges">
+            <span v-bind:key="item" v-for="item in [...this.checkedFilterItems['species'],...this.checkedFilterItems['gender'],...this.checkedFilterItems['size'],...this.checkedFilterItems['color']]" class="badge badge-pill badge-primary mr-1">{{item}}</span>
         </div>
         <table class="table table-sm table-bordered my-4 table-animals-list" :style="{opacity: tableOpacity}">
             <thead class="thead-dark">
@@ -298,3 +303,11 @@
         }
     }
 </script>
+
+<style scoped>
+.animals-list .filter-badges {
+    clear: left;
+    float: left;
+    margin-bottom: 15px;
+}
+</style>
