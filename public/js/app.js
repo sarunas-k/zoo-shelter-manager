@@ -1942,10 +1942,13 @@ __webpack_require__.r(__webpack_exports__);
     },
     navigatePrev: function navigatePrev() {
       if (!this.response.prev_page_url) return;
-      this.fetch(this.response.prev_page_url); // MAYBE no need to add history item when going BACK a page.
-      // let params = Object.assign({'page': this.response.current_page - 1}, this.checkedFilterItems);
-      //     history.pushState(params, null, null);
-      //     console.log("History: pushed state: " + JSON.stringify(params));
+      this.fetch(this.response.prev_page_url); // MAYBE no need to add history item when navigating BACK through list.
+
+      var params = Object.assign({
+        'page': this.response.current_page - 1
+      }, this.checkedFilterItems);
+      history.pushState(params, null, null);
+      console.log("History: pushed state: " + JSON.stringify(params));
     },
     routeAnimalDetailsPage: function routeAnimalDetailsPage(id) {
       return '/animals/' + id;
@@ -1953,8 +1956,11 @@ __webpack_require__.r(__webpack_exports__);
     routeAnimalEditPage: function routeAnimalEditPage(id) {
       return '/animals/' + id + '/edit';
     },
-    routeAnimalDelete: function routeAnimalDelete(id) {
-      return '/animals/' + id;
+    getURLparams: function getURLparams() {
+      var url = this.response.request.responseURL;
+      if (!url) return null;
+      var parameters = new URL(url).search;
+      return parameters;
     },
     fetch: function fetch(url, params) {
       var _this2 = this;
@@ -38121,7 +38127,7 @@ var render = function() {
                   {
                     attrs: {
                       method: "POST",
-                      action: _vm.routeAnimalDelete(animal.id)
+                      action: _vm.routeAnimalDetailsPage(animal.id)
                     }
                   },
                   [

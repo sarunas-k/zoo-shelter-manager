@@ -117,8 +117,13 @@ class AnimalsRepository implements IAnimalsRepository {
         
         // Save animal breeds to animal_breed table
         $animal->breeds()->sync($formFields['breed']);
-
-        if (!is_null($formFields['animal-images-list'])) {
+        if (is_null($formFields['animal-images-list'])) {
+            $animal->images()->detach();
+            $image = new Image;
+            $image->path = 'public/images/no_image.jpeg';
+            $image->save();
+            $animal->images()->sync($image);
+        } else {
             $animal->images()->sync(explode(',', $formFields['animal-images-list']));
         }
 

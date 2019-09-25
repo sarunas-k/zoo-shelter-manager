@@ -139,7 +139,7 @@ class AnimalsController extends Controller
             'staff' => 'required',
             'breed' => 'required',
             'is-neutered' => 'required|boolean',
-            'animal-images-list' => 'required'
+            'animal-images-list' => ''
         ]);
 
         $this->animalsRepo->updateFromInput($animal, $formFields);

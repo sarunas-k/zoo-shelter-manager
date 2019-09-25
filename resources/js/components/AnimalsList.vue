@@ -163,7 +163,7 @@
                     <td>{{ animal.living_area.name }}</td>
                     <td><a :href="routeAnimalEditPage(animal.id)" class="btn btn-primary btn-sm">Edit</a></td>
                     <td>
-                        <form method="POST" :action="routeAnimalDelete(animal.id)">
+                        <form method="POST" :action="routeAnimalDetailsPage(animal.id)">
                             <input type="hidden" name="_token" v-bind:value="csrf">
                             <input type="hidden" name="_method" value="DELETE">
                             <button type="submit" class="btn btn-danger btn-sm">Delete</button>
@@ -246,10 +246,10 @@
                     return;
                 
                 this.fetch(this.response.prev_page_url);
-                // MAYBE no need to add history item when going BACK a page.
-                // let params = Object.assign({'page': this.response.current_page - 1}, this.checkedFilterItems);
-                //     history.pushState(params, null, null);
-                //     console.log("History: pushed state: " + JSON.stringify(params));
+                // MAYBE no need to add history item when navigating BACK through list.
+                let params = Object.assign({'page': this.response.current_page - 1}, this.checkedFilterItems);
+                    history.pushState(params, null, null);
+                    console.log("History: pushed state: " + JSON.stringify(params));
             },
             routeAnimalDetailsPage: function(id) {
                 return '/animals/' + id;
@@ -257,8 +257,13 @@
             routeAnimalEditPage: function(id) {
                 return '/animals/' + id + '/edit';
             },
-            routeAnimalDelete: function(id) {
-                return '/animals/' + id;
+            getURLparams: function() {
+                let url = this.response.request.responseURL;
+                if (!url)
+                    return null;
+                
+                let parameters = new URL(url).search;
+                return parameters;
             },
             fetch: function(url, params) {
                 if (!url)

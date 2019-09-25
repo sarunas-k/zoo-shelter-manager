@@ -95,7 +95,7 @@
         </div>
     </div>
     <div class="form-row">
-        <div class="form-group col-md-2">
+        <div class="form-group col-md-4">
             <label for="size">Size</label>
             <select class="form-control" id="size" name="size">
                 <option>---</option>
@@ -105,7 +105,7 @@
                 <option @if(old('size')=='Very large' ) selected @endif>Very large</option>
             </select>
         </div>
-        <div class="form-group col-md-3">
+        <div class="form-group col-md-4">
             <label for="intake-date">Intake Date</label>
             <input type="datetime-local" class="form-control" id="intake-date" name="intake-date"
                 value="{{old('intake-date') ? old('intake-date') : str_replace(' ', 'T', date('Y-m-d H:i'))}}">

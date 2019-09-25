@@ -15,8 +15,20 @@
             </button>
           </div>
         </div>
+
+        {{-- <div>
+          <div style="width: 23.75%; height:300px; border: 1px solid grey; float: left; margin-left: 1%; position: relative">
+            <span style="position: absolute; left: 50%; top: 50%; transform: translateX(-50%) translateY(-50%); font-family: 'Nunito', sans-serif; font-size: 30px; text-align: center;">Shelter view</span></div>
+          <div style="width: 23.75%; height:300px; border: 1px solid grey; float: left; margin-left: 1%; position: relative">
+            <span style="position: absolute; left: 50%; top: 50%; transform: translateX(-50%) translateY(-50%); font-family: 'Nunito', sans-serif; font-size: 30px; text-align: center;">Animal intake</span></div>
+          <div style="width: 23.75%; height:300px; border: 1px solid grey; float: left; margin-left: 1%; position: relative">
+            <span style="position: absolute; left: 50%; top: 50%; transform: translateX(-50%) translateY(-50%); font-family: 'Nunito', sans-serif; font-size: 30px; text-align: center;">Call registration</span></div>
+          <div style="width: 23.75%; height:300px; border: 1px solid grey; float: left; margin-left: 1%; position: relative">
+            <span style="position: absolute; left: 50%; top: 50%; transform: translateX(-50%) translateY(-50%); font-family: 'Nunito', sans-serif; font-size: 30px; text-align: center;">Calendar</span></div>
+        </div> --}}
   
-        <h3>Latest animals</h3>
+        <div class="latest-animals" style="clear: left">
+          <h3>Latest animals</h3>
         <div class="table-responsive">
           <table class="table table-bordered table-sm my-4">
             <thead class="thead-dark">
@@ -47,5 +59,6 @@
           <a href="{{route('animals.index')}}"><button type="button" class="btn btn-sm btn-outline-primary">
             More
           </button></a>
+        </div>
         </div>
 @endsection
