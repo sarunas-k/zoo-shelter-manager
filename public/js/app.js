@@ -1899,6 +1899,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     var _this = this;
@@ -1909,6 +1912,11 @@ __webpack_require__.r(__webpack_exports__);
 
     window.onpopstate = function (event) {
       console.log("location: " + document.location + ", state: " + JSON.stringify(event.state));
+      if (event.state) _this.checkedFilterItems = event.state;else {
+        for (var filterName in _this.checkedFilterItems) {
+          _this.checkedFilterItems[filterName] = [];
+        }
+      }
 
       _this.fetch(url, event.state);
     };
@@ -1927,11 +1935,13 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    checkedFilter: function checkedFilter(event, filterColumn) {
-      var target = event.currentTarget;
-      var filterValue = target.getAttribute('data-animal-filter');
-      var isFiltered = this.checkedFilterItems[filterColumn].includes(filterValue);
-      if (!isFiltered) this.checkedFilterItems[filterColumn].push(filterValue);else this.checkedFilterItems[filterColumn].splice(this.checkedFilterItems[filterColumn].indexOf(filterValue), 1);
+    removeFilter: function removeFilter(item, filter) {
+      this.checkedFilterItems[filter] = this.checkedFilterItems[filter].filter(function (i) {
+        return i !== item;
+      });
+      this.fetchWithFilters();
+    },
+    fetchWithFilters: function fetchWithFilters() {
       this.fetch('/api/animals', this.checkedFilterItems);
       history.pushState(this.checkedFilterItems, null, null);
       console.log("History: pushed state: " + JSON.stringify(this.checkedFilterItems));
@@ -1973,7 +1983,7 @@ __webpack_require__.r(__webpack_exports__);
       if (!url) return;
       this.isLoading = true;
       console.log("Fetching URL: " + url);
-      console.log("Parameters: " + params);
+      console.log("Parameters: " + JSON.stringify(params));
       axios.get(url, params ? {
         params: params
       } : null).then(function (response) {
@@ -6670,7 +6680,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.animals-list .filter-badges[data-v-f24648cc] {\r\n    clear: left;\r\n    float: left;\r\n    margin-bottom: 15px;\n}\r\n", ""]);
+exports.push([module.i, "\n.animals-list .filter-badges[data-v-f24648cc] {\r\n    clear: left;\r\n    float: left;\r\n    margin-bottom: 15px;\n}\n.animals-list .filter-badges .filter-badge[data-v-f24648cc] {\r\n    cursor: pointer;\n}\r\n", ""]);
 
 // exports
 
@@ -38258,17 +38268,56 @@ var render = function() {
           [
             _c("div", { staticClass: "form-check dropdown-item" }, [
               _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.checkedFilterItems["species"],
+                    expression: "checkedFilterItems['species']"
+                  }
+                ],
                 staticClass: "form-check-input filter-species-checkbox",
                 attrs: {
                   type: "checkbox",
-                  value: "",
+                  value: "Dogs",
                   id: "checkboxDogs",
                   "data-animal-filter": "Dogs"
                 },
+                domProps: {
+                  checked: Array.isArray(_vm.checkedFilterItems["species"])
+                    ? _vm._i(_vm.checkedFilterItems["species"], "Dogs") > -1
+                    : _vm.checkedFilterItems["species"]
+                },
                 on: {
-                  change: function($event) {
-                    return _vm.checkedFilter($event, "species")
-                  }
+                  change: [
+                    function($event) {
+                      var $$a = _vm.checkedFilterItems["species"],
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = "Dogs",
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 &&
+                            _vm.$set(
+                              _vm.checkedFilterItems,
+                              "species",
+                              $$a.concat([$$v])
+                            )
+                        } else {
+                          $$i > -1 &&
+                            _vm.$set(
+                              _vm.checkedFilterItems,
+                              "species",
+                              $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                            )
+                        }
+                      } else {
+                        _vm.$set(_vm.checkedFilterItems, "species", $$c)
+                      }
+                    },
+                    _vm.fetchWithFilters
+                  ]
                 }
               }),
               _vm._v(" "),
@@ -38284,17 +38333,56 @@ var render = function() {
             _vm._v(" "),
             _c("div", { staticClass: "form-check dropdown-item" }, [
               _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.checkedFilterItems["species"],
+                    expression: "checkedFilterItems['species']"
+                  }
+                ],
                 staticClass: "form-check-input filter-species-checkbox",
                 attrs: {
                   type: "checkbox",
-                  value: "",
+                  value: "Cats",
                   id: "checkboxCats",
                   "data-animal-filter": "Cats"
                 },
+                domProps: {
+                  checked: Array.isArray(_vm.checkedFilterItems["species"])
+                    ? _vm._i(_vm.checkedFilterItems["species"], "Cats") > -1
+                    : _vm.checkedFilterItems["species"]
+                },
                 on: {
-                  change: function($event) {
-                    return _vm.checkedFilter($event, "species")
-                  }
+                  change: [
+                    function($event) {
+                      var $$a = _vm.checkedFilterItems["species"],
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = "Cats",
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 &&
+                            _vm.$set(
+                              _vm.checkedFilterItems,
+                              "species",
+                              $$a.concat([$$v])
+                            )
+                        } else {
+                          $$i > -1 &&
+                            _vm.$set(
+                              _vm.checkedFilterItems,
+                              "species",
+                              $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                            )
+                        }
+                      } else {
+                        _vm.$set(_vm.checkedFilterItems, "species", $$c)
+                      }
+                    },
+                    _vm.fetchWithFilters
+                  ]
                 }
               }),
               _vm._v(" "),
@@ -38310,17 +38398,56 @@ var render = function() {
             _vm._v(" "),
             _c("div", { staticClass: "form-check dropdown-item" }, [
               _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.checkedFilterItems["species"],
+                    expression: "checkedFilterItems['species']"
+                  }
+                ],
                 staticClass: "form-check-input filter-species-checkbox",
                 attrs: {
                   type: "checkbox",
-                  value: "",
+                  value: "Turtles",
                   id: "checkboxTurtles",
                   "data-animal-filter": "Turtles"
                 },
+                domProps: {
+                  checked: Array.isArray(_vm.checkedFilterItems["species"])
+                    ? _vm._i(_vm.checkedFilterItems["species"], "Turtles") > -1
+                    : _vm.checkedFilterItems["species"]
+                },
                 on: {
-                  change: function($event) {
-                    return _vm.checkedFilter($event, "species")
-                  }
+                  change: [
+                    function($event) {
+                      var $$a = _vm.checkedFilterItems["species"],
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = "Turtles",
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 &&
+                            _vm.$set(
+                              _vm.checkedFilterItems,
+                              "species",
+                              $$a.concat([$$v])
+                            )
+                        } else {
+                          $$i > -1 &&
+                            _vm.$set(
+                              _vm.checkedFilterItems,
+                              "species",
+                              $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                            )
+                        }
+                      } else {
+                        _vm.$set(_vm.checkedFilterItems, "species", $$c)
+                      }
+                    },
+                    _vm.fetchWithFilters
+                  ]
                 }
               }),
               _vm._v(" "),
@@ -38371,16 +38498,51 @@ var render = function() {
           [
             _c("div", { staticClass: "form-check dropdown-item" }, [
               _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.checkedFilterItems["gender"],
+                    expression: "checkedFilterItems['gender']"
+                  }
+                ],
                 staticClass: "form-check-input",
-                attrs: {
-                  type: "checkbox",
-                  id: "checkboxMale",
-                  "data-animal-filter": "Male"
+                attrs: { type: "checkbox", id: "checkboxMale", value: "Male" },
+                domProps: {
+                  checked: Array.isArray(_vm.checkedFilterItems["gender"])
+                    ? _vm._i(_vm.checkedFilterItems["gender"], "Male") > -1
+                    : _vm.checkedFilterItems["gender"]
                 },
                 on: {
-                  change: function($event) {
-                    return _vm.checkedFilter($event, "gender")
-                  }
+                  change: [
+                    function($event) {
+                      var $$a = _vm.checkedFilterItems["gender"],
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = "Male",
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 &&
+                            _vm.$set(
+                              _vm.checkedFilterItems,
+                              "gender",
+                              $$a.concat([$$v])
+                            )
+                        } else {
+                          $$i > -1 &&
+                            _vm.$set(
+                              _vm.checkedFilterItems,
+                              "gender",
+                              $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                            )
+                        }
+                      } else {
+                        _vm.$set(_vm.checkedFilterItems, "gender", $$c)
+                      }
+                    },
+                    _vm.fetchWithFilters
+                  ]
                 }
               }),
               _vm._v(" "),
@@ -38396,16 +38558,55 @@ var render = function() {
             _vm._v(" "),
             _c("div", { staticClass: "form-check dropdown-item" }, [
               _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.checkedFilterItems["gender"],
+                    expression: "checkedFilterItems['gender']"
+                  }
+                ],
                 staticClass: "form-check-input",
                 attrs: {
                   type: "checkbox",
                   id: "checkboxFemale",
-                  "data-animal-filter": "Female"
+                  value: "Female"
+                },
+                domProps: {
+                  checked: Array.isArray(_vm.checkedFilterItems["gender"])
+                    ? _vm._i(_vm.checkedFilterItems["gender"], "Female") > -1
+                    : _vm.checkedFilterItems["gender"]
                 },
                 on: {
-                  change: function($event) {
-                    return _vm.checkedFilter($event, "gender")
-                  }
+                  change: [
+                    function($event) {
+                      var $$a = _vm.checkedFilterItems["gender"],
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = "Female",
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 &&
+                            _vm.$set(
+                              _vm.checkedFilterItems,
+                              "gender",
+                              $$a.concat([$$v])
+                            )
+                        } else {
+                          $$i > -1 &&
+                            _vm.$set(
+                              _vm.checkedFilterItems,
+                              "gender",
+                              $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                            )
+                        }
+                      } else {
+                        _vm.$set(_vm.checkedFilterItems, "gender", $$c)
+                      }
+                    },
+                    _vm.fetchWithFilters
+                  ]
                 }
               }),
               _vm._v(" "),
@@ -38456,16 +38657,55 @@ var render = function() {
           [
             _c("div", { staticClass: "form-check dropdown-item" }, [
               _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.checkedFilterItems["size"],
+                    expression: "checkedFilterItems['size']"
+                  }
+                ],
                 staticClass: "form-check-input",
                 attrs: {
                   type: "checkbox",
                   id: "checkboxSizeSmall",
-                  "data-animal-filter": "Small"
+                  value: "Small"
+                },
+                domProps: {
+                  checked: Array.isArray(_vm.checkedFilterItems["size"])
+                    ? _vm._i(_vm.checkedFilterItems["size"], "Small") > -1
+                    : _vm.checkedFilterItems["size"]
                 },
                 on: {
-                  change: function($event) {
-                    return _vm.checkedFilter($event, "size")
-                  }
+                  change: [
+                    function($event) {
+                      var $$a = _vm.checkedFilterItems["size"],
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = "Small",
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 &&
+                            _vm.$set(
+                              _vm.checkedFilterItems,
+                              "size",
+                              $$a.concat([$$v])
+                            )
+                        } else {
+                          $$i > -1 &&
+                            _vm.$set(
+                              _vm.checkedFilterItems,
+                              "size",
+                              $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                            )
+                        }
+                      } else {
+                        _vm.$set(_vm.checkedFilterItems, "size", $$c)
+                      }
+                    },
+                    _vm.fetchWithFilters
+                  ]
                 }
               }),
               _vm._v(" "),
@@ -38485,16 +38725,55 @@ var render = function() {
             _vm._v(" "),
             _c("div", { staticClass: "form-check dropdown-item" }, [
               _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.checkedFilterItems["size"],
+                    expression: "checkedFilterItems['size']"
+                  }
+                ],
                 staticClass: "form-check-input",
                 attrs: {
                   type: "checkbox",
                   id: "checkboxSizeMedium",
-                  "data-animal-filter": "Medium"
+                  value: "Medium"
+                },
+                domProps: {
+                  checked: Array.isArray(_vm.checkedFilterItems["size"])
+                    ? _vm._i(_vm.checkedFilterItems["size"], "Medium") > -1
+                    : _vm.checkedFilterItems["size"]
                 },
                 on: {
-                  change: function($event) {
-                    return _vm.checkedFilter($event, "size")
-                  }
+                  change: [
+                    function($event) {
+                      var $$a = _vm.checkedFilterItems["size"],
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = "Medium",
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 &&
+                            _vm.$set(
+                              _vm.checkedFilterItems,
+                              "size",
+                              $$a.concat([$$v])
+                            )
+                        } else {
+                          $$i > -1 &&
+                            _vm.$set(
+                              _vm.checkedFilterItems,
+                              "size",
+                              $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                            )
+                        }
+                      } else {
+                        _vm.$set(_vm.checkedFilterItems, "size", $$c)
+                      }
+                    },
+                    _vm.fetchWithFilters
+                  ]
                 }
               }),
               _vm._v(" "),
@@ -38514,16 +38793,55 @@ var render = function() {
             _vm._v(" "),
             _c("div", { staticClass: "form-check dropdown-item" }, [
               _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.checkedFilterItems["size"],
+                    expression: "checkedFilterItems['size']"
+                  }
+                ],
                 staticClass: "form-check-input",
                 attrs: {
                   type: "checkbox",
                   id: "checkboxSizeLarge",
-                  "data-animal-filter": "Large"
+                  value: "Large"
+                },
+                domProps: {
+                  checked: Array.isArray(_vm.checkedFilterItems["size"])
+                    ? _vm._i(_vm.checkedFilterItems["size"], "Large") > -1
+                    : _vm.checkedFilterItems["size"]
                 },
                 on: {
-                  change: function($event) {
-                    return _vm.checkedFilter($event, "size")
-                  }
+                  change: [
+                    function($event) {
+                      var $$a = _vm.checkedFilterItems["size"],
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = "Large",
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 &&
+                            _vm.$set(
+                              _vm.checkedFilterItems,
+                              "size",
+                              $$a.concat([$$v])
+                            )
+                        } else {
+                          $$i > -1 &&
+                            _vm.$set(
+                              _vm.checkedFilterItems,
+                              "size",
+                              $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                            )
+                        }
+                      } else {
+                        _vm.$set(_vm.checkedFilterItems, "size", $$c)
+                      }
+                    },
+                    _vm.fetchWithFilters
+                  ]
                 }
               }),
               _vm._v(" "),
@@ -38543,16 +38861,55 @@ var render = function() {
             _vm._v(" "),
             _c("div", { staticClass: "form-check dropdown-item" }, [
               _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.checkedFilterItems["size"],
+                    expression: "checkedFilterItems['size']"
+                  }
+                ],
                 staticClass: "form-check-input",
                 attrs: {
                   type: "checkbox",
                   id: "checkboxSizeXLarge",
-                  "data-animal-filter": "Very large"
+                  value: "Very large"
+                },
+                domProps: {
+                  checked: Array.isArray(_vm.checkedFilterItems["size"])
+                    ? _vm._i(_vm.checkedFilterItems["size"], "Very large") > -1
+                    : _vm.checkedFilterItems["size"]
                 },
                 on: {
-                  change: function($event) {
-                    return _vm.checkedFilter($event, "size")
-                  }
+                  change: [
+                    function($event) {
+                      var $$a = _vm.checkedFilterItems["size"],
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = "Very large",
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 &&
+                            _vm.$set(
+                              _vm.checkedFilterItems,
+                              "size",
+                              $$a.concat([$$v])
+                            )
+                        } else {
+                          $$i > -1 &&
+                            _vm.$set(
+                              _vm.checkedFilterItems,
+                              "size",
+                              $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                            )
+                        }
+                      } else {
+                        _vm.$set(_vm.checkedFilterItems, "size", $$c)
+                      }
+                    },
+                    _vm.fetchWithFilters
+                  ]
                 }
               }),
               _vm._v(" "),
@@ -38603,16 +38960,55 @@ var render = function() {
           [
             _c("div", { staticClass: "form-check dropdown-item" }, [
               _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.checkedFilterItems["color"],
+                    expression: "checkedFilterItems['color']"
+                  }
+                ],
                 staticClass: "form-check-input",
                 attrs: {
                   type: "checkbox",
                   id: "checkboxColorBlack",
-                  "data-animal-filter": "Black"
+                  value: "Black"
+                },
+                domProps: {
+                  checked: Array.isArray(_vm.checkedFilterItems["color"])
+                    ? _vm._i(_vm.checkedFilterItems["color"], "Black") > -1
+                    : _vm.checkedFilterItems["color"]
                 },
                 on: {
-                  change: function($event) {
-                    return _vm.checkedFilter($event, "color")
-                  }
+                  change: [
+                    function($event) {
+                      var $$a = _vm.checkedFilterItems["color"],
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = "Black",
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 &&
+                            _vm.$set(
+                              _vm.checkedFilterItems,
+                              "color",
+                              $$a.concat([$$v])
+                            )
+                        } else {
+                          $$i > -1 &&
+                            _vm.$set(
+                              _vm.checkedFilterItems,
+                              "color",
+                              $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                            )
+                        }
+                      } else {
+                        _vm.$set(_vm.checkedFilterItems, "color", $$c)
+                      }
+                    },
+                    _vm.fetchWithFilters
+                  ]
                 }
               }),
               _vm._v(" "),
@@ -38632,16 +39028,55 @@ var render = function() {
             _vm._v(" "),
             _c("div", { staticClass: "form-check dropdown-item" }, [
               _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.checkedFilterItems["color"],
+                    expression: "checkedFilterItems['color']"
+                  }
+                ],
                 staticClass: "form-check-input",
                 attrs: {
                   type: "checkbox",
                   id: "checkboxColorBrown",
-                  "data-animal-filter": "Brown"
+                  value: "Brown"
+                },
+                domProps: {
+                  checked: Array.isArray(_vm.checkedFilterItems["color"])
+                    ? _vm._i(_vm.checkedFilterItems["color"], "Brown") > -1
+                    : _vm.checkedFilterItems["color"]
                 },
                 on: {
-                  change: function($event) {
-                    return _vm.checkedFilter($event, "color")
-                  }
+                  change: [
+                    function($event) {
+                      var $$a = _vm.checkedFilterItems["color"],
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = "Brown",
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 &&
+                            _vm.$set(
+                              _vm.checkedFilterItems,
+                              "color",
+                              $$a.concat([$$v])
+                            )
+                        } else {
+                          $$i > -1 &&
+                            _vm.$set(
+                              _vm.checkedFilterItems,
+                              "color",
+                              $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                            )
+                        }
+                      } else {
+                        _vm.$set(_vm.checkedFilterItems, "color", $$c)
+                      }
+                    },
+                    _vm.fetchWithFilters
+                  ]
                 }
               }),
               _vm._v(" "),
@@ -38661,16 +39096,55 @@ var render = function() {
             _vm._v(" "),
             _c("div", { staticClass: "form-check dropdown-item" }, [
               _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.checkedFilterItems["color"],
+                    expression: "checkedFilterItems['color']"
+                  }
+                ],
                 staticClass: "form-check-input",
                 attrs: {
                   type: "checkbox",
                   id: "checkboxColorWhite",
-                  "data-animal-filter": "White"
+                  value: "White"
+                },
+                domProps: {
+                  checked: Array.isArray(_vm.checkedFilterItems["color"])
+                    ? _vm._i(_vm.checkedFilterItems["color"], "White") > -1
+                    : _vm.checkedFilterItems["color"]
                 },
                 on: {
-                  change: function($event) {
-                    return _vm.checkedFilter($event, "color")
-                  }
+                  change: [
+                    function($event) {
+                      var $$a = _vm.checkedFilterItems["color"],
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = "White",
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 &&
+                            _vm.$set(
+                              _vm.checkedFilterItems,
+                              "color",
+                              $$a.concat([$$v])
+                            )
+                        } else {
+                          $$i > -1 &&
+                            _vm.$set(
+                              _vm.checkedFilterItems,
+                              "color",
+                              $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                            )
+                        }
+                      } else {
+                        _vm.$set(_vm.checkedFilterItems, "color", $$c)
+                      }
+                    },
+                    _vm.fetchWithFilters
+                  ]
                 }
               }),
               _vm._v(" "),
@@ -38690,16 +39164,58 @@ var render = function() {
             _vm._v(" "),
             _c("div", { staticClass: "form-check dropdown-item" }, [
               _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.checkedFilterItems["color"],
+                    expression: "checkedFilterItems['color']"
+                  }
+                ],
                 staticClass: "form-check-input",
                 attrs: {
                   type: "checkbox",
                   id: "checkboxColorBrownBlack",
-                  "data-animal-filter": "Black and brown"
+                  value: "Black and brown"
+                },
+                domProps: {
+                  checked: Array.isArray(_vm.checkedFilterItems["color"])
+                    ? _vm._i(
+                        _vm.checkedFilterItems["color"],
+                        "Black and brown"
+                      ) > -1
+                    : _vm.checkedFilterItems["color"]
                 },
                 on: {
-                  change: function($event) {
-                    return _vm.checkedFilter($event, "color")
-                  }
+                  change: [
+                    function($event) {
+                      var $$a = _vm.checkedFilterItems["color"],
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = "Black and brown",
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 &&
+                            _vm.$set(
+                              _vm.checkedFilterItems,
+                              "color",
+                              $$a.concat([$$v])
+                            )
+                        } else {
+                          $$i > -1 &&
+                            _vm.$set(
+                              _vm.checkedFilterItems,
+                              "color",
+                              $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                            )
+                        }
+                      } else {
+                        _vm.$set(_vm.checkedFilterItems, "color", $$c)
+                      }
+                    },
+                    _vm.fetchWithFilters
+                  ]
                 }
               }),
               _vm._v(" "),
@@ -38728,21 +39244,72 @@ var render = function() {
     _c(
       "div",
       { staticClass: "filter-badges" },
-      _vm._l(
-        this.checkedFilterItems["species"].concat(
-          this.checkedFilterItems["gender"],
-          this.checkedFilterItems["size"],
-          this.checkedFilterItems["color"]
-        ),
-        function(item) {
+      [
+        _vm._l(this.checkedFilterItems["species"], function(item) {
           return _c(
             "span",
-            { key: item, staticClass: "badge badge-pill badge-primary mr-1" },
-            [_vm._v(_vm._s(item))]
+            {
+              key: item,
+              staticClass: "filter-badge badge badge-pill badge-primary mr-1",
+              on: {
+                click: function($event) {
+                  return _vm.removeFilter(item, "species")
+                }
+              }
+            },
+            [_vm._v(_vm._s(item) + " X")]
           )
-        }
-      ),
-      0
+        }),
+        _vm._v(" "),
+        _vm._l(this.checkedFilterItems["gender"], function(item) {
+          return _c(
+            "span",
+            {
+              key: item,
+              staticClass: "filter-badge badge badge-pill badge-primary mr-1",
+              on: {
+                click: function($event) {
+                  return _vm.removeFilter(item, "gender")
+                }
+              }
+            },
+            [_vm._v(_vm._s(item) + " X")]
+          )
+        }),
+        _vm._v(" "),
+        _vm._l(this.checkedFilterItems["size"], function(item) {
+          return _c(
+            "span",
+            {
+              key: item,
+              staticClass: "filter-badge badge badge-pill badge-primary mr-1",
+              on: {
+                click: function($event) {
+                  return _vm.removeFilter(item, "size")
+                }
+              }
+            },
+            [_vm._v(_vm._s(item) + " X")]
+          )
+        }),
+        _vm._v(" "),
+        _vm._l(this.checkedFilterItems["color"], function(item) {
+          return _c(
+            "span",
+            {
+              key: item,
+              staticClass: "filter-badge badge badge-pill badge-primary mr-1",
+              on: {
+                click: function($event) {
+                  return _vm.removeFilter(item, "color")
+                }
+              }
+            },
+            [_vm._v(_vm._s(item) + " X")]
+          )
+        })
+      ],
+      2
     ),
     _vm._v(" "),
     _c(
