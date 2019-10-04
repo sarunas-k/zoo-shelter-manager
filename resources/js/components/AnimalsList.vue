@@ -189,8 +189,6 @@
                 </a>
               </li>
               <li class="page-item"><span class="page-link">Page {{ response.current_page }} of {{ response.last_page }}</span></li>
-              <!-- <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li> -->
               <li class="page-item" style="cursor: pointer">
                 <a class="page-link" aria-label="Next" @click="navigateNext()">
                   <span aria-hidden="true">&raquo;</span>
@@ -318,5 +316,6 @@
 }
 .animals-list .filter-badges .filter-badge {
     cursor: pointer;
+    background-color: #888d91;
 }
 </style>

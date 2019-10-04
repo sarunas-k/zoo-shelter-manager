@@ -1900,8 +1900,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     var _this = this;
@@ -2113,25 +2111,41 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     updateView: function updateView() {
       var reportId = this.response.reportId;
+      var dateSuffix = this.response.dateFrom + ' to ' + this.response.dateTo + ':';
 
-      if (reportId == '0') {
-        this.label = 'Animals in shelter:';
-        this.content = this.response.animalsCount;
-      } else if (reportId == '1') {
-        this.label = 'Intakes from ' + this.response.dateFrom + ' to ' + this.response.dateTo + ':';
-        this.content = this.response.animalsCount;
-      } else if (reportId == '2') {
-        this.label = 'Adoptions from ' + this.response.dateFrom + ' to ' + this.response.dateTo + ':';
-        this.content = this.response.adoptionsCount;
-      } else if (reportId == '3') {
-        this.label = 'Reclaims from ' + this.response.dateFrom + ' to ' + this.response.dateTo + ':';
-        this.content = this.response.reclaimsCount;
-      } else if (reportId == '4') {
-        this.label = 'Fosters from ' + this.response.dateFrom + ' to ' + this.response.dateTo + ':';
-        this.content = this.response.fostersCount;
-      } else if (reportId == '5') {
-        this.label = 'Deceased from ' + this.response.dateFrom + ' to ' + this.response.dateTo + ':';
-        this.content = this.response.deceasedCount;
+      switch (reportId) {
+        case '0':
+          this.label = 'Animals in shelter:';
+          this.content = this.response.animalsCount;
+          break;
+
+        case '1':
+          this.label = 'Intakes from ' + dateSuffix;
+          this.content = this.response.animalsCount;
+          break;
+
+        case '2':
+          this.label = 'Adoptions from ' + dateSuffix;
+          this.content = this.response.adoptionsCount;
+          break;
+
+        case '3':
+          this.label = 'Reclaims from ' + dateSuffix;
+          this.content = this.response.reclaimsCount;
+          break;
+
+        case '4':
+          this.label = 'Fosters from ' + dateSuffix;
+          this.content = this.response.fostersCount;
+          break;
+
+        case '5':
+          this.label = 'Deceased from ' + dateSuffix;
+          this.content = this.response.deceasedCount;
+          break;
+
+        default:
+          break;
       }
     },
     createReport: function createReport() {
@@ -2139,18 +2153,16 @@ __webpack_require__.r(__webpack_exports__);
         this.label = '';
         this.content = 'Incorrect dates';
         return;
-      } // Make XMLHttpRequest to get animal records and pass animal record filters
+      }
 
-
-      this.fetch('/api/reports');
+      this.fetchReport();
     },
-    fetch: function fetch(url) {
+    fetchReport: function fetchReport() {
       var _this = this;
 
-      if (!url) return;
       this.isLoading = true;
-      console.log("Fetching URL: " + url);
-      axios.get(url, {
+      console.log("Fetching URL: /api/reports");
+      axios.get('/api/reports', {
         params: this.params
       }).then(function (response) {
         // success
@@ -2160,11 +2172,8 @@ __webpack_require__.r(__webpack_exports__);
 
         _this.updateView();
       })["catch"](function (error) {
-        // error
-        // handle error
         console.log(error);
       }).then(function () {
-        // finally
         // always executed
         console.log('Finished axios request');
         _this.isLoading = false;
@@ -2177,7 +2186,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     todaysDate: function todaysDate() {
       var today = new Date();
-      var month = today.getMonth() + 1; // months start from "0"
+      var month = today.getMonth() + 1; // months start from 0
 
       var day = today.getDate();
       if (month < 10) month = '0' + month;
@@ -6680,7 +6689,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.animals-list .filter-badges[data-v-f24648cc] {\r\n    clear: left;\r\n    float: left;\r\n    margin-bottom: 15px;\n}\n.animals-list .filter-badges .filter-badge[data-v-f24648cc] {\r\n    cursor: pointer;\n}\r\n", ""]);
+exports.push([module.i, "\n.animals-list .filter-badges[data-v-f24648cc] {\r\n    clear: left;\r\n    float: left;\r\n    margin-bottom: 15px;\n}\n.animals-list .filter-badges .filter-badge[data-v-f24648cc] {\r\n    cursor: pointer;\r\n    background-color: #888d91;\n}\r\n", ""]);
 
 // exports
 
@@ -39571,60 +39580,6 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "reports" }, [
     _c("div", { staticClass: "form-row" }, [
-      _c("div", { staticClass: "form-group col-md-4" }, [
-        _c("label", { attrs: { for: "date-from" } }, [_vm._v("From:")]),
-        _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.params.dateFrom,
-              expression: "params.dateFrom"
-            }
-          ],
-          staticClass: "form-control",
-          attrs: { type: "date", id: "date-from", name: "date-from" },
-          domProps: { value: _vm.params.dateFrom },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.$set(_vm.params, "dateFrom", $event.target.value)
-            }
-          }
-        })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group col-md-4" }, [
-        _c("label", { attrs: { for: "date-to" } }, [_vm._v("Until:")]),
-        _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.params.dateTo,
-              expression: "params.dateTo"
-            }
-          ],
-          staticClass: "form-control",
-          attrs: { type: "date", id: "date-to", name: "date-to" },
-          domProps: { value: _vm.params.dateTo },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.$set(_vm.params, "dateTo", $event.target.value)
-            }
-          }
-        })
-      ])
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "form-row" }, [
       _c("div", { staticClass: "form-group col-md-8" }, [
         _c(
           "select",
@@ -39675,6 +39630,62 @@ var render = function() {
         )
       ])
     ]),
+    _vm._v(" "),
+    _vm.params.reportId != 0
+      ? _c("div", { staticClass: "form-row" }, [
+          _c("div", { staticClass: "form-group col-md-4" }, [
+            _c("label", { attrs: { for: "date-from" } }, [_vm._v("From:")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.params.dateFrom,
+                  expression: "params.dateFrom"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "date", id: "date-from", name: "date-from" },
+              domProps: { value: _vm.params.dateFrom },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.params, "dateFrom", $event.target.value)
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group col-md-4" }, [
+            _c("label", { attrs: { for: "date-to" } }, [_vm._v("Until:")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.params.dateTo,
+                  expression: "params.dateTo"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "date", id: "date-to", name: "date-to" },
+              domProps: { value: _vm.params.dateTo },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.params, "dateTo", $event.target.value)
+                }
+              }
+            })
+          ])
+        ])
+      : _vm._e(),
     _vm._v(" "),
     _c("div", { staticClass: "form-row" }, [
       _c("div", { staticClass: "form-group col-md-8" }, [
