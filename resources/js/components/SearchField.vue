@@ -25,7 +25,7 @@
         }
     }
 </script>
-<style>
+<style scoped>
 .search-field {
     position: relative;
 }
