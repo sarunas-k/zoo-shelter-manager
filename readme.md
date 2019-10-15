@@ -1,1 +1,1 @@
-# shelter-manager
+# Animal shelter management system
