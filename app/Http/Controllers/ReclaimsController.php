@@ -123,5 +123,6 @@ class ReclaimsController extends Controller
     public function destroy($id)
     {
         $this->reclaimsRepo->delete($id);
+        return redirect('/reclaims')->with('success', 'Reclaim deleted successfully');
     }
 }

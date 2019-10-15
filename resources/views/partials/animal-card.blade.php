@@ -36,7 +36,9 @@
         </div>
         <div class="animal-badges mx-2" style="width: 150px;">
             @if($animal->is_neutered)<span class="badge badge-pill badge-primary" style="width: 150px">Spayed/Neutered</span>@endif
-            @if($animal->in_foster)<span class="badge badge-pill badge-success" style="width: 150px">In Foster</span>@endif
+            @if($animal->is_fostered)<span class="badge badge-pill badge-success" style="width: 150px">In Foster</span>@endif
+            @if($animal->is_adopted)<span class="badge badge-pill badge-success" style="width: 150px">Adopted</span>@endif
+            @if($animal->is_reclaimed)<span class="badge badge-pill badge-success" style="width: 150px">Reclaimed</span>@endif
             @if(!$animal->is_adoptable)<span class="badge badge-pill badge-danger" style="width: 150px">Not For Adoption</span>@endif
         </div>
     </div>

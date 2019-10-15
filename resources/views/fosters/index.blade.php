@@ -4,14 +4,14 @@
 @section('content')
     <br>
     <h3>Fosters</h3>
-    <br>
     @if(session('success')) <div class="alert alert-success" role="alert">  {{ session('success') }}</div>@endif
     @if(session('error'))   <div class="alert alert-danger" role="alert">   {{ session('error') }}  </div>@endif
     @if(!isset($fosters) || $fosters->count() < 1)
-    <p>No fosters records found.</p>
+        <p>No fosters records found.</p>
     @else
+        <a href="{{route('fosters.create')}}" class="btn btn-success btn-sm my-3">New foster</a>
         {{ $fosters->links() }}
-        <table class="table table-bordered table-sm my-4">
+        <table class="table table-bordered table-sm mb-4">
             <thead class="thead-dark">
               <tr>
                 <th scope="col">Start date</th>
@@ -24,7 +24,7 @@
             <tbody>
             @foreach($fosters as $foster)
                 <tr>
-                    <td scope="row" style="width: 15%"><a href="{{route('fosters.show', ['id' => $foster->id])}}">{{ $foster->foster_start_date }}</a></td>
+                    <td scope="row" style="width: 15%">{{ $foster->foster_start_date }}</td>
                     <td style="width: 15%">{{ $foster->foster_end_date }}</td>
                     <td><a href="{{route('animals.show', ['id' => $foster->animal->id])}}">{{ $foster->animal->list_number }} {{$foster->animal->name}}</a></td>
                     <td><a href="{{route('people.show', ['id' => $foster->person->id])}}">{{ $foster->person->first_name }} {{ $foster->person->last_name }}</a></td>

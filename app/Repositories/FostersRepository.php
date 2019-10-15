@@ -34,7 +34,8 @@ class FostersRepository implements IFostersRepository {
                 $person->id, 
                 ['foster_start_date' => $request->input('start-date'),
                  'foster_end_date' => null,
-                 'notes' => $request->input('notes')
+                 'notes' => $request->input('notes'),
+                 'created_at' => now()
                 ]);
             return true;
         } else {

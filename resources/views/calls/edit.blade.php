@@ -19,7 +19,7 @@
     @else
     <form method="POST" action="{{route('calls.update', ['id' => $call->id])}}">
         @csrf
-        @method('PUT')
+        @method('PATCH')
         <div class="form-row">
             <div class="form-group col-md-4">
                 <label for="call-date">Call date</label>

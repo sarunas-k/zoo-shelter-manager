@@ -19,14 +19,30 @@ class PeopleRepository implements IPeopleRepository {
         return Person::find($id);
     }
 
-    public function addFromInput($request) {
-        $person = new Person;
-        $person->first_name = $request->input('first-name');
-        $person->save();
+    public function addFromInput($formFields) {
+        Person::create([
+            'first_name' => $formFields['first-name'],
+            'last_name' => $formFields['last-name'],
+            'date_of_birth' => $formFields['date-of-birth'],
+            'phone_first' => $formFields['phone-primary'],
+            'phone_second' => $formFields['phone-secondary'],
+            'address' => $formFields['address']
+        ]);
     }
 
-    public function updateFromInput($id, $request) {
+    public function updateFromInput($id, $formFields) {
+        $person = $this->get($id);
+        if (!$person)
+            return;
         
+        $person->update([
+            'first_name' => $formFields['first-name'],
+            'last_name' => $formFields['last-name'],
+            'date_of_birth' => $formFields['date-of-birth'],
+            'phone_first' => $formFields['phone-primary'],
+            'phone_second' => $formFields['phone-secondary'],
+            'address' => $formFields['address']
+        ]);
     }
 
     public function delete($id) {

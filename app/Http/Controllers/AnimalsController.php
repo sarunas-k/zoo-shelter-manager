@@ -44,7 +44,7 @@ class AnimalsController extends Controller
     public function create()
     {
         return view('animals/create')->with([
-            'species' => $this->speciesRepo->all(),
+            'species' => $this->speciesRepo->all()->sortBy('id'),
             'colors' => $this->colorsRepo->all(),
             'staff' => $this->staffRepo->all(),
             'livingAreas' => $this->areasRepo->all()
@@ -158,7 +158,23 @@ class AnimalsController extends Controller
         return redirect('/animals')->with('success', 'Animal delete successful');
     }
 
-    public function getAnimalsAsJson(Request $request) {
-        return response()->json($this->animalsRepo->allFilteredAndPaginatedJSON($request)->toArray());
+    public function getAnimalsJSON(Request $request) {
+        $appendFilters = $request->appendFilters;
+        // appendFilters parameter is only used in first request to get data to initialize ListFilter component
+        // Unset appendFilters so that Paginator doesnt use this parameter in pagination links
+        unset($request['appendFilters']);
+        $response = $this->animalsRepo->allFilteredAndPaginated($request)->toArray();
+        if ($appendFilters)
+            $response['filters'] = $this->getAnimalsFilters();
+        return response()->json($response);
+    }
+    
+    public function getAnimalsFilters() {
+        return [
+            'species' => $this->speciesRepo->getSpeciesNames(),
+            'gender' => ['Male', 'Female'],
+            'size' => ['Small', 'Medium', 'Large', 'Very large'],
+            'color' => $this->colorsRepo->getColorsNames()
+        ];
     }
 }

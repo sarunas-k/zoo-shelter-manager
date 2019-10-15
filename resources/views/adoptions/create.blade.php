@@ -15,8 +15,23 @@
 @endif
 
 @if(isset($animal))
-@include('partials/animal-card')
+    @include('partials/animal-card')
+    @if(!$animal->is_adoptable)
+        <div class="alert alert-warning" role="alert"><strong>Notice:</strong> Animal is set as <strong>not for adoption</strong>.</div>
+    @endif
 @endif
+
+@if(isset($animal) && $animal->notInShelter())
+    <div class="alert alert-danger" role="alert">
+        @if($animal->in_foster)
+            Animal is <strong>in foster</strong>. Please end current foster to proceed with this adoption.
+        @elseif($animal->reclaimed)
+            Animal is <strong>reclaimed</strong>. Please end current reclaim to proceed with this adoption.
+        @elseif($animal->adopted)
+            Animal is <strong>adopted</strong>. Please end current adoption to proceed with this adoption.
+        @endif
+    </div>
+@else
 <form method="POST" action="{{route('adoptions.store')}}" enctype="multipart/form-data">
     @csrf
     <div class="form-row">
@@ -58,6 +73,7 @@
     </div>
     <button type="submit" class="btn btn-success">Save</button>
 </form>
+@endif
 @endsection
 
 @section('scripts')

@@ -32,8 +32,10 @@ class AdoptionsRepository implements IAdoptionsRepository {
         if ($animal !== null && $person !== null) {
             $animal->adopters()->attach(
                 $person->id, 
-                ['adoption_date' => $formFields['adoption-date'],
-                 'notes' => $formFields['notes']
+                [
+                    'adoption_date' => $formFields['adoption-date'],
+                    'notes' => $formFields['notes'],
+                    'created_at' => now()
                 ]);
             return true;
         } else {
@@ -42,7 +44,11 @@ class AdoptionsRepository implements IAdoptionsRepository {
     }
 
     public function updateFromInput($adoption, $formFields) {
-        $adoption->update(['notes' => $formFields['notes'], 'return_date' => $formFields['return-date']]);
+        $adoption->update([
+            'notes' => $formFields['notes'],
+            'return_date' => $formFields['return-date'],
+            'updated_at' => now()
+        ]);
     }
 
     public function delete($adoption) {

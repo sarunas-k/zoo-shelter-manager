@@ -10,6 +10,9 @@ class Person extends Model
     protected $table = 'people';
     // Primary key
     public $primaryKey = 'id';
+    
+    public $guarded = [];
+    public $timestamps = false;
 
     
     public function adopted_animals() {

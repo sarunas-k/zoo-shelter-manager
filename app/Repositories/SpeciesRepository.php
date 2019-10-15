@@ -11,6 +11,10 @@ class SpeciesRepository implements ISpeciesRepository {
         return Species::all();
     }
 
+    public function getSpeciesNames() {
+        return Species::all()->pluck('name')->toArray();
+    }
+
     public function allPaginated($perPage = 10) {
         return Species::paginate($perPage);
     }

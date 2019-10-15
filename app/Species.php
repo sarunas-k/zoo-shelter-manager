@@ -10,6 +10,7 @@ class Species extends Model
     protected $table = 'species';
     // Primary key
     public $primaryKey = 'id';
+    public $guarded = [];
 
     
     public function animals() {

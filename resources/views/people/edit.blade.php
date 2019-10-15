@@ -1,5 +1,5 @@
 @extends('layouts/main')
-@section('title', 'New Person')
+@section('title', 'Edit Person')
 
 @section('content')
     <br>
@@ -13,39 +13,43 @@
             </ul>
         </div>
     @endif
-
-    <form method="POST" action="{{route('people.store')}}">
+    @if(!isset($person))
+    <p>Person was not found.</p>
+    @else
+    <form method="POST" action="{{route('people.update', ['id' => $person->id])}}">
         @csrf
+        @method('PATCH')
         <div class="form-row">
             <div class="form-group col-md-4">
                 <label for="first-name">First name</label>
-                <input type="text" class="form-control" id="first-name" name="first-name" placeholder="First name" value="{{old('first-name')}}">
+                <input type="text" class="form-control" id="first-name" name="first-name" placeholder="First name" value="{{$person->first_name}}">
             </div>
             <div class="form-group col-md-4">
                 <label for="last-name">Last name</label>
-                <input type="text" class="form-control" id="last-name" name="last-name" placeholder="Last name" value="{{old('last-name')}}">
+                <input type="text" class="form-control" id="last-name" name="last-name" placeholder="Last name" value="{{$person->last_name}}">
             </div>
             <div class="form-group col-md-4">
                 <label for="date-of-birth">Date of Birth</label>
-            <input type="date" class="form-control" id="date-of-birth" name="date-of-birth" placeholder="Date of Birth" value="{{old('caller-phone')}}">
+            <input type="date" class="form-control" id="date-of-birth" name="date-of-birth" placeholder="Date of Birth" value="{{$person->date_of_birth}}">
             </div>
         </div>
         <div class="form-row">
             <div class="form-group col-md-4">
                 <label for="phone-primary">Phone 1</label>
-                <input type="text" class="form-control" id="phone-primary" name="phone-primary" placeholder="Phone 1" value="{{old('phone-primary')}}">
+                <input type="text" class="form-control" id="phone-primary" name="phone-primary" placeholder="Phone 1" value="{{$person->phone_first}}">
             </div>
             <div class="form-group col-md-4">
                 <label for="phone-secondary">Phone 2</label>
-                <input type="text" class="form-control" id="phone-secondary" name="phone-secondary" placeholder="Phone 2" value="{{old('phone-secondary')}}">
+                <input type="text" class="form-control" id="phone-secondary" name="phone-secondary" placeholder="Phone 2" value="{{$person->phone_second}}">
             </div>
             <div class="form-group col-md-4">
                 <label for="address">Address</label>
-                <input type="text" class="form-control" id="address" name="address" placeholder="Address" value="{{old('address')}}">
+                <input type="text" class="form-control" id="address" name="address" placeholder="Address" value="{{$person->address}}">
             </div>
         </div>
         <button type="submit" class="btn btn-success">Save</button>
     </form>
+    @endif
 @endsection
 
 @section('scripts')

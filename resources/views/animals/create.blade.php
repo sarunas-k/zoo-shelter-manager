@@ -28,8 +28,7 @@
             <select class="form-control" id="species" name="species">
                 <option>---</option>
                 @foreach($species as $speciesItem)
-                <option value="{{$speciesItem->id}}" @if(old('species')==$speciesItem->id) selected @endif>{{$speciesItem->name}}
-                </option>
+                    <option value="{{$speciesItem->id}}" @if(old('species')==$speciesItem->id) selected @endif>{{$speciesItem->name}}</option>
                 @endforeach
             </select>
         </div>
@@ -80,7 +79,7 @@
         </div>
         <div class="form-group col-md-4">
             <label for="staff">Responsible staff</label>
-            <select class="form-control" id="staff" name="staff">
+            <select class="form-control selectpicker" id="staff" name="staff">
                 <option>---</option>
                 @foreach($staff as $staffMember)
                 <option value="{{$staffMember->id}}" @if(old('staff')==$staffMember->id) selected @endif>{{$staffMember->first_name}}

@@ -38,9 +38,13 @@
             aria-selected="false">Images</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" id="adopt-tab" href="{{route('adoptions.create.for.animal', ['id' => $animal->id])}}">Create
-            adoption</a>
-
+        <a class="nav-link" id="adopt-tab" href="{{route('adoptions.create.for.animal', ['id' => $animal->id])}}">Adopt</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="adopt-tab" href="{{route('fosters.create.for.animal', ['id' => $animal->id])}}">Foster</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="adopt-tab" href="{{route('reclaims.create.for.animal', ['id' => $animal->id])}}">Reclaim</a>
     </li>
 </ul>
 

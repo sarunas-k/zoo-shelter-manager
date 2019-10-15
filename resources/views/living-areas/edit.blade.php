@@ -19,7 +19,7 @@
     @else
         <form method="POST" action="{{route('living-areas.update', ['id' => $livingArea->id])}}">
             @csrf
-            @method('PUT')
+            @method('PATCH')
             <div class="form-row">
                 <div class="form-group col-md-4">
                     <label for="area-name">Name</label>

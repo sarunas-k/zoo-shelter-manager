@@ -19,126 +19,7 @@
               </li>
             </ul>
         </nav>
-        <div class="animals-list-filters float-left ml-3 mt-1">
-            <span class="dropdown filter-species">
-                <button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="menuButtonSpecies" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-                    SPECIES
-                </button>
-                <div class="dropdown-menu px-2" aria-labelledby="menuButtonSpecies" @click="$event.stopPropagation()">
-                    <div class="form-check dropdown-item">
-                        <input v-model="filters['species']" class="form-check-input filter-species-checkbox" type="checkbox" value="Dogs" id="checkboxDogs" data-animal-filter="Dogs" @change="fetchWithFilters">
-                        <label class="form-check-label" for="checkboxDogs">
-                            Dogs
-                        </label>
-                    </div>
-                    <div class="form-check dropdown-item">
-                        <input v-model="filters['species']" class="form-check-input filter-species-checkbox" type="checkbox" value="Cats" id="checkboxCats" data-animal-filter="Cats" @change="fetchWithFilters">
-                        <label class="form-check-label" for="checkboxCats">
-                            Cats
-                        </label>
-                    </div>
-                    <div class="form-check dropdown-item">
-                        <input v-model="filters['species']" class="form-check-input filter-species-checkbox" type="checkbox" value="Turtles" id="checkboxTurtles" data-animal-filter="Turtles" @change="fetchWithFilters">
-                        <label class="form-check-label" for="checkboxTurtles">
-                            Turtles
-                        </label>
-                    </div>
-                </div>
-            </span>
-            <span class="dropdown filter-gender">
-                <button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="menuButtonGender" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-                    GENDER
-                </button>
-                <div class="dropdown-menu px-2" aria-labelledby="menuButtonGender" @click="$event.stopPropagation()">
-                    <div class="form-check dropdown-item">
-                        <input v-model="filters['gender']" class="form-check-input" type="checkbox" id="checkboxMale" value="Male" @change="fetchWithFilters">
-                        <label class="form-check-label" for="checkboxMale">
-                            Male
-                        </label>
-                    </div>
-                    <div class="form-check dropdown-item">
-                        <input v-model="filters['gender']" class="form-check-input" type="checkbox" id="checkboxFemale" value="Female" @change="fetchWithFilters">
-                        <label class="form-check-label" for="checkboxFemale">
-                            Female
-                        </label>
-                    </div>
-                </div>
-            </span>
-            <span class="dropdown filter-size">
-                <button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="menuButtonSize" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-                    SIZE
-                </button>
-                <div class="dropdown-menu px-2" aria-labelledby="menuButtonSize" @click="$event.stopPropagation()">
-                    <div class="form-check dropdown-item">
-                        <input v-model="filters['size']" class="form-check-input" type="checkbox" id="checkboxSizeSmall" value="Small" @change="fetchWithFilters">
-                        <label class="form-check-label" for="checkboxSizeSmall">
-                            Small
-                        </label>
-                    </div>
-                    <div class="form-check dropdown-item">
-                        <input v-model="filters['size']" class="form-check-input" type="checkbox" id="checkboxSizeMedium" value="Medium" @change="fetchWithFilters">
-                        <label class="form-check-label" for="checkboxSizeMedium">
-                            Medium
-                        </label>
-                    </div>
-                    <div class="form-check dropdown-item">
-                        <input v-model="filters['size']" class="form-check-input" type="checkbox" id="checkboxSizeLarge" value="Large" @change="fetchWithFilters">
-                        <label class="form-check-label" for="checkboxSizeLarge">
-                            Large
-                        </label>
-                    </div>
-                    <div class="form-check dropdown-item">
-                        <input v-model="filters['size']" class="form-check-input" type="checkbox" id="checkboxSizeXLarge" value="Very large" @change="fetchWithFilters">
-                        <label class="form-check-label" for="checkboxSizeXLarge">
-                            Very large
-                        </label>
-                    </div>
-                </div>
-            </span>
-            <span class="dropdown filter-color">
-                <button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="menuButtonColor" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-                    COLOR
-                </button>
-                <div class="dropdown-menu px-2" aria-labelledby="menuButtonColor" @click="$event.stopPropagation()">
-                    <div class="form-check dropdown-item">
-                        <input v-model="filters['color']" class="form-check-input" type="checkbox" id="checkboxColorBlack" value="Black" @change="fetchWithFilters">
-                        <label class="form-check-label" for="checkboxColorBlack">
-                            Black
-                        </label>
-                    </div>
-                    <div class="form-check dropdown-item">
-                        <input v-model="filters['color']" class="form-check-input" type="checkbox" id="checkboxColorBrown" value="Brown" @change="fetchWithFilters">
-                        <label class="form-check-label" for="checkboxColorBrown">
-                            Brown
-                        </label>
-                    </div>
-                    <div class="form-check dropdown-item">
-                        <input v-model="filters['color']" class="form-check-input" type="checkbox" id="checkboxColorWhite" value="White" @change="fetchWithFilters">
-                        <label class="form-check-label" for="checkboxColorWhite">
-                            White
-                        </label>
-                    </div>
-                    <div class="form-check dropdown-item">
-                        <input v-model="filters['color']" class="form-check-input" type="checkbox" id="checkboxColorBrownBlack" value="Black and brown" @change="fetchWithFilters">
-                        <label class="form-check-label" for="checkboxColorBrownBlack">
-                            Black and brown
-                        </label>
-                    </div>
-                </div>
-            </span>
-            <br>
-        </div>
-        <br>
-        <div class="filter-badges">
-            <span v-bind:key="item" v-for="item in this.filters['species']" class="filter-badge badge badge-pill badge-primary mr-1" @click="removeFilter(item, 'species')">{{item}} X</span>
-            <span v-bind:key="item" v-for="item in this.filters['gender']" class="filter-badge badge badge-pill badge-primary mr-1" @click="removeFilter(item, 'gender')">{{item}} X</span>
-            <span v-bind:key="item" v-for="item in this.filters['size']" class="filter-badge badge badge-pill badge-primary mr-1" @click="removeFilter(item, 'size')">{{item}} X</span>
-            <span v-bind:key="item" v-for="item in this.filters['color']" class="filter-badge badge badge-pill badge-primary mr-1" @click="removeFilter(item, 'color')">{{item}} X</span>
-        </div>
+        <ListFilter :initialFilters="this.initialFilterItems" :checkedFilters="this.filters" @filter-change="onFilterChange"/>
         <table class="table table-sm table-bordered my-4 table-animals-list" :style="{opacity: tableOpacity}">
             <thead class="thead-dark">
                 <tr>
@@ -174,7 +55,9 @@
                         <form method="POST" :action="routeAnimalDetailsPage(animal.id)">
                             <input type="hidden" name="_token" v-bind:value="csrf">
                             <input type="hidden" name="_method" value="DELETE">
-                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                            <button type="submit" class="btn btn-danger btn-sm">
+                                <span>X</span>
+                            </button>
                         </form>
                     </td>
                 </tr>
@@ -202,46 +85,46 @@
 
 
 <script>
+    import ListFilter from './ListFilter.vue'
     export default {
         mounted() {
             console.log('Vue: AnimalsList Component mounted.');
-            var url = '/api/animals';
-            this.fetch(url);
-            window.onpopstate = (event) => {
-                console.log("location: " + document.location + ", state: " + JSON.stringify(event.state));
-                if (event.state)
-                    this.filters = event.state;
-                else {
-                    for (let filterName in this.filters)
-                        this.filters[filterName] = [];
-                }
-                this.fetch(url, event.state);
-            };
+            this.fetch(this.url, {'appendFilters': true});
+            this.attachOnPopStateHandler();
         },
         data: function() {
             return {
                 animals: [],
                 response: [],
                 isLoading: false,
-                filters: {
-                    species: [],
-                    gender: [],
-                    size: [],
-                    color: []
-                }
+                filters: {},
+                initialFilterItems: {},
+                url: '/api/animals'
             }
         },
         methods: {
-            removeFilter(item, filter) {
-                this.filters[filter] = this.filters[filter].filter(i => i !== item);
-                this.fetchWithFilters();
+            attachOnPopStateHandler() {
+                window.onpopstate = (event) => {
+                    console.log(`[POP STATE] location: ${document.location}, state: ${JSON.stringify(event.state)}`);
+                    if (event.state) {
+                        this.filters = {...event.state};
+                        delete this.filters.page;
+                    }
+                    else {
+                        for (let filterName in this.filters)
+                            this.filters[filterName] = [];
+                    }
+                    this.fetch(this.url, event.state);
+                };
             },
-            fetchWithFilters() {
-                this.filters['page'] = 1;
-                console.log('Fetch with filters', this.filters);
-                this.fetch('/api/animals', this.filters);
-                history.pushState(this.filters, null, null);
-                    console.log("History: pushed state: " + JSON.stringify(this.filters));
+            onFilterChange(params) {
+                this.filters = {...params};
+                // Start pagination from page 1 after submitting new filter
+                params['page'] = 1;
+                console.log('Fetch with filters', params);
+                this.fetch('/api/animals', params);
+                history.pushState(params, null, null);
+                    console.log("History: pushed state: " + JSON.stringify(params));
             },
             navigateNext() {
                 console.log('Navigate next');
@@ -288,10 +171,15 @@
 
                 axios.get(url, parameters ? { params: parameters } : null)
                 .then((response) => { // success
-                    console.log("Response:");
-                    console.log(response);
+                    console.log(`Response: ${response}`);
                     this.response = response.data;
                     this.animals = response.data.data;
+                    if (response.data.filters) {
+                        this.initialFilterItems = response.data.filters;
+                        this.filters = {...this.initialFilterItems};
+                        for (let name in this.filters)
+                            this.filters[name] = [];
+                    }
                 })
                 .catch(function (error) { // error
                     // handle error
@@ -306,6 +194,9 @@
         props: ['csrf'],
         computed: {
             tableOpacity() { return this.isLoading ? 0.6 : 1 }
+        },
+        components: {
+            ListFilter
         }
     }
 </script>
@@ -318,6 +209,13 @@
 }
 .animals-list .filter-badges .filter-badge {
     cursor: pointer;
-    background-color: #888d91;
+    background-color: #FFFFFF;
+    border: 1px solid #5b5b5b;
+    color: #5b5b5b;
+    font-weight: normal;
+}
+.animals-list .filter-badges .filter-badge:hover {
+    border: 1px solid #000000;
+    color: #000000;
 }
 </style>

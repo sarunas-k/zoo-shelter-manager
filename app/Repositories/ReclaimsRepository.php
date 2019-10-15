@@ -32,7 +32,9 @@ class ReclaimsRepository implements IReclaimsRepository {
         if ($animal !== null && $person !== null) {
             $animal->reclaimers()->attach(
                 $person->id, 
-                ['date' => $request->input('date')
+                [
+                    'date' => $request->input('date'),
+                    'created_at' => now()
                 ]);
                 return true;
         } else {

@@ -11,10 +11,10 @@
         @csrf
         <div class="form-row">
             <div class="form-group col-md-4">
-                <input type="text" class="form-control" id="area-name" name="area-name" placeholder="Living area name" value="{{old('area-name')}}">
+                <input type="text" class="form-control form-control-sm" id="area-name" name="area-name" placeholder="Living area name" value="{{old('area-name')}}">
             </div>
             <div class="form-group col-md-4">
-                <button type="submit" class="btn btn-success">Add</button>
+                <button type="submit" class="btn btn-success btn-sm">Add</button>
             </div>
         </div>
     </form>
@@ -25,7 +25,6 @@
         <table class="table table-bordered table-sm my-4">
             <thead class="thead-dark">
               <tr>
-                <th scope="col" style="width: 5%">Nr</th>
                 <th scope="col" style="width: 20%">Name</th>
                 <th scope="col" style="width: 55%">Animals</th>
                 <th scope="col" style="width: 10%"></th>
@@ -33,9 +32,8 @@
               </tr>
             </thead>
             <tbody>
-            @foreach($living_areas as $area)
+            @foreach($living_areas as $index => $area)
                 <tr>
-                    <td>{{ $area->id}}</td>
                     <td>{{ $area->name}}</td>
                     <td>
                         @foreach($area->animals as $animal)
@@ -47,7 +45,9 @@
                         <form method="POST" action="{{route('living-areas.destroy', ['id' => $area->id])}}">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                            <button type="submit" class="btn btn-danger btn-sm">
+                                <span data-feather="x"></span>
+                            </button>
                         </form>
                     </td>
                 </tr>

@@ -50,7 +50,9 @@
                         <form method="POST" action="{{route('calls.destroy', ['id' => $call->id])}}">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                            <button type="submit" class="btn btn-danger btn-sm">
+                                <span data-feather="x"></span>
+                            </button>
                         </form>
                     </td>
                 </tr>

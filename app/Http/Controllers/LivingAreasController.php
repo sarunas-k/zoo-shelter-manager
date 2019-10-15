@@ -101,5 +101,6 @@ class LivingAreasController extends Controller
     public function destroy($id)
     {
         $this->areasRepo->delete($id);
+        return redirect('/living-areas')->with('success', 'Living area deleted successfully');
     }
 }

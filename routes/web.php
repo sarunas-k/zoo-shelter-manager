@@ -47,7 +47,11 @@ Route::resource('reports', 'ReportsController')->only(['index', 'show'])->middle
 
 Route::get('/search', 'SearchController@index')->middleware('auth');
 
-Auth::routes();
+Auth::routes([
+    'register' => false,
+    'reset' => false,
+    'verify' => false
+            ]);
 
 Route::get('/home', 'HomeController@index')->name('home');
 

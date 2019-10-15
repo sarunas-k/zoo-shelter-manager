@@ -2,6 +2,7 @@
 
 @section('content')
 <div class="container" style="margin-top: 100px">
+    <h2 class="mb-4 text-center" style="font-weight: bold; color: #5d5d5d">ANIMAL SHELTER MANAGER</h2>
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">

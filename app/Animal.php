@@ -64,6 +64,12 @@ class Animal extends Model
         return $this->reclaims()->whereNull('return_date');
     }
 
+    public function notInShelter() {
+        return $this->activeAdoptions()->count() > 0 ||
+                $this->activeFosters()->count() > 0 ||
+                $this->activeReclaims()->count() > 0;
+    }
+
     public function fosterers() {
         return $this->belongsToMany(Person::class, 'animal_fosters')->withPivot('foster_start_date', 'foster_end_date', 'notes');
     }

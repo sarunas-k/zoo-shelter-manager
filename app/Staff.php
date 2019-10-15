@@ -10,6 +10,8 @@ class Staff extends Model
     protected $table = 'staff';
     // Primary key
     public $primaryKey = 'id';
+    // Timestamps
+    public $timestamps = false;
 
     
     public function calls() {
@@ -21,6 +23,6 @@ class Staff extends Model
     }
 
     public function procedures() {
-        return $this->hasMany(Procedure::class);
+        return $this->hasMany(Procedure::class, 'vet_id');
     }
 }

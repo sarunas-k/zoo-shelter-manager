@@ -39,7 +39,7 @@ class PeopleController extends Controller
      */
     public function create()
     {
-        //
+        return view('people/create');
     }
 
     /**
@@ -50,7 +50,17 @@ class PeopleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $formFields = $this->validate($request, [
+            'first-name' => 'required',
+            'last-name' => 'required',
+            'date-of-birth' => 'required',
+            'phone-primary' => 'required',
+            'phone-secondary' => 'required',
+            'address' => 'required',
+        ]);
+        $this->peopleRepo->addFromInput($formFields);
+
+        return redirect('/people')->with('success', 'Person was added');
     }
 
     /**
@@ -77,7 +87,7 @@ class PeopleController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('people/edit')->with(['person' => $this->peopleRepo->get($id)]);
     }
 
     /**
@@ -89,7 +99,18 @@ class PeopleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $formFields = $this->validate($request, [
+            'first-name' => 'required',
+            'last-name' => 'required',
+            'date-of-birth' => 'required',
+            'phone-primary' => 'required',
+            'phone-secondary' => 'required',
+            'address' => 'required',
+        ]);
+        
+        $this->peopleRepo->updateFromInput($id, $formFields);
+
+        return redirect('/people')->with('success', 'Person was edited');
     }
 
     /**
@@ -100,6 +121,7 @@ class PeopleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->peopleRepo->delete($id);
+        return redirect('/people')->with('success', 'Person was deleted successfully');
     }
 }

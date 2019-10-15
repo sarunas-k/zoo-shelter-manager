@@ -136,5 +136,6 @@ class AdoptionsController extends Controller
     public function destroy(Adoption $adoption)
     {
         $this->adoptionsRepo->delete($adoption);
+        return redirect('/adoptions')->with('success', 'Adoption deleted successfully');
     }
 }

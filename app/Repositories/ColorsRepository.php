@@ -11,6 +11,10 @@ class ColorsRepository implements IColorsRepository {
         return Color::all();
     }
 
+    public function getColorsNames() {
+        return Color::all()->pluck('name')->toArray();
+    }
+
     public function allPaginated($perPage = 10) {
         return Color::paginate($perPage);
     }

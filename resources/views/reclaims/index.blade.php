@@ -4,14 +4,14 @@
 @section('content')
     <br>
     <h3>Reclaims</h3>
-    <br>
     @if(session('success'))<div class="alert alert-success" role="alert">{{session('success')}}</div>@endif
     @if(session('error'))<div class="alert alert-danger" role="alert">{{session('error')}}</div>@endif
     @if(!isset($reclaims) || $reclaims->count() < 1)
-    <p>No reclaim records found.</p>
+        <p>No reclaim records found.</p>
     @else
+        <a href="{{route('reclaims.create')}}" class="btn btn-success btn-sm my-3">New reclaim</a>
         {{ $reclaims->links() }}
-        <table class="table table-bordered table-sm my-4">
+        <table class="table table-bordered table-sm mb-4">
             <thead class="thead-dark">
               <tr>
                 <th scope="col">Date</th>
@@ -23,7 +23,7 @@
             <tbody>
             @foreach($reclaims as $reclaim)
                 <tr>
-                    <td scope="row" style="width: 10%"><a href="{{route('reclaims.show', ['id' => $reclaim->id])}}">{{ $reclaim->date }}</a></td>
+                    <td scope="row" style="width: 10%">{{ $reclaim->date }}</td>
                     <td scope="row" style="width: 10%">{{ $reclaim->return_date }}</td>
                     <td><a href="{{route('animals.show', ['id' => $reclaim->animal->id])}}">{{ $reclaim->animal->list_number }} {{$reclaim->animal->name}}</a></td>
                     <td><a href="{{route('people.show', ['id' => $reclaim->person->id])}}">{{ $reclaim->person->first_name }} {{ $reclaim->person->last_name }}</a></td>

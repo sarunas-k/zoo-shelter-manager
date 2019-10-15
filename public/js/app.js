@@ -1697,6 +1697,7 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ListFilter_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ListFilter.vue */ "./resources/js/components/ListFilter.vue");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { keys.push.apply(keys, Object.getOwnPropertySymbols(object)); } if (enumerableOnly) keys = keys.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -1789,168 +1790,52 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
-    var _this = this;
-
     console.log('Vue: AnimalsList Component mounted.');
-    var url = '/api/animals';
-    this.fetch(url);
-
-    window.onpopstate = function (event) {
-      console.log("location: " + document.location + ", state: " + JSON.stringify(event.state));
-      if (event.state) _this.filters = event.state;else {
-        for (var filterName in _this.filters) {
-          _this.filters[filterName] = [];
-        }
-      }
-
-      _this.fetch(url, event.state);
-    };
+    this.fetch(this.url, {
+      'appendFilters': true
+    });
+    this.attachOnPopStateHandler();
   },
   data: function data() {
     return {
       animals: [],
       response: [],
       isLoading: false,
-      filters: {
-        species: [],
-        gender: [],
-        size: [],
-        color: []
-      }
+      filters: {},
+      initialFilterItems: {},
+      url: '/api/animals'
     };
   },
   methods: {
-    removeFilter: function removeFilter(item, filter) {
-      this.filters[filter] = this.filters[filter].filter(function (i) {
-        return i !== item;
-      });
-      this.fetchWithFilters();
+    attachOnPopStateHandler: function attachOnPopStateHandler() {
+      var _this = this;
+
+      window.onpopstate = function (event) {
+        console.log("[POP STATE] location: ".concat(document.location, ", state: ").concat(JSON.stringify(event.state)));
+
+        if (event.state) {
+          _this.filters = _objectSpread({}, event.state);
+          delete _this.filters.page;
+        } else {
+          for (var filterName in _this.filters) {
+            _this.filters[filterName] = [];
+          }
+        }
+
+        _this.fetch(_this.url, event.state);
+      };
     },
-    fetchWithFilters: function fetchWithFilters() {
-      this.filters['page'] = 1;
-      console.log('Fetch with filters', this.filters);
-      this.fetch('/api/animals', this.filters);
-      history.pushState(this.filters, null, null);
-      console.log("History: pushed state: " + JSON.stringify(this.filters));
+    onFilterChange: function onFilterChange(params) {
+      this.filters = _objectSpread({}, params); // Start pagination from page 1 after submitting new filter
+
+      params['page'] = 1;
+      console.log('Fetch with filters', params);
+      this.fetch('/api/animals', params);
+      history.pushState(params, null, null);
+      console.log("History: pushed state: " + JSON.stringify(params));
     },
     navigateNext: function navigateNext() {
       console.log('Navigate next');
@@ -1999,10 +1884,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         params: parameters
       } : null).then(function (response) {
         // success
-        console.log("Response:");
-        console.log(response);
+        console.log("Response: ".concat(response));
         _this2.response = response.data;
         _this2.animals = response.data.data;
+
+        if (response.data.filters) {
+          _this2.initialFilterItems = response.data.filters;
+          _this2.filters = _objectSpread({}, _this2.initialFilterItems);
+
+          for (var name in _this2.filters) {
+            _this2.filters[name] = [];
+          }
+        }
       })["catch"](function (error) {
         // error
         // handle error
@@ -2019,6 +1912,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     tableOpacity: function tableOpacity() {
       return this.isLoading ? 0.6 : 1;
     }
+  },
+  components: {
+    ListFilter: _ListFilter_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   }
 });
 
@@ -2052,6 +1948,86 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     console.log('Component mounted.');
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ListFilter.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ListFilter.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { keys.push.apply(keys, Object.getOwnPropertySymbols(object)); } if (enumerableOnly) keys = keys.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  mounted: function mounted() {
+    console.log('Vue: ListFilter Component mounted.');
+    console.log('[Prop] Initial filters:', this.initialFilters);
+    console.log('[Prop] Checked filters:', this.checkedFilters);
+  },
+  data: function data() {
+    return {
+      initialized: false,
+      checkedFilterItems: {}
+    };
+  },
+  methods: {
+    removeFromFilter: function removeFromFilter(item, filterName) {
+      this.checkedFilterItems[filterName] = this.checkedFilterItems[filterName].filter(function (i) {
+        return i !== item;
+      });
+      this.emitFilterChangeEvent();
+    },
+    emitFilterChangeEvent: function emitFilterChangeEvent() {
+      this.$emit('filter-change', this.checkedFilterItems);
+    }
+  },
+  props: ['initialFilters', 'checkedFilters'],
+  watch: {
+    initialFilters: function initialFilters() {
+      this.initialized = true;
+    },
+    checkedFilters: function checkedFilters() {
+      this.checkedFilterItems = _objectSpread({}, this.checkedFilters);
+    }
   }
 });
 
@@ -6703,7 +6679,26 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.animals-list .filter-badges[data-v-f24648cc] {\r\n    clear: left;\r\n    float: left;\r\n    margin-bottom: 15px;\n}\n.animals-list .filter-badges .filter-badge[data-v-f24648cc] {\r\n    cursor: pointer;\r\n    background-color: #888d91;\n}\r\n", ""]);
+exports.push([module.i, "\n.animals-list .filter-badges[data-v-f24648cc] {\r\n    clear: left;\r\n    float: left;\r\n    margin-bottom: 15px;\n}\n.animals-list .filter-badges .filter-badge[data-v-f24648cc] {\r\n    cursor: pointer;\r\n    background-color: #FFFFFF;\r\n    border: 1px solid #5b5b5b;\r\n    color: #5b5b5b;\r\n    font-weight: normal;\n}\n.animals-list .filter-badges .filter-badge[data-v-f24648cc]:hover {\r\n    border: 1px solid #000000;\r\n    color: #000000;\n}\r\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ListFilter.vue?vue&type=style&index=0&id=a0c2493e&scoped=true&lang=css&":
+/*!****************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ListFilter.vue?vue&type=style&index=0&id=a0c2493e&scoped=true&lang=css& ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.disabled[data-v-a0c2493e] {\r\n    pointer-events: none;\r\n    opacity: 0.7;\n}\n.animals-list .filter-badges[data-v-a0c2493e] {\r\n    clear: left;\r\n    float: left;\r\n    margin-bottom: 15px;\n}\n.animals-list .filter-badges .filter-badge[data-v-a0c2493e] {\r\n    cursor: pointer;\r\n    background-color: #FFFFFF;\r\n    border: 1px solid #5b5b5b;\r\n    color: #5b5b5b;\r\n    font-weight: normal;\n}\n.animals-list .filter-badges .filter-badge[data-v-a0c2493e]:hover {\r\n    border: 1px solid #000000;\r\n    color: #000000;\n}\n.filter-title[data-v-a0c2493e] {\r\n    text-transform: uppercase;\n}\r\n", ""]);
 
 // exports
 
@@ -37605,6 +37600,36 @@ if(false) {}
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ListFilter.vue?vue&type=style&index=0&id=a0c2493e&scoped=true&lang=css&":
+/*!********************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ListFilter.vue?vue&type=style&index=0&id=a0c2493e&scoped=true&lang=css& ***!
+  \********************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./ListFilter.vue?vue&type=style&index=0&id=a0c2493e&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ListFilter.vue?vue&type=style&index=0&id=a0c2493e&scoped=true&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SearchField.vue?vue&type=style&index=0&id=72dfb3d2&scoped=true&lang=css&":
 /*!*********************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/SearchField.vue?vue&type=style&index=0&id=72dfb3d2&scoped=true&lang=css& ***!
@@ -38234,14 +38259,177 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "animals-list" }, [
-    _c(
-      "nav",
-      {
-        staticClass: "float-left",
-        attrs: { "aria-label": "Page navigation example" }
-      },
-      [
+  return _c(
+    "div",
+    { staticClass: "animals-list" },
+    [
+      _c(
+        "nav",
+        {
+          staticClass: "float-left",
+          attrs: { "aria-label": "Page navigation example" }
+        },
+        [
+          _c("ul", { staticClass: "pagination" }, [
+            _c(
+              "li",
+              { staticClass: "page-item", staticStyle: { cursor: "pointer" } },
+              [
+                _c(
+                  "a",
+                  {
+                    staticClass: "page-link",
+                    attrs: { "aria-label": "Previous" },
+                    on: {
+                      click: function($event) {
+                        return _vm.navigatePrev()
+                      }
+                    }
+                  },
+                  [
+                    _c("span", { attrs: { "aria-hidden": "true" } }, [
+                      _vm._v("«")
+                    ]),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "sr-only" }, [_vm._v("Previous")])
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c("li", { staticClass: "page-item" }, [
+              _c("span", { staticClass: "page-link" }, [
+                _vm._v(
+                  "Page " +
+                    _vm._s(_vm.response.current_page) +
+                    " of " +
+                    _vm._s(_vm.response.last_page)
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c(
+              "li",
+              { staticClass: "page-item", staticStyle: { cursor: "pointer" } },
+              [
+                _c(
+                  "a",
+                  {
+                    staticClass: "page-link",
+                    attrs: { "aria-label": "Next" },
+                    on: {
+                      click: function($event) {
+                        return _vm.navigateNext()
+                      }
+                    }
+                  },
+                  [
+                    _c("span", { attrs: { "aria-hidden": "true" } }, [
+                      _vm._v("»")
+                    ]),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "sr-only" }, [_vm._v("Next")])
+                  ]
+                )
+              ]
+            )
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c("ListFilter", {
+        attrs: {
+          initialFilters: this.initialFilterItems,
+          checkedFilters: this.filters
+        },
+        on: { "filter-change": _vm.onFilterChange }
+      }),
+      _vm._v(" "),
+      _c(
+        "table",
+        {
+          staticClass: "table table-sm table-bordered my-4 table-animals-list",
+          style: { opacity: _vm.tableOpacity }
+        },
+        [
+          _vm._m(0),
+          _vm._v(" "),
+          _c(
+            "tbody",
+            _vm._l(_vm.animals, function(animal, index) {
+              return _c("tr", { key: index }, [
+                _c("th", { attrs: { scope: "row" } }, [
+                  _c(
+                    "a",
+                    { attrs: { href: _vm.routeAnimalDetailsPage(animal.id) } },
+                    [_vm._v(_vm._s(animal.list_number))]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(animal.species.name))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(animal.gender))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(animal.color.name))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(animal.name))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(animal.birthdate))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(animal.size))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(animal.intake_date.substr(0, 11)))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(animal.chip_number))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(animal.living_area.name))]),
+                _vm._v(" "),
+                _c("td", [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "btn btn-primary btn-sm",
+                      attrs: { href: _vm.routeAnimalEditPage(animal.id) }
+                    },
+                    [_vm._v("Edit")]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _c(
+                    "form",
+                    {
+                      attrs: {
+                        method: "POST",
+                        action: _vm.routeAnimalDetailsPage(animal.id)
+                      }
+                    },
+                    [
+                      _c("input", {
+                        attrs: { type: "hidden", name: "_token" },
+                        domProps: { value: _vm.csrf }
+                      }),
+                      _vm._v(" "),
+                      _c("input", {
+                        attrs: {
+                          type: "hidden",
+                          name: "_method",
+                          value: "DELETE"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm._m(1, true)
+                    ]
+                  )
+                ])
+              ])
+            }),
+            0
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c("nav", { attrs: { "aria-label": "Page navigation example" } }, [
         _c("ul", { staticClass: "pagination" }, [
           _c(
             "li",
@@ -38306,1183 +38494,10 @@ var render = function() {
             ]
           )
         ])
-      ]
-    ),
-    _vm._v(" "),
-    _c("div", { staticClass: "animals-list-filters float-left ml-3 mt-1" }, [
-      _c("span", { staticClass: "dropdown filter-species" }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-primary btn-sm dropdown-toggle",
-            attrs: {
-              type: "button",
-              id: "menuButtonSpecies",
-              "data-toggle": "dropdown",
-              "aria-haspopup": "true",
-              "aria-expanded": "false"
-            }
-          },
-          [_vm._v("\n                SPECIES\n            ")]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "dropdown-menu px-2",
-            attrs: { "aria-labelledby": "menuButtonSpecies" },
-            on: {
-              click: function($event) {
-                return $event.stopPropagation()
-              }
-            }
-          },
-          [
-            _c("div", { staticClass: "form-check dropdown-item" }, [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.filters["species"],
-                    expression: "filters['species']"
-                  }
-                ],
-                staticClass: "form-check-input filter-species-checkbox",
-                attrs: {
-                  type: "checkbox",
-                  value: "Dogs",
-                  id: "checkboxDogs",
-                  "data-animal-filter": "Dogs"
-                },
-                domProps: {
-                  checked: Array.isArray(_vm.filters["species"])
-                    ? _vm._i(_vm.filters["species"], "Dogs") > -1
-                    : _vm.filters["species"]
-                },
-                on: {
-                  change: [
-                    function($event) {
-                      var $$a = _vm.filters["species"],
-                        $$el = $event.target,
-                        $$c = $$el.checked ? true : false
-                      if (Array.isArray($$a)) {
-                        var $$v = "Dogs",
-                          $$i = _vm._i($$a, $$v)
-                        if ($$el.checked) {
-                          $$i < 0 &&
-                            _vm.$set(_vm.filters, "species", $$a.concat([$$v]))
-                        } else {
-                          $$i > -1 &&
-                            _vm.$set(
-                              _vm.filters,
-                              "species",
-                              $$a.slice(0, $$i).concat($$a.slice($$i + 1))
-                            )
-                        }
-                      } else {
-                        _vm.$set(_vm.filters, "species", $$c)
-                      }
-                    },
-                    _vm.fetchWithFilters
-                  ]
-                }
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass: "form-check-label",
-                  attrs: { for: "checkboxDogs" }
-                },
-                [_vm._v("\n                        Dogs\n                    ")]
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-check dropdown-item" }, [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.filters["species"],
-                    expression: "filters['species']"
-                  }
-                ],
-                staticClass: "form-check-input filter-species-checkbox",
-                attrs: {
-                  type: "checkbox",
-                  value: "Cats",
-                  id: "checkboxCats",
-                  "data-animal-filter": "Cats"
-                },
-                domProps: {
-                  checked: Array.isArray(_vm.filters["species"])
-                    ? _vm._i(_vm.filters["species"], "Cats") > -1
-                    : _vm.filters["species"]
-                },
-                on: {
-                  change: [
-                    function($event) {
-                      var $$a = _vm.filters["species"],
-                        $$el = $event.target,
-                        $$c = $$el.checked ? true : false
-                      if (Array.isArray($$a)) {
-                        var $$v = "Cats",
-                          $$i = _vm._i($$a, $$v)
-                        if ($$el.checked) {
-                          $$i < 0 &&
-                            _vm.$set(_vm.filters, "species", $$a.concat([$$v]))
-                        } else {
-                          $$i > -1 &&
-                            _vm.$set(
-                              _vm.filters,
-                              "species",
-                              $$a.slice(0, $$i).concat($$a.slice($$i + 1))
-                            )
-                        }
-                      } else {
-                        _vm.$set(_vm.filters, "species", $$c)
-                      }
-                    },
-                    _vm.fetchWithFilters
-                  ]
-                }
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass: "form-check-label",
-                  attrs: { for: "checkboxCats" }
-                },
-                [_vm._v("\n                        Cats\n                    ")]
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-check dropdown-item" }, [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.filters["species"],
-                    expression: "filters['species']"
-                  }
-                ],
-                staticClass: "form-check-input filter-species-checkbox",
-                attrs: {
-                  type: "checkbox",
-                  value: "Turtles",
-                  id: "checkboxTurtles",
-                  "data-animal-filter": "Turtles"
-                },
-                domProps: {
-                  checked: Array.isArray(_vm.filters["species"])
-                    ? _vm._i(_vm.filters["species"], "Turtles") > -1
-                    : _vm.filters["species"]
-                },
-                on: {
-                  change: [
-                    function($event) {
-                      var $$a = _vm.filters["species"],
-                        $$el = $event.target,
-                        $$c = $$el.checked ? true : false
-                      if (Array.isArray($$a)) {
-                        var $$v = "Turtles",
-                          $$i = _vm._i($$a, $$v)
-                        if ($$el.checked) {
-                          $$i < 0 &&
-                            _vm.$set(_vm.filters, "species", $$a.concat([$$v]))
-                        } else {
-                          $$i > -1 &&
-                            _vm.$set(
-                              _vm.filters,
-                              "species",
-                              $$a.slice(0, $$i).concat($$a.slice($$i + 1))
-                            )
-                        }
-                      } else {
-                        _vm.$set(_vm.filters, "species", $$c)
-                      }
-                    },
-                    _vm.fetchWithFilters
-                  ]
-                }
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass: "form-check-label",
-                  attrs: { for: "checkboxTurtles" }
-                },
-                [
-                  _vm._v(
-                    "\n                        Turtles\n                    "
-                  )
-                ]
-              )
-            ])
-          ]
-        )
-      ]),
-      _vm._v(" "),
-      _c("span", { staticClass: "dropdown filter-gender" }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-primary btn-sm dropdown-toggle",
-            attrs: {
-              type: "button",
-              id: "menuButtonGender",
-              "data-toggle": "dropdown",
-              "aria-haspopup": "true",
-              "aria-expanded": "false"
-            }
-          },
-          [_vm._v("\n                GENDER\n            ")]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "dropdown-menu px-2",
-            attrs: { "aria-labelledby": "menuButtonGender" },
-            on: {
-              click: function($event) {
-                return $event.stopPropagation()
-              }
-            }
-          },
-          [
-            _c("div", { staticClass: "form-check dropdown-item" }, [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.filters["gender"],
-                    expression: "filters['gender']"
-                  }
-                ],
-                staticClass: "form-check-input",
-                attrs: { type: "checkbox", id: "checkboxMale", value: "Male" },
-                domProps: {
-                  checked: Array.isArray(_vm.filters["gender"])
-                    ? _vm._i(_vm.filters["gender"], "Male") > -1
-                    : _vm.filters["gender"]
-                },
-                on: {
-                  change: [
-                    function($event) {
-                      var $$a = _vm.filters["gender"],
-                        $$el = $event.target,
-                        $$c = $$el.checked ? true : false
-                      if (Array.isArray($$a)) {
-                        var $$v = "Male",
-                          $$i = _vm._i($$a, $$v)
-                        if ($$el.checked) {
-                          $$i < 0 &&
-                            _vm.$set(_vm.filters, "gender", $$a.concat([$$v]))
-                        } else {
-                          $$i > -1 &&
-                            _vm.$set(
-                              _vm.filters,
-                              "gender",
-                              $$a.slice(0, $$i).concat($$a.slice($$i + 1))
-                            )
-                        }
-                      } else {
-                        _vm.$set(_vm.filters, "gender", $$c)
-                      }
-                    },
-                    _vm.fetchWithFilters
-                  ]
-                }
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass: "form-check-label",
-                  attrs: { for: "checkboxMale" }
-                },
-                [_vm._v("\n                        Male\n                    ")]
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-check dropdown-item" }, [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.filters["gender"],
-                    expression: "filters['gender']"
-                  }
-                ],
-                staticClass: "form-check-input",
-                attrs: {
-                  type: "checkbox",
-                  id: "checkboxFemale",
-                  value: "Female"
-                },
-                domProps: {
-                  checked: Array.isArray(_vm.filters["gender"])
-                    ? _vm._i(_vm.filters["gender"], "Female") > -1
-                    : _vm.filters["gender"]
-                },
-                on: {
-                  change: [
-                    function($event) {
-                      var $$a = _vm.filters["gender"],
-                        $$el = $event.target,
-                        $$c = $$el.checked ? true : false
-                      if (Array.isArray($$a)) {
-                        var $$v = "Female",
-                          $$i = _vm._i($$a, $$v)
-                        if ($$el.checked) {
-                          $$i < 0 &&
-                            _vm.$set(_vm.filters, "gender", $$a.concat([$$v]))
-                        } else {
-                          $$i > -1 &&
-                            _vm.$set(
-                              _vm.filters,
-                              "gender",
-                              $$a.slice(0, $$i).concat($$a.slice($$i + 1))
-                            )
-                        }
-                      } else {
-                        _vm.$set(_vm.filters, "gender", $$c)
-                      }
-                    },
-                    _vm.fetchWithFilters
-                  ]
-                }
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass: "form-check-label",
-                  attrs: { for: "checkboxFemale" }
-                },
-                [
-                  _vm._v(
-                    "\n                        Female\n                    "
-                  )
-                ]
-              )
-            ])
-          ]
-        )
-      ]),
-      _vm._v(" "),
-      _c("span", { staticClass: "dropdown filter-size" }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-primary btn-sm dropdown-toggle",
-            attrs: {
-              type: "button",
-              id: "menuButtonSize",
-              "data-toggle": "dropdown",
-              "aria-haspopup": "true",
-              "aria-expanded": "false"
-            }
-          },
-          [_vm._v("\n                SIZE\n            ")]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "dropdown-menu px-2",
-            attrs: { "aria-labelledby": "menuButtonSize" },
-            on: {
-              click: function($event) {
-                return $event.stopPropagation()
-              }
-            }
-          },
-          [
-            _c("div", { staticClass: "form-check dropdown-item" }, [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.filters["size"],
-                    expression: "filters['size']"
-                  }
-                ],
-                staticClass: "form-check-input",
-                attrs: {
-                  type: "checkbox",
-                  id: "checkboxSizeSmall",
-                  value: "Small"
-                },
-                domProps: {
-                  checked: Array.isArray(_vm.filters["size"])
-                    ? _vm._i(_vm.filters["size"], "Small") > -1
-                    : _vm.filters["size"]
-                },
-                on: {
-                  change: [
-                    function($event) {
-                      var $$a = _vm.filters["size"],
-                        $$el = $event.target,
-                        $$c = $$el.checked ? true : false
-                      if (Array.isArray($$a)) {
-                        var $$v = "Small",
-                          $$i = _vm._i($$a, $$v)
-                        if ($$el.checked) {
-                          $$i < 0 &&
-                            _vm.$set(_vm.filters, "size", $$a.concat([$$v]))
-                        } else {
-                          $$i > -1 &&
-                            _vm.$set(
-                              _vm.filters,
-                              "size",
-                              $$a.slice(0, $$i).concat($$a.slice($$i + 1))
-                            )
-                        }
-                      } else {
-                        _vm.$set(_vm.filters, "size", $$c)
-                      }
-                    },
-                    _vm.fetchWithFilters
-                  ]
-                }
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass: "form-check-label",
-                  attrs: { for: "checkboxSizeSmall" }
-                },
-                [
-                  _vm._v(
-                    "\n                        Small\n                    "
-                  )
-                ]
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-check dropdown-item" }, [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.filters["size"],
-                    expression: "filters['size']"
-                  }
-                ],
-                staticClass: "form-check-input",
-                attrs: {
-                  type: "checkbox",
-                  id: "checkboxSizeMedium",
-                  value: "Medium"
-                },
-                domProps: {
-                  checked: Array.isArray(_vm.filters["size"])
-                    ? _vm._i(_vm.filters["size"], "Medium") > -1
-                    : _vm.filters["size"]
-                },
-                on: {
-                  change: [
-                    function($event) {
-                      var $$a = _vm.filters["size"],
-                        $$el = $event.target,
-                        $$c = $$el.checked ? true : false
-                      if (Array.isArray($$a)) {
-                        var $$v = "Medium",
-                          $$i = _vm._i($$a, $$v)
-                        if ($$el.checked) {
-                          $$i < 0 &&
-                            _vm.$set(_vm.filters, "size", $$a.concat([$$v]))
-                        } else {
-                          $$i > -1 &&
-                            _vm.$set(
-                              _vm.filters,
-                              "size",
-                              $$a.slice(0, $$i).concat($$a.slice($$i + 1))
-                            )
-                        }
-                      } else {
-                        _vm.$set(_vm.filters, "size", $$c)
-                      }
-                    },
-                    _vm.fetchWithFilters
-                  ]
-                }
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass: "form-check-label",
-                  attrs: { for: "checkboxSizeMedium" }
-                },
-                [
-                  _vm._v(
-                    "\n                        Medium\n                    "
-                  )
-                ]
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-check dropdown-item" }, [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.filters["size"],
-                    expression: "filters['size']"
-                  }
-                ],
-                staticClass: "form-check-input",
-                attrs: {
-                  type: "checkbox",
-                  id: "checkboxSizeLarge",
-                  value: "Large"
-                },
-                domProps: {
-                  checked: Array.isArray(_vm.filters["size"])
-                    ? _vm._i(_vm.filters["size"], "Large") > -1
-                    : _vm.filters["size"]
-                },
-                on: {
-                  change: [
-                    function($event) {
-                      var $$a = _vm.filters["size"],
-                        $$el = $event.target,
-                        $$c = $$el.checked ? true : false
-                      if (Array.isArray($$a)) {
-                        var $$v = "Large",
-                          $$i = _vm._i($$a, $$v)
-                        if ($$el.checked) {
-                          $$i < 0 &&
-                            _vm.$set(_vm.filters, "size", $$a.concat([$$v]))
-                        } else {
-                          $$i > -1 &&
-                            _vm.$set(
-                              _vm.filters,
-                              "size",
-                              $$a.slice(0, $$i).concat($$a.slice($$i + 1))
-                            )
-                        }
-                      } else {
-                        _vm.$set(_vm.filters, "size", $$c)
-                      }
-                    },
-                    _vm.fetchWithFilters
-                  ]
-                }
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass: "form-check-label",
-                  attrs: { for: "checkboxSizeLarge" }
-                },
-                [
-                  _vm._v(
-                    "\n                        Large\n                    "
-                  )
-                ]
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-check dropdown-item" }, [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.filters["size"],
-                    expression: "filters['size']"
-                  }
-                ],
-                staticClass: "form-check-input",
-                attrs: {
-                  type: "checkbox",
-                  id: "checkboxSizeXLarge",
-                  value: "Very large"
-                },
-                domProps: {
-                  checked: Array.isArray(_vm.filters["size"])
-                    ? _vm._i(_vm.filters["size"], "Very large") > -1
-                    : _vm.filters["size"]
-                },
-                on: {
-                  change: [
-                    function($event) {
-                      var $$a = _vm.filters["size"],
-                        $$el = $event.target,
-                        $$c = $$el.checked ? true : false
-                      if (Array.isArray($$a)) {
-                        var $$v = "Very large",
-                          $$i = _vm._i($$a, $$v)
-                        if ($$el.checked) {
-                          $$i < 0 &&
-                            _vm.$set(_vm.filters, "size", $$a.concat([$$v]))
-                        } else {
-                          $$i > -1 &&
-                            _vm.$set(
-                              _vm.filters,
-                              "size",
-                              $$a.slice(0, $$i).concat($$a.slice($$i + 1))
-                            )
-                        }
-                      } else {
-                        _vm.$set(_vm.filters, "size", $$c)
-                      }
-                    },
-                    _vm.fetchWithFilters
-                  ]
-                }
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass: "form-check-label",
-                  attrs: { for: "checkboxSizeXLarge" }
-                },
-                [
-                  _vm._v(
-                    "\n                        Very large\n                    "
-                  )
-                ]
-              )
-            ])
-          ]
-        )
-      ]),
-      _vm._v(" "),
-      _c("span", { staticClass: "dropdown filter-color" }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-primary btn-sm dropdown-toggle",
-            attrs: {
-              type: "button",
-              id: "menuButtonColor",
-              "data-toggle": "dropdown",
-              "aria-haspopup": "true",
-              "aria-expanded": "false"
-            }
-          },
-          [_vm._v("\n                COLOR\n            ")]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "dropdown-menu px-2",
-            attrs: { "aria-labelledby": "menuButtonColor" },
-            on: {
-              click: function($event) {
-                return $event.stopPropagation()
-              }
-            }
-          },
-          [
-            _c("div", { staticClass: "form-check dropdown-item" }, [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.filters["color"],
-                    expression: "filters['color']"
-                  }
-                ],
-                staticClass: "form-check-input",
-                attrs: {
-                  type: "checkbox",
-                  id: "checkboxColorBlack",
-                  value: "Black"
-                },
-                domProps: {
-                  checked: Array.isArray(_vm.filters["color"])
-                    ? _vm._i(_vm.filters["color"], "Black") > -1
-                    : _vm.filters["color"]
-                },
-                on: {
-                  change: [
-                    function($event) {
-                      var $$a = _vm.filters["color"],
-                        $$el = $event.target,
-                        $$c = $$el.checked ? true : false
-                      if (Array.isArray($$a)) {
-                        var $$v = "Black",
-                          $$i = _vm._i($$a, $$v)
-                        if ($$el.checked) {
-                          $$i < 0 &&
-                            _vm.$set(_vm.filters, "color", $$a.concat([$$v]))
-                        } else {
-                          $$i > -1 &&
-                            _vm.$set(
-                              _vm.filters,
-                              "color",
-                              $$a.slice(0, $$i).concat($$a.slice($$i + 1))
-                            )
-                        }
-                      } else {
-                        _vm.$set(_vm.filters, "color", $$c)
-                      }
-                    },
-                    _vm.fetchWithFilters
-                  ]
-                }
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass: "form-check-label",
-                  attrs: { for: "checkboxColorBlack" }
-                },
-                [
-                  _vm._v(
-                    "\n                        Black\n                    "
-                  )
-                ]
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-check dropdown-item" }, [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.filters["color"],
-                    expression: "filters['color']"
-                  }
-                ],
-                staticClass: "form-check-input",
-                attrs: {
-                  type: "checkbox",
-                  id: "checkboxColorBrown",
-                  value: "Brown"
-                },
-                domProps: {
-                  checked: Array.isArray(_vm.filters["color"])
-                    ? _vm._i(_vm.filters["color"], "Brown") > -1
-                    : _vm.filters["color"]
-                },
-                on: {
-                  change: [
-                    function($event) {
-                      var $$a = _vm.filters["color"],
-                        $$el = $event.target,
-                        $$c = $$el.checked ? true : false
-                      if (Array.isArray($$a)) {
-                        var $$v = "Brown",
-                          $$i = _vm._i($$a, $$v)
-                        if ($$el.checked) {
-                          $$i < 0 &&
-                            _vm.$set(_vm.filters, "color", $$a.concat([$$v]))
-                        } else {
-                          $$i > -1 &&
-                            _vm.$set(
-                              _vm.filters,
-                              "color",
-                              $$a.slice(0, $$i).concat($$a.slice($$i + 1))
-                            )
-                        }
-                      } else {
-                        _vm.$set(_vm.filters, "color", $$c)
-                      }
-                    },
-                    _vm.fetchWithFilters
-                  ]
-                }
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass: "form-check-label",
-                  attrs: { for: "checkboxColorBrown" }
-                },
-                [
-                  _vm._v(
-                    "\n                        Brown\n                    "
-                  )
-                ]
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-check dropdown-item" }, [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.filters["color"],
-                    expression: "filters['color']"
-                  }
-                ],
-                staticClass: "form-check-input",
-                attrs: {
-                  type: "checkbox",
-                  id: "checkboxColorWhite",
-                  value: "White"
-                },
-                domProps: {
-                  checked: Array.isArray(_vm.filters["color"])
-                    ? _vm._i(_vm.filters["color"], "White") > -1
-                    : _vm.filters["color"]
-                },
-                on: {
-                  change: [
-                    function($event) {
-                      var $$a = _vm.filters["color"],
-                        $$el = $event.target,
-                        $$c = $$el.checked ? true : false
-                      if (Array.isArray($$a)) {
-                        var $$v = "White",
-                          $$i = _vm._i($$a, $$v)
-                        if ($$el.checked) {
-                          $$i < 0 &&
-                            _vm.$set(_vm.filters, "color", $$a.concat([$$v]))
-                        } else {
-                          $$i > -1 &&
-                            _vm.$set(
-                              _vm.filters,
-                              "color",
-                              $$a.slice(0, $$i).concat($$a.slice($$i + 1))
-                            )
-                        }
-                      } else {
-                        _vm.$set(_vm.filters, "color", $$c)
-                      }
-                    },
-                    _vm.fetchWithFilters
-                  ]
-                }
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass: "form-check-label",
-                  attrs: { for: "checkboxColorWhite" }
-                },
-                [
-                  _vm._v(
-                    "\n                        White\n                    "
-                  )
-                ]
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-check dropdown-item" }, [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.filters["color"],
-                    expression: "filters['color']"
-                  }
-                ],
-                staticClass: "form-check-input",
-                attrs: {
-                  type: "checkbox",
-                  id: "checkboxColorBrownBlack",
-                  value: "Black and brown"
-                },
-                domProps: {
-                  checked: Array.isArray(_vm.filters["color"])
-                    ? _vm._i(_vm.filters["color"], "Black and brown") > -1
-                    : _vm.filters["color"]
-                },
-                on: {
-                  change: [
-                    function($event) {
-                      var $$a = _vm.filters["color"],
-                        $$el = $event.target,
-                        $$c = $$el.checked ? true : false
-                      if (Array.isArray($$a)) {
-                        var $$v = "Black and brown",
-                          $$i = _vm._i($$a, $$v)
-                        if ($$el.checked) {
-                          $$i < 0 &&
-                            _vm.$set(_vm.filters, "color", $$a.concat([$$v]))
-                        } else {
-                          $$i > -1 &&
-                            _vm.$set(
-                              _vm.filters,
-                              "color",
-                              $$a.slice(0, $$i).concat($$a.slice($$i + 1))
-                            )
-                        }
-                      } else {
-                        _vm.$set(_vm.filters, "color", $$c)
-                      }
-                    },
-                    _vm.fetchWithFilters
-                  ]
-                }
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass: "form-check-label",
-                  attrs: { for: "checkboxColorBrownBlack" }
-                },
-                [
-                  _vm._v(
-                    "\n                        Black and brown\n                    "
-                  )
-                ]
-              )
-            ])
-          ]
-        )
-      ]),
-      _vm._v(" "),
-      _c("br")
-    ]),
-    _vm._v(" "),
-    _c("br"),
-    _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "filter-badges" },
-      [
-        _vm._l(this.filters["species"], function(item) {
-          return _c(
-            "span",
-            {
-              key: item,
-              staticClass: "filter-badge badge badge-pill badge-primary mr-1",
-              on: {
-                click: function($event) {
-                  return _vm.removeFilter(item, "species")
-                }
-              }
-            },
-            [_vm._v(_vm._s(item) + " X")]
-          )
-        }),
-        _vm._v(" "),
-        _vm._l(this.filters["gender"], function(item) {
-          return _c(
-            "span",
-            {
-              key: item,
-              staticClass: "filter-badge badge badge-pill badge-primary mr-1",
-              on: {
-                click: function($event) {
-                  return _vm.removeFilter(item, "gender")
-                }
-              }
-            },
-            [_vm._v(_vm._s(item) + " X")]
-          )
-        }),
-        _vm._v(" "),
-        _vm._l(this.filters["size"], function(item) {
-          return _c(
-            "span",
-            {
-              key: item,
-              staticClass: "filter-badge badge badge-pill badge-primary mr-1",
-              on: {
-                click: function($event) {
-                  return _vm.removeFilter(item, "size")
-                }
-              }
-            },
-            [_vm._v(_vm._s(item) + " X")]
-          )
-        }),
-        _vm._v(" "),
-        _vm._l(this.filters["color"], function(item) {
-          return _c(
-            "span",
-            {
-              key: item,
-              staticClass: "filter-badge badge badge-pill badge-primary mr-1",
-              on: {
-                click: function($event) {
-                  return _vm.removeFilter(item, "color")
-                }
-              }
-            },
-            [_vm._v(_vm._s(item) + " X")]
-          )
-        })
-      ],
-      2
-    ),
-    _vm._v(" "),
-    _c(
-      "table",
-      {
-        staticClass: "table table-sm table-bordered my-4 table-animals-list",
-        style: { opacity: _vm.tableOpacity }
-      },
-      [
-        _vm._m(0),
-        _vm._v(" "),
-        _c(
-          "tbody",
-          _vm._l(_vm.animals, function(animal, index) {
-            return _c("tr", { key: index }, [
-              _c("th", { attrs: { scope: "row" } }, [
-                _c(
-                  "a",
-                  { attrs: { href: _vm.routeAnimalDetailsPage(animal.id) } },
-                  [_vm._v(_vm._s(animal.list_number))]
-                )
-              ]),
-              _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(animal.species.name))]),
-              _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(animal.gender))]),
-              _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(animal.color.name))]),
-              _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(animal.name))]),
-              _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(animal.birthdate))]),
-              _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(animal.size))]),
-              _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(animal.intake_date.substr(0, 11)))]),
-              _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(animal.chip_number))]),
-              _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(animal.living_area.name))]),
-              _vm._v(" "),
-              _c("td", [
-                _c(
-                  "a",
-                  {
-                    staticClass: "btn btn-primary btn-sm",
-                    attrs: { href: _vm.routeAnimalEditPage(animal.id) }
-                  },
-                  [_vm._v("Edit")]
-                )
-              ]),
-              _vm._v(" "),
-              _c("td", [
-                _c(
-                  "form",
-                  {
-                    attrs: {
-                      method: "POST",
-                      action: _vm.routeAnimalDetailsPage(animal.id)
-                    }
-                  },
-                  [
-                    _c("input", {
-                      attrs: { type: "hidden", name: "_token" },
-                      domProps: { value: _vm.csrf }
-                    }),
-                    _vm._v(" "),
-                    _c("input", {
-                      attrs: {
-                        type: "hidden",
-                        name: "_method",
-                        value: "DELETE"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-danger btn-sm",
-                        attrs: { type: "submit" }
-                      },
-                      [_vm._v("Delete")]
-                    )
-                  ]
-                )
-              ])
-            ])
-          }),
-          0
-        )
-      ]
-    ),
-    _vm._v(" "),
-    _c("nav", { attrs: { "aria-label": "Page navigation example" } }, [
-      _c("ul", { staticClass: "pagination" }, [
-        _c(
-          "li",
-          { staticClass: "page-item", staticStyle: { cursor: "pointer" } },
-          [
-            _c(
-              "a",
-              {
-                staticClass: "page-link",
-                attrs: { "aria-label": "Previous" },
-                on: {
-                  click: function($event) {
-                    return _vm.navigatePrev()
-                  }
-                }
-              },
-              [
-                _c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("«")]),
-                _vm._v(" "),
-                _c("span", { staticClass: "sr-only" }, [_vm._v("Previous")])
-              ]
-            )
-          ]
-        ),
-        _vm._v(" "),
-        _c("li", { staticClass: "page-item" }, [
-          _c("span", { staticClass: "page-link" }, [
-            _vm._v(
-              "Page " +
-                _vm._s(_vm.response.current_page) +
-                " of " +
-                _vm._s(_vm.response.last_page)
-            )
-          ])
-        ]),
-        _vm._v(" "),
-        _c(
-          "li",
-          { staticClass: "page-item", staticStyle: { cursor: "pointer" } },
-          [
-            _c(
-              "a",
-              {
-                staticClass: "page-link",
-                attrs: { "aria-label": "Next" },
-                on: {
-                  click: function($event) {
-                    return _vm.navigateNext()
-                  }
-                }
-              },
-              [
-                _c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("»")]),
-                _vm._v(" "),
-                _c("span", { staticClass: "sr-only" }, [_vm._v("Next")])
-              ]
-            )
-          ]
-        )
       ])
-    ])
-  ])
+    ],
+    1
+  )
 }
 var staticRenderFns = [
   function() {
@@ -39516,6 +38531,16 @@ var staticRenderFns = [
         _c("th", { attrs: { scope: "col" } })
       ])
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      { staticClass: "btn btn-danger btn-sm", attrs: { type: "submit" } },
+      [_c("span", [_vm._v("X")])]
+    )
   }
 ]
 render._withStripped = true
@@ -39565,6 +38590,202 @@ var staticRenderFns = [
     ])
   }
 ]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ListFilter.vue?vue&type=template&id=a0c2493e&scoped=true&":
+/*!*************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ListFilter.vue?vue&type=template&id=a0c2493e&scoped=true& ***!
+  \*************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "list-filter", class: { disabled: !_vm.initialized } },
+    [
+      _c(
+        "div",
+        { staticClass: "list-filter-buttons float-left ml-3 mt-1" },
+        [
+          _vm._l(_vm.initialFilters, function(filterValues, filterName, index) {
+            return _c(
+              "span",
+              { key: index, class: ["dropdown", "filter-" + filterName] },
+              [
+                _c(
+                  "button",
+                  {
+                    staticClass:
+                      "btn btn-outline-primary btn-sm dropdown-toggle",
+                    attrs: {
+                      type: "button",
+                      id: "menuButton" + filterName,
+                      "data-toggle": "dropdown",
+                      "aria-haspopup": "true",
+                      "aria-expanded": "false"
+                    }
+                  },
+                  [
+                    _c("span", { staticClass: "filter-title" }, [
+                      _vm._v(_vm._s(filterName))
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "dropdown-menu px-2",
+                    attrs: { "aria-labelledby": "menuButton" + filterName },
+                    on: {
+                      click: function($event) {
+                        return $event.stopPropagation()
+                      }
+                    }
+                  },
+                  _vm._l(filterValues, function(value, i) {
+                    return _c(
+                      "div",
+                      {
+                        key: i,
+                        class: [
+                          "form-check",
+                          "dropdown-item",
+                          "filter-value-" + value
+                        ]
+                      },
+                      [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.checkedFilterItems[filterName],
+                              expression: "checkedFilterItems[filterName]"
+                            }
+                          ],
+                          staticClass: "form-check-input",
+                          attrs: { type: "checkbox", id: value },
+                          domProps: {
+                            value: value,
+                            checked: Array.isArray(
+                              _vm.checkedFilterItems[filterName]
+                            )
+                              ? _vm._i(
+                                  _vm.checkedFilterItems[filterName],
+                                  value
+                                ) > -1
+                              : _vm.checkedFilterItems[filterName]
+                          },
+                          on: {
+                            change: [
+                              function($event) {
+                                var $$a = _vm.checkedFilterItems[filterName],
+                                  $$el = $event.target,
+                                  $$c = $$el.checked ? true : false
+                                if (Array.isArray($$a)) {
+                                  var $$v = value,
+                                    $$i = _vm._i($$a, $$v)
+                                  if ($$el.checked) {
+                                    $$i < 0 &&
+                                      _vm.$set(
+                                        _vm.checkedFilterItems,
+                                        filterName,
+                                        $$a.concat([$$v])
+                                      )
+                                  } else {
+                                    $$i > -1 &&
+                                      _vm.$set(
+                                        _vm.checkedFilterItems,
+                                        filterName,
+                                        $$a
+                                          .slice(0, $$i)
+                                          .concat($$a.slice($$i + 1))
+                                      )
+                                  }
+                                } else {
+                                  _vm.$set(
+                                    _vm.checkedFilterItems,
+                                    filterName,
+                                    $$c
+                                  )
+                                }
+                              },
+                              _vm.emitFilterChangeEvent
+                            ]
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "label",
+                          {
+                            staticClass: "form-check-label",
+                            attrs: { for: value }
+                          },
+                          [
+                            _vm._v(
+                              "\n                        " +
+                                _vm._s(value) +
+                                "\n                    "
+                            )
+                          ]
+                        )
+                      ]
+                    )
+                  }),
+                  0
+                )
+              ]
+            )
+          }),
+          _vm._v(" "),
+          _c("br")
+        ],
+        2
+      ),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "filter-badges" },
+        [
+          _vm._l(_vm.checkedFilterItems, function(filterValues, filterName) {
+            return _vm._l(_vm.checkedFilterItems[filterName], function(item) {
+              return _c(
+                "span",
+                {
+                  key: item,
+                  staticClass: "filter-badge badge badge-pill mr-1",
+                  on: {
+                    click: function($event) {
+                      return _vm.removeFromFilter(item, filterName)
+                    }
+                  }
+                },
+                [_vm._v(_vm._s(item) + " X")]
+              )
+            })
+          })
+        ],
+        2
+      )
+    ]
+  )
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -51958,6 +51179,7 @@ Vue.component('example-component', __webpack_require__(/*! ./components/ExampleC
 Vue.component('search-field', __webpack_require__(/*! ./components/SearchField.vue */ "./resources/js/components/SearchField.vue")["default"]);
 Vue.component('animals-list', __webpack_require__(/*! ./components/AnimalsList.vue */ "./resources/js/components/AnimalsList.vue")["default"]);
 Vue.component('reports', __webpack_require__(/*! ./components/Reports.vue */ "./resources/js/components/Reports.vue")["default"]);
+Vue.component('list-filter', __webpack_require__(/*! ./components/ListFilter.vue */ "./resources/js/components/ListFilter.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -52186,6 +51408,93 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ExampleComponent_vue_vue_type_template_id_299e239e___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ExampleComponent_vue_vue_type_template_id_299e239e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/ListFilter.vue":
+/*!************************************************!*\
+  !*** ./resources/js/components/ListFilter.vue ***!
+  \************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ListFilter_vue_vue_type_template_id_a0c2493e_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ListFilter.vue?vue&type=template&id=a0c2493e&scoped=true& */ "./resources/js/components/ListFilter.vue?vue&type=template&id=a0c2493e&scoped=true&");
+/* harmony import */ var _ListFilter_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ListFilter.vue?vue&type=script&lang=js& */ "./resources/js/components/ListFilter.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _ListFilter_vue_vue_type_style_index_0_id_a0c2493e_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ListFilter.vue?vue&type=style&index=0&id=a0c2493e&scoped=true&lang=css& */ "./resources/js/components/ListFilter.vue?vue&type=style&index=0&id=a0c2493e&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _ListFilter_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ListFilter_vue_vue_type_template_id_a0c2493e_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ListFilter_vue_vue_type_template_id_a0c2493e_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "a0c2493e",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/ListFilter.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/ListFilter.vue?vue&type=script&lang=js&":
+/*!*************************************************************************!*\
+  !*** ./resources/js/components/ListFilter.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ListFilter_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./ListFilter.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ListFilter.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ListFilter_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/ListFilter.vue?vue&type=style&index=0&id=a0c2493e&scoped=true&lang=css&":
+/*!*********************************************************************************************************!*\
+  !*** ./resources/js/components/ListFilter.vue?vue&type=style&index=0&id=a0c2493e&scoped=true&lang=css& ***!
+  \*********************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ListFilter_vue_vue_type_style_index_0_id_a0c2493e_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./ListFilter.vue?vue&type=style&index=0&id=a0c2493e&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ListFilter.vue?vue&type=style&index=0&id=a0c2493e&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ListFilter_vue_vue_type_style_index_0_id_a0c2493e_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ListFilter_vue_vue_type_style_index_0_id_a0c2493e_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ListFilter_vue_vue_type_style_index_0_id_a0c2493e_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ListFilter_vue_vue_type_style_index_0_id_a0c2493e_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ListFilter_vue_vue_type_style_index_0_id_a0c2493e_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./resources/js/components/ListFilter.vue?vue&type=template&id=a0c2493e&scoped=true&":
+/*!*******************************************************************************************!*\
+  !*** ./resources/js/components/ListFilter.vue?vue&type=template&id=a0c2493e&scoped=true& ***!
+  \*******************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ListFilter_vue_vue_type_template_id_a0c2493e_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./ListFilter.vue?vue&type=template&id=a0c2493e&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ListFilter.vue?vue&type=template&id=a0c2493e&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ListFilter_vue_vue_type_template_id_a0c2493e_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ListFilter_vue_vue_type_template_id_a0c2493e_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

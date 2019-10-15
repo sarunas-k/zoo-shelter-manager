@@ -25,19 +25,19 @@ class AnimalsRepository implements IAnimalsRepository {
         return Animal::latest();
     }
 
+    // public function allFilteredAndPaginated($request, $includeNonShelterAnimals = false, $perPage = 10) {
+    //     $animals = $this->latest();
+    //     if (!$includeNonShelterAnimals)
+    //         $animals
+    //             ->whereDoesntHave('activeAdoptions')
+    //             ->whereDoesntHave('activeFosters')
+    //             ->whereDoesntHave('activeReclaims');
+
+    //     $this->applyFilters($animals, $request);
+    //     return $animals->paginate($perPage);
+    // }
+
     public function allFilteredAndPaginated($request, $includeNonShelterAnimals = false, $perPage = 10) {
-        $animals = $this->latest();
-        if (!$includeNonShelterAnimals)
-            $animals
-                ->whereDoesntHave('activeAdoptions')
-                ->whereDoesntHave('activeFosters')
-                ->whereDoesntHave('activeReclaims');
-
-        $this->applyFilters($animals, $request);
-        return $animals->paginate($perPage);
-    }
-
-    public function allFilteredAndPaginatedJSON($request, $includeNonShelterAnimals = false, $perPage = 10) {
         $animals = $this->latest()->with(['species', 'color', 'living_area']);
         if (!$includeNonShelterAnimals)
             $animals
@@ -187,10 +187,16 @@ class AnimalsRepository implements IAnimalsRepository {
 
         // Check if animal quarantine period has passed
         $daysInShelter = date_diff(date_create($animal->intake_date), date_create(date("Y-m-d")))->format('%a');
-        $animal->is_adoptable = $daysInShelter > 14; //TODO: store this value somewhere in configuration file
+        $animal->is_adoptable = $daysInShelter > 14; //TODO: store this value somewhere in configuration
 
         // Check if animal is in foster care
-        $animal->in_foster = $animal->fosters()->whereNull('foster_end_date')->count() > 0;
+        $animal->is_fostered = $animal->activeFosters()->count() > 0;
+
+        // Check if animal is adopted
+        $animal->is_adopted = $animal->activeAdoptions()->count() > 0;
+
+        // Check if animal is reclaimed
+        $animal->is_reclaimed = $animal->activeReclaims()->count() > 0;
 
         $animal->breeds_concatenated = '';
         foreach($animal->breeds as $key => $breed) {

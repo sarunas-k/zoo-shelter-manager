@@ -73,22 +73,28 @@
                 People
               </a>
             </li>
-            <li class="nav-item">
+            {{-- <li class="nav-item">
               <a class="nav-link" href="/settings">
                 <span data-feather="sliders"></span>
                 Settings
               </a>
-            </li>
+            </li> --}}
             <li class="nav-item">
               <a class="nav-link" href="{{route('reports.index')}}">
                 <span data-feather="bar-chart-2"></span>
                 Reports
               </a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">
+                <span data-feather="book"></span>
+                Off-shelter animals
+              </a>
+            </li>
           </ul>
           
   
-          <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+          {{-- <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
             <span>Saved reports</span>
             <a class="d-flex align-items-center text-muted" href="#">
               <span data-feather="plus-circle"></span>
@@ -120,6 +126,6 @@
               </a>
             </li>
             
-          </ul>
+          </ul> --}}
         </div>
       </nav>

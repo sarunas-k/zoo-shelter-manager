@@ -16,7 +16,8 @@
 
 @include('partials/animal-card')
 <p><strong>Date:</strong> {{$adoption->adoption_date}}</p>
-<p><strong>Person:</strong> {{$adoption->person->first_name}} {{$adoption->person->last_name}} - {{$adoption->person->id}}</p>
+<p><strong>Person:</strong> {{$adoption->person->first_name}} {{$adoption->person->last_name}}</p>
+<p><strong>Animal:</strong> {{$adoption->animal->list_number}} {{$adoption->animal->name}}</p>
 <form method="POST" action="{{route('adoptions.update', ['id' => $adoption->id])}}" enctype="multipart/form-data">
     @csrf
     @method('PATCH')
