@@ -170,11 +170,15 @@ class AnimalsController extends Controller
     }
     
     public function getAnimalsFilters() {
+        $speciesNames = $this->speciesRepo->getSpeciesNames();
+        $colorsNames = $this->colorsRepo->getColorsNames();
+        sort($speciesNames);
+        sort($colorsNames);
         return [
-            'species' => $this->speciesRepo->getSpeciesNames(),
-            'gender' => ['Male', 'Female'],
-            'size' => ['Small', 'Medium', 'Large', 'Very large'],
-            'color' => $this->colorsRepo->getColorsNames()
+            'species' => $speciesNames,
+            'gender' => Animal::genderNames(),
+            'size' => Animal::sizeNames(),
+            'color' => $colorsNames
         ];
     }
 }

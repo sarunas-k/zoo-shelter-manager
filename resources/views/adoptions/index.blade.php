@@ -24,7 +24,8 @@
         @foreach($adoptions as $adoption)
         <tr>
             <td scope="row" style="width: 10%">
-                <a href="{{route('adoptions.show', ['id' => $adoption->id])}}">{{ $adoption->adoption_date }}</a></td>
+                <a href="{{route('adoptions.show', ['id' => $adoption->id])}}">{{ $adoption->adoption_date }}</a>
+            </td>
             <td style="width: 10%">
                 {{ $adoption->return_date }}
             </td>

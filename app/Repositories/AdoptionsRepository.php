@@ -44,11 +44,12 @@ class AdoptionsRepository implements IAdoptionsRepository {
     }
 
     public function updateFromInput($adoption, $formFields) {
-        $adoption->update([
-            'notes' => $formFields['notes'],
-            'return_date' => $formFields['return-date'],
-            'updated_at' => now()
-        ]);
+        $adoption['notes'] = $formFields['notes'];
+        if(isset($formFields['return-date'])) {
+            $adoption['return_date'] = $formFields['return-date'];
+        }
+        $adoption['updated_at'] = now();
+        $adoption->save();
     }
 
     public function delete($adoption) {

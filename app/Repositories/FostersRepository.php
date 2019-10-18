@@ -43,6 +43,15 @@ class FostersRepository implements IFostersRepository {
         }
     }
 
+    public function updateFromInput($foster, $formFields) {
+        $foster['notes'] = $formFields['notes'];
+        if(isset($formFields['end-date'])) {
+            $foster['foster_end_date'] = $formFields['end-date'];
+        }
+        $foster['updated_at'] = now();
+        $foster->save();
+    }
+
     public function delete($id) {
         $this->get($id)->delete();
     }

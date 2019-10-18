@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Reclaim;
 use Illuminate\Http\Request;
 use App\Repositories\Interfaces\IReclaimsRepository;
 use App\Repositories\Interfaces\IAnimalsRepository;
@@ -70,7 +71,7 @@ class ReclaimsController extends Controller
         $this->validate($request, [
             'animal' => 'required|numeric',
             'date' => 'required|date',
-            'person' => 'required|numeric',
+            'person' => 'required|numeric'
         ]);
 
         $result = $this->reclaimsRepo->addFromInput($request);
@@ -86,9 +87,12 @@ class ReclaimsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Reclaim $reclaim)
     {
-        return view('reclaims/show')->with('reclaim', $this->reclaimsRepo->get($id));
+        return view('reclaims/show')->with([
+            'reclaim' => $reclaim,
+            'animal' => $this->animalsRepo->formatFieldsForPresentation($reclaim->animal)
+            ]);
     }
 
     /**
@@ -97,9 +101,12 @@ class ReclaimsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Reclaim $reclaim)
     {
-        return view('reclaims/edit')->with('reclaim', $this->reclaimsRepo->get($id));
+        return view('reclaims/edit')->with([
+            'reclaim' => $reclaim,
+            'animal' => $this->animalsRepo->formatFieldsForPresentation($reclaim->animal)  
+        ]);
     }
 
     /**
@@ -109,9 +116,16 @@ class ReclaimsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Reclaim $reclaim)
     {
-        //
+        $formFields = $this->validate($request, [
+            'notes' => 'string|nullable',
+            'return-date' => 'date|nullable'
+        ]);
+
+        $this->reclaimsRepo->updateFromInput($reclaim, $formFields);
+
+        return redirect('/reclaims/')->with('success', 'Reclaim was updated');
     }
 
     /**

@@ -10,7 +10,7 @@
 @if(!isset($animals))
 <p>No animal records found.</p>
 @else
-<animals-list csrf="{{ csrf_token() }}"></animals-list>
+<animals-list csrf="{{ csrf_token() }}"/>
 @endif
 @endsection
 

@@ -34,12 +34,21 @@ class ReclaimsRepository implements IReclaimsRepository {
                 $person->id, 
                 [
                     'date' => $request->input('date'),
-                    'created_at' => now()
+                    'created_at' => now(),
+                    'notes' => $request->input('notes')
                 ]);
                 return true;
-        } else {
-            return false;
         }
+        return false;
+    }
+
+    public function updateFromInput($reclaim, $formFields) {
+        $reclaim['notes'] = $formFields['notes'];
+        if(isset($formFields['return-date'])) {
+            $reclaim['return_date'] = $formFields['return-date'];
+        }
+        $reclaim['updated_at'] = now();
+        $reclaim->save();
     }
 
     public function delete($id) {

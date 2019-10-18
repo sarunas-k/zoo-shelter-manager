@@ -85,4 +85,12 @@ class Animal extends Model
     public function reclaims() {
         return $this->hasMany(Reclaim::class);
     }
+
+    protected function genderNames() {
+        return ['Male', 'Female'];
+    }
+
+    protected function sizeNames() {
+        return ['Small', 'Medium', 'Large', 'Very large'];
+    }
 }

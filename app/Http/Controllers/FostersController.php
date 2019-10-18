@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Foster;
 use Illuminate\Http\Request;
 use App\Repositories\Interfaces\IFostersRepository;
 use App\Repositories\Interfaces\IAnimalsRepository;
@@ -85,9 +86,12 @@ class FostersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Foster $foster)
     {
-        return view('fosters/show')->with('foster', $this->fostersRepo->get($id));
+        return view('fosters/show')->with([
+            'foster' => $foster,
+            'animal' => $this->animalsRepo->formatFieldsForPresentation($foster->animal)
+            ]);
     }
 
     /**
@@ -96,9 +100,12 @@ class FostersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Foster $foster)
     {
-        return view('fosters/edit')->with('foster', $this->fostersRepo->get($id));
+        return view('fosters/edit')->with([
+            'foster' => $foster,
+            'animal' => $this->animalsRepo->formatFieldsForPresentation($foster->animal)
+            ]);
     }
 
     /**
@@ -108,9 +115,16 @@ class FostersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Foster $foster)
     {
-        //
+        $formFields = $this->validate($request, [
+            'notes' => 'string|nullable',
+            'end-date' => 'date|nullable'
+        ]);
+
+        $this->fostersRepo->updateFromInput($foster, $formFields);
+
+        return redirect('/fosters/')->with('success', 'Foster was updated');
     }
 
     /**

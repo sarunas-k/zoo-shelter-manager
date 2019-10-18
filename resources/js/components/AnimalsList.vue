@@ -3,7 +3,7 @@
         <nav aria-label="Page navigation example" class="float-left">
             <ul class="pagination">
               <li class="page-item" style="cursor: pointer">
-                <a class="page-link" aria-label="Previous" @click="navigatePrev()">
+                <a class="page-link" aria-label="Previous" @click="navigatePrev">
                   <span aria-hidden="true">&laquo;</span>
                   <span class="sr-only">Previous</span>
                 </a>
@@ -12,7 +12,7 @@
               <!-- <li class="page-item"><a class="page-link" href="#">2</a></li>
               <li class="page-item"><a class="page-link" href="#">3</a></li> -->
               <li class="page-item" style="cursor: pointer">
-                <a class="page-link" aria-label="Next" @click="navigateNext()">
+                <a class="page-link" aria-label="Next" @click="navigateNext">
                   <span aria-hidden="true">&raquo;</span>
                   <span class="sr-only">Next</span>
                 </a>
@@ -38,6 +38,7 @@
                 </tr>
             </thead>
             <tbody>
+                <tr v-show="initialized && animals.length == 0"><td colspan="12" class="text-center">No animal records found.</td></tr>
                 <tr v-for="(animal, index) in animals" v-bind:key="index">
                     <th scope="row"><a :href="routeAnimalDetailsPage(animal.id)">{{ animal.list_number }}</a>
                     </th>
@@ -66,14 +67,14 @@
         <nav aria-label="Page navigation example">
             <ul class="pagination">
               <li class="page-item" style="cursor: pointer">
-                <a class="page-link" aria-label="Previous" @click="navigatePrev()">
+                <a class="page-link" aria-label="Previous" @click="navigatePrev">
                   <span aria-hidden="true">&laquo;</span>
                   <span class="sr-only">Previous</span>
                 </a>
               </li>
               <li class="page-item"><span class="page-link">Page {{ response.current_page }} of {{ response.last_page }}</span></li>
               <li class="page-item" style="cursor: pointer">
-                <a class="page-link" aria-label="Next" @click="navigateNext()">
+                <a class="page-link" aria-label="Next" @click="navigateNext">
                   <span aria-hidden="true">&raquo;</span>
                   <span class="sr-only">Next</span>
                 </a>
@@ -97,6 +98,7 @@
                 animals: [],
                 response: [],
                 isLoading: false,
+                initialized: false,
                 filters: {},
                 initialFilterItems: {},
                 url: '/api/animals'
@@ -153,14 +155,6 @@
             routeAnimalEditPage(id) {
                 return '/animals/' + id + '/edit';
             },
-            getURLparams() {
-                let url = this.response.request.responseURL;
-                if (!url)
-                    return null;
-                
-                let parameters = new URL(url).search;
-                return parameters;
-            },
             fetch(url, parameters) {
                 if (!url)
                     return;
@@ -188,6 +182,8 @@
                 .then(() => { // always executed
                     console.log('Finished axios request');
                     this.isLoading = false;
+                    if (!this.initialized)
+                        this.initialized = true;
                 });
             }
         },
@@ -202,20 +198,4 @@
 </script>
 
 <style scoped>
-.animals-list .filter-badges {
-    clear: left;
-    float: left;
-    margin-bottom: 15px;
-}
-.animals-list .filter-badges .filter-badge {
-    cursor: pointer;
-    background-color: #FFFFFF;
-    border: 1px solid #5b5b5b;
-    color: #5b5b5b;
-    font-weight: normal;
-}
-.animals-list .filter-badges .filter-badge:hover {
-    border: 1px solid #000000;
-    color: #000000;
-}
 </style>

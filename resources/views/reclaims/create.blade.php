@@ -32,11 +32,11 @@
     <form method="POST" action="{{route('reclaims.store')}}" enctype="multipart/form-data">
         @csrf
         <div class="form-row">
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-4">
                 <label for="date">Date</label>
                 <input type="date" class="form-control" id="date" name="date" value="{{old('date') ? old('date') : date('Y-m-d')}}">
             </div>
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-4">
                 <label for="person">Person</label>
                 <select class="form-control" id="person" name="person">
                     <option>---</option>
@@ -62,6 +62,12 @@
             </div>
         </div>
         @endif
+        <div class="form-row">
+            <div class="form-group col-md-8">
+                <label for="notes">Notes</label>
+                <textarea class="form-control" rows="4" id="notes" name="notes" value="{{old('notes')}}"></textarea>
+            </div>
+        </div>
         <button type="submit" class="btn btn-success">Save</button>
     </form>
 @endif

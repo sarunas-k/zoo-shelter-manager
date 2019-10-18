@@ -27,8 +27,9 @@
             <button class="btn btn-primary btn-block" @click="createReport">Create report</button>
         </div>
     </div>
-    <div class="report-content" :style="{opacity: tableOpacity}">
-        {{label}} <strong>{{content}}</strong>
+    <div class="report" :style="{opacity: tableOpacity}">
+        <p>{{label}}</p>
+        <p><strong>{{content}}</strong></p>
     </div>
 </div>
 </template>
@@ -129,3 +130,8 @@
         }
     }
 </script>
+<style scoped>
+.report p {
+    margin-bottom: 0.5rem;
+}
+</style>

@@ -23,7 +23,9 @@
             <tbody>
             @foreach($reclaims as $reclaim)
                 <tr>
-                    <td scope="row" style="width: 10%">{{ $reclaim->date }}</td>
+                    <td scope="row" style="width: 10%">
+                        <a href="{{route('reclaims.show', ['id' => $reclaim->id])}}">{{ $reclaim->date }}</a>
+                    </td>
                     <td scope="row" style="width: 10%">{{ $reclaim->return_date }}</td>
                     <td><a href="{{route('animals.show', ['id' => $reclaim->animal->id])}}">{{ $reclaim->animal->list_number }} {{$reclaim->animal->name}}</a></td>
                     <td><a href="{{route('people.show', ['id' => $reclaim->person->id])}}">{{ $reclaim->person->first_name }} {{ $reclaim->person->last_name }}</a></td>
