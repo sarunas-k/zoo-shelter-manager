@@ -44,6 +44,12 @@
                 <input type="text" class="form-control" id="address" name="address" placeholder="Address" value="{{old('address')}}">
             </div>
         </div>
+        <div class="form-row">
+            <div class="form-group col-md-8">
+                <label for="notes">Notes</label>
+                <textarea class="form-control" rows="2" id="notes" name="notes" value="{{old('notes')}}"></textarea>
+            </div>
+        </div>
         <button type="submit" class="btn btn-success">Save</button>
     </form>
 @endsection

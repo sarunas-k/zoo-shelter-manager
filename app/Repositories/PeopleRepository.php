@@ -26,7 +26,8 @@ class PeopleRepository implements IPeopleRepository {
             'date_of_birth' => $formFields['date-of-birth'],
             'phone_first' => $formFields['phone-primary'],
             'phone_second' => $formFields['phone-secondary'],
-            'address' => $formFields['address']
+            'address' => $formFields['address'],
+            'notes' => $formFields['notes']
         ]);
     }
 
@@ -41,7 +42,8 @@ class PeopleRepository implements IPeopleRepository {
             'date_of_birth' => $formFields['date-of-birth'],
             'phone_first' => $formFields['phone-primary'],
             'phone_second' => $formFields['phone-secondary'],
-            'address' => $formFields['address']
+            'address' => $formFields['address'],
+            'notes' => $formFields['notes']
         ]);
     }
 

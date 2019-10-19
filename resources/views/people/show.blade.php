@@ -6,7 +6,7 @@
 <h3>People</h3>
 {{-- PERSON DETAILS --}}
 @if(!isset($person))
-<p>Incorrect person id.</p>
+    <p>Incorrect person id.</p>
 @else
 <table class="table table-bordered table-sm">
     <tr>
@@ -32,6 +32,10 @@
     <tr>
         <td><strong>Address: </strong></td>
         <td>{{$person->address}}</td>
+    </tr>
+    <tr>
+        <td><strong>Notes: </strong></td>
+        <td>{{$person->notes}}</td>
     </tr>
 </table>
 

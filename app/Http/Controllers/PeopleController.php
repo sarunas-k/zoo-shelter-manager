@@ -53,10 +53,11 @@ class PeopleController extends Controller
         $formFields = $this->validate($request, [
             'first-name' => 'required',
             'last-name' => 'required',
-            'date-of-birth' => 'required',
+            'date-of-birth' => 'required|date',
             'phone-primary' => 'required',
-            'phone-secondary' => 'required',
+            'phone-secondary' => 'nullable',
             'address' => 'required',
+            'notes' => 'string|nullable'
         ]);
         $this->peopleRepo->addFromInput($formFields);
 
@@ -104,8 +105,9 @@ class PeopleController extends Controller
             'last-name' => 'required',
             'date-of-birth' => 'required',
             'phone-primary' => 'required',
-            'phone-secondary' => 'required',
+            'phone-secondary' => 'nullable',
             'address' => 'required',
+            'notes' => 'string|nullable'
         ]);
         
         $this->peopleRepo->updateFromInput($id, $formFields);
