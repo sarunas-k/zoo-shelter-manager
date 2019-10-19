@@ -25,6 +25,7 @@ Vue.component('search-field', require('./components/SearchField.vue').default);
 Vue.component('animals-list', require('./components/AnimalsList.vue').default);
 Vue.component('reports', require('./components/Reports.vue').default);
 Vue.component('list-filter', require('./components/ListFilter.vue').default);
+Vue.component('delete-button', require('./components/DeleteButton.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

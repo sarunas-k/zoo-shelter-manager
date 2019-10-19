@@ -36,15 +36,11 @@
                     <td>{{ $person->phone_first }}</td>
                     <td>{{ $person->phone_second }}</td>
                     <td>{{ $person->address }}</td>
-                    <td><a href="{{route('people.edit', ['id' => $person->id])}}" class="btn btn-primary btn-sm">Edit</a></td>
                     <td>
-                        <form method="POST" action="{{route('people.destroy', ['id' => $person->id])}}">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm">
-                                <span data-feather="x"></span>
-                            </button>
-                        </form>
+                        <a href="{{route('people.edit', ['id' => $person->id])}}" class="btn btn-primary btn-sm">Edit</a>
+                    </td>
+                    <td>
+                        <delete-button action="{{route('people.destroy', ['id' => $person->id])}}" csrf="{{csrf_token()}}"/>
                     </td>
                 </tr>
             @endforeach

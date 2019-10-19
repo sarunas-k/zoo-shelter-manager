@@ -53,13 +53,7 @@
                     <td>{{ animal.living_area.name }}</td>
                     <td><a :href="routeAnimalEditPage(animal.id)" class="btn btn-primary btn-sm">Edit</a></td>
                     <td>
-                        <form method="POST" :action="routeAnimalDetailsPage(animal.id)">
-                            <input type="hidden" name="_token" v-bind:value="csrf">
-                            <input type="hidden" name="_method" value="DELETE">
-                            <button type="submit" class="btn btn-danger btn-sm">
-                                <span>X</span>
-                            </button>
-                        </form>
+                        <delete-button :csrf="csrf" :action="routeAnimalDetailsPage(animal.id)"/>
                     </td>
                 </tr>
             </tbody>

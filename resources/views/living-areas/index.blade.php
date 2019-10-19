@@ -40,15 +40,11 @@
                             <a href="{{route('animals.show', ['id' => $animal->id])}}">{{$animal->list_number}}</a><br>
                         @endforeach
                     </td>
-                    <td class="text-center"><a href="{{route('living-areas.edit', ['id' => $area->id])}}" class="btn btn-primary btn-sm">Edit</a></td>
                     <td class="text-center">
-                        <form method="POST" action="{{route('living-areas.destroy', ['id' => $area->id])}}">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm">
-                                <span data-feather="x"></span>
-                            </button>
-                        </form>
+                        <a href="{{route('living-areas.edit', ['id' => $area->id])}}" class="btn btn-primary btn-sm">Edit</a>
+                    </td>
+                    <td class="text-center">
+                        <delete-button action="{{route('living-areas.destroy', ['id' => $area->id])}}" csrf="{{csrf_token()}}"/>>
                     </td>
                 </tr>
             @endforeach

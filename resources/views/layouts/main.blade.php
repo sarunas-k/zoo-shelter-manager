@@ -40,7 +40,7 @@
     </div>
     <!-- Optional JavaScript -->
     <script type="text/javascript" src="{{ URL::asset('js/feather.min.js') }}"></script>
-    <script type="text/javascript">(function () { feather.replace() }())</script>
+    <script type="text/javascript">window.addEventListener('load', () => feather.replace())</script>
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     @yield('scripts')
   </body>

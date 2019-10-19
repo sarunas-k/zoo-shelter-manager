@@ -47,13 +47,7 @@
                     </td>
                     <td><a href="{{route('calls.edit', ['id' => $call->id])}}" class="btn btn-primary btn-sm">Edit</a></td>
                     <td>
-                        <form method="POST" action="{{route('calls.destroy', ['id' => $call->id])}}">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm">
-                                <span data-feather="x"></span>
-                            </button>
-                        </form>
+                        <delete-button csrf="{{csrf_token()}}" action="{{route('calls.destroy', ['id' => $call->id])}}"/>
                     </td>
                 </tr>
             @endforeach
