@@ -46,18 +46,3 @@
 {{ $adoptions->links() }}
 @endif
 @endsection
-
-@section('scripts')
-<script>
-    window.onload = function () {
-        // SET MENU ITEM AS ACTIVE
-        $('.sidebar .nav-link').each((i, element) => {
-            const el = $(element);
-            if (el.text().indexOf('Adoptions') >= 0)
-                el.addClass('active');
-            else
-                el.removeClass('active');
-        });
-    }
-</script>
-@endsection

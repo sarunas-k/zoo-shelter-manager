@@ -9,7 +9,7 @@
     @else
         <table class="table table-bordered table-sm">
             <tr>
-                <td><strong>Date: </strong></td>
+                <td style="width: 15%"><strong>Date: </strong></td>
                 <td>{{$call->date_time}}</td>
             </tr>
             <tr>
@@ -46,19 +46,4 @@
             </tr>
         </table>
     @endif
-@endsection
-
-@section('scripts')
-    <script>
-        window.onload = function () {
-            $('table td:first').css('width', '15%');
-            // SET MENU ITEM AS ACTIVE
-            $('.sidebar .nav-link').each((i, element) => {
-                if ($(element).text().indexOf('Calls') >= 0)
-                    $(element).addClass('active');
-                else
-                    $(element).removeClass('active');
-            });
-        }
-    </script>
 @endsection

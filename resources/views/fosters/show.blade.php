@@ -13,7 +13,7 @@
         </div>  
         <table class="foster-details-table table table-bordered table-sm">
             <tr>
-                <td><strong>Start date: </strong></td>
+                <td style="width: 15%"><strong>Start date: </strong></td>
                 <td>{{$foster->foster_start_date}}</td>
             </tr>
             <tr>
@@ -34,19 +34,4 @@
             </tr>
         </table>
     @endif
-@endsection
-
-@section('scripts')
-    <script>
-        window.onload = function () {
-            $('.foster-details-table td:first').css('width', '15%');
-            // SET MENU ITEM AS ACTIVE
-            $('.sidebar .nav-link').each((i, element) => {
-                if ($(element).text().indexOf('Fosters') >= 0)
-                    $(element).addClass('active');
-                else
-                    $(element).removeClass('active');
-            });
-        }
-    </script>
 @endsection

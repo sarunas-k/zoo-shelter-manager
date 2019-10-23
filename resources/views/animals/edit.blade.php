@@ -149,7 +149,7 @@
 @endsection
 @section('scripts')
 <script>
-    window.onload = function () {
+    window.addEventListener('load', () => {
         // SET MENU ITEM AS ACTIVE
         $('.sidebar .nav-link').each((i, element) => {
             if ($(element).text().indexOf('Animals') >= 0)
@@ -174,7 +174,7 @@
         });
         $('#animal-images-list').val(imageIds.join());
 
-    }
+    });
 
 </script>
 @endsection
