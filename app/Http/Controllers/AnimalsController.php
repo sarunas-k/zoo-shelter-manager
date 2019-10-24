@@ -44,10 +44,12 @@ class AnimalsController extends Controller
     public function create()
     {
         return view('animals/create')->with([
-            'species' => $this->speciesRepo->all()->sortBy('id'),
+            'species' => $this->speciesRepo->allWithBreeds(),
             'colors' => $this->colorsRepo->all(),
             'staff' => $this->staffRepo->all(),
-            'livingAreas' => $this->areasRepo->all()
+            'livingAreas' => $this->areasRepo->all(),
+            'sizes' => $this->animalsRepo->getSizeNames(),
+            'genders' => $this->animalsRepo->getGenderNames()
         ]);
     }
 
@@ -176,8 +178,8 @@ class AnimalsController extends Controller
         sort($colorsNames);
         return [
             'species' => $speciesNames,
-            'gender' => Animal::genderNames(),
-            'size' => Animal::sizeNames(),
+            'gender' => $this->animalsRepo->getGenderNames(),
+            'size' => $this->animalsRepo->getSizeNames(),
             'color' => $colorsNames
         ];
     }

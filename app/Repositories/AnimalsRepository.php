@@ -25,18 +25,6 @@ class AnimalsRepository implements IAnimalsRepository {
         return Animal::latest();
     }
 
-    // public function allFilteredAndPaginated($request, $includeNonShelterAnimals = false, $perPage = 10) {
-    //     $animals = $this->latest();
-    //     if (!$includeNonShelterAnimals)
-    //         $animals
-    //             ->whereDoesntHave('activeAdoptions')
-    //             ->whereDoesntHave('activeFosters')
-    //             ->whereDoesntHave('activeReclaims');
-
-    //     $this->applyFilters($animals, $request);
-    //     return $animals->paginate($perPage);
-    // }
-
     public function allFilteredAndPaginated($request, $includeNonShelterAnimals = false, $perPage = 10) {
         $animals = $this->latest()->with(['species', 'color', 'living_area']);
         if (!$includeNonShelterAnimals)
@@ -232,5 +220,13 @@ class AnimalsRepository implements IAnimalsRepository {
                 $q->whereIn('name', $request->color);
             });
         }
+    }
+
+    public function getSizeNames() {
+        return ['Small', 'Medium', 'Large', 'Very large'];
+    }
+
+    public function getGenderNames() {
+        return ['Male', 'Female'];
     }
 }

@@ -1,0 +1,155 @@
+<template>
+    <form method="POST" :action="routeAnimalsIndex()" enctype="multipart/form-data">
+    <input type="hidden" name="_token" :value="csrf">
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <label for="animal-number">Animal number</label>
+            <input type="text" class="form-control" id="animal-number" name="animal-number" placeholder="Number" :value="oldObj['animal-number']">
+        </div>
+        <div class="form-group col-md-4">
+            <label for="species">Species</label>
+            <select class="form-control" id="species" name="species">
+                <option>---</option>
+                <option v-for="(value, name) in speciesObj" :value="value.id" :selected="oldObj['species'] == value.id ? 'selected' : ''" :key="name">{{value.name}}</option>
+            </select>
+        </div>
+        <div class="form-group col-md-4">
+            <label for="gender">Gender</label>
+            <select class="form-control" id="gender" name="gender">
+                <option>---</option>
+                <option v-for="(gender, index) in gendersObj" :key="index" :selected="oldObj['gender'] == gender ? 'selected' : ''">{{gender}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" class="form-control" placeholder="Name" :value="oldObj['name']">
+        </div>
+        <div class="form-group col-md-4">
+            <label for="birthdate">Date of Birth</label>
+            <input type="date" class="form-control" id="birthdate" name="birthdate" :value="oldObj['birthdate']">
+        </div>
+        <div class="form-group col-md-4">
+            <label for="color">Color</label>
+            <select class="form-control" id="color" name="color">
+                <option>---</option>
+                <option v-for="(color, index) in colorsObj" :key="index" :value="color.id" :selected="oldObj['color'] == color.id ? 'selected' : ''">{{color.name}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <label for="breed">Breed</label>
+            <select class="form-control" id="breed" name="breed[]" multiple>
+                <optgroup :label="value.name" v-for="(value, index) in speciesObj.filter(item => item.breeds.length)" :key="index">
+                    <option v-for="(breed, i) in value.breeds" :key="i" :value="breed.id" :selected="oldObj['breed'] == breed.id ? 'selected' : ''">{{breed.name}}</option>
+                </optgroup>
+            </select>
+        </div>
+        <div class="form-group col-md-4">
+            <label for="staff">Responsible staff</label>
+            <select class="form-control selectpicker" id="staff" name="staff">
+                <option>---</option>
+                <option v-for="(staffMember, index) in staffObj" :key="index" :value="staffMember.id" :selected="oldObj['staff'] == staffMember.id ? 'selected' : ''">{{staffMember.first_name}}
+                    {{staffMember.last_name}}</option>
+            </select>
+        </div>
+        <div class="form-group col-md-4">
+            <label for="microchip">Microchip number</label>
+            <input type="text" class="form-control" id="microchip" name="microchip" placeholder="Microchip number"
+                :value="oldObj['microchip']">
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <label for="size">Size</label>
+            <select class="form-control" id="size" name="size">
+                <option>---</option>
+                <option v-for="(size, index) in sizesObj" :key="index" :selected="oldObj['size'] == size ? 'selected' : ''">{{size}}</option>
+            </select>
+        </div>
+        <div class="form-group col-md-4">
+            <label for="intake-date">Intake Date</label>
+            <input type="datetime-local" class="form-control" id="intake-date" name="intake-date"
+                :value="oldObj['intake-date'] ? oldObj['intake-date'] : date">
+        </div>
+        <div class="form-group col-md-4">
+            <label for="living-area">Living area</label>
+            <select class="form-control" id="living-area" name="living-area">
+                <option>---</option>
+                <option v-for="(area, index) in livingareasObj" :key="index" :value="area.id" :selected="oldObj['living-area'] == area.id ? 'selected' : ''">{{area.name}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-3">
+            <input type="hidden" name="is-neutered" value="0">
+            <input type="checkbox" name="is-neutered" id="is-neutered" :checked="oldObj['is-neutered'] == '1' ? 'checked' : ''">
+            <label for="is-neutered">Spayed/neutered</label>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <label for="animal-image">Image</label><br>
+            <input type="file" class="form-control-file" name="animal-image[]" id="animal-image" multiple>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-success">Save</button>
+</form>
+</template>
+
+<script>
+export default {
+    mounted() {
+        console.log('Vue: AnimalCreateForm Component mounted.');
+    },
+    data: function() {
+        return {
+
+        }
+    },
+    methods: {
+        routeAnimalsIndex() {
+            return '/animals';
+        }
+    },
+    props: {
+        csrf:       { type: String, default: '' },
+        old:        { type: String, default: '' },
+        species:    { type: String, default: '' },
+        staff:      { type: String, default: '' },
+        livingareas:{ type: String, default: '' },
+        colors:     { type: String, default: '' },
+        sizes:      { type: String, default: '' },
+        genders:    { type: String, default: '' },
+        date:       { type: String, default: '' }
+    },
+    computed: {
+        oldObj() { return JSON.parse(this.old);
+        },
+        speciesObj() {
+            return JSON.parse(this.species);
+        },
+        staffObj() {
+            return JSON.parse(this.staff);
+        },
+        livingareasObj() {
+            return JSON.parse(this.livingareas);
+        },
+        colorsObj() {
+            return JSON.parse(this.colors);
+        },
+        sizesObj() {
+            return JSON.parse(this.sizes);
+        },
+        gendersObj() {
+            return JSON.parse(this.genders);
+        }
+    }
+}
+</script>
+
+<style scoped>
+
+</style>

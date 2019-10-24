@@ -11,6 +11,10 @@ class SpeciesRepository implements ISpeciesRepository {
         return Species::all();
     }
 
+    public function allWithBreeds() {
+        return Species::with(['breeds'])->get();
+    }
+
     public function getSpeciesNames() {
         return Species::all()->pluck('name')->toArray();
     }

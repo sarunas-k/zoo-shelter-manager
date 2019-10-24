@@ -1688,6 +1688,193 @@ module.exports = {
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AnimalCreateForm.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/AnimalCreateForm.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  mounted: function mounted() {
+    console.log('Vue: AnimalCreateForm Component mounted.');
+  },
+  data: function data() {
+    return {};
+  },
+  methods: {
+    routeAnimalsIndex: function routeAnimalsIndex() {
+      return '/animals';
+    }
+  },
+  props: {
+    csrf: {
+      type: String,
+      "default": ''
+    },
+    old: {
+      type: String,
+      "default": ''
+    },
+    species: {
+      type: String,
+      "default": ''
+    },
+    staff: {
+      type: String,
+      "default": ''
+    },
+    livingareas: {
+      type: String,
+      "default": ''
+    },
+    colors: {
+      type: String,
+      "default": ''
+    },
+    sizes: {
+      type: String,
+      "default": ''
+    },
+    genders: {
+      type: String,
+      "default": ''
+    },
+    date: {
+      type: String,
+      "default": ''
+    }
+  },
+  computed: {
+    oldObj: function oldObj() {
+      return JSON.parse(this.old);
+    },
+    speciesObj: function speciesObj() {
+      return JSON.parse(this.species);
+    },
+    staffObj: function staffObj() {
+      return JSON.parse(this.staff);
+    },
+    livingareasObj: function livingareasObj() {
+      return JSON.parse(this.livingareas);
+    },
+    colorsObj: function colorsObj() {
+      return JSON.parse(this.colors);
+    },
+    sizesObj: function sizesObj() {
+      return JSON.parse(this.sizes);
+    },
+    gendersObj: function gendersObj() {
+      return JSON.parse(this.genders);
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AnimalsList.vue?vue&type=script&lang=js&":
 /*!**********************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/AnimalsList.vue?vue&type=script&lang=js& ***!
@@ -38267,6 +38454,414 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AnimalCreateForm.vue?vue&type=template&id=55c7d132&scoped=true&":
+/*!*******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/AnimalCreateForm.vue?vue&type=template&id=55c7d132&scoped=true& ***!
+  \*******************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "form",
+    {
+      attrs: {
+        method: "POST",
+        action: _vm.routeAnimalsIndex(),
+        enctype: "multipart/form-data"
+      }
+    },
+    [
+      _c("input", {
+        attrs: { type: "hidden", name: "_token" },
+        domProps: { value: _vm.csrf }
+      }),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-row" }, [
+        _c("div", { staticClass: "form-group col-md-4" }, [
+          _c("label", { attrs: { for: "animal-number" } }, [
+            _vm._v("Animal number")
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "form-control",
+            attrs: {
+              type: "text",
+              id: "animal-number",
+              name: "animal-number",
+              placeholder: "Number"
+            },
+            domProps: { value: _vm.oldObj["animal-number"] }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group col-md-4" }, [
+          _c("label", { attrs: { for: "species" } }, [_vm._v("Species")]),
+          _vm._v(" "),
+          _c(
+            "select",
+            {
+              staticClass: "form-control",
+              attrs: { id: "species", name: "species" }
+            },
+            [
+              _c("option", [_vm._v("---")]),
+              _vm._v(" "),
+              _vm._l(_vm.speciesObj, function(value, name) {
+                return _c(
+                  "option",
+                  {
+                    key: name,
+                    domProps: {
+                      value: value.id,
+                      selected:
+                        _vm.oldObj["species"] == value.id ? "selected" : ""
+                    }
+                  },
+                  [_vm._v(_vm._s(value.name))]
+                )
+              })
+            ],
+            2
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group col-md-4" }, [
+          _c("label", { attrs: { for: "gender" } }, [_vm._v("Gender")]),
+          _vm._v(" "),
+          _c(
+            "select",
+            {
+              staticClass: "form-control",
+              attrs: { id: "gender", name: "gender" }
+            },
+            [
+              _c("option", [_vm._v("---")]),
+              _vm._v(" "),
+              _vm._l(_vm.gendersObj, function(gender, index) {
+                return _c(
+                  "option",
+                  {
+                    key: index,
+                    domProps: {
+                      selected: _vm.oldObj["gender"] == gender ? "selected" : ""
+                    }
+                  },
+                  [_vm._v(_vm._s(gender))]
+                )
+              })
+            ],
+            2
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-row" }, [
+        _c("div", { staticClass: "form-group col-md-4" }, [
+          _c("label", { attrs: { for: "name" } }, [_vm._v("Name")]),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "form-control",
+            attrs: {
+              type: "text",
+              id: "name",
+              name: "name",
+              placeholder: "Name"
+            },
+            domProps: { value: _vm.oldObj["name"] }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group col-md-4" }, [
+          _c("label", { attrs: { for: "birthdate" } }, [
+            _vm._v("Date of Birth")
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "form-control",
+            attrs: { type: "date", id: "birthdate", name: "birthdate" },
+            domProps: { value: _vm.oldObj["birthdate"] }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group col-md-4" }, [
+          _c("label", { attrs: { for: "color" } }, [_vm._v("Color")]),
+          _vm._v(" "),
+          _c(
+            "select",
+            {
+              staticClass: "form-control",
+              attrs: { id: "color", name: "color" }
+            },
+            [
+              _c("option", [_vm._v("---")]),
+              _vm._v(" "),
+              _vm._l(_vm.colorsObj, function(color, index) {
+                return _c(
+                  "option",
+                  {
+                    key: index,
+                    domProps: {
+                      value: color.id,
+                      selected:
+                        _vm.oldObj["color"] == color.id ? "selected" : ""
+                    }
+                  },
+                  [_vm._v(_vm._s(color.name))]
+                )
+              })
+            ],
+            2
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-row" }, [
+        _c("div", { staticClass: "form-group col-md-4" }, [
+          _c("label", { attrs: { for: "breed" } }, [_vm._v("Breed")]),
+          _vm._v(" "),
+          _c(
+            "select",
+            {
+              staticClass: "form-control",
+              attrs: { id: "breed", name: "breed[]", multiple: "" }
+            },
+            _vm._l(
+              _vm.speciesObj.filter(function(item) {
+                return item.breeds.length
+              }),
+              function(value, index) {
+                return _c(
+                  "optgroup",
+                  { key: index, attrs: { label: value.name } },
+                  _vm._l(value.breeds, function(breed, i) {
+                    return _c(
+                      "option",
+                      {
+                        key: i,
+                        domProps: {
+                          value: breed.id,
+                          selected:
+                            _vm.oldObj["breed"] == breed.id ? "selected" : ""
+                        }
+                      },
+                      [_vm._v(_vm._s(breed.name))]
+                    )
+                  }),
+                  0
+                )
+              }
+            ),
+            0
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group col-md-4" }, [
+          _c("label", { attrs: { for: "staff" } }, [
+            _vm._v("Responsible staff")
+          ]),
+          _vm._v(" "),
+          _c(
+            "select",
+            {
+              staticClass: "form-control selectpicker",
+              attrs: { id: "staff", name: "staff" }
+            },
+            [
+              _c("option", [_vm._v("---")]),
+              _vm._v(" "),
+              _vm._l(_vm.staffObj, function(staffMember, index) {
+                return _c(
+                  "option",
+                  {
+                    key: index,
+                    domProps: {
+                      value: staffMember.id,
+                      selected:
+                        _vm.oldObj["staff"] == staffMember.id ? "selected" : ""
+                    }
+                  },
+                  [
+                    _vm._v(
+                      _vm._s(staffMember.first_name) +
+                        "\n                    " +
+                        _vm._s(staffMember.last_name)
+                    )
+                  ]
+                )
+              })
+            ],
+            2
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group col-md-4" }, [
+          _c("label", { attrs: { for: "microchip" } }, [
+            _vm._v("Microchip number")
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "form-control",
+            attrs: {
+              type: "text",
+              id: "microchip",
+              name: "microchip",
+              placeholder: "Microchip number"
+            },
+            domProps: { value: _vm.oldObj["microchip"] }
+          })
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-row" }, [
+        _c("div", { staticClass: "form-group col-md-4" }, [
+          _c("label", { attrs: { for: "size" } }, [_vm._v("Size")]),
+          _vm._v(" "),
+          _c(
+            "select",
+            {
+              staticClass: "form-control",
+              attrs: { id: "size", name: "size" }
+            },
+            [
+              _c("option", [_vm._v("---")]),
+              _vm._v(" "),
+              _vm._l(_vm.sizesObj, function(size, index) {
+                return _c(
+                  "option",
+                  {
+                    key: index,
+                    domProps: {
+                      selected: _vm.oldObj["size"] == size ? "selected" : ""
+                    }
+                  },
+                  [_vm._v(_vm._s(size))]
+                )
+              })
+            ],
+            2
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group col-md-4" }, [
+          _c("label", { attrs: { for: "intake-date" } }, [
+            _vm._v("Intake Date")
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "form-control",
+            attrs: {
+              type: "datetime-local",
+              id: "intake-date",
+              name: "intake-date"
+            },
+            domProps: {
+              value: _vm.oldObj["intake-date"]
+                ? _vm.oldObj["intake-date"]
+                : _vm.date
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group col-md-4" }, [
+          _c("label", { attrs: { for: "living-area" } }, [
+            _vm._v("Living area")
+          ]),
+          _vm._v(" "),
+          _c(
+            "select",
+            {
+              staticClass: "form-control",
+              attrs: { id: "living-area", name: "living-area" }
+            },
+            [
+              _c("option", [_vm._v("---")]),
+              _vm._v(" "),
+              _vm._l(_vm.livingareasObj, function(area, index) {
+                return _c(
+                  "option",
+                  {
+                    key: index,
+                    domProps: {
+                      value: area.id,
+                      selected:
+                        _vm.oldObj["living-area"] == area.id ? "selected" : ""
+                    }
+                  },
+                  [_vm._v(_vm._s(area.name))]
+                )
+              })
+            ],
+            2
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-row" }, [
+        _c("div", { staticClass: "form-group col-md-3" }, [
+          _c("input", {
+            attrs: { type: "hidden", name: "is-neutered", value: "0" }
+          }),
+          _vm._v(" "),
+          _c("input", {
+            attrs: { type: "checkbox", name: "is-neutered", id: "is-neutered" },
+            domProps: {
+              checked: _vm.oldObj["is-neutered"] == "1" ? "checked" : ""
+            }
+          }),
+          _vm._v(" "),
+          _c("label", { attrs: { for: "is-neutered" } }, [
+            _vm._v("Spayed/neutered")
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _vm._m(0),
+      _vm._v(" "),
+      _c(
+        "button",
+        { staticClass: "btn btn-success", attrs: { type: "submit" } },
+        [_vm._v("Save")]
+      )
+    ]
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-row" }, [
+      _c("div", { staticClass: "form-group col-md-4" }, [
+        _c("label", { attrs: { for: "animal-image" } }, [_vm._v("Image")]),
+        _c("br"),
+        _vm._v(" "),
+        _c("input", {
+          staticClass: "form-control-file",
+          attrs: {
+            type: "file",
+            name: "animal-image[]",
+            id: "animal-image",
+            multiple: ""
+          }
+        })
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AnimalsList.vue?vue&type=template&id=f24648cc&scoped=true&":
 /*!**************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/AnimalsList.vue?vue&type=template&id=f24648cc&scoped=true& ***!
@@ -51231,6 +51826,7 @@ Vue.component('animals-list', __webpack_require__(/*! ./components/AnimalsList.v
 Vue.component('reports', __webpack_require__(/*! ./components/Reports.vue */ "./resources/js/components/Reports.vue")["default"]);
 Vue.component('list-filter', __webpack_require__(/*! ./components/ListFilter.vue */ "./resources/js/components/ListFilter.vue")["default"]);
 Vue.component('delete-button', __webpack_require__(/*! ./components/DeleteButton.vue */ "./resources/js/components/DeleteButton.vue")["default"]);
+Vue.component('animal-create-form', __webpack_require__(/*! ./components/AnimalCreateForm.vue */ "./resources/js/components/AnimalCreateForm.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -51305,6 +51901,75 @@ if (window.Laravel && window.Laravel.apiToken) window.axios.defaults.headers.com
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     encrypted: true
 // });
+
+/***/ }),
+
+/***/ "./resources/js/components/AnimalCreateForm.vue":
+/*!******************************************************!*\
+  !*** ./resources/js/components/AnimalCreateForm.vue ***!
+  \******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _AnimalCreateForm_vue_vue_type_template_id_55c7d132_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AnimalCreateForm.vue?vue&type=template&id=55c7d132&scoped=true& */ "./resources/js/components/AnimalCreateForm.vue?vue&type=template&id=55c7d132&scoped=true&");
+/* harmony import */ var _AnimalCreateForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AnimalCreateForm.vue?vue&type=script&lang=js& */ "./resources/js/components/AnimalCreateForm.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _AnimalCreateForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _AnimalCreateForm_vue_vue_type_template_id_55c7d132_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _AnimalCreateForm_vue_vue_type_template_id_55c7d132_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "55c7d132",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/AnimalCreateForm.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/AnimalCreateForm.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************!*\
+  !*** ./resources/js/components/AnimalCreateForm.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AnimalCreateForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./AnimalCreateForm.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AnimalCreateForm.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AnimalCreateForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/AnimalCreateForm.vue?vue&type=template&id=55c7d132&scoped=true&":
+/*!*************************************************************************************************!*\
+  !*** ./resources/js/components/AnimalCreateForm.vue?vue&type=template&id=55c7d132&scoped=true& ***!
+  \*************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AnimalCreateForm_vue_vue_type_template_id_55c7d132_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./AnimalCreateForm.vue?vue&type=template&id=55c7d132&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AnimalCreateForm.vue?vue&type=template&id=55c7d132&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AnimalCreateForm_vue_vue_type_template_id_55c7d132_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AnimalCreateForm_vue_vue_type_template_id_55c7d132_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
 
 /***/ }),
 
