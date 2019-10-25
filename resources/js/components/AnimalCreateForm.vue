@@ -8,10 +8,7 @@
         </div>
         <div class="form-group col-md-4">
             <label for="species">Species</label>
-            <select class="form-control" id="species" name="species">
-                <option>---</option>
-                <option v-for="(value, name) in speciesObj" :value="value.id" :selected="oldObj['species'] == value.id ? 'selected' : ''" :key="name">{{value.name}}</option>
-            </select>
+            <dropdown :options="speciesObj" name="species" placeholder="Species" :default="oldObj['species']"/>
         </div>
         <div class="form-group col-md-4">
             <label for="gender">Gender</label>
@@ -32,10 +29,7 @@
         </div>
         <div class="form-group col-md-4">
             <label for="color">Color</label>
-            <select class="form-control" id="color" name="color">
-                <option>---</option>
-                <option v-for="(color, index) in colorsObj" :key="index" :value="color.id" :selected="oldObj['color'] == color.id ? 'selected' : ''">{{color.name}}</option>
-            </select>
+            <dropdown :options="colorsObj" name="color" placeholder="Color" :default="oldObj['color']"/>
         </div>
     </div>
     <div class="form-row">
@@ -49,11 +43,7 @@
         </div>
         <div class="form-group col-md-4">
             <label for="staff">Responsible staff</label>
-            <select class="form-control selectpicker" id="staff" name="staff">
-                <option>---</option>
-                <option v-for="(staffMember, index) in staffObj" :key="index" :value="staffMember.id" :selected="oldObj['staff'] == staffMember.id ? 'selected' : ''">{{staffMember.first_name}}
-                    {{staffMember.last_name}}</option>
-            </select>
+            <dropdown :options="staffObj" name="staff" placeholder="Staff" :default="oldObj['staff']"/>
         </div>
         <div class="form-group col-md-4">
             <label for="microchip">Microchip number</label>
@@ -100,13 +90,14 @@
 </template>
 
 <script>
+import Dropdown from './Dropdown.vue';
 export default {
     mounted() {
         console.log('Vue: AnimalCreateForm Component mounted.');
     },
     data: function() {
         return {
-
+            
         }
     },
     methods: {
@@ -126,13 +117,17 @@ export default {
         date:       { type: String, default: '' }
     },
     computed: {
-        oldObj() { return JSON.parse(this.old);
+        oldObj() {
+            return JSON.parse(this.old);
         },
         speciesObj() {
             return JSON.parse(this.species);
         },
         staffObj() {
-            return JSON.parse(this.staff);
+            return JSON.parse(this.staff)
+                .map((staffer) => { // Append 'name' property for displaying
+                    return {...staffer, ...{ name: `${staffer.first_name} ${staffer.last_name}` } }
+                });
         },
         livingareasObj() {
             return JSON.parse(this.livingareas);
