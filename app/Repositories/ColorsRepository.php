@@ -8,7 +8,7 @@ use App\Repositories\Interfaces\IColorsRepository;
 class ColorsRepository implements IColorsRepository {
 
     public function all() {
-        return Color::all();
+        return Color::orderBy('name')->get();
     }
 
     public function getColorsNames() {
