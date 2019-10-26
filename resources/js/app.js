@@ -27,7 +27,7 @@ Vue.component('reports', require('./components/Reports.vue').default);
 Vue.component('list-filter', require('./components/ListFilter.vue').default);
 Vue.component('delete-button', require('./components/DeleteButton.vue').default);
 Vue.component('animal-create-form', require('./components/AnimalCreateForm.vue').default);
-Vue.component('dropdown', require('./components/Dropdown.vue').default);
+Vue.component('searchable-select', require('./components/SearchableSelect.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

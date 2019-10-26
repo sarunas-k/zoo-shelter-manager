@@ -8,7 +8,7 @@
         </div>
         <div class="form-group col-md-4">
             <label for="species">Species</label>
-            <dropdown :options="speciesObj" name="species" placeholder="Species" :default="oldObj['species']"/>
+            <searchable-select :options="speciesObj" name="species" placeholder="Species" :default="oldObj['species']"/>
         </div>
         <div class="form-group col-md-4">
             <label for="gender">Gender</label>
@@ -29,7 +29,7 @@
         </div>
         <div class="form-group col-md-4">
             <label for="color">Color</label>
-            <dropdown :options="colorsObj" name="color" placeholder="Color" :default="oldObj['color']"/>
+            <searchable-select :options="colorsObj" name="color" placeholder="Color" :default="oldObj['color']"/>
         </div>
     </div>
     <div class="form-row">
@@ -43,7 +43,7 @@
         </div>
         <div class="form-group col-md-4">
             <label for="staff">Responsible staff</label>
-            <dropdown :options="staffObj" name="staff" placeholder="Staff" :default="oldObj['staff']"/>
+            <searchable-select :options="staffObj" name="staff" placeholder="Staff" :default="oldObj['staff']"/>
         </div>
         <div class="form-group col-md-4">
             <label for="microchip">Microchip number</label>
@@ -66,10 +66,7 @@
         </div>
         <div class="form-group col-md-4">
             <label for="living-area">Living area</label>
-            <select class="form-control" id="living-area" name="living-area">
-                <option>---</option>
-                <option v-for="(area, index) in livingareasObj" :key="index" :value="area.id" :selected="oldObj['living-area'] == area.id ? 'selected' : ''">{{area.name}}</option>
-            </select>
+            <searchable-select :options="livingareasObj" name="living-area" placeholder="Living area" :default="oldObj['living-area']"/>
         </div>
     </div>
     <div class="form-row">
@@ -90,7 +87,7 @@
 </template>
 
 <script>
-import Dropdown from './Dropdown.vue';
+import SearchableSelect from './SearchableSelect.vue';
 export default {
     mounted() {
         console.log('Vue: AnimalCreateForm Component mounted.');

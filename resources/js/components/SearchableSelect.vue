@@ -29,8 +29,8 @@
 
 <script>
   export default {
-    name: 'Dropdown',
-    template: 'Dropdown',
+    name: 'SearchableSelect',
+    template: 'SearchableSelect',
     props: {
       name: {
         type: String,
