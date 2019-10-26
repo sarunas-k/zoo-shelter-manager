@@ -156,6 +156,7 @@
       margin-top: 3px;
       max-height: 250px;
       .dropdown-item {
+        padding-top: 7px;
         &:hover {
           background-color: #e7ecf5;
         }
