@@ -19,12 +19,12 @@
 
 @if(isset($animal) && $animal->notInShelter())
     <div class="alert alert-danger" role="alert">
-        @if($animal->in_foster)
-            Animal is <strong>in foster</strong>. Please end current foster to proceed with this foster.
-        @elseif($animal->reclaimed)
-            Animal is <strong>reclaimed</strong>. Please end current reclaim to proceed with this foster.
-        @elseif($animal->adopted)
-            Animal is <strong>adopted</strong>. Please end current adoption to proceed with this foster.
+        @if($animal->is_fostered)
+            Animal is <strong>in foster</strong>. Please end current foster to proceed.
+        @elseif($animal->is_reclaimed)
+            Animal is <strong>reclaimed</strong>. Please end current reclaim to proceed.
+        @elseif($animal->is_adopted)
+            Animal is <strong>adopted</strong>. Please end current adoption to proceed.
         @endif
     </div>
 @else
