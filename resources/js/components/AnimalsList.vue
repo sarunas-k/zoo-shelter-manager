@@ -1,26 +1,19 @@
 <template>
-    <div class="animals-list">
-        <nav aria-label="Page navigation example" class="float-left">
-            <ul class="pagination">
-              <li class="page-item" style="cursor: pointer">
-                <a class="page-link" aria-label="Previous" @click="navigatePrev">
-                  <span aria-hidden="true">&laquo;</span>
-                  <span class="sr-only">Previous</span>
-                </a>
-              </li>
-              <li class="page-item"><span class="page-link">Page {{ response.current_page }} of {{ response.last_page }}</span></li>
-              <!-- <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li> -->
-              <li class="page-item" style="cursor: pointer">
-                <a class="page-link" aria-label="Next" @click="navigateNext">
-                  <span aria-hidden="true">&raquo;</span>
-                  <span class="sr-only">Next</span>
-                </a>
-              </li>
-            </ul>
-        </nav>
-        <ListFilter :initialFilters="this.initialFilterItems" :checkedFilters="this.filters" @filter-change="onFilterChange"/>
-        <table class="table table-sm table-bordered my-4 table-animals-list" :style="{opacity: tableOpacity}">
+  <div class="animals-list">
+  <!-- <div class="animals-list" style="display: grid; grid-template-columns: 1fr 1fr; grid-gap: 15px; margin-bottom: 20px;"> -->
+      <!-- <div class="animals-list-item" style="display: flex; padding: 15px; box-shadow: 0px 0px 3px 3px rgba(0,0,0,0.08);">
+          <div class="img" style="width: 70px; height: 70px; background-color: black"/>
+          <h4 style="margin-left: 10px;">Animal #1</h4>
+      </div>
+      <div class="animals-list-item" style="display: flex; padding: 15px; box-shadow: 0px 0px 3px 3px rgba(0,0,0,0.08);">
+          <div class="img" style="width: 70px; height: 70px; background-color: gray"/>
+          <h4 style="margin-left: 10px;">Animal #1</h4>
+      </div>
+      <div class="animals-list-item" style="display: flex; padding: 15px; box-shadow: 0px 0px 3px 3px rgba(0,0,0,0.08);">
+          <div class="img" style="width: 70px; height: 70px; background-color: black"/>
+          <h4 style="margin-left: 10px;">Animal #1</h4>
+      </div> -->
+      <table class="table table-sm table-bordered my-4 table-animals-list" :style="{opacity: tableOpacity}">
             <thead class="thead-dark">
                 <tr>
                     <th scope="col">Nr</th>
@@ -58,138 +51,60 @@
                 </tr>
             </tbody>
         </table>
-        <nav aria-label="Page navigation example">
-            <ul class="pagination">
-              <li class="page-item" style="cursor: pointer">
-                <a class="page-link" aria-label="Previous" @click="navigatePrev">
-                  <span aria-hidden="true">&laquo;</span>
-                  <span class="sr-only">Previous</span>
-                </a>
-              </li>
-              <li class="page-item"><span class="page-link">Page {{ response.current_page }} of {{ response.last_page }}</span></li>
-              <li class="page-item" style="cursor: pointer">
-                <a class="page-link" aria-label="Next" @click="navigateNext">
-                  <span aria-hidden="true">&raquo;</span>
-                  <span class="sr-only">Next</span>
-                </a>
-              </li>
-            </ul>
-        </nav>
-    </div>
+  </div>
 </template>
 
-
 <script>
-    import ListFilter from './ListFilter.vue'
-    export default {
-        mounted() {
-            console.log('Vue: AnimalsList Component mounted.');
-            this.fetch(this.url, {'appendFilters': true});
-            this.attachOnPopStateHandler();
+import DeleteButton from './DeleteButton.vue';
+export default {
+    components: {
+        DeleteButton
+    },
+    mounted() {
+        console.log('Vue: AnimalsList Component mounted');
+    },
+    props: {
+        animals: {
+            type: Array,
+            required: true,
+            default: [],
+            note: 'Array of animal entries'
         },
-        data: function() {
-            return {
-                animals: [],
-                response: [],
-                isLoading: false,
-                initialized: false,
-                filters: {},
-                initialFilterItems: {},
-                url: '/api/animals'
-            }
+        isLoading: {
+            type: Boolean,
+            required: true,
+            default: false,
+            note: 'True, if animal entries are currently loading from API'
         },
-        methods: {
-            attachOnPopStateHandler() {
-                window.onpopstate = (event) => {
-                    console.log(`[POP STATE] location: ${document.location}, state: ${JSON.stringify(event.state)}`);
-                    if (event.state) {
-                        this.filters = {...event.state};
-                        delete this.filters.page;
-                    }
-                    else {
-                        for (let filterName in this.filters)
-                            this.filters[filterName] = [];
-                    }
-                    this.fetch(this.url, event.state);
-                };
-            },
-            onFilterChange(params) {
-                this.filters = {...params};
-                // Start pagination from page 1 after submitting new filter
-                params['page'] = 1;
-                console.log('Fetch with filters', params);
-                this.fetch('/api/animals', params);
-                history.pushState(params, null, null);
-                    console.log("History: pushed state: " + JSON.stringify(params));
-            },
-            navigateNext() {
-                console.log('Navigate next');
-                if (!this.response.next_page_url)
-                    return;
-                
-                this.fetch(this.response.next_page_url);
-                let state = {...this.filters, 'page': this.response.current_page + 1};
-                    history.pushState(state, null, null);
-                    console.log("History: pushed state: " + JSON.stringify(state));
-            },
-            navigatePrev() {
-                console.log('Navigate previous');
-                if (!this.response.prev_page_url)
-                    return;
-                
-                this.fetch(this.response.prev_page_url);
-                // MAYBE no need to add history item when navigating BACK through list.
-                let state = {...this.filters, 'page': this.response.current_page - 1};
-                    history.pushState(state, null, null);
-                    console.log("History: pushed state: " + JSON.stringify(state));
-            },
-            routeAnimalDetailsPage(id) {
-                return '/animals/' + id;
-            },
-            routeAnimalEditPage(id) {
-                return '/animals/' + id + '/edit';
-            },
-            fetch(url, parameters) {
-                if (!url)
-                    return;
-                
-                this.isLoading = true;
-                console.log("Fetching URL: " + url);
-                console.log("Parameters: " + JSON.stringify(parameters));
-
-                axios.get(url, parameters ? { params: parameters } : null)
-                .then((response) => { // success
-                    console.log(`Response: ${response}`);
-                    this.response = response.data;
-                    this.animals = response.data.data;
-                    if (response.data.filters) {
-                        this.initialFilterItems = response.data.filters;
-                        this.filters = {...this.initialFilterItems};
-                        for (let name in this.filters)
-                            this.filters[name] = [];
-                    }
-                })
-                .catch(function (error) { // error
-                    // handle error
-                    console.log(error);
-                })
-                .then(() => { // always executed
-                    console.log('Finished axios request');
-                    this.isLoading = false;
-                    if (!this.initialized)
-                        this.initialized = true;
-                });
-            }
+        initialized: {
+            type: Boolean,
+            required: true,
+            default: false,
+            note: 'True, when initial entries are loaded'
         },
-        props: ['csrf'],
-        computed: {
-            tableOpacity() { return this.isLoading ? 0.6 : 1 }
-        },
-        components: {
-            ListFilter
+        csrf: {
+            type: String,
+            required: true,
+            default: '',
+            note: 'CSRF Token'
         }
+    },
+    computed: {
+        tableOpacity() { 
+            return this.isLoading ? 0.6 : 1
+        }
+    },
+    methods: {
+        routeAnimalDetailsPage(id) {
+            return '/animals/' + id;
+        },
+        routeAnimalEditPage(id) {
+            return '/animals/' + id + '/edit';
+        },
     }
+}
 </script>
 
 <style scoped>
+
 </style>
