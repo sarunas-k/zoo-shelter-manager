@@ -69,7 +69,7 @@
                 required: false,
                 note: 'Filters that need to be selected'
             }
-        }['options', 'checkedFilters'],
+        },
         watch: { 
       	    options() {
                 this.initialized = true;

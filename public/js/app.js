@@ -2300,7 +2300,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       required: false,
       note: 'Filters that need to be selected'
     }
-  }[('options', 'checkedFilters')],
+  },
   watch: {
     options: function options() {
       this.initialized = true;
