@@ -76,10 +76,14 @@
             <label for="is-neutered">Spayed/neutered</label>
         </div>
     </div>
+
     <div class="form-row">
-        <div class="form-group col-md-4">
+        <div class="form-group col-md-3">
             <label for="animal-image">Image</label><br>
-            <input type="file" class="form-control-file" name="animal-image[]" id="animal-image" multiple>
+            <input type="file" class="form-control-file" name="animal-image[]" id="animal-image" ref="fileInput" multiple @change="onImageInputChange">
+        </div>
+        <div class="form-group col-md-9">
+            <image-preview :files="files"/>
         </div>
     </div>
     <button type="submit" class="btn btn-success">Save</button>
@@ -88,18 +92,22 @@
 
 <script>
 import SearchableSelect from './SearchableSelect.vue';
+import ImagePreview from './ImagePreview.vue';
 export default {
     mounted() {
         console.log('Vue: AnimalCreateForm Component mounted.');
     },
     data: function() {
         return {
-            
+            files: {}
         }
     },
     methods: {
         routeAnimalsIndex() {
             return '/animals';
+        },
+        onImageInputChange(event) {
+            this.files = event.target.files;
         }
     },
     props: {
@@ -138,6 +146,10 @@ export default {
         gendersObj() {
             return JSON.parse(this.genders);
         }
+    },
+    components: {
+        SearchableSelect,
+        ImagePreview
     }
 }
 </script>
