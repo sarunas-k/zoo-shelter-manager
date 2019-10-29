@@ -79,14 +79,12 @@
 
     <div class="form-row">
         <div class="form-group col-md-2">
-            <label for="animal-image" class="animal-image-label">
-                <p data-feather="image"></p>
-                <p>Add Image</p>
-            </label>
-            <input type="file" class="form-control-file" name="animal-image[]" id="animal-image" ref="fileInput" multiple @change="onImageInputChange">
+            <input-file name="animal-image" :multiple="true" :onlyImages="true" @inputChange="onImageInputChange">
+                Add Image
+            </input-file>
         </div>
         <div class="form-group col-md-10">
-            <image-preview :files="files"/>
+            <image-upload-preview :files="files"/>
         </div>
     </div>
     <button type="submit" class="btn btn-success">Save</button>
@@ -95,7 +93,8 @@
 
 <script>
 import SearchableSelect from './SearchableSelect.vue';
-import ImagePreview from './ImagePreview.vue';
+import ImageUploadPreview from './ImageUploadPreview.vue';
+import InputFile from './InputFile.vue';
 export default {
     mounted() {
         console.log('Vue: AnimalCreateForm Component mounted.');
@@ -152,30 +151,12 @@ export default {
     },
     components: {
         SearchableSelect,
-        ImagePreview
+        ImageUploadPreview,
+        InputFile
     }
 }
 </script>
 
 <style scoped>
-#animal-image {
-    visibility: hidden;
-}
-.animal-image-label {
-    padding: 20px;
-    border: 1px solid #CCC;
-    font-size: 16px;
-    text-align: center;
-}
-.animal-image-label:hover {
-    background-color: #EEE;
-    cursor: pointer;
-}
-.animal-image-label p {
-    margin-bottom: 0;
-}
-.animal-image-label svg {
-    height: 32px;
-    width: 32px;
-}
+
 </style>

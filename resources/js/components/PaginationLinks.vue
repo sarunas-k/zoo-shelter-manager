@@ -20,6 +20,9 @@
 
 <script>
 export default {
+    mounted() {
+        console.log('Vue: PaginationLinks Component mounted.');
+    },
     props: {
         navigatePrev: {
             type: Function,

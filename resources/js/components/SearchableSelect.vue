@@ -75,6 +75,9 @@
         searchFilter: ''
       }
     },
+    mounted() {
+        console.log('Vue: SearchableSelect Component mounted.');
+    },
     created() {
       this.$emit('selected', this.selected);
       if (this.default)

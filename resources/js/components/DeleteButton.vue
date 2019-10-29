@@ -12,6 +12,7 @@
 export default {
     mounted() {
         window.feather.replace();
+        console.log('Vue: DeleteButton Component mounted.');
     },
     data: function() {
         return {

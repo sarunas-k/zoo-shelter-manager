@@ -30,7 +30,8 @@ Vue.component('animal-create-form', require('./components/AnimalCreateForm.vue')
 Vue.component('searchable-select', require('./components/SearchableSelect.vue').default);
 Vue.component('animals-list', require('./components/AnimalsList.vue').default);
 Vue.component('pagination-links', require('./components/PaginationLinks.vue').default);
-Vue.component('image-preview', require('./components/ImagePreview.vue').default);
+Vue.component('image-upload-preview', require('./components/ImageUploadPreview.vue').default);
+Vue.component('input-file', require('./components/InputFile.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
