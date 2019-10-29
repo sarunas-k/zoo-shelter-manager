@@ -2006,7 +2006,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         params: parameters
       } : null).then(function (response) {
         // success
-        console.log("Response: ".concat(response));
+        console.log("Response: ".concat(JSON.stringify(response)));
         _this2.response = response.data;
         _this2.animals = response.data.data;
 
@@ -39313,14 +39313,16 @@ var render = function() {
         }
       }),
       _vm._v(" "),
-      _c("pagination-links", {
-        attrs: {
-          currentPage: _vm.response.current_page,
-          totalPages: _vm.response.last_page,
-          navigatePrev: _vm.onNavigatePrev,
-          navigateNext: _vm.onNavigateNext
-        }
-      })
+      _vm.animals.length
+        ? _c("pagination-links", {
+            attrs: {
+              currentPage: _vm.response.current_page,
+              totalPages: _vm.response.last_page,
+              navigatePrev: _vm.onNavigatePrev,
+              navigateNext: _vm.onNavigateNext
+            }
+          })
+        : _vm._e()
     ],
     1
   )
@@ -39347,99 +39349,106 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "animals-list" }, [
-    _c(
-      "table",
-      {
-        staticClass: "table table-sm table-bordered my-4 table-animals-list",
-        style: { opacity: _vm.tableOpacity }
-      },
-      [
-        _vm._m(0),
-        _vm._v(" "),
+  return _vm.initialized
+    ? _c("div", { staticClass: "animals-list" }, [
         _c(
-          "tbody",
+          "table",
+          {
+            staticClass:
+              "table table-sm table-bordered my-4 table-animals-list",
+            style: { opacity: _vm.tableOpacity }
+          },
           [
+            _vm._m(0),
+            _vm._v(" "),
             _c(
-              "tr",
-              {
-                directives: [
-                  {
-                    name: "show",
-                    rawName: "v-show",
-                    value: _vm.initialized && _vm.animals.length == 0,
-                    expression: "initialized && animals.length == 0"
-                  }
-                ]
-              },
+              "tbody",
               [
                 _c(
-                  "td",
-                  { staticClass: "text-center", attrs: { colspan: "12" } },
-                  [_vm._v("No animal records found.")]
-                )
-              ]
-            ),
-            _vm._v(" "),
-            _vm._l(_vm.animals, function(animal, index) {
-              return _c("tr", { key: index }, [
-                _c("th", { attrs: { scope: "row" } }, [
-                  _c(
-                    "a",
-                    { attrs: { href: _vm.routeAnimalDetailsPage(animal.id) } },
-                    [_vm._v(_vm._s(animal.list_number))]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(animal.species.name))]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(animal.gender))]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(animal.color.name))]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(animal.name))]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(animal.birthdate))]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(animal.size))]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(animal.intake_date.substr(0, 11)))]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(animal.chip_number))]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(animal.living_area.name))]),
-                _vm._v(" "),
-                _c("td", [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "btn btn-primary btn-sm",
-                      attrs: { href: _vm.routeAnimalEditPage(animal.id) }
-                    },
-                    [_vm._v("Edit")]
-                  )
-                ]),
-                _vm._v(" "),
-                _c(
-                  "td",
-                  [
-                    _c("delete-button", {
-                      attrs: {
-                        csrf: _vm.csrf,
-                        action: _vm.routeAnimalDetailsPage(animal.id)
+                  "tr",
+                  {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: _vm.initialized && _vm.animals.length == 0,
+                        expression: "initialized && animals.length == 0"
                       }
-                    })
-                  ],
-                  1
-                )
-              ])
-            })
-          ],
-          2
+                    ]
+                  },
+                  [
+                    _c(
+                      "td",
+                      { staticClass: "text-center", attrs: { colspan: "12" } },
+                      [_vm._v("No animal records found.")]
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _vm._l(_vm.animals, function(animal, index) {
+                  return _c("tr", { key: index }, [
+                    _c("th", { attrs: { scope: "row" } }, [
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: _vm.routeAnimalDetailsPage(animal.id) }
+                        },
+                        [_vm._v(_vm._s(animal.list_number))]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(animal.species.name))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(animal.gender))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(animal.color.name))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(animal.name))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(animal.birthdate))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(animal.size))]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(_vm._s(animal.intake_date.substr(0, 11)))
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(animal.chip_number))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(animal.living_area.name))]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "btn btn-primary btn-sm",
+                          attrs: { href: _vm.routeAnimalEditPage(animal.id) }
+                        },
+                        [_vm._v("Edit")]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "td",
+                      [
+                        _c("delete-button", {
+                          attrs: {
+                            csrf: _vm.csrf,
+                            action: _vm.routeAnimalDetailsPage(animal.id)
+                          }
+                        })
+                      ],
+                      1
+                    )
+                  ])
+                })
+              ],
+              2
+            )
+          ]
         )
-      ]
-    )
-  ])
+      ])
+    : _vm._e()
 }
 var staticRenderFns = [
   function() {
@@ -39626,182 +39635,180 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "list-filter", class: { disabled: !_vm.initialized } },
-    [
-      _c(
-        "div",
-        { staticClass: "list-filter-buttons" },
-        [
-          _vm._l(_vm.options, function(filterValues, filterName, index) {
-            return _c(
-              "span",
-              { key: index, class: ["dropdown", "filter-" + filterName] },
-              [
-                _c(
-                  "button",
+  return _vm.initialized
+    ? _c("div", { staticClass: "list-filter" }, [
+        _c(
+          "div",
+          { staticClass: "list-filter-buttons" },
+          [
+            _vm._l(_vm.options, function(filterValues, filterName, index) {
+              return _c(
+                "span",
+                { key: index, class: ["dropdown", "filter-" + filterName] },
+                [
+                  _c(
+                    "button",
+                    {
+                      staticClass:
+                        "btn btn-outline-primary btn-sm dropdown-toggle",
+                      attrs: {
+                        type: "button",
+                        id: "menuButton" + filterName,
+                        "data-toggle": "dropdown",
+                        "aria-haspopup": "true",
+                        "aria-expanded": "false"
+                      }
+                    },
+                    [
+                      _c("span", { staticClass: "filter-title" }, [
+                        _vm._v(_vm._s(filterName))
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "dropdown-menu px-2",
+                      attrs: { "aria-labelledby": "menuButton" + filterName },
+                      on: {
+                        click: function($event) {
+                          return $event.stopPropagation()
+                        }
+                      }
+                    },
+                    _vm._l(filterValues, function(value, i) {
+                      return _c(
+                        "div",
+                        {
+                          key: i,
+                          class: [
+                            "form-check",
+                            "dropdown-item",
+                            "filter-value-" + value,
+                            {
+                              "dropdown-item-active": _vm.checkedFilterItems[
+                                filterName
+                              ].includes(value)
+                            }
+                          ]
+                        },
+                        [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.checkedFilterItems[filterName],
+                                expression: "checkedFilterItems[filterName]"
+                              }
+                            ],
+                            staticClass: "form-check-input",
+                            attrs: { type: "checkbox", id: value },
+                            domProps: {
+                              value: value,
+                              checked: Array.isArray(
+                                _vm.checkedFilterItems[filterName]
+                              )
+                                ? _vm._i(
+                                    _vm.checkedFilterItems[filterName],
+                                    value
+                                  ) > -1
+                                : _vm.checkedFilterItems[filterName]
+                            },
+                            on: {
+                              change: [
+                                function($event) {
+                                  var $$a = _vm.checkedFilterItems[filterName],
+                                    $$el = $event.target,
+                                    $$c = $$el.checked ? true : false
+                                  if (Array.isArray($$a)) {
+                                    var $$v = value,
+                                      $$i = _vm._i($$a, $$v)
+                                    if ($$el.checked) {
+                                      $$i < 0 &&
+                                        _vm.$set(
+                                          _vm.checkedFilterItems,
+                                          filterName,
+                                          $$a.concat([$$v])
+                                        )
+                                    } else {
+                                      $$i > -1 &&
+                                        _vm.$set(
+                                          _vm.checkedFilterItems,
+                                          filterName,
+                                          $$a
+                                            .slice(0, $$i)
+                                            .concat($$a.slice($$i + 1))
+                                        )
+                                    }
+                                  } else {
+                                    _vm.$set(
+                                      _vm.checkedFilterItems,
+                                      filterName,
+                                      $$c
+                                    )
+                                  }
+                                },
+                                _vm.emitFilterChangeEvent
+                              ]
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "label",
+                            {
+                              staticClass: "form-check-label",
+                              attrs: { for: value }
+                            },
+                            [
+                              _vm._v(
+                                "\n                        " +
+                                  _vm._s(value) +
+                                  "\n                    "
+                              )
+                            ]
+                          )
+                        ]
+                      )
+                    }),
+                    0
+                  )
+                ]
+              )
+            }),
+            _vm._v(" "),
+            _c("br")
+          ],
+          2
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "filter-badges" },
+          [
+            _vm._l(_vm.checkedFilterItems, function(filterValues, filterName) {
+              return _vm._l(_vm.checkedFilterItems[filterName], function(item) {
+                return _c(
+                  "span",
                   {
-                    staticClass:
-                      "btn btn-outline-primary btn-sm dropdown-toggle",
-                    attrs: {
-                      type: "button",
-                      id: "menuButton" + filterName,
-                      "data-toggle": "dropdown",
-                      "aria-haspopup": "true",
-                      "aria-expanded": "false"
-                    }
-                  },
-                  [
-                    _c("span", { staticClass: "filter-title" }, [
-                      _vm._v(_vm._s(filterName))
-                    ])
-                  ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    staticClass: "dropdown-menu px-2",
-                    attrs: { "aria-labelledby": "menuButton" + filterName },
+                    key: item,
+                    staticClass: "filter-badge badge badge-pill mr-1",
                     on: {
                       click: function($event) {
-                        return $event.stopPropagation()
+                        return _vm.removeFromFilter(item, filterName)
                       }
                     }
                   },
-                  _vm._l(filterValues, function(value, i) {
-                    return _c(
-                      "div",
-                      {
-                        key: i,
-                        class: [
-                          "form-check",
-                          "dropdown-item",
-                          "filter-value-" + value,
-                          {
-                            "dropdown-item-active": _vm.checkedFilterItems[
-                              filterName
-                            ].includes(value)
-                          }
-                        ]
-                      },
-                      [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.checkedFilterItems[filterName],
-                              expression: "checkedFilterItems[filterName]"
-                            }
-                          ],
-                          staticClass: "form-check-input",
-                          attrs: { type: "checkbox", id: value },
-                          domProps: {
-                            value: value,
-                            checked: Array.isArray(
-                              _vm.checkedFilterItems[filterName]
-                            )
-                              ? _vm._i(
-                                  _vm.checkedFilterItems[filterName],
-                                  value
-                                ) > -1
-                              : _vm.checkedFilterItems[filterName]
-                          },
-                          on: {
-                            change: [
-                              function($event) {
-                                var $$a = _vm.checkedFilterItems[filterName],
-                                  $$el = $event.target,
-                                  $$c = $$el.checked ? true : false
-                                if (Array.isArray($$a)) {
-                                  var $$v = value,
-                                    $$i = _vm._i($$a, $$v)
-                                  if ($$el.checked) {
-                                    $$i < 0 &&
-                                      _vm.$set(
-                                        _vm.checkedFilterItems,
-                                        filterName,
-                                        $$a.concat([$$v])
-                                      )
-                                  } else {
-                                    $$i > -1 &&
-                                      _vm.$set(
-                                        _vm.checkedFilterItems,
-                                        filterName,
-                                        $$a
-                                          .slice(0, $$i)
-                                          .concat($$a.slice($$i + 1))
-                                      )
-                                  }
-                                } else {
-                                  _vm.$set(
-                                    _vm.checkedFilterItems,
-                                    filterName,
-                                    $$c
-                                  )
-                                }
-                              },
-                              _vm.emitFilterChangeEvent
-                            ]
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c(
-                          "label",
-                          {
-                            staticClass: "form-check-label",
-                            attrs: { for: value }
-                          },
-                          [
-                            _vm._v(
-                              "\n                        " +
-                                _vm._s(value) +
-                                "\n                    "
-                            )
-                          ]
-                        )
-                      ]
-                    )
-                  }),
-                  0
+                  [_vm._v(_vm._s(item) + " X")]
                 )
-              ]
-            )
-          }),
-          _vm._v(" "),
-          _c("br")
-        ],
-        2
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "filter-badges" },
-        [
-          _vm._l(_vm.checkedFilterItems, function(filterValues, filterName) {
-            return _vm._l(_vm.checkedFilterItems[filterName], function(item) {
-              return _c(
-                "span",
-                {
-                  key: item,
-                  staticClass: "filter-badge badge badge-pill mr-1",
-                  on: {
-                    click: function($event) {
-                      return _vm.removeFromFilter(item, filterName)
-                    }
-                  }
-                },
-                [_vm._v(_vm._s(item) + " X")]
-              )
+              })
             })
-          })
-        ],
-        2
-      )
-    ]
-  )
+          ],
+          2
+        )
+      ])
+    : _vm._e()
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -39825,57 +39832,64 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("nav", { attrs: { "aria-label": "Pagination" } }, [
-    _c("ul", { staticClass: "pagination" }, [
-      _c(
-        "li",
-        { staticClass: "page-item", staticStyle: { cursor: "pointer" } },
-        [
-          _c(
-            "a",
-            {
-              staticClass: "page-link",
-              attrs: { "aria-label": "Previous" },
-              on: { click: _vm.navigatePrev }
-            },
-            [
-              _c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("«")]),
-              _vm._v(" "),
-              _c("span", { staticClass: "sr-only" }, [_vm._v("Previous")])
-            ]
-          )
-        ]
-      ),
-      _vm._v(" "),
-      _c("li", { staticClass: "page-item" }, [
-        _c("span", { staticClass: "page-link" }, [
-          _vm._v(
-            "Page " + _vm._s(_vm.currentPage) + " of " + _vm._s(_vm.totalPages)
-          )
-        ])
-      ]),
-      _vm._v(" "),
-      _c(
-        "li",
-        { staticClass: "page-item", staticStyle: { cursor: "pointer" } },
-        [
-          _c(
-            "a",
-            {
-              staticClass: "page-link",
-              attrs: { "aria-label": "Next" },
-              on: { click: _vm.navigateNext }
-            },
-            [
-              _c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("»")]),
-              _vm._v(" "),
-              _c("span", { staticClass: "sr-only" }, [_vm._v("Next")])
-            ]
-          )
-        ]
-      )
-    ])
-  ])
+  return _c(
+    "nav",
+    { staticClass: "pagination-links", attrs: { "aria-label": "Pagination" } },
+    [
+      _c("ul", { staticClass: "pagination" }, [
+        _c(
+          "li",
+          { staticClass: "page-item", staticStyle: { cursor: "pointer" } },
+          [
+            _c(
+              "a",
+              {
+                staticClass: "page-link",
+                attrs: { "aria-label": "Previous" },
+                on: { click: _vm.navigatePrev }
+              },
+              [
+                _c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("«")]),
+                _vm._v(" "),
+                _c("span", { staticClass: "sr-only" }, [_vm._v("Previous")])
+              ]
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c("li", { staticClass: "page-item" }, [
+          _c("span", { staticClass: "page-link" }, [
+            _vm._v(
+              "Page " +
+                _vm._s(_vm.currentPage) +
+                " of " +
+                _vm._s(_vm.totalPages)
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c(
+          "li",
+          { staticClass: "page-item", staticStyle: { cursor: "pointer" } },
+          [
+            _c(
+              "a",
+              {
+                staticClass: "page-link",
+                attrs: { "aria-label": "Next" },
+                on: { click: _vm.navigateNext }
+              },
+              [
+                _c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("»")]),
+                _vm._v(" "),
+                _c("span", { staticClass: "sr-only" }, [_vm._v("Next")])
+              ]
+            )
+          ]
+        )
+      ])
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

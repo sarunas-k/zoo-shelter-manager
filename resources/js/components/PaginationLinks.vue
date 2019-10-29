@@ -1,5 +1,5 @@
 <template>
-    <nav aria-label="Pagination">
+    <nav aria-label="Pagination" class="pagination-links">
         <ul class="pagination">
           <li class="page-item" style="cursor: pointer">
             <a class="page-link" aria-label="Previous" @click="navigatePrev">

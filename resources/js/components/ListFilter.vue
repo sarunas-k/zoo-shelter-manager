@@ -1,5 +1,5 @@
 <template>
-    <div class="list-filter" :class="{disabled: !initialized}">
+    <div class="list-filter" v-if="initialized">
         <div class="list-filter-buttons">
             <span v-for="(filterValues, filterName, index) in options" :key="index" :class="['dropdown', `filter-${filterName}`]">
                 <button class="btn btn-outline-primary btn-sm dropdown-toggle" type="button" :id="`menuButton${filterName}`" data-toggle="dropdown"

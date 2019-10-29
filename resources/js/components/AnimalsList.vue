@@ -1,5 +1,5 @@
 <template>
-  <div class="animals-list">
+  <div class="animals-list" v-if="initialized">
   <!-- <div class="animals-list" style="display: grid; grid-template-columns: 1fr 1fr; grid-gap: 15px; margin-bottom: 20px;"> -->
       <!-- <div class="animals-list-item" style="display: flex; padding: 15px; box-shadow: 0px 0px 3px 3px rgba(0,0,0,0.08);">
           <div class="img" style="width: 70px; height: 70px; background-color: black"/>

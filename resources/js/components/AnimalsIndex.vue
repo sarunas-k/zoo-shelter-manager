@@ -5,7 +5,7 @@
 
         <animals-list :animals="animals" :isLoading="isLoading" :initialized="initialized" :csrf="csrf"/>
 
-        <pagination-links :currentPage="response.current_page" :totalPages="response.last_page" :navigatePrev="onNavigatePrev" :navigateNext="onNavigateNext"/>
+        <pagination-links v-if="animals.length" :currentPage="response.current_page" :totalPages="response.last_page" :navigatePrev="onNavigatePrev" :navigateNext="onNavigateNext"/>
 
     </div>
 </template>
@@ -87,7 +87,7 @@
 
                 axios.get(url, parameters ? { params: parameters } : null)
                 .then((response) => { // success
-                    console.log(`Response: ${response}`);
+                    console.log(`Response: ${JSON.stringify(response)}`);
                     this.response = response.data;
                     this.animals = response.data.data;
                     if (response.data.filters) {
