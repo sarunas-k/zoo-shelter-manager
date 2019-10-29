@@ -78,11 +78,14 @@
     </div>
 
     <div class="form-row">
-        <div class="form-group col-md-3">
-            <label for="animal-image">Image</label><br>
+        <div class="form-group col-md-2">
+            <label for="animal-image" class="animal-image-label">
+                <p data-feather="image"></p>
+                <p>Add Image</p>
+            </label>
             <input type="file" class="form-control-file" name="animal-image[]" id="animal-image" ref="fileInput" multiple @change="onImageInputChange">
         </div>
-        <div class="form-group col-md-9">
+        <div class="form-group col-md-10">
             <image-preview :files="files"/>
         </div>
     </div>
@@ -155,5 +158,24 @@ export default {
 </script>
 
 <style scoped>
-
+#animal-image {
+    visibility: hidden;
+}
+.animal-image-label {
+    padding: 20px;
+    border: 1px solid #CCC;
+    font-size: 16px;
+    text-align: center;
+}
+.animal-image-label:hover {
+    background-color: #EEE;
+    cursor: pointer;
+}
+.animal-image-label p {
+    margin-bottom: 0;
+}
+.animal-image-label svg {
+    height: 32px;
+    width: 32px;
+}
 </style>
