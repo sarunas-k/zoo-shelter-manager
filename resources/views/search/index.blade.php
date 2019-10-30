@@ -3,7 +3,7 @@
 
 @section('content')
     <br>
-    <h3>Search for "{{request()->input('q')}}"</h3>
+    <heading :level="2">Search for "{{request()->input('q')}}"</heading>
     <br>
     @if(!isset($animals_results) || $animals_results->count() < 1)
     <p>No animals matched search criteria.</p>

@@ -3,7 +3,7 @@
 
 @section('content')
     <br>
-    <h3>New reclaim @if(isset($animal))- {{$animal->list_number}}@endif</h3>
+    <heading :level="2">New reclaim @if(isset($animal))- {{$animal->list_number}}@endif</heading>
     @if ($errors->any())
         <div class="alert alert-danger">
             <ul>

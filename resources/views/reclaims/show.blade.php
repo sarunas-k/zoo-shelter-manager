@@ -3,7 +3,7 @@
 
 @section('content')
     <br>
-    <h3>Reclaims</h3>
+    <heading :level="2">Reclaims</heading>
     @if(!isset($reclaim))
         <p>Incorrect reclaim id.</p>
     @else

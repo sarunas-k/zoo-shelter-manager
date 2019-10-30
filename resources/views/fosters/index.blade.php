@@ -3,7 +3,7 @@
 
 @section('content')
     <br>
-    <h3>Fosters</h3>
+    <heading :level="2">Fosters</heading>
     @if(session('success')) <div class="alert alert-success" role="alert">  {{ session('success') }}</div>@endif
     @if(session('error'))   <div class="alert alert-danger" role="alert">   {{ session('error') }}  </div>@endif
     @if(!isset($fosters) || $fosters->count() < 1)
