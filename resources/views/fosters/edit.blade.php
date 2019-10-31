@@ -3,7 +3,7 @@
 
 @section('content')
 <br>
-<heading :level="2">Edit foster</heading>
+<h3>Edit foster</h3>
 @if ($errors->any())
 <div class="alert alert-danger">
     <ul>

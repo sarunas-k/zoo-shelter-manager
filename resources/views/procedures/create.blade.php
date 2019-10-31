@@ -3,7 +3,7 @@
 
 @section('content')
 <br>
-<heading :level="2">New procedure @if(isset($animal))- {{$animal->list_number}} {{$animal->name}}@endif</heading>
+<h3>New procedure @if(isset($animal))- {{$animal->list_number}} {{$animal->name}}@endif</h3>
 @if ($errors->any())
 <div class="alert alert-danger">
     <ul>

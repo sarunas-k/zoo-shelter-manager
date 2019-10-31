@@ -3,7 +3,7 @@
 
 @section('content')
     <br>
-    <heading :level="2">People</heading>
+    <h3>People</h3>
     @if(session('success'))<div class="alert alert-success" role="alert">{{session('success')}}</div>@endif
     @if(session('error'))<div class="alert alert-danger" role="alert">{{session('error')}}</div>@endif
     @if(!isset($people))

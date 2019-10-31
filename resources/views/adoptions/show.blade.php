@@ -3,7 +3,7 @@
 
 @section('content')
     <br>
-    <heading :level="2">Adoptions</heading>
+    <h3>Adoptions</h3>
     @if(!isset($adoption))
     <p>Incorrect adoption id.</p>
     @else

@@ -3,7 +3,7 @@
 
 @section('content')
     <br>
-    <heading :level="2">Living Area</heading>
+    <h3>Living area</h3>
     @if(!isset($livingArea))
         <p>Incorrect living-area id.</p>
     @else

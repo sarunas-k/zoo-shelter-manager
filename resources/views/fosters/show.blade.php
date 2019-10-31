@@ -3,7 +3,7 @@
 
 @section('content')
     <br>
-    <heading :level="2">Fosters</heading>
+    <h3>Fosters</h3>
     @if(!isset($foster))
         <p>Incorrect foster id.</p>
     @else

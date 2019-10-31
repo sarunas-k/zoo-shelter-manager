@@ -3,7 +3,7 @@
 
 @section('content')
     <br>
-    <heading :level="2">Living Areas</heading>
+    <h3>Living Areas</h3>
     @if ($errors->any())
         <div class="alert alert-danger">
             <ul>

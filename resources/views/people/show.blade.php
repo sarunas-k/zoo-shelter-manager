@@ -3,7 +3,7 @@
 
 @section('content')
 <br>
-<heading :level="2">People</heading>
+<h3>People</h3>
 {{-- PERSON DETAILS --}}
 @if(!isset($person))
     <p>Incorrect person id.</p>
