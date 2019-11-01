@@ -85,4 +85,8 @@ class Animal extends Model
     public function reclaims() {
         return $this->hasMany(Reclaim::class);
     }
+
+    public function intakeType() {
+        return $this->belongsTo(IntakeType::class);
+    }
 }
