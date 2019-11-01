@@ -1698,7 +1698,7 @@ module.exports = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _SearchableSelect_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SearchableSelect.vue */ "./resources/js/components/SearchableSelect.vue");
-/* harmony import */ var _ImageUploadPreview_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ImageUploadPreview.vue */ "./resources/js/components/ImageUploadPreview.vue");
+/* harmony import */ var _ImageUploadPreview_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ImageUploadPreview.vue */ "./resources/js/components/ImageUploadPreview.vue");
 /* harmony import */ var _InputFile_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./InputFile.vue */ "./resources/js/components/InputFile.vue");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { keys.push.apply(keys, Object.getOwnPropertySymbols(object)); } if (enumerableOnly) keys = keys.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); return keys; }
 
@@ -1887,7 +1887,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   components: {
     SearchableSelect: _SearchableSelect_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
-    ImageUploadPreview: _ImageUploadPreview_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
+    ImageUploadPreview: _ImageUploadPreview_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
     InputFile: _InputFile_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   }
 });
