@@ -1799,6 +1799,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -1855,6 +1864,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     date: {
       type: String,
       "default": ''
+    },
+    intaketypes: {
+      type: String,
+      "default": ''
     }
   },
   computed: {
@@ -1883,6 +1896,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     gendersObj: function gendersObj() {
       return JSON.parse(this.genders);
+    },
+    intaketypesObj: function intaketypesObj() {
+      return JSON.parse(this.intaketypes);
     }
   },
   components: {
@@ -39327,6 +39343,41 @@ var render = function() {
           ],
           1
         )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-row" }, [
+        _c("div", { staticClass: "form-group col-md-4" }, [
+          _c("label", { attrs: { for: "intake-type" } }, [
+            _vm._v("Intake type")
+          ]),
+          _vm._v(" "),
+          _c(
+            "select",
+            {
+              staticClass: "form-control",
+              attrs: { id: "intake-type", name: "intake-type" }
+            },
+            [
+              _c("option", [_vm._v("---")]),
+              _vm._v(" "),
+              _vm._l(_vm.intaketypesObj, function(type) {
+                return _c(
+                  "option",
+                  {
+                    key: type.id,
+                    domProps: {
+                      value: type.id,
+                      selected:
+                        _vm.oldObj["intake-type"] == type.id ? "selected" : ""
+                    }
+                  },
+                  [_vm._v(_vm._s(type.name))]
+                )
+              })
+            ],
+            2
+          )
+        ])
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "form-row" }, [

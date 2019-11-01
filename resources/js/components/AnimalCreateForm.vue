@@ -70,6 +70,15 @@
         </div>
     </div>
     <div class="form-row">
+        <div class="form-group col-md-4">
+            <label for="intake-type">Intake type</label>
+            <select class="form-control" id="intake-type" name="intake-type">
+                <option>---</option>
+                <option v-for="type in intaketypesObj" :key="type.id" :value="type.id" :selected="oldObj['intake-type'] == type.id ? 'selected' : ''">{{type.name}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-row">
         <div class="form-group col-md-3">
             <input type="hidden" name="is-neutered" value="0">
             <input type="checkbox" name="is-neutered" id="is-neutered" :checked="oldObj['is-neutered'] == '1' ? 'checked' : ''">
@@ -113,15 +122,16 @@ export default {
         }
     },
     props: {
-        csrf:       { type: String, default: '' },
-        old:        { type: String, default: '' },
-        species:    { type: String, default: '' },
-        staff:      { type: String, default: '' },
-        livingareas:{ type: String, default: '' },
-        colors:     { type: String, default: '' },
-        sizes:      { type: String, default: '' },
-        genders:    { type: String, default: '' },
-        date:       { type: String, default: '' }
+        csrf:        { type: String, default: '' },
+        old:         { type: String, default: '' },
+        species:     { type: String, default: '' },
+        staff:       { type: String, default: '' },
+        livingareas: { type: String, default: '' },
+        colors:      { type: String, default: '' },
+        sizes:       { type: String, default: '' },
+        genders:     { type: String, default: '' },
+        date:        { type: String, default: '' },
+        intaketypes: { type: String, default: '' }
     },
     computed: {
         oldObj() {
@@ -147,6 +157,9 @@ export default {
         },
         gendersObj() {
             return JSON.parse(this.genders);
+        },
+        intaketypesObj() {
+            return JSON.parse(this.intaketypes);
         }
     },
     components: {

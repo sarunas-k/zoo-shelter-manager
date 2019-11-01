@@ -64,7 +64,8 @@ class AnimalsRepository implements IAnimalsRepository {
             'living_area_id' => $formFields['living-area'],
             'color_id' => $formFields['color'],
             'staff_id' => $formFields['staff'],
-            'is_neutered' => $formFields['is-neutered']
+            'is_neutered' => $formFields['is-neutered'],
+            'intake_type_id' => $formFields['intake-type']
         ]);
 
         // Attach Animal breeds to the Animal through animal_breed table
@@ -100,7 +101,8 @@ class AnimalsRepository implements IAnimalsRepository {
             'living_area_id' => $formFields['living-area'],
             'color_id' => $formFields['color'],
             'staff_id' => $formFields['staff'],
-            'is_neutered' => $formFields['is-neutered'] ? 1 : 0
+            'is_neutered' => $formFields['is-neutered'] ? 1 : 0,
+            'intake_type_id' => $formFields['intake-type']
         ]);
         
         // Save animal breeds to animal_breed table

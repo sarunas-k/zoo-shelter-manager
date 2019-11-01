@@ -124,6 +124,16 @@
         </div>
     </div>
     <div class="form-row">
+        <div class="form-group col-md-4">
+            <label for="intake-type">Intake type</label>
+            <select class="form-control" id="intake-type" name="intake-type">
+                @foreach($intakeTypes as $type)
+                    <option value="{{$type->id}}" @if($animal->intakeType->id == $type->id) selected @endif>{{$type->name}}</option>
+                @endforeach
+            </select>
+        </div>
+    </div>
+    <div class="form-row">
         <div class="form-group col-md-2">
             <input type="hidden" name="is-neutered" value="0">
             <input type="checkbox" name="is-neutered" id="is-neutered" {{$animal->is_neutered ? 'checked' : ''}}>

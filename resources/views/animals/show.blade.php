@@ -62,6 +62,10 @@
                 <td>{{$animal->species->name}}</td>
             </tr>
             <tr>
+                <td><strong>Intake type: </strong></td>
+                <td>{{$animal->intakeType->name}}</td>
+            </tr>
+            <tr>
                 <td><strong>Gender: </strong></td>
                 <td>{{$animal->gender}}</td>
             </tr>

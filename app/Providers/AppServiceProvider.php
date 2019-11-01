@@ -16,6 +16,7 @@ use App\Repositories\SpeciesRepository;
 use App\Repositories\ColorsRepository;
 use App\Repositories\StaffRepository;
 use App\Repositories\ProcedureTypesRepository;
+use App\Repositories\IntakeTypesRepository;
 use App\Repositories\Interfaces\IAnimalsRepository;
 use App\Repositories\Interfaces\IAdoptionsRepository;
 use App\Repositories\Interfaces\ICallsRepository;
@@ -28,6 +29,7 @@ use App\Repositories\Interfaces\ISpeciesRepository;
 use App\Repositories\Interfaces\IColorsRepository;
 use App\Repositories\Interfaces\IStaffRepository;
 use App\Repositories\Interfaces\IProcedureTypesRepository;
+use App\Repositories\Interfaces\IIntakeTypesRepository;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -106,6 +108,11 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             IProcedureTypesRepository::class, 
             ProcedureTypesRepository::class
+        );
+
+        $this->app->bind(
+            IIntakeTypesRepository::class, 
+            IntakeTypesRepository::class
         );
     }
 }

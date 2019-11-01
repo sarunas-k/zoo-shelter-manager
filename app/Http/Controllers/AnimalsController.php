@@ -8,6 +8,7 @@ use App\Repositories\Interfaces\ISpeciesRepository;
 use App\Repositories\Interfaces\IColorsRepository;
 use App\Repositories\Interfaces\IStaffRepository;
 use App\Repositories\Interfaces\ILivingAreasRepository;
+use App\Repositories\Interfaces\IIntakeTypesRepository;
 use App\Animal;
 
 class AnimalsController extends Controller
@@ -17,13 +18,15 @@ class AnimalsController extends Controller
                                 ISpeciesRepository $speciesRepo,
                                 IColorsRepository $colorsRepo,
                                 IStaffRepository $staffRepo,
-                                ILivingAreasRepository $areasRepo)
+                                ILivingAreasRepository $areasRepo,
+                                IIntakeTypesRepository $intakeTypesRepo)
     {
         $this->animalsRepo = $animalsRepo;
         $this->speciesRepo = $speciesRepo;
         $this->colorsRepo = $colorsRepo;
         $this->staffRepo = $staffRepo;
         $this->areasRepo = $areasRepo;
+        $this->intakeTypesRepo = $intakeTypesRepo;
     }
     
     /**
@@ -49,7 +52,8 @@ class AnimalsController extends Controller
             'staff' => $this->staffRepo->all(),
             'livingAreas' => $this->areasRepo->all(),
             'sizes' => $this->animalsRepo->getSizeNames(),
-            'genders' => $this->animalsRepo->getGenderNames()
+            'genders' => $this->animalsRepo->getGenderNames(),
+            'intakeTypes' => $this->intakeTypesRepo->all()
         ]);
     }
 
@@ -79,7 +83,8 @@ class AnimalsController extends Controller
             'animal-image.*' => 'mimes:jpeg,jpg,bmp,png',
             'breed' => 'required',
             'staff' => 'required',
-            'is-neutered' => 'required|boolean'
+            'is-neutered' => 'required|boolean',
+            'intake-type' => 'required'
         ]);
 
         $animalId = $this->animalsRepo->addFromInput($formFields);
@@ -111,7 +116,8 @@ class AnimalsController extends Controller
             'species' => $this->speciesRepo->all(),
             'colors' => $this->colorsRepo->all(),
             'staff' => $this->staffRepo->all(),
-            'livingAreas' => $this->areasRepo->all()
+            'livingAreas' => $this->areasRepo->all(),
+            'intakeTypes' => $this->intakeTypesRepo->all(),
         ]);
     }
 
@@ -141,7 +147,8 @@ class AnimalsController extends Controller
             'staff' => 'required',
             'breed' => 'required',
             'is-neutered' => 'required|boolean',
-            'animal-images-list' => ''
+            'animal-images-list' => '',
+            'intake-type' => 'required',
         ]);
 
         $this->animalsRepo->updateFromInput($animal, $formFields);
