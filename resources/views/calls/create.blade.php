@@ -37,12 +37,7 @@
             </div>
             <div class="form-group col-md-4">
                 <label for="staff">Responsible staff</label>
-                <select class="form-control" id="staff" name="staff">
-                    <option>---</option>
-                    @foreach($staff as $staffMember)
-                        <option value="{{$staffMember->id}}" @if(old('staff') == $staffMember->id) selected @endif>{{$staffMember->first_name}} {{$staffMember->last_name}}</option>
-                    @endforeach
-                </select>
+                <searchable-select name="staff" :options="{{json_encode($staff)}}" placeholder="Select a staff member" @if(old('staff')) default="{{old('staff')}}" @endif/>
             </div>
         </div>
         <div class="form-row">

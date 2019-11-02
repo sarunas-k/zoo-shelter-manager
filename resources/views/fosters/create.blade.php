@@ -38,26 +38,14 @@
         </div>
         <div class="form-group col-md-4">
             <label for="person">Person</label>
-            <select class="form-control" id="person" name="person">
-                <option>---</option>
-                @foreach($people as $person)
-                <option value="{{$person->id}}" @if(old('person')==$person->id) selected @endif>{{$person->first_name}}
-                    {{$person->last_name}}</option>
-                @endforeach
-            </select>
+            <searchable-select name="person" :options="{{json_encode($people)}}" placeholder="Select a person" @if(old('person')) default="{{old('person')}}" @endif/>
         </div>
         @if(isset($animal))
         <input type="hidden" name="animal" id="animal" value="{{$animal->id}}" />
         @else
         <div class="form-group col-md-4">
             <label for="animal">Animal</label>
-            <select class="form-control" id="animal" name="animal">
-                <option>---</option>
-                @foreach($animals as $animal)
-                <option value="{{$animal->id}}" @if(old('animal')==$animal->id) selected @endif>{{$animal->list_number}}
-                    {{$animal->name}}</option>
-                @endforeach
-            </select>
+            <searchable-select name="animal" :options="{{json_encode($animals)}}" placeholder="Select an animal" @if(old('animal')) default="{{old('animal')}}" @endif/>
         </div>
         @endif
     </div>
