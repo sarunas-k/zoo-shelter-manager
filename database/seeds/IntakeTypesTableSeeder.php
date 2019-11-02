@@ -12,10 +12,10 @@ class IntakeTypesTableSeeder extends Seeder
     public function run()
     {
         App\IntakeType::insert([
-            ['name' => 'Confiscated'],
+            ['name' => 'Stray'],
             ['name' => 'Foster'],
             ['name' => 'Surrender'],
-            ['name' => 'Stray']
+            ['name' => 'Confiscated']
         ]);
     }
 }
