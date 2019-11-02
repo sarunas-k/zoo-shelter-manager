@@ -1,23 +1,23 @@
 <template>
     <div class="list-filter" v-if="initialized">
         <div class="list-filter-buttons">
-            <span v-for="(filterValues, filterName, index) in options" :key="index" :class="['dropdown', `filter-${filterName}`]">
-                <button class="btn btn-outline-primary btn-sm dropdown-toggle" type="button" :id="`menuButton${filterName}`" data-toggle="dropdown"
+            <span v-for="(categoryItems, filterCategory, index) in options" :key="index" :class="['dropdown', `filter-${filterCategory}`]">
+                <button class="btn btn-outline-primary btn-sm dropdown-toggle" type="button" :id="`menuButton${filterCategory}`" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
-                    <span class="filter-title">{{filterName}}</span>
+                    <span class="filter-title">{{filterCategory}}</span>
                 </button>
-                <div class="dropdown-menu px-2" @click="$event.stopPropagation()" :aria-labelledby="`menuButton${filterName}`">
+                <div class="dropdown-menu px-2" @click="$event.stopPropagation()" :aria-labelledby="`menuButton${filterCategory}`">
                     <div 
-                        v-for="(value, i) in filterValues"
+                        v-for="(value, i) in categoryItems"
                         :key="i"
                         :class="[
                                 'form-check', 
                                 'dropdown-item', 
                                 `filter-value-${value}`, 
-                                {'dropdown-item-active': checkedFilterItems[filterName].includes(value)}
+                                {'dropdown-item-active': isChecked(value, filterCategory)}
                                 ]"
                     >
-                        <input v-model="checkedFilterItems[filterName]" class="form-check-input" type="checkbox" :value="value" :id="value" @change="emitFilterChangeEvent">
+                        <input v-model="checkedFilterItems[filterCategory]" class="form-check-input" type="checkbox" :value="value" :id="value" @change="emitFilterChangeEvent">
                         <label class="form-check-label" :for="value">
                             {{value}}
                         </label>
@@ -27,8 +27,8 @@
             <br>
         </div>
         <div class="filter-badges">
-            <template v-for="(filterValues, filterName) in checkedFilterItems">
-                <span :key="item" v-for="item in checkedFilterItems[filterName]" class="filter-badge badge badge-pill mr-1" @click="removeFromFilter(item, filterName)">{{item}} X</span>
+            <template v-for="(categoryItems, filterCategory) in checkedFilterItems">
+                <span :key="item" v-for="item in categoryItems" class="filter-badge badge badge-pill mr-1" @click="removeFromFilter(item, filterCategory)">{{item}} X</span>
             </template>
         </div>
     </div>
@@ -49,12 +49,21 @@
             }
         },
         methods: {
-            removeFromFilter(item, filterName) {
-                this.checkedFilterItems[filterName] = this.checkedFilterItems[filterName].filter(i => i !== item);
+            removeFromFilter(item, filterCategory) {
+                if (!this.checkedFilterItems || !this.checkedFilterItems[filterCategory])
+                    return;
+                
+                this.checkedFilterItems[filterCategory] = this.checkedFilterItems[filterCategory].filter(i => i !== item);
                 this.emitFilterChangeEvent();
             },
             emitFilterChangeEvent() {
                 this.$emit('filter-change', this.checkedFilterItems);
+            },
+            isChecked(item, filterCategory) {
+                if (!this.checkedFilterItems || !this.checkedFilterItems[filterCategory])
+                    return false;
+                
+                return this.checkedFilterItems[filterCategory].includes(item);
             }
         },
         props: {
@@ -74,8 +83,9 @@
       	    options() {
                 this.initialized = true;
             },
-            checkedFilters() {
-                this.checkedFilterItems = {...this.checkedFilters};
+            checkedFilters: {
+                handler: function() { this.checkedFilterItems = {...this.checkedFilters} },
+                deep: true
             }
         }
     }

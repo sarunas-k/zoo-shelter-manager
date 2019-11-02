@@ -1939,8 +1939,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
 
 
 
@@ -2026,7 +2024,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         params: parameters
       } : null).then(function (response) {
         // success
-        console.log("Response: ".concat(JSON.stringify(response)));
+        // console.log(`Response: ${JSON.stringify(response)}`);
         _this2.response = response.data;
         _this2.animals = response.data.data;
 
@@ -2422,14 +2420,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     };
   },
   methods: {
-    removeFromFilter: function removeFromFilter(item, filterName) {
-      this.checkedFilterItems[filterName] = this.checkedFilterItems[filterName].filter(function (i) {
+    removeFromFilter: function removeFromFilter(item, filterCategory) {
+      if (!this.checkedFilterItems || !this.checkedFilterItems[filterCategory]) return;
+      this.checkedFilterItems[filterCategory] = this.checkedFilterItems[filterCategory].filter(function (i) {
         return i !== item;
       });
       this.emitFilterChangeEvent();
     },
     emitFilterChangeEvent: function emitFilterChangeEvent() {
       this.$emit('filter-change', this.checkedFilterItems);
+    },
+    isChecked: function isChecked(item, filterCategory) {
+      if (!this.checkedFilterItems || !this.checkedFilterItems[filterCategory]) return false;
+      return this.checkedFilterItems[filterCategory].includes(item);
     }
   },
   props: {
@@ -2449,8 +2452,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     options: function options() {
       this.initialized = true;
     },
-    checkedFilters: function checkedFilters() {
-      this.checkedFilterItems = _objectSpread({}, this.checkedFilters);
+    checkedFilters: {
+      handler: function handler() {
+        this.checkedFilterItems = _objectSpread({}, this.checkedFilters);
+      },
+      deep: true
     }
   }
 });
@@ -39848,10 +39854,10 @@ var render = function() {
           "div",
           { staticClass: "list-filter-buttons" },
           [
-            _vm._l(_vm.options, function(filterValues, filterName, index) {
+            _vm._l(_vm.options, function(categoryItems, filterCategory, index) {
               return _c(
                 "span",
-                { key: index, class: ["dropdown", "filter-" + filterName] },
+                { key: index, class: ["dropdown", "filter-" + filterCategory] },
                 [
                   _c(
                     "button",
@@ -39860,7 +39866,7 @@ var render = function() {
                         "btn btn-outline-primary btn-sm dropdown-toggle",
                       attrs: {
                         type: "button",
-                        id: "menuButton" + filterName,
+                        id: "menuButton" + filterCategory,
                         "data-toggle": "dropdown",
                         "aria-haspopup": "true",
                         "aria-expanded": "false"
@@ -39868,7 +39874,7 @@ var render = function() {
                     },
                     [
                       _c("span", { staticClass: "filter-title" }, [
-                        _vm._v(_vm._s(filterName))
+                        _vm._v(_vm._s(filterCategory))
                       ])
                     ]
                   ),
@@ -39877,14 +39883,16 @@ var render = function() {
                     "div",
                     {
                       staticClass: "dropdown-menu px-2",
-                      attrs: { "aria-labelledby": "menuButton" + filterName },
+                      attrs: {
+                        "aria-labelledby": "menuButton" + filterCategory
+                      },
                       on: {
                         click: function($event) {
                           return $event.stopPropagation()
                         }
                       }
                     },
-                    _vm._l(filterValues, function(value, i) {
+                    _vm._l(categoryItems, function(value, i) {
                       return _c(
                         "div",
                         {
@@ -39894,9 +39902,10 @@ var render = function() {
                             "dropdown-item",
                             "filter-value-" + value,
                             {
-                              "dropdown-item-active": _vm.checkedFilterItems[
-                                filterName
-                              ].includes(value)
+                              "dropdown-item-active": _vm.isChecked(
+                                value,
+                                filterCategory
+                              )
                             }
                           ]
                         },
@@ -39906,8 +39915,8 @@ var render = function() {
                               {
                                 name: "model",
                                 rawName: "v-model",
-                                value: _vm.checkedFilterItems[filterName],
-                                expression: "checkedFilterItems[filterName]"
+                                value: _vm.checkedFilterItems[filterCategory],
+                                expression: "checkedFilterItems[filterCategory]"
                               }
                             ],
                             staticClass: "form-check-input",
@@ -39915,18 +39924,19 @@ var render = function() {
                             domProps: {
                               value: value,
                               checked: Array.isArray(
-                                _vm.checkedFilterItems[filterName]
+                                _vm.checkedFilterItems[filterCategory]
                               )
                                 ? _vm._i(
-                                    _vm.checkedFilterItems[filterName],
+                                    _vm.checkedFilterItems[filterCategory],
                                     value
                                   ) > -1
-                                : _vm.checkedFilterItems[filterName]
+                                : _vm.checkedFilterItems[filterCategory]
                             },
                             on: {
                               change: [
                                 function($event) {
-                                  var $$a = _vm.checkedFilterItems[filterName],
+                                  var $$a =
+                                      _vm.checkedFilterItems[filterCategory],
                                     $$el = $event.target,
                                     $$c = $$el.checked ? true : false
                                   if (Array.isArray($$a)) {
@@ -39936,14 +39946,14 @@ var render = function() {
                                       $$i < 0 &&
                                         _vm.$set(
                                           _vm.checkedFilterItems,
-                                          filterName,
+                                          filterCategory,
                                           $$a.concat([$$v])
                                         )
                                     } else {
                                       $$i > -1 &&
                                         _vm.$set(
                                           _vm.checkedFilterItems,
-                                          filterName,
+                                          filterCategory,
                                           $$a
                                             .slice(0, $$i)
                                             .concat($$a.slice($$i + 1))
@@ -39952,7 +39962,7 @@ var render = function() {
                                   } else {
                                     _vm.$set(
                                       _vm.checkedFilterItems,
-                                      filterName,
+                                      filterCategory,
                                       $$c
                                     )
                                   }
@@ -39994,8 +40004,11 @@ var render = function() {
           "div",
           { staticClass: "filter-badges" },
           [
-            _vm._l(_vm.checkedFilterItems, function(filterValues, filterName) {
-              return _vm._l(_vm.checkedFilterItems[filterName], function(item) {
+            _vm._l(_vm.checkedFilterItems, function(
+              categoryItems,
+              filterCategory
+            ) {
+              return _vm._l(categoryItems, function(item) {
                 return _c(
                   "span",
                   {
@@ -40003,7 +40016,7 @@ var render = function() {
                     staticClass: "filter-badge badge badge-pill mr-1",
                     on: {
                       click: function($event) {
-                        return _vm.removeFromFilter(item, filterName)
+                        return _vm.removeFromFilter(item, filterCategory)
                       }
                     }
                   },
