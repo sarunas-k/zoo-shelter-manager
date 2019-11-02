@@ -2397,16 +2397,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     console.log('Vue: ListFilter Component mounted.');
@@ -39894,11 +39884,12 @@ var render = function() {
                     },
                     _vm._l(categoryItems, function(value, i) {
                       return _c(
-                        "div",
+                        "label",
                         {
                           key: i,
                           class: [
                             "form-check",
+                            "form-check-label",
                             "dropdown-item",
                             "filter-value-" + value,
                             {
@@ -39971,20 +39962,10 @@ var render = function() {
                               ]
                             }
                           }),
-                          _vm._v(" "),
-                          _c(
-                            "label",
-                            {
-                              staticClass: "form-check-label",
-                              attrs: { for: value }
-                            },
-                            [
-                              _vm._v(
-                                "\n                        " +
-                                  _vm._s(value) +
-                                  "\n                    "
-                              )
-                            ]
+                          _vm._v(
+                            "\n                    " +
+                              _vm._s(value) +
+                              "\n                "
                           )
                         ]
                       )

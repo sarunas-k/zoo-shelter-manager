@@ -7,21 +7,11 @@
                     <span class="filter-title">{{filterCategory}}</span>
                 </button>
                 <div class="dropdown-menu px-2" @click="$event.stopPropagation()" :aria-labelledby="`menuButton${filterCategory}`">
-                    <div 
-                        v-for="(value, i) in categoryItems"
-                        :key="i"
-                        :class="[
-                                'form-check', 
-                                'dropdown-item', 
-                                `filter-value-${value}`, 
-                                {'dropdown-item-active': isChecked(value, filterCategory)}
-                                ]"
-                    >
+                    <label v-for="(value, i) in categoryItems" :key="i" :class="['form-check', 'form-check-label', 'dropdown-item', 
+                        `filter-value-${value}`, {'dropdown-item-active': isChecked(value, filterCategory)}]">
                         <input v-model="checkedFilterItems[filterCategory]" class="form-check-input" type="checkbox" :value="value" :id="value" @change="emitFilterChangeEvent">
-                        <label class="form-check-label" :for="value">
-                            {{value}}
-                        </label>
-                    </div>
+                        {{value}}
+                    </label>
                 </div>
             </span>
             <br>
