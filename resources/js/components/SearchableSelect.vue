@@ -21,7 +21,7 @@
         @mousedown.prevent="selectOption(option)"
         v-for="(option, index) in filteredOptions"
         :key="index">
-          {{ option.name || option.id || '-' }}
+          {{ option[display] || option.id || '-' }}
       </div>
     </div>
   </div>
@@ -66,6 +66,12 @@
         required: false,
         default: null,
         note: 'Default value of input'
+      },
+      display: {
+        type: String,
+        required: false,
+        default: 'name',
+        note: 'Property to be displayed as a select option label'
       }
     },
     data() {
@@ -88,7 +94,7 @@
         const filtered = [];
         const regOption = new RegExp(this.searchFilter, 'ig');
         for (const option of this.options) {
-          if (this.searchFilter.length < 1 || option.name.match(regOption)){
+          if (this.searchFilter.length < 1 || option[this.display].match(regOption)){
             if (filtered.length < this.maxItem) filtered.push(option);
           }
         }
@@ -101,7 +107,7 @@
           return;
         this.selected = option;
         this.optionsShown = false;
-        this.searchFilter = this.selected.name;
+        this.searchFilter = this.selected[display];
         this.$emit('selected', this.selected);
         if (this.$refs.input) this.$refs.input.blur();
       },
@@ -116,7 +122,7 @@
           this.selected = {};
           this.searchFilter = '';
         } else {
-          this.searchFilter = this.selected.name;
+          this.searchFilter = this.selected[display];
         }
         this.$emit('selected', this.selected);
         this.optionsShown = false;

@@ -2751,6 +2751,12 @@ __webpack_require__.r(__webpack_exports__);
       required: false,
       "default": null,
       note: 'Default value of input'
+    },
+    display: {
+      type: String,
+      required: false,
+      "default": 'name',
+      note: 'Property to be displayed as a select option label'
     }
   },
   data: function data() {
@@ -2783,7 +2789,7 @@ __webpack_require__.r(__webpack_exports__);
         for (var _iterator = this.options[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
           var option = _step.value;
 
-          if (this.searchFilter.length < 1 || option.name.match(regOption)) {
+          if (this.searchFilter.length < 1 || option[this.display].match(regOption)) {
             if (filtered.length < this.maxItem) filtered.push(option);
           }
         }
@@ -2810,7 +2816,7 @@ __webpack_require__.r(__webpack_exports__);
       if (!option) return;
       this.selected = option;
       this.optionsShown = false;
-      this.searchFilter = this.selected.name;
+      this.searchFilter = this.selected[display];
       this.$emit('selected', this.selected);
       if (this.$refs.input) this.$refs.input.blur();
     },
@@ -2825,7 +2831,7 @@ __webpack_require__.r(__webpack_exports__);
         this.selected = {};
         this.searchFilter = '';
       } else {
-        this.searchFilter = this.selected.name;
+        this.searchFilter = this.selected[display];
       }
 
       this.$emit('selected', this.selected);
@@ -40444,7 +40450,7 @@ var render = function() {
               [
                 _vm._v(
                   "\n        " +
-                    _vm._s(option.name || option.id || "-") +
+                    _vm._s(option[_vm.display] || option.id || "-") +
                     "\n    "
                 )
               ]
