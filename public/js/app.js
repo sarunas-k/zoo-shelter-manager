@@ -1700,12 +1700,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _SearchableSelect_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SearchableSelect.vue */ "./resources/js/components/SearchableSelect.vue");
 /* harmony import */ var _ImageUploadPreview_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ImageUploadPreview.vue */ "./resources/js/components/ImageUploadPreview.vue");
 /* harmony import */ var _InputFile_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./InputFile.vue */ "./resources/js/components/InputFile.vue");
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { keys.push.apply(keys, Object.getOwnPropertySymbols(object)); } if (enumerableOnly) keys = keys.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
+//
+//
+//
+//
 //
 //
 //
@@ -1833,32 +1831,32 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       type: String,
       "default": ''
     },
-    old: {
-      type: String,
+    oldvalues: {
+      type: Array,
       "default": ''
     },
     species: {
-      type: String,
+      type: Array,
       "default": ''
     },
     staff: {
-      type: String,
+      type: Array,
       "default": ''
     },
     livingareas: {
-      type: String,
+      type: Array,
       "default": ''
     },
     colors: {
-      type: String,
+      type: Array,
       "default": ''
     },
     sizes: {
-      type: String,
+      type: Array,
       "default": ''
     },
     genders: {
-      type: String,
+      type: Array,
       "default": ''
     },
     date: {
@@ -1866,39 +1864,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       "default": ''
     },
     intaketypes: {
-      type: String,
+      type: Array,
       "default": ''
-    }
-  },
-  computed: {
-    oldObj: function oldObj() {
-      return JSON.parse(this.old);
     },
-    speciesObj: function speciesObj() {
-      return JSON.parse(this.species);
-    },
-    staffObj: function staffObj() {
-      return JSON.parse(this.staff).map(function (staffer) {
-        // Append 'name' property for displaying
-        return _objectSpread({}, staffer, {}, {
-          name: "".concat(staffer.first_name, " ").concat(staffer.last_name)
-        });
-      });
-    },
-    livingareasObj: function livingareasObj() {
-      return JSON.parse(this.livingareas);
-    },
-    colorsObj: function colorsObj() {
-      return JSON.parse(this.colors);
-    },
-    sizesObj: function sizesObj() {
-      return JSON.parse(this.sizes);
-    },
-    gendersObj: function gendersObj() {
-      return JSON.parse(this.genders);
-    },
-    intaketypesObj: function intaketypesObj() {
-      return JSON.parse(this.intaketypes);
+    calls: {
+      type: Array,
+      "default": ''
     }
   },
   components: {
@@ -7338,6 +7309,25 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 // module
 exports.push([module.i, ".dropdown-input[data-v-ea175bee] {\n  cursor: default;\n}\n.dropdown-content[data-v-ea175bee] {\n  position: absolute;\n  background-color: #fff;\n  width: 100%;\n  border-bottom: 1px solid #e7ecf5;\n  border-left: 1px solid #e7ecf5;\n  border-right: 1px solid #e7ecf5;\n  box-shadow: 0px -8px 34px 0px rgba(0, 0, 0, 0.15);\n  overflow: auto;\n  z-index: 1;\n  cursor: default;\n  margin-top: 3px;\n  max-height: 250px;\n}\n.dropdown-content .dropdown-item[data-v-ea175bee] {\n  padding-top: 7px;\n}\n.dropdown-content .dropdown-item[data-v-ea175bee]:hover {\n  background-color: #e7ecf5;\n}\n.dropdown:hover .dropdowncontent[data-v-ea175bee] {\n  display: block;\n}", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AnimalCreateForm.vue?vue&type=style&index=0&id=55c7d132&scoped=true&lang=css&":
+/*!**********************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/AnimalCreateForm.vue?vue&type=style&index=0&id=55c7d132&scoped=true&lang=css& ***!
+  \**********************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\nform[data-v-55c7d132] {\n    margin-bottom: 3rem;\n}\n", ""]);
 
 // exports
 
@@ -38315,6 +38305,36 @@ if(false) {}
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AnimalCreateForm.vue?vue&type=style&index=0&id=55c7d132&scoped=true&lang=css&":
+/*!**************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/AnimalCreateForm.vue?vue&type=style&index=0&id=55c7d132&scoped=true&lang=css& ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./AnimalCreateForm.vue?vue&type=style&index=0&id=55c7d132&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AnimalCreateForm.vue?vue&type=style&index=0&id=55c7d132&scoped=true&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ImageUploadPreview.vue?vue&type=style&index=0&id=1c177ed2&scoped=true&lang=css&":
 /*!****************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ImageUploadPreview.vue?vue&type=style&index=0&id=1c177ed2&scoped=true&lang=css& ***!
@@ -39093,7 +39113,7 @@ var render = function() {
               name: "animal-number",
               placeholder: "Number"
             },
-            domProps: { value: _vm.oldObj["animal-number"] }
+            domProps: { value: _vm.oldvalues["animal-number"] }
           })
         ]),
         _vm._v(" "),
@@ -39105,10 +39125,10 @@ var render = function() {
             _vm._v(" "),
             _c("searchable-select", {
               attrs: {
-                options: _vm.speciesObj,
+                options: _vm.species,
                 name: "species",
                 placeholder: "Species",
-                default: _vm.oldObj["species"]
+                default: _vm.oldvalues["species"]
               }
             })
           ],
@@ -39127,13 +39147,14 @@ var render = function() {
             [
               _c("option", [_vm._v("---")]),
               _vm._v(" "),
-              _vm._l(_vm.gendersObj, function(gender, index) {
+              _vm._l(_vm.genders, function(gender, index) {
                 return _c(
                   "option",
                   {
                     key: index,
                     domProps: {
-                      selected: _vm.oldObj["gender"] == gender ? "selected" : ""
+                      selected:
+                        _vm.oldvalues["gender"] == gender ? "selected" : ""
                     }
                   },
                   [_vm._v(_vm._s(gender))]
@@ -39157,7 +39178,7 @@ var render = function() {
               name: "name",
               placeholder: "Name"
             },
-            domProps: { value: _vm.oldObj["name"] }
+            domProps: { value: _vm.oldvalues["name"] }
           })
         ]),
         _vm._v(" "),
@@ -39169,7 +39190,7 @@ var render = function() {
           _c("input", {
             staticClass: "form-control",
             attrs: { type: "date", id: "birthdate", name: "birthdate" },
-            domProps: { value: _vm.oldObj["birthdate"] }
+            domProps: { value: _vm.oldvalues["birthdate"] }
           })
         ]),
         _vm._v(" "),
@@ -39181,10 +39202,10 @@ var render = function() {
             _vm._v(" "),
             _c("searchable-select", {
               attrs: {
-                options: _vm.colorsObj,
+                options: _vm.colors,
                 name: "color",
                 placeholder: "Color",
-                default: _vm.oldObj["color"]
+                default: _vm.oldvalues["color"]
               }
             })
           ],
@@ -39203,7 +39224,7 @@ var render = function() {
               attrs: { id: "breed", name: "breed[]", multiple: "" }
             },
             _vm._l(
-              _vm.speciesObj.filter(function(item) {
+              _vm.species.filter(function(item) {
                 return item.breeds.length
               }),
               function(value, index) {
@@ -39218,7 +39239,7 @@ var render = function() {
                         domProps: {
                           value: breed.id,
                           selected:
-                            _vm.oldObj["breed"] == breed.id ? "selected" : ""
+                            _vm.oldvalues["breed"] == breed.id ? "selected" : ""
                         }
                       },
                       [_vm._v(_vm._s(breed.name))]
@@ -39242,10 +39263,10 @@ var render = function() {
             _vm._v(" "),
             _c("searchable-select", {
               attrs: {
-                options: _vm.staffObj,
+                options: _vm.staff,
                 name: "staff",
                 placeholder: "Staff",
-                default: _vm.oldObj["staff"]
+                default: _vm.oldvalues["staff"]
               }
             })
           ],
@@ -39265,7 +39286,7 @@ var render = function() {
               name: "microchip",
               placeholder: "Microchip number"
             },
-            domProps: { value: _vm.oldObj["microchip"] }
+            domProps: { value: _vm.oldvalues["microchip"] }
           })
         ])
       ]),
@@ -39283,13 +39304,13 @@ var render = function() {
             [
               _c("option", [_vm._v("---")]),
               _vm._v(" "),
-              _vm._l(_vm.sizesObj, function(size, index) {
+              _vm._l(_vm.sizes, function(size, index) {
                 return _c(
                   "option",
                   {
                     key: index,
                     domProps: {
-                      selected: _vm.oldObj["size"] == size ? "selected" : ""
+                      selected: _vm.oldvalues["size"] == size ? "selected" : ""
                     }
                   },
                   [_vm._v(_vm._s(size))]
@@ -39313,8 +39334,8 @@ var render = function() {
               name: "intake-date"
             },
             domProps: {
-              value: _vm.oldObj["intake-date"]
-                ? _vm.oldObj["intake-date"]
+              value: _vm.oldvalues["intake-date"]
+                ? _vm.oldvalues["intake-date"]
                 : _vm.date
             }
           })
@@ -39330,10 +39351,10 @@ var render = function() {
             _vm._v(" "),
             _c("searchable-select", {
               attrs: {
-                options: _vm.livingareasObj,
+                options: _vm.livingareas,
                 name: "living-area",
                 placeholder: "Living area",
-                default: _vm.oldObj["living-area"]
+                default: _vm.oldvalues["living-area"]
               }
             })
           ],
@@ -39356,7 +39377,7 @@ var render = function() {
             [
               _c("option", [_vm._v("---")]),
               _vm._v(" "),
-              _vm._l(_vm.intaketypesObj, function(type) {
+              _vm._l(_vm.intaketypes, function(type) {
                 return _c(
                   "option",
                   {
@@ -39364,7 +39385,9 @@ var render = function() {
                     domProps: {
                       value: type.id,
                       selected:
-                        _vm.oldObj["intake-type"] == type.id ? "selected" : ""
+                        _vm.oldvalues["intake-type"] == type.id
+                          ? "selected"
+                          : ""
                     }
                   },
                   [_vm._v(_vm._s(type.name))]
@@ -39373,7 +39396,25 @@ var render = function() {
             ],
             2
           )
-        ])
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "form-group col-md-4" },
+          [
+            _c("label", { attrs: { for: "call" } }, [_vm._v("Reference call")]),
+            _vm._v(" "),
+            _c("searchable-select", {
+              attrs: {
+                options: _vm.calls,
+                name: "call",
+                placeholder: "Reference call",
+                default: _vm.oldvalues["call"]
+              }
+            })
+          ],
+          1
+        )
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "form-row" }, [
@@ -39385,7 +39426,7 @@ var render = function() {
           _c("input", {
             attrs: { type: "checkbox", name: "is-neutered", id: "is-neutered" },
             domProps: {
-              checked: _vm.oldObj["is-neutered"] == "1" ? "checked" : ""
+              checked: _vm.oldvalues["is-neutered"] == "1" ? "checked" : ""
             }
           }),
           _vm._v(" "),
@@ -52682,7 +52723,9 @@ if (window.Laravel && window.Laravel.apiToken) window.axios.defaults.headers.com
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _AnimalCreateForm_vue_vue_type_template_id_55c7d132_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AnimalCreateForm.vue?vue&type=template&id=55c7d132&scoped=true& */ "./resources/js/components/AnimalCreateForm.vue?vue&type=template&id=55c7d132&scoped=true&");
 /* harmony import */ var _AnimalCreateForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AnimalCreateForm.vue?vue&type=script&lang=js& */ "./resources/js/components/AnimalCreateForm.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _AnimalCreateForm_vue_vue_type_style_index_0_id_55c7d132_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./AnimalCreateForm.vue?vue&type=style&index=0&id=55c7d132&scoped=true&lang=css& */ "./resources/js/components/AnimalCreateForm.vue?vue&type=style&index=0&id=55c7d132&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
 
 
 
@@ -52690,7 +52733,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
   _AnimalCreateForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _AnimalCreateForm_vue_vue_type_template_id_55c7d132_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
   _AnimalCreateForm_vue_vue_type_template_id_55c7d132_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
@@ -52719,6 +52762,22 @@ component.options.__file = "resources/js/components/AnimalCreateForm.vue"
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AnimalCreateForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./AnimalCreateForm.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AnimalCreateForm.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AnimalCreateForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/AnimalCreateForm.vue?vue&type=style&index=0&id=55c7d132&scoped=true&lang=css&":
+/*!***************************************************************************************************************!*\
+  !*** ./resources/js/components/AnimalCreateForm.vue?vue&type=style&index=0&id=55c7d132&scoped=true&lang=css& ***!
+  \***************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AnimalCreateForm_vue_vue_type_style_index_0_id_55c7d132_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./AnimalCreateForm.vue?vue&type=style&index=0&id=55c7d132&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AnimalCreateForm.vue?vue&type=style&index=0&id=55c7d132&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AnimalCreateForm_vue_vue_type_style_index_0_id_55c7d132_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AnimalCreateForm_vue_vue_type_style_index_0_id_55c7d132_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AnimalCreateForm_vue_vue_type_style_index_0_id_55c7d132_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AnimalCreateForm_vue_vue_type_style_index_0_id_55c7d132_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AnimalCreateForm_vue_vue_type_style_index_0_id_55c7d132_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 

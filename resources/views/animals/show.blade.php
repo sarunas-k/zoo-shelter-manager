@@ -105,6 +105,14 @@
                 <td><strong>Living area: </strong></td>
                 <td>{{$animal->living_area->name}}</td>
             </tr>
+            @if(isset($animal->call))
+                <tr>
+                    <td><strong>Reference call: </strong></td>
+                    <td>
+                        <a href="{{route('calls.show', ['id' => $animal->call->id])}}">{{$animal->call->name}}</a>
+                    </td>
+                </tr>
+            @endif
             <tr>
                 <td><strong>Staff: </strong></td>
                 <td>{{$animal->staff->first_name}} {{$animal->staff->last_name}}</td>

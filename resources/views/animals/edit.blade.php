@@ -132,6 +132,10 @@
                 @endforeach
             </select>
         </div>
+        <div class="form-group col-md-4">
+            <label for="call">Reference call</label>
+            <searchable-select :options="{{json_encode($calls)}}" name="call" placeholder="Reference call" @if(isset($animal->call)) default="{{$animal->call->id}}" @endif/>
+        </div>
     </div>
     <div class="form-row">
         <div class="form-group col-md-2">

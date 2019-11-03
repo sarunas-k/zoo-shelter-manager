@@ -14,14 +14,15 @@
 </div>
 @endif
 <animal-create-form 
-    species="{{json_encode($species)}}" 
-    staff="{{json_encode($staff)}}" 
-    livingareas="{{json_encode($livingAreas)}}" 
-    old="{{json_encode(old())}}" 
-    colors="{{json_encode($colors)}}"
-    sizes="{{json_encode($sizes)}}"
-    genders="{{json_encode($genders)}}"
-    intaketypes="{{json_encode($intakeTypes)}}"
+    :species="{{json_encode($species)}}" 
+    :staff="{{json_encode($staff)}}" 
+    :livingareas="{{json_encode($livingAreas)}}" 
+    :oldvalues="{{json_encode(old())}}" 
+    :colors="{{json_encode($colors)}}"
+    :sizes="{{json_encode($sizes)}}"
+    :genders="{{json_encode($genders)}}"
+    :intaketypes="{{json_encode($intakeTypes)}}"
+    :calls="{{json_encode($calls)}}"
     csrf="{{csrf_token()}}" 
     date="{{str_replace(' ', 'T', date('Y-m-d H:i'))}}"
 />
