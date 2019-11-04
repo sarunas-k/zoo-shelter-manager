@@ -26,7 +26,7 @@ class AnimalsRepository implements IAnimalsRepository {
     }
 
     public function allFilteredAndPaginated($request, $includeNonShelterAnimals = false, $perPage = 10) {
-        $animals = $this->latest()->with(['species', 'color', 'living_area']);
+        $animals = $this->latest()->with(['species', 'color', 'living_area', 'images']);
         if (!$includeNonShelterAnimals)
             $animals
                 ->whereDoesntHave('activeAdoptions')
@@ -164,19 +164,6 @@ class AnimalsRepository implements IAnimalsRepository {
     }
 
     public function formatFieldsForPresentation($animal) {
-        // Convert date of birth to age
-        $dateDiff = date_diff(date_create($animal->birthdate), date_create(date("Y-m-d")));
-        $ageMonths =  $dateDiff->m + ($dateDiff->y * 12);
-        if($ageMonths < 1) {
-            $animal->age = $dateDiff->format('%a day(-s)');
-        } elseif($ageMonths > 1 && $ageMonths < 3) {
-            $animal->age = $dateDiff->format('%m month(-s) and %d day(-s)');
-        } elseif($ageMonths > 3 && $ageMonths < 12) {
-            $animal->age = $dateDiff->format('%m month(-s)');
-        } else {
-            $animal->age = $dateDiff->format('%y year(-s) and %m month(-s)');
-        }  
-
         // Check if animal quarantine period has passed
         $daysInShelter = date_diff(date_create($animal->intake_date), date_create(date("Y-m-d")))->format('%a');
         $animal->is_adoptable = $daysInShelter > 14; //TODO: store this value somewhere in configuration

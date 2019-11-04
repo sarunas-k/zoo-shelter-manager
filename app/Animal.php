@@ -11,6 +11,7 @@ class Animal extends Model
     // Primary key
     public $primaryKey = 'id';
     protected $guarded = [];
+    protected $appends = ['age'];
 
     public function species() {
         return $this->belongsTo(Species::class);
@@ -88,5 +89,38 @@ class Animal extends Model
 
     public function intakeType() {
         return $this->belongsTo(IntakeType::class);
+    }
+
+    public function getAgeAttribute() {
+        $dateDiff = date_diff(date_create($this->birthdate), date_create(date("Y-m-d")));
+        $ageMonths =  $dateDiff->m + ($dateDiff->y * 12);
+        $age = '';
+        // if($ageMonths < 1) {
+        //     $age = $dateDiff->format('%a day(-s)');
+        // } elseif($ageMonths >= 1 && $ageMonths < 3) {
+        //     $age = $dateDiff->format('%m month(-s) and %d day(-s)');
+        // } elseif($ageMonths > 3 && $ageMonths < 12) {
+        //     $age = $dateDiff->format('%m month(-s)');
+        // } else {
+        //     $age = $dateDiff->format('%y year(-s) and %m month(-s)');
+        // }
+        if ($dateDiff->y == 1) {
+            $age = '1 year';
+        } else if ($dateDiff->y > 1) {
+            $age = $dateDiff->format('%y years');
+        } else if ($dateDiff->y == 0) {
+            if ($dateDiff->m < 1) {
+                if ($dateDiff->d == 1)
+                    $age = '1 day';
+                else
+                    $age = $dateDiff->format('%a days');
+            } else if ($dateDiff->m == 1) {
+                $age = '1 month';
+            } else {
+                $age = $dateDiff->format('%m months');
+            }  
+        }
+
+        return $age;
     }
 }

@@ -90,7 +90,7 @@ class AnimalsController extends Controller
             'staff' => 'required',
             'is-neutered' => 'required|boolean',
             'intake-type' => 'required',
-            'call' => 'numeric'
+            'call' => ''
         ]);
 
         $animalId = $this->animalsRepo->addFromInput($formFields);
@@ -156,7 +156,7 @@ class AnimalsController extends Controller
             'is-neutered' => 'required|boolean',
             'animal-images-list' => '',
             'intake-type' => 'required',
-            'call' => 'numeric'
+            'call' => ''
         ]);
 
         $this->animalsRepo->updateFromInput($animal, $formFields);
