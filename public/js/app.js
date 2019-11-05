@@ -1806,6 +1806,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -1868,6 +1872,10 @@ __webpack_require__.r(__webpack_exports__);
       "default": ''
     },
     calls: {
+      type: Array,
+      "default": ''
+    },
+    people: {
       type: Array,
       "default": ''
     }
@@ -2844,7 +2852,7 @@ __webpack_require__.r(__webpack_exports__);
       if (!option) return;
       this.selected = option;
       this.optionsShown = false;
-      this.searchFilter = this.selected[display];
+      this.searchFilter = this.selected[this.display];
       this.$emit('selected', this.selected);
       if (this.$refs.input) this.$refs.input.blur();
     },
@@ -2859,7 +2867,7 @@ __webpack_require__.r(__webpack_exports__);
         this.selected = {};
         this.searchFilter = '';
       } else {
-        this.searchFilter = this.selected[display];
+        this.searchFilter = this.selected[this.display];
       }
 
       this.$emit('selected', this.selected);
@@ -39493,6 +39501,27 @@ var render = function() {
                 name: "call",
                 placeholder: "Reference call",
                 default: _vm.oldvalues["call"]
+              }
+            })
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "form-group col-md-4" },
+          [
+            _c("label", { attrs: { for: "bring-in-person" } }, [
+              _vm._v("Person bringing animal in")
+            ]),
+            _vm._v(" "),
+            _c("searchable-select", {
+              attrs: {
+                options: _vm.people,
+                name: "bring-in-person",
+                display: "full_name_with_address",
+                placeholder: "Person",
+                default: _vm.oldvalues["bring-in-person"]
               }
             })
           ],

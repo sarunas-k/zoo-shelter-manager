@@ -81,6 +81,10 @@
             <label for="call">Reference call</label>
             <searchable-select :options="calls" name="call" placeholder="Reference call" :default="oldvalues['call']"/>
         </div>
+        <div class="form-group col-md-4">
+            <label for="bring-in-person">Person bringing animal in</label>
+            <searchable-select :options="people" name="bring-in-person" display="full_name_with_address" placeholder="Person" :default="oldvalues['bring-in-person']"/>
+        </div>
     </div>
     <div class="form-row">
         <div class="form-group col-md-3">
@@ -136,7 +140,8 @@ export default {
         genders:     { type: Array, default: '' },
         date:        { type: String, default: '' },
         intaketypes: { type: Array, default: '' },
-        calls:       { type: Array, default: '' }
+        calls:       { type: Array, default: '' },
+        people:      { type: Array, default: '' },
     },
     components: {
         SearchableSelect,

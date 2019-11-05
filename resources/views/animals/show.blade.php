@@ -114,6 +114,16 @@
                 </tr>
             @endif
             <tr>
+                <td><strong>Person bringing animal in: </strong></td>
+                <td>
+                    @if(isset($animal->bringInPerson))
+                        <a href="{{route('people.show', ['id' => $animal->bringInPerson->id])}}">{{$animal->bringInPerson->full_name}}</a>
+                    @else
+                        Unknown
+                    @endif
+                </td>
+            </tr>
+            <tr>
                 <td><strong>Staff: </strong></td>
                 <td>{{$animal->staff->first_name}} {{$animal->staff->last_name}}</td>
             </tr>

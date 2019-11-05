@@ -115,5 +115,29 @@
     </tbody>
 </table>
 @endif
+
+{{-- PERSON BRING INS --}}
+@if(isset($person->broughtInAnimals) && $person->broughtInAnimals->count() > 0)
+<h4>{{$person->first_name}} {{$person->last_name}} Bring ins</h4>
+<table class="table table-bordered table-sm">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Date</th>
+            <th scope="col">Animal</th>
+            <th scope="col">Person bringing animal in</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach($person->broughtInAnimals as $animal)
+        <tr>
+            <td scope="row" style="width: 15%">{{ $animal->intake_date }}</td>
+            <td><a href="{{route('animals.show', ['id' => $animal->id])}}">{{ $animal->list_number }}
+                    {{$animal->name}}</a></td>
+            <td style="width: 25%">{{ $animal->bringInPerson->full_name }}</td>
+        </tr>
+        @endforeach
+    </tbody>
+</table>
+@endif
 @endif
 @endsection

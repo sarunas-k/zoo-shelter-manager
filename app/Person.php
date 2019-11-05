@@ -11,20 +11,20 @@ class Person extends Model
     // Primary key
     public $primaryKey = 'id';
     // Append these accessors to query results
-    protected $appends = ['name'];
+    protected $appends = ['full_name', 'full_name_with_address'];
     
     public $guarded = [];
     public $timestamps = false;
     
-    public function adopted_animals() {
+    public function adoptedAnimals() {
         return $this->belongsToMany(Animal::class, 'animal_adoptions');
     }
 
-    public function fostered_animals() {
+    public function fosteredAnimals() {
         return $this->belongsToMany(Animal::class, 'animal_fosters');
     }
 
-    public function reclaimed_animals() {
+    public function reclaimedAnimals() {
         return $this->belongsToMany(Animal::class, 'animal_reclaims');
     }
 
@@ -40,7 +40,15 @@ class Person extends Model
         return $this->hasMany(Reclaim::class);
     }
 
-    public function getNameAttribute() {
+    public function broughtInAnimals() {
+        return $this->hasMany(Animal::class, 'bring_in_person_id');
+    }
+
+    public function getFullNameAttribute() {
         return $this->first_name . ' ' . $this->last_name;
+    }
+
+    public function getFullNameWithAddressAttribute() {
+        return $this->first_name . ' ' . $this->last_name . ' | ' . $this->address;
     }
 }

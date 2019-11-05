@@ -10,6 +10,7 @@ use App\Repositories\Interfaces\IStaffRepository;
 use App\Repositories\Interfaces\ILivingAreasRepository;
 use App\Repositories\Interfaces\IIntakeTypesRepository;
 use App\Repositories\Interfaces\ICallsRepository;
+use App\Repositories\Interfaces\IPeopleRepository;
 use App\Animal;
 
 class AnimalsController extends Controller
@@ -21,7 +22,8 @@ class AnimalsController extends Controller
                                 IStaffRepository $staffRepo,
                                 ILivingAreasRepository $areasRepo,
                                 IIntakeTypesRepository $intakeTypesRepo,
-                                ICallsRepository $callsRepo
+                                ICallsRepository $callsRepo,
+                                IPeopleRepository $peopleRepo
                                 )
     {
         $this->animalsRepo = $animalsRepo;
@@ -31,6 +33,7 @@ class AnimalsController extends Controller
         $this->areasRepo = $areasRepo;
         $this->intakeTypesRepo = $intakeTypesRepo;
         $this->callsRepo = $callsRepo;
+        $this->peopleRepo = $peopleRepo;
     }
     
     /**
@@ -59,6 +62,7 @@ class AnimalsController extends Controller
             'genders' => $this->animalsRepo->getGenderNames(),
             'intakeTypes' => $this->intakeTypesRepo->all(),
             'calls' => $this->callsRepo->all(),
+            'people' => $this->peopleRepo->all()
         ]);
     }
 
@@ -90,7 +94,8 @@ class AnimalsController extends Controller
             'staff' => 'required',
             'is-neutered' => 'required|boolean',
             'intake-type' => 'required',
-            'call' => ''
+            'call' => '',
+            'bring-in-person' => '',
         ]);
 
         $animalId = $this->animalsRepo->addFromInput($formFields);
@@ -125,6 +130,7 @@ class AnimalsController extends Controller
             'livingAreas' => $this->areasRepo->all(),
             'intakeTypes' => $this->intakeTypesRepo->all(),
             'calls' => $this->callsRepo->all(),
+            'people' => $this->peopleRepo->all()
         ]);
     }
 
@@ -156,7 +162,8 @@ class AnimalsController extends Controller
             'is-neutered' => 'required|boolean',
             'animal-images-list' => '',
             'intake-type' => 'required',
-            'call' => ''
+            'call' => '',
+            'bring-in-person' => '',
         ]);
 
         $this->animalsRepo->updateFromInput($animal, $formFields);

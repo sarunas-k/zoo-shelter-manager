@@ -91,6 +91,10 @@ class Animal extends Model
         return $this->belongsTo(IntakeType::class);
     }
 
+    public function bringInPerson() {
+        return $this->belongsTo(Person::class);
+    }
+
     public function getAgeAttribute() {
         $dateDiff = date_diff(date_create($this->birthdate), date_create(date("Y-m-d")));
         $ageMonths =  $dateDiff->m + ($dateDiff->y * 12);

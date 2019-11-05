@@ -107,7 +107,7 @@
           return;
         this.selected = option;
         this.optionsShown = false;
-        this.searchFilter = this.selected[display];
+        this.searchFilter = this.selected[this.display];
         this.$emit('selected', this.selected);
         if (this.$refs.input) this.$refs.input.blur();
       },
@@ -122,7 +122,7 @@
           this.selected = {};
           this.searchFilter = '';
         } else {
-          this.searchFilter = this.selected[display];
+          this.searchFilter = this.selected[this.display];
         }
         this.$emit('selected', this.selected);
         this.optionsShown = false;

@@ -23,6 +23,7 @@
     :genders="{{json_encode($genders)}}"
     :intaketypes="{{json_encode($intakeTypes)}}"
     :calls="{{json_encode($calls)}}"
+    :people="{{json_encode($people)}}"
     csrf="{{csrf_token()}}" 
     date="{{str_replace(' ', 'T', date('Y-m-d H:i'))}}"
 />
