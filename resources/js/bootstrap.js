@@ -61,3 +61,7 @@ if (window.Laravel && window.Laravel.apiToken)
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     encrypted: true
 // });
+
+let userMetaTag = document.querySelector('meta[name=current-user]');
+window.currentUser = userMetaTag ? userMetaTag.getAttribute('content') : null;
+userMetaTag = undefined;

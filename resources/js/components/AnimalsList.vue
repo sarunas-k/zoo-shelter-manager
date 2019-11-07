@@ -120,6 +120,18 @@ export default {
     computed: {
         tableOpacity() { 
             return this.isLoading ? 0.6 : 1
+        },
+        userIsAdmin() {
+            if (window.currentUser) {
+                try {
+                    const user = JSON.parse(window.currentUser);
+                    if (user instanceof Object)
+                        return user.is_admin;
+                } catch (e) {
+                    return false;
+                }
+            }
+            return false;
         }
     },
     methods: {

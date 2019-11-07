@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 class UsersTableSeeder extends Seeder
 {
@@ -12,9 +13,11 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         $user = new App\User;
-        $user->name = 'Admin Name';
-        $user->email = 'test@test.com';
+        $user->name = 'Administrator';
+        $user->email = 'admin@admin.com';
         $user->password = bcrypt('admin');
+        $user->api_token = Str::random(30);
+        $user->is_admin = true;
         $user->save();
     }
 }

@@ -73,18 +73,20 @@
            People
          </a>
        </li>
-       {{-- <li class="nav-item">
-         <a class="nav-link" href="/settings">
-           <span data-feather="sliders"></span>
-           Settings
-         </a>
-       </li> --}}
-       <li class="nav-item">
-         <a class="nav-link" href="{{route('reports.index')}}">
-           <span data-feather="bar-chart-2"></span>
-           Reports
-         </a>
-       </li>
+       @if(Auth::user()->isAdmin())
+        <li class="nav-item">
+          <a class="nav-link" href="/settings">
+            <span data-feather="sliders"></span>
+            Settings
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{route('reports.index')}}">
+            <span data-feather="bar-chart-2"></span>
+            Reports
+          </a>
+        </li>
+       @endif
        <li class="nav-item">
          <a class="nav-link" href="#">
            <span data-feather="book"></span>

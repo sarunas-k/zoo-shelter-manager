@@ -2175,6 +2175,18 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     tableOpacity: function tableOpacity() {
       return this.isLoading ? 0.6 : 1;
+    },
+    userIsAdmin: function userIsAdmin() {
+      if (window.currentUser) {
+        try {
+          var user = JSON.parse(window.currentUser);
+          if (user instanceof Object) return user.is_admin;
+        } catch (e) {
+          return false;
+        }
+      }
+
+      return false;
     }
   },
   methods: {
@@ -52813,6 +52825,10 @@ if (window.Laravel && window.Laravel.apiToken) window.axios.defaults.headers.com
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     encrypted: true
 // });
+
+var userMetaTag = document.querySelector('meta[name=current-user]');
+window.currentUser = userMetaTag ? userMetaTag.getAttribute('content') : null;
+userMetaTag = undefined;
 
 /***/ }),
 

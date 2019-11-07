@@ -11,6 +11,9 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    <!-- User -->
+    <meta name="current-user" content="{{ json_encode(['name' => Auth::user()->name, 'email' => Auth::user()->email, 'is_admin' => Auth::user()->isAdmin()]) }}">
+
     <!-- API Token -->
     <script>
       window.Laravel = {!! json_encode([
