@@ -2138,6 +2138,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -7400,7 +7402,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\nth[data-v-f24648cc] {\r\n    background-color: #dce5ef;\r\n    color: black;\r\n    font-weight: normal;\r\n    font-family: sans-serif;\r\n    text-align: center;\r\n    line-height: 2em;\n}\ntd[data-v-f24648cc] {\r\n    /* font-size: 13px; */\r\n    max-width: 120px;\r\n    white-space: nowrap;\n}\r\n", ""]);
+exports.push([module.i, "\ntable[data-v-f24648cc] {\r\n    text-align: center;\n}\nth[data-v-f24648cc] {\r\n    background-color: #eee;\r\n    color: black;\r\n    font-weight: normal;\r\n    font-family: sans-serif;\r\n    line-height: 2em;\n}\ntd[data-v-f24648cc] {\r\n    max-width: 120px;\r\n    white-space: nowrap;\n}\nth[data-v-f24648cc], td[data-v-f24648cc] {\r\n    vertical-align: middle;\n}\n.animal-image-container[data-v-f24648cc] {\r\n    height: 100px;\r\n    width: 100px;\n}\n.animal-image-container .animal-image[data-v-f24648cc] {\r\n    height: 100%;\r\n    width: 100%;\r\n    -o-object-fit: cover;\r\n       object-fit: cover;\n}\r\n", ""]);
 
 // exports
 
@@ -39724,6 +39726,28 @@ var render = function() {
                       )
                     ]),
                     _vm._v(" "),
+                    _c("td", { staticClass: "animal-image-container" }, [
+                      animal.images.length
+                        ? _c(
+                            "a",
+                            {
+                              attrs: {
+                                href: _vm.routeAnimalDetailsPage(animal.id)
+                              }
+                            },
+                            [
+                              _c("img", {
+                                staticClass: "animal-image",
+                                attrs: {
+                                  src:
+                                    "/storage" + animal.images[0].path.substr(6)
+                                }
+                              })
+                            ]
+                          )
+                        : _vm._e()
+                    ]),
+                    _vm._v(" "),
                     _c("td", [_vm._v(_vm._s(animal.species.name))]),
                     _vm._v(" "),
                     _c("td", [_vm._v(_vm._s(animal.gender))]),
@@ -39781,6 +39805,8 @@ var staticRenderFns = [
     return _c("thead", { staticClass: "thead-dark" }, [
       _c("tr", [
         _c("th", { attrs: { scope: "col" } }, [_vm._v("#")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Image")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Species")]),
         _vm._v(" "),

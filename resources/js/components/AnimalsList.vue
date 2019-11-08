@@ -49,6 +49,7 @@
             <thead class="thead-dark">
                 <tr>
                     <th scope="col">#</th>
+                    <th scope="col">Image</th>
                     <th scope="col">Species</th>
                     <th scope="col">Gender</th>
                     <th scope="col">Age</th>
@@ -65,6 +66,7 @@
                 <tr v-for="(animal, index) in animals" v-bind:key="index">
                     <th scope="row"><a :href="routeAnimalDetailsPage(animal.id)">{{ animal.list_number }}</a>
                     </th>
+                    <td class="animal-image-container"><a :href="routeAnimalDetailsPage(animal.id)" v-if="animal.images.length"><img :src="'/storage' + animal.images[0].path.substr(6)" class="animal-image"/></a></td>
                     <td>{{ animal.species.name }}</td>
                     <td>{{ animal.gender }}</td>
                     <td>{{ animal.age }}</td>
@@ -146,17 +148,30 @@ export default {
 </script>
 
 <style scoped>
+table {
+    text-align: center;
+}
 th {
-    background-color: #dce5ef;
+    background-color: #eee;
     color: black;
     font-weight: normal;
     font-family: sans-serif;
-    text-align: center;
     line-height: 2em;
 }
 td {
-    /* font-size: 13px; */
     max-width: 120px;
     white-space: nowrap;
+}
+th, td {
+    vertical-align: middle;
+}
+.animal-image-container {
+    height: 100px;
+    width: 100px;
+}
+.animal-image-container .animal-image {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
 }
 </style>
