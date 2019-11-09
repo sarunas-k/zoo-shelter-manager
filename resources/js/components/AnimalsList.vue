@@ -1,83 +1,68 @@
 <template>
   <div class="animals-list" v-if="initialized">
-  <!-- <div class="animals-list" style="display: grid; grid-template-columns: 1fr 1fr; grid-gap: 15px; margin-bottom: 20px;">
-     <div v-for="(animal, index) in animals" v-bind:key="index" class="animals-list-item" style="box-shadow: 0px 0px 3px 3px rgba(0,0,0,0.08)">
-          <div class="img" style="width: 125px; height: 125px; background-color: black;float: left">
-              <img :src="`/storage/${animal.images[0].path.substr(7)}`" style="width: 125px; height: 125px; object-fit: cover;"/>
-          </div>
-          <div style="float: left; margin-left: 20px; margin-top: 10px; width: 400px">
-            <h4 style="font-size: 1.2rem">{{ animal.name }} {{ animal.list_number }}</h4>
-          </div>
-          <div style="float: left; margin-left: 20px">
-              <table class="table table-bordered table-sm">
-                  <tr>
-                      <th>SPECIES</th>
-                      <td>{{animal.species.name}}</td>
-                  </tr>
-                  <tr>
-                      <th>GENDER</th>
-                      <td>{{animal.gender}}</td>
-                  </tr>
-              </table>
-          </div>
-          <div style="float: left">
-              <table class="table table-bordered table-sm">
-                  <tr>
-                      <th>AGE</th>
-                      <td>{{animal.age}}</td>
-                  </tr>
-                  <tr>
-                      <th>COLOR</th>
-                      <td>{{animal.color.name}}</td>
-                  </tr>
-              </table>
-          </div>
-          <div style="float: left">
-              <table class="table table-bordered table-sm">
-                  <tr>
-                      <th>SIZE</th>
-                      <td>{{animal.size}}</td>
-                  </tr>
-                  <tr>
-                      <th>INTAKE DATE</th>
-                      <td>{{animal.intake_date.substr(0, 10)}}</td>
-                  </tr>
-              </table>
-          </div>
-      </div> -->
-      <table class="table table-sm table-bordered my-4 table-animals-list" :style="{opacity: tableOpacity}">
-            <thead class="thead-dark">
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Image</th>
-                    <th scope="col">Species</th>
-                    <th scope="col">Gender</th>
-                    <th scope="col">Age</th>
-                    <th scope="col">Color</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Size</th>
-                    <th scope="col">Intake Date</th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
-                </tr>
-            </thead>
+      <table class="table table-sm table-bordered mb-4 table-animals-list" :style="{opacity: tableOpacity}">
             <tbody>
                 <tr v-show="initialized && animals.length == 0"><td colspan="12" class="text-center">No animal records found.</td></tr>
                 <tr v-for="(animal, index) in animals" v-bind:key="index">
-                    <th scope="row"><a :href="routeAnimalDetailsPage(animal.id)">{{ animal.list_number }}</a>
-                    </th>
-                    <td class="animal-image-container"><a :href="routeAnimalDetailsPage(animal.id)" v-if="animal.images.length"><img :src="'/storage' + animal.images[0].path.substr(6)" class="animal-image"/></a></td>
-                    <td>{{ animal.species.name }}</td>
-                    <td>{{ animal.gender }}</td>
-                    <td>{{ animal.age }}</td>
-                    <td>{{ animal.color.name }}</td>
-                    <td>{{ animal.name }}</td>
-                    <td>{{ animal.size }}</td>
-                    <td>{{ (animal.intake_date).substr(0, 11) }}</td>
-                    <td><a :href="routeAnimalEditPage(animal.id)" class="btn btn-primary btn-sm">Edit</a></td>
+                    <td class="animal-image-container">
+                        <a :href="routeAnimalDetailsPage(animal.id)" v-if="animal.images.length">
+                            <img :src="'/storage' + animal.images[0].path.substr(6)" class="animal-image"/>
+                        </a>
+                    </td>
+                    <td>
+                        <div class="column-value-container">
+                            <span class="bold">Number</span><br>
+                            <span class="column-value">
+                                <a :href="routeAnimalDetailsPage(animal.id)">{{ animal.list_number }}</a>
+                            </span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="column-value-container">
+                            <span class="bold">Species</span><br>
+                            <span class="column-value">{{ animal.species.name }}</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="column-value-container">
+                            <span class="bold">Gender</span><br>
+                            <span class="column-value">{{ animal.gender }}</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="column-value-container">
+                            <span class="bold">Age</span><br>
+                            <span class="column-value">{{ animal.age }}</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="column-value-container">
+                            <span class="bold">Color</span><br>
+                            <span class="column-value">{{ animal.color.name }}</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="column-value-container">
+                            <span class="bold">Name</span><br>
+                            <span class="column-value">{{ animal.name }}</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="column-value-container">
+                            <span class="bold">Size</span><br>
+                            <span class="column-value">{{ animal.size }}</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="column-value-container">
+                            <span class="bold">Intake date</span><br>
+                            <span class="column-value">{{ (animal.intake_date).substr(0, 11) }}</span>
+                        </div>
+                    </td>
+                    <!-- <td><a :href="routeAnimalEditPage(animal.id)" class="btn btn-primary btn-sm">Edit</a></td>
                     <td>
                         <delete-button :csrf="csrf" :action="routeAnimalDetailsPage(animal.id)"/>
-                    </td>
+                    </td> -->
                 </tr>
             </tbody>
         </table>
@@ -150,6 +135,9 @@ export default {
 <style scoped>
 table {
     text-align: center;
+    border-spacing: 0 10px;
+    border-collapse: unset;
+    border: 0;
 }
 th {
     background-color: #eee;
@@ -161,9 +149,14 @@ th {
 td {
     max-width: 120px;
     white-space: nowrap;
+    border: 0;
 }
 th, td {
     vertical-align: middle;
+}
+tr {
+    background-color: #f1f1f1;
+    box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);
 }
 .animal-image-container {
     height: 100px;
@@ -173,5 +166,14 @@ th, td {
     height: 100%;
     width: 100%;
     object-fit: cover;
+    border-radius: 10%;
+}
+.column-value-container {
+    text-align: left;
+    display: inline-block;
+    width: 75%;
+}
+.column-value {
+    
 }
 </style>

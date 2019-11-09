@@ -1918,6 +1918,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 
 
@@ -2054,21 +2056,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _DeleteButton_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DeleteButton.vue */ "./resources/js/components/DeleteButton.vue");
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -7402,7 +7389,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\ntable[data-v-f24648cc] {\r\n    text-align: center;\n}\nth[data-v-f24648cc] {\r\n    background-color: #eee;\r\n    color: black;\r\n    font-weight: normal;\r\n    font-family: sans-serif;\r\n    line-height: 2em;\n}\ntd[data-v-f24648cc] {\r\n    max-width: 120px;\r\n    white-space: nowrap;\n}\nth[data-v-f24648cc], td[data-v-f24648cc] {\r\n    vertical-align: middle;\n}\n.animal-image-container[data-v-f24648cc] {\r\n    height: 100px;\r\n    width: 100px;\n}\n.animal-image-container .animal-image[data-v-f24648cc] {\r\n    height: 100%;\r\n    width: 100%;\r\n    -o-object-fit: cover;\r\n       object-fit: cover;\n}\r\n", ""]);
+exports.push([module.i, "\ntable[data-v-f24648cc] {\r\n    text-align: center;\r\n    border-spacing: 0 10px;\r\n    border-collapse: unset;\r\n    border: 0;\n}\nth[data-v-f24648cc] {\r\n    background-color: #eee;\r\n    color: black;\r\n    font-weight: normal;\r\n    font-family: sans-serif;\r\n    line-height: 2em;\n}\ntd[data-v-f24648cc] {\r\n    max-width: 120px;\r\n    white-space: nowrap;\r\n    border: 0;\n}\nth[data-v-f24648cc], td[data-v-f24648cc] {\r\n    vertical-align: middle;\n}\ntr[data-v-f24648cc] {\r\n    background-color: #f1f1f1;\r\n    box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);\n}\n.animal-image-container[data-v-f24648cc] {\r\n    height: 100px;\r\n    width: 100px;\n}\n.animal-image-container .animal-image[data-v-f24648cc] {\r\n    height: 100%;\r\n    width: 100%;\r\n    -o-object-fit: cover;\r\n       object-fit: cover;\r\n    border-radius: 10%;\n}\n.column-value-container[data-v-f24648cc] {\r\n    text-align: left;\r\n    display: inline-block;\r\n    width: 75%;\n}\n.column-value[data-v-f24648cc] {\n}\r\n", ""]);
 
 // exports
 
@@ -39633,6 +39620,17 @@ var render = function() {
         on: { "filter-change": _vm.onFilterChange }
       }),
       _vm._v(" "),
+      _vm.animals.length
+        ? _c("pagination-links", {
+            attrs: {
+              currentPage: _vm.response.current_page,
+              totalPages: _vm.response.last_page,
+              navigatePrev: _vm.onNavigatePrev,
+              navigateNext: _vm.onNavigateNext
+            }
+          })
+        : _vm._e(),
+      _vm._v(" "),
       _c("animals-list", {
         attrs: {
           animals: _vm.animals,
@@ -39684,12 +39682,10 @@ var render = function() {
           "table",
           {
             staticClass:
-              "table table-sm table-bordered my-4 table-animals-list",
+              "table table-sm table-bordered mb-4 table-animals-list",
             style: { opacity: _vm.tableOpacity }
           },
           [
-            _vm._m(0),
-            _vm._v(" "),
             _c(
               "tbody",
               [
@@ -39716,16 +39712,6 @@ var render = function() {
                 _vm._v(" "),
                 _vm._l(_vm.animals, function(animal, index) {
                   return _c("tr", { key: index }, [
-                    _c("th", { attrs: { scope: "row" } }, [
-                      _c(
-                        "a",
-                        {
-                          attrs: { href: _vm.routeAnimalDetailsPage(animal.id) }
-                        },
-                        [_vm._v(_vm._s(animal.list_number))]
-                      )
-                    ]),
-                    _vm._v(" "),
                     _c("td", { staticClass: "animal-image-container" }, [
                       animal.images.length
                         ? _c(
@@ -39748,45 +39734,105 @@ var render = function() {
                         : _vm._e()
                     ]),
                     _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(animal.species.name))]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(animal.gender))]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(animal.age))]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(animal.color.name))]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(animal.name))]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(animal.size))]),
-                    _vm._v(" "),
                     _c("td", [
-                      _vm._v(_vm._s(animal.intake_date.substr(0, 11)))
+                      _c("div", { staticClass: "column-value-container" }, [
+                        _c("span", { staticClass: "bold" }, [_vm._v("Number")]),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "column-value" }, [
+                          _c(
+                            "a",
+                            {
+                              attrs: {
+                                href: _vm.routeAnimalDetailsPage(animal.id)
+                              }
+                            },
+                            [_vm._v(_vm._s(animal.list_number))]
+                          )
+                        ])
+                      ])
                     ]),
                     _vm._v(" "),
                     _c("td", [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "btn btn-primary btn-sm",
-                          attrs: { href: _vm.routeAnimalEditPage(animal.id) }
-                        },
-                        [_vm._v("Edit")]
-                      )
+                      _c("div", { staticClass: "column-value-container" }, [
+                        _c("span", { staticClass: "bold" }, [
+                          _vm._v("Species")
+                        ]),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "column-value" }, [
+                          _vm._v(_vm._s(animal.species.name))
+                        ])
+                      ])
                     ]),
                     _vm._v(" "),
-                    _c(
-                      "td",
-                      [
-                        _c("delete-button", {
-                          attrs: {
-                            csrf: _vm.csrf,
-                            action: _vm.routeAnimalDetailsPage(animal.id)
-                          }
-                        })
-                      ],
-                      1
-                    )
+                    _c("td", [
+                      _c("div", { staticClass: "column-value-container" }, [
+                        _c("span", { staticClass: "bold" }, [_vm._v("Gender")]),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "column-value" }, [
+                          _vm._v(_vm._s(animal.gender))
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c("div", { staticClass: "column-value-container" }, [
+                        _c("span", { staticClass: "bold" }, [_vm._v("Age")]),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "column-value" }, [
+                          _vm._v(_vm._s(animal.age))
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c("div", { staticClass: "column-value-container" }, [
+                        _c("span", { staticClass: "bold" }, [_vm._v("Color")]),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "column-value" }, [
+                          _vm._v(_vm._s(animal.color.name))
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c("div", { staticClass: "column-value-container" }, [
+                        _c("span", { staticClass: "bold" }, [_vm._v("Name")]),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "column-value" }, [
+                          _vm._v(_vm._s(animal.name))
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c("div", { staticClass: "column-value-container" }, [
+                        _c("span", { staticClass: "bold" }, [_vm._v("Size")]),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "column-value" }, [
+                          _vm._v(_vm._s(animal.size))
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c("div", { staticClass: "column-value-container" }, [
+                        _c("span", { staticClass: "bold" }, [
+                          _vm._v("Intake date")
+                        ]),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "column-value" }, [
+                          _vm._v(_vm._s(animal.intake_date.substr(0, 11)))
+                        ])
+                      ])
+                    ])
                   ])
                 })
               ],
@@ -39797,38 +39843,7 @@ var render = function() {
       ])
     : _vm._e()
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", { staticClass: "thead-dark" }, [
-      _c("tr", [
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("#")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Image")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Species")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Gender")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Age")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Color")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Name")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Size")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Intake Date")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } })
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

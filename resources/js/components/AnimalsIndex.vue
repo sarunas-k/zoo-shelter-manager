@@ -2,6 +2,8 @@
     <div class="animals-wrapper">
         <list-filter :options="this.filterOptions" :checkedFilters="this.checkedFilters" @filter-change="onFilterChange"/>
 
+        <pagination-links v-if="animals.length" :currentPage="response.current_page" :totalPages="response.last_page" :navigatePrev="onNavigatePrev" :navigateNext="onNavigateNext"/>
+
         <animals-list :animals="animals" :isLoading="isLoading" :initialized="initialized" :csrf="csrf"/>
 
         <pagination-links v-if="animals.length" :currentPage="response.current_page" :totalPages="response.last_page" :navigatePrev="onNavigatePrev" :navigateNext="onNavigateNext"/>
