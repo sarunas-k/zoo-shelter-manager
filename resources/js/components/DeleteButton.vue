@@ -3,7 +3,7 @@
         <input type="hidden" name="_token" :value="csrf">
         <input type="hidden" name="_method" value="DELETE">
         <button type="submit" class="btn btn-danger btn-sm">
-            <span data-feather="x"></span>
+            <slot><span data-feather="x"></span></slot>
         </button>
     </form>
 </template>

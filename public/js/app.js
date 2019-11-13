@@ -39991,21 +39991,15 @@ var render = function() {
       attrs: { type: "hidden", name: "_method", value: "DELETE" }
     }),
     _vm._v(" "),
-    _vm._m(0)
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
+    _c(
       "button",
       { staticClass: "btn btn-danger btn-sm", attrs: { type: "submit" } },
-      [_c("span", { attrs: { "data-feather": "x" } })]
+      [_vm._t("default", [_c("span", { attrs: { "data-feather": "x" } })])],
+      2
     )
-  }
-]
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
