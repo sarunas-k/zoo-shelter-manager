@@ -18,6 +18,14 @@
 @if(!isset($animal))
 <p>Animal not found.</p>
 @else
+<div style="margin-top: 1em; margin-bottom: 1em;">
+    <a href="{{route('animals.edit', ['id' => $animal->id])}}" class="btn btn-link" style="padding-left: 0; padding-right: 0.25em">Edit</a> |
+    <form method="POST" action="{{route('animals.destroy', ['id' => $animal->id])}}" style="display: inline-block">
+        @csrf
+        @method('DELETE')
+        <button type="submit" class="btn btn-link" style="padding-left: 0.25em">Delete</button>
+    </form>
+</div>
 @include('partials/animal-card')
 <!-- Animal details tabs navigation -->
 <ul class="nav nav-tabs" id="animal-details-tabs" role="tablist">
