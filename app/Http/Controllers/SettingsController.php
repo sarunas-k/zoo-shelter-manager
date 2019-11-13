@@ -20,4 +20,12 @@ class SettingsController extends Controller
                                             'users' => $this->usersRepo->all(),
                                             ]);
     }
+
+    public function update(Request $request, $id) {
+        $formFields = $this->validate($request, [
+            'value' => 'required|string'
+        ]);
+        $this->settingsRepo->updateFromInput($id, $formFields);        
+        return response()->json(['status' => 'success']);
+    }
 }

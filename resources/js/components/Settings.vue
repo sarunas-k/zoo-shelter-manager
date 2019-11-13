@@ -1,15 +1,17 @@
 <template>
 <div class="settings-wrapper">
-    <h4 class="mt-4" style="margin-left: 1.5rem">General</h4>
-        <div style="background-color: #fff; padding: 1.5rem; box-shadow: 0 0 5px rgba(0,0,0,0.1);" class="mt-3 mb-5">
-            <div v-for="setting in settings" :key="setting.id">
-                <label style="margin-right: 1em; font-weight: bold">{{setting.name}}</label>
-                <input type="text" :value="setting.value"/>
-            </div>
+    <h4 class="mt-4 section-title">General</h4>
+        <div class="mt-3 mb-5 section">
+            <table class="table table-sm">
+                <tr v-for="setting in settings" :key="setting.id">
+                    <td style="width: 25%; font-weight: bold">{{setting.name}}</td>
+                    <td><input type="text" v-model="setting.value" @blur="updateSetting(setting)"/></td>
+                </tr>
+            </table>
         </div>
 
-        <h4 style="margin-left: 1.5rem">Users</h4>
-        <div style="background-color: #fff; padding: 1.5rem; box-shadow: 0 0 5px rgba(0,0,0,0.1);" class="mt-3 mb-5">
+        <h4 class="section-title">Users</h4>
+        <div class="mt-3 mb-5 section">
             <table class="table table-sm" :style="{opacity: tableOpacity}">
                 <tr><th>Name</th><th>Email</th><th>Admin</th><th></th></tr>
                     <tr v-for="user in usersList" :key="user.id">
@@ -19,14 +21,13 @@
                             <input type="checkbox" v-model="user.is_admin" @change="updateUserStatus(user)"/>
                         </td>
                         <td>
-                            <span style="cursor: pointer; color: #3490dc" @click="deleteUser(user.id)">Delete user</span>
+                            <span class="delete-button" @click="deleteUser(user.id)">Delete user</span>
                         </td>
                     </tr>
             </table>
         </div>
 </div>
 </template>
-
 
 <script>
     export default {
@@ -42,6 +43,17 @@
             }
         },
         methods: {
+            updateSetting(setting) {
+                axios.patch(`/api/settings/${setting.id}`, null, {params: {'value': setting.value}})
+                .then((response) => { // success
+                })
+                .catch(function (error) {
+                    console.log(error);
+                })
+                .then(() => {
+                    // always executed
+                });
+            },
             deleteUser(id) {
                 this.isLoading = true;
                 axios.delete(`/api/users/${id}`, null, null)
@@ -81,4 +93,16 @@
     }
 </script>
 <style scoped>
+.section {
+    background-color: #fff;
+    padding: 1.5rem;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+.section-title {
+    margin-left: 1.5rem;
+}
+.delete-button {
+    cursor: pointer;
+    color: #3490dc;
+}
 </style>

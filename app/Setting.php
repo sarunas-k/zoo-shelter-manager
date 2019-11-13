@@ -11,4 +11,5 @@ class Setting extends Model
     // Primary key
     public $primaryKey = 'id';
     protected $guarded = [];
+    public $timestamps = false;
 }

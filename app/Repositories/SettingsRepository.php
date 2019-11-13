@@ -23,11 +23,11 @@ class SettingsRepository implements ISettingsRepository {
         Setting::create(['name' => $name, 'value' => $value]);
     }
 
-    public function update($name, $value) {
-        $setting = Setting::where('name', $name);
+    public function updateFromInput($id, $formFields) {
+        $setting = $this->get($id);
         if (!$setting)
             return;
-        
-        $setting->update('value', $value);
+        $setting->value = $formFields['value'];
+        $setting->save();
     }
 }
