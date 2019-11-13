@@ -157,6 +157,8 @@
       currentPage = 'People';
     else if (title.indexOf('Reports') !== -1)
       currentPage = 'Reports';
+    else if (title.indexOf('Settings') !== -1)
+      currentPage = 'Settings';
     
     window.addEventListener('load', () => {
         $('.sidebar .nav-link').each((i, element) => {

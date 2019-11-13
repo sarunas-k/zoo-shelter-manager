@@ -44,8 +44,11 @@ Route::resource('people', 'PeopleController')->middleware('auth');
 // REPORTS ROUTES
 Route::resource('reports', 'ReportsController')->only(['index', 'show'])->middleware('auth');
 
-
+// SEARCH
 Route::get('/search', 'SearchController@index')->middleware('auth');
+
+// SETTINGS
+Route::get('/settings', 'SettingsController@index')->middleware('auth');
 
 Auth::routes([
     'register' => false,
