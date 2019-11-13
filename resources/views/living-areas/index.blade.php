@@ -44,7 +44,7 @@
                         <a href="{{route('living-areas.edit', ['id' => $area->id])}}" class="btn btn-primary btn-sm">Edit</a>
                     </td>
                     <td class="text-center">
-                        <delete-button action="{{route('living-areas.destroy', ['id' => $area->id])}}" csrf="{{csrf_token()}}"/>>
+                        <delete-button action="{{route('living-areas.destroy', ['id' => $area->id])}}" csrf="{{csrf_token()}}"/>
                     </td>
                 </tr>
             @endforeach
