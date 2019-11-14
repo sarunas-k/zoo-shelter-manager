@@ -11,46 +11,51 @@
 |
 */
 Route::middleware(['web.common'])->group(function () {
-    Route::get('/', 'HomeController@index')->middleware('auth');
 
-    // ANIMALS ROUTES
-    Route::resource('animals', 'AnimalsController')->middleware('auth');
+    Route::middleware(['auth'])->group(function () {
 
-    // CALLS ROUTES
-    Route::resource('calls', 'CallsController')->middleware('auth');
+        // HOME
+        Route::get('/', 'HomeController@index');
+        Route::get('/home', 'HomeController@index')->name('home');
 
-    // PROCEDURES ROUTES
-    Route::resource('procedures', 'ProceduresController')->middleware('auth');
-    Route::get('/procedures/create/{id}', 'ProceduresController@createWithAnimalID')->middleware('auth')->name('procedures.create.for.animal');
+        // ANIMALS ROUTES
+        Route::resource('animals', 'AnimalsController');
 
-    // ADOPTIONS ROUTES
-    Route::resource('adoptions', 'AdoptionsController')->middleware('auth');
-    Route::get('/adoptions/create/{animal}', 'AdoptionsController@createWithAnimalID')->middleware('auth')->name('adoptions.create.for.animal');
+        // CALLS ROUTES
+        Route::resource('calls', 'CallsController');
 
-    // FOSTERS ROUTES
-    Route::resource('fosters', 'FostersController')->middleware('auth');
-    Route::get('/fosters/create/{id}', 'FostersController@createWithAnimalID')->middleware('auth')->name('fosters.create.for.animal');
+        // PROCEDURES ROUTES
+        Route::resource('procedures', 'ProceduresController');
+        Route::get('/procedures/create/{id}', 'ProceduresController@createWithAnimalID')->name('procedures.create.for.animal');
 
-    // RECLAIMS ROUTES
-    Route::resource('reclaims', 'ReclaimsController')->middleware('auth');
-    Route::get('/reclaims/create/{id}', 'ReclaimsController@createWithAnimalID')->middleware('auth')->name('reclaims.create.for.animal');
+        // ADOPTIONS ROUTES
+        Route::resource('adoptions', 'AdoptionsController');
+        Route::get('/adoptions/create/{animal}', 'AdoptionsController@createWithAnimalID')->name('adoptions.create.for.animal');
 
-    // LIVING AREAS ROUTES
-    Route::resource('living-areas', 'LivingAreasController')->middleware('auth');
+        // FOSTERS ROUTES
+        Route::resource('fosters', 'FostersController');
+        Route::get('/fosters/create/{id}', 'FostersController@createWithAnimalID')->name('fosters.create.for.animal');
 
-    // PEOPLE ROUTES
-    Route::resource('people', 'PeopleController')->middleware('auth');
+        // RECLAIMS ROUTES
+        Route::resource('reclaims', 'ReclaimsController');
+        Route::get('/reclaims/create/{id}', 'ReclaimsController@createWithAnimalID')->name('reclaims.create.for.animal');
 
-    // REPORTS ROUTES
-    Route::resource('reports', 'ReportsController')->only(['index', 'show'])->middleware('auth');
+        // LIVING AREAS ROUTES
+        Route::resource('living-areas', 'LivingAreasController');
 
-    // SEARCH
-    Route::get('/search', 'SearchController@index')->middleware('auth');
+        // PEOPLE ROUTES
+        Route::resource('people', 'PeopleController');
 
-    // SETTINGS
-    Route::get('/settings', 'SettingsController@index')->middleware('auth');
+        // REPORTS ROUTES
+        Route::resource('reports', 'ReportsController')->only(['index', 'show']);
 
-    Route::get('/home', 'HomeController@index')->name('home');
+        // SEARCH
+        Route::get('/search', 'SearchController@index');
+
+        // SETTINGS
+        Route::get('/settings', 'SettingsController@index');
+
+    });
 });
 
 
