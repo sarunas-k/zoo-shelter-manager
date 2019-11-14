@@ -15,8 +15,8 @@ class SettingsRepository implements ISettingsRepository {
         return Setting::find($id);
     } 
 
-    public function getByName($name) {
-        return Setting::where('name', $name)->get();
+    public function getValue($name) {
+        return Setting::where('name', $name)->first()->value;
     }
 
     public function add($name, $value) {

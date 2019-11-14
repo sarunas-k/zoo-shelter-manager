@@ -27,7 +27,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
-    <title>Animal shelter | @yield('title')</title>
+    <title>{{$appName}} | @yield('title')</title>
   </head>
   <body>
     <div id="app">

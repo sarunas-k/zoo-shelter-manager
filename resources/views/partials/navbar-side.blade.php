@@ -134,31 +134,54 @@
 
 @section('scripts')
   <script>
-    const title = document.title;
+    const pageName = document.title.substr(document.title.indexOf('|') + 2);
     let currentPage = 'Dashboard';
-    if (title.indexOf('Animals') !== -1 || title.indexOf('Edit Animal') !== -1 || title.indexOf('Animal details') !== -1
-          || title.indexOf('New Procedure') !== -1)
-      currentPage = 'Animals';
-    else if (title.indexOf('New Animal') !== -1)
-      currentPage = 'Add Animal';
-    else if (title.indexOf('Calls') !== -1)
-      currentPage = 'Calls';
-    else if (title.indexOf('New Call') !== -1)
-      currentPage = 'Add Call';
-    else if (title.indexOf('Adoptions') !== -1 || title.indexOf('New Adoption') !== -1 || title.indexOf('Edit Adoption') !== -1)
-      currentPage = 'Adoptions';
-    else if (title.indexOf('Fosters') !== -1 || title.indexOf('New Foster') !== -1 || title.indexOf('Edit Foster') !== -1)
-      currentPage = 'Fosters';
-    else if (title.indexOf('Reclaims') !== -1 || title.indexOf('New Reclaim') !== -1 || title.indexOf('Edit Reclaim') !== -1)
-      currentPage = 'Reclaims';
-    else if (title.indexOf('Living Areas') !== -1)
-      currentPage = 'Living Areas';
-    else if (title.indexOf('People') !== -1 || title.indexOf('New Person') !== -1 || title.indexOf('Edit Person') !== -1)
-      currentPage = 'People';
-    else if (title.indexOf('Reports') !== -1)
-      currentPage = 'Reports';
-    else if (title.indexOf('Settings') !== -1)
-      currentPage = 'Settings';
+    switch(pageName) {
+      case 'Animals':
+      case 'Edit Animal':
+      case 'Animal details':
+      case 'New Procedure':
+        currentPage = 'Animals';
+        break;
+      case 'New Animal':
+        currentPage = 'Add Animal';
+        break;
+      case 'Calls':
+        currentPage = 'Calls';
+        break;
+      case 'New Call':
+        currentPage = 'Add Call';
+        break;
+      case 'Adoptions':
+      case 'New Adoption':
+      case 'Edit Adoption':
+        currentPage = 'Adoptions';
+        break;
+      case 'Fosters':
+      case 'New Foster':
+      case 'Edit Foster':
+        currentPage = 'Fosters';
+        break;
+      case 'Reclaims':
+      case 'New Reclaim':
+      case 'Edit Reclaim':
+        currentPage = 'Reclaims';
+        break;
+      case 'Living Areas':
+        currentPage = 'Living Areas';
+        break;
+      case 'People':
+      case 'New Person':
+      case 'Edit Person':
+        currentPage = 'People';
+        break;
+      case 'Reports':
+        currentPage = 'Reports';
+        break;
+      case 'Settings':
+        currentPage = 'Settings';
+        break;
+    }
     
     window.addEventListener('load', () => {
         $('.sidebar .nav-link').each((i, element) => {
