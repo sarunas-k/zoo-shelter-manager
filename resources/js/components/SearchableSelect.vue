@@ -6,7 +6,7 @@
     <input class="dropdown-input form-control"
       @focus="showOptions()"
       @blur="exit()"
-      @keyup="keyMonitor"
+      @keydown.enter.prevent="keyMonitor"
       v-model="searchFilter"
       :disabled="disabled"
       :placeholder="placeholder"

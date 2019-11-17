@@ -131,7 +131,7 @@ export default {
     },
     props: {
         csrf:        { type: String, default: '' },
-        oldvalues:   { type: Array, default: '' },
+        oldvalues:   { type: Array | Object, default: '' },
         species:     { type: Array, default: '' },
         staff:       { type: Array, default: '' },
         livingareas: { type: Array, default: '' },
