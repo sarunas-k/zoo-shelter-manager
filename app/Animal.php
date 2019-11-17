@@ -11,7 +11,7 @@ class Animal extends Model
     // Primary key
     public $primaryKey = 'id';
     protected $guarded = [];
-    protected $appends = ['age'];
+    protected $appends = ['age', 'adoptable'];
 
     public function species() {
         return $this->belongsTo(Species::class);
@@ -99,15 +99,6 @@ class Animal extends Model
         $dateDiff = date_diff(date_create($this->birthdate), date_create(date("Y-m-d")));
         $ageMonths =  $dateDiff->m + ($dateDiff->y * 12);
         $age = '';
-        // if($ageMonths < 1) {
-        //     $age = $dateDiff->format('%a day(-s)');
-        // } elseif($ageMonths >= 1 && $ageMonths < 3) {
-        //     $age = $dateDiff->format('%m month(-s) and %d day(-s)');
-        // } elseif($ageMonths > 3 && $ageMonths < 12) {
-        //     $age = $dateDiff->format('%m month(-s)');
-        // } else {
-        //     $age = $dateDiff->format('%y year(-s) and %m month(-s)');
-        // }
         if ($dateDiff->y == 1) {
             $age = '1 year';
         } else if ($dateDiff->y > 1) {
@@ -126,5 +117,9 @@ class Animal extends Model
         }
 
         return $age;
+    }
+
+    public function getAdoptableAttribute() {
+        return date_diff(date_create($this->intake_date), date_create(date("Y-m-d")))->format('%a') > 14 && !$this->notInShelter();
     }
 }

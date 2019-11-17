@@ -81,13 +81,19 @@
                 if (!url)
                     return;
                 
-                this.isLoading = true;
-                console.log("Fetching URL: " + url);
-                console.log("Parameters: " + JSON.stringify(parameters));
+                if (parameters) {
+                    if (this.nonshelter)
+                        parameters['nonshelter'] = true;
+                } else if (!parameters && this.nonshelter) {
+                    parameters = { 'nonshelter': true };
+                } else {
+                    parameters = null;
+                }
 
-                axios.get(url, parameters ? { params: parameters } : null)
+                this.isLoading = true;
+
+                axios.get(url, { params: parameters })
                 .then((response) => { // success
-                    // console.log(`Response: ${JSON.stringify(response)}`);
                     this.response = response.data;
                     this.animals = response.data.data;
                     if (response.data.filters) {
@@ -115,6 +121,13 @@
                 required: true,
                 default: '',
                 note: 'CSRF token'
+            },
+            nonshelter: {
+                type: Boolean,
+                required: false,
+                default: false,
+                note: 'If true, show only non shelter animals'
+
             }
         },
         components: {

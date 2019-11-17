@@ -46,6 +46,11 @@ class AnimalsController extends Controller
         return view('animals/index')->with('animals', $this->animalsRepo->allFilteredAndPaginated($request));
     }
 
+    public function indexOffShelter(Request $request)
+    {
+        return view('animals/index-off-shelter');
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -187,7 +192,11 @@ class AnimalsController extends Controller
         // appendFilters parameter is only used in first request to get data to initialize ListFilter component
         // Unset appendFilters so that Paginator doesnt use this parameter in pagination links
         unset($request['appendFilters']);
-        $response = $this->animalsRepo->allFilteredAndPaginated($request)->toArray();
+        if ($request->nonshelter)
+            $response = $this->animalsRepo->allFilteredAndPaginated($request, false, 10, true)->toArray();
+        else
+            $response = $this->animalsRepo->allFilteredAndPaginated($request)->toArray();
+    
         if ($appendFilters)
             $response['filters'] = $this->getAnimalsFilters();
         return response()->json($response);

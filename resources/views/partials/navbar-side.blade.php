@@ -75,7 +75,7 @@
        </li>
        @if(Auth::user()->isAdmin())
         <li class="nav-item">
-          <a class="nav-link" href="/settings">
+          <a class="nav-link" href="{{route('settings')}}">
             <span data-feather="sliders"></span>
             Settings
           </a>
@@ -88,7 +88,7 @@
         </li>
        @endif
        <li class="nav-item">
-         <a class="nav-link" href="#">
+       <a class="nav-link" href="{{route('animals.indexOffShelter')}}">
            <span data-feather="book"></span>
            Off-shelter animals
          </a>
@@ -180,6 +180,9 @@
         break;
       case 'Settings':
         currentPage = 'Settings';
+        break;
+      case 'Animals off shelter':
+        currentPage = 'Off-shelter animals';
         break;
     }
     

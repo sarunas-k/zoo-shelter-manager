@@ -20,6 +20,7 @@ Route::middleware(['web.common'])->group(function () {
 
         // ANIMALS ROUTES
         Route::resource('animals', 'AnimalsController');
+        Route::get('/off-shelter', 'AnimalsController@indexOffShelter')->name('animals.indexOffShelter');
 
         // CALLS ROUTES
         Route::resource('calls', 'CallsController');
@@ -53,7 +54,7 @@ Route::middleware(['web.common'])->group(function () {
         Route::get('/search', 'SearchController@index');
 
         // SETTINGS
-        Route::get('/settings', 'SettingsController@index');
+        Route::get('/settings', 'SettingsController@index')->name('settings');
 
     });
 });

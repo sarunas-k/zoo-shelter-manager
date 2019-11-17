@@ -13,7 +13,6 @@ class AnimalsRepository implements IAnimalsRepository {
         if (!$includeNonShelterAnimals) {
             $animals = Animal::
                 whereDoesntHave('activeAdoptions')
-                ->whereDoesntHave('activeFosters')
                 ->whereDoesntHave('activeReclaims')
                 ->get();
         }
@@ -21,17 +20,27 @@ class AnimalsRepository implements IAnimalsRepository {
         return $animals;
     }
 
+    public function allNonShelter() {
+        return Animal::has('activeAdoptions')->has('activeReclaims')->get();
+    }
+
     public function latest() {
         return Animal::latest();
     }
 
-    public function allFilteredAndPaginated($request, $includeNonShelterAnimals = false, $perPage = 10) {
-        $animals = $this->latest()->with(['species', 'color', 'living_area', 'images']);
-        if (!$includeNonShelterAnimals)
-            $animals
-                ->whereDoesntHave('activeAdoptions')
-                ->whereDoesntHave('activeFosters')
-                ->whereDoesntHave('activeReclaims');
+    public function allFilteredAndPaginated($request, $appendNonShelterAnimals = false, $perPage = 10, $onlyNonShelter = false) {
+        if ($onlyNonShelter) {
+            $animals = Animal::where(function($q) {
+                $q->has("activeAdoptions")->orHas("activeReclaims");
+            });
+        } else {
+            $animals = $this->latest();
+            if (!$appendNonShelterAnimals)
+                $animals
+                    ->whereDoesntHave('activeAdoptions')
+                    ->whereDoesntHave('activeReclaims');
+        }
+        $animals = $animals->with(['species', 'color', 'living_area', 'images', 'activeAdoptions', 'activeFosters', 'activeReclaims']);
         
         $this->applyFilters($animals, $request);
         return $animals->paginate($perPage)->appends($request->input());

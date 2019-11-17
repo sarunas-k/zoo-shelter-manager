@@ -1998,14 +1998,22 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var _this2 = this;
 
       if (!url) return;
+
+      if (parameters) {
+        if (this.nonshelter) parameters['nonshelter'] = true;
+      } else if (!parameters && this.nonshelter) {
+        parameters = {
+          'nonshelter': true
+        };
+      } else {
+        parameters = null;
+      }
+
       this.isLoading = true;
-      console.log("Fetching URL: " + url);
-      console.log("Parameters: " + JSON.stringify(parameters));
-      axios.get(url, parameters ? {
+      axios.get(url, {
         params: parameters
-      } : null).then(function (response) {
+      }).then(function (response) {
         // success
-        // console.log(`Response: ${JSON.stringify(response)}`);
         _this2.response = response.data;
         _this2.animals = response.data.data;
 
@@ -2035,6 +2043,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       required: true,
       "default": '',
       note: 'CSRF token'
+    },
+    nonshelter: {
+      type: Boolean,
+      required: false,
+      "default": false,
+      note: 'If true, show only non shelter animals'
     }
   },
   components: {
@@ -2056,6 +2070,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _DeleteButton_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DeleteButton.vue */ "./resources/js/components/DeleteButton.vue");
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -7479,7 +7501,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".dropdown-input[data-v-ea175bee] {\n  cursor: default;\n}\n.dropdown-content[data-v-ea175bee] {\n  position: absolute;\n  background-color: #fff;\n  width: 100%;\n  border-bottom: 1px solid #e7ecf5;\n  border-left: 1px solid #e7ecf5;\n  border-right: 1px solid #e7ecf5;\n  box-shadow: 0px -8px 34px 0px rgba(0, 0, 0, 0.15);\n  overflow: auto;\n  z-index: 1;\n  cursor: default;\n  margin-top: 3px;\n  max-height: 250px;\n}\n.dropdown-content .dropdown-item[data-v-ea175bee] {\n  padding-top: 7px;\n}\n.dropdown-content .dropdown-item[data-v-ea175bee]:hover {\n  background-color: #e7ecf5;\n}\n.dropdown:hover .dropdowncontent[data-v-ea175bee] {\n  display: block;\n}", ""]);
+exports.push([module.i, ".dropdown-input[data-v-ea175bee] {\n  cursor: default;\n}\n.dropdown-content[data-v-ea175bee] {\n  position: absolute;\n  background-color: #fff;\n  width: auto;\n  min-width: 100%;\n  border-bottom: 1px solid #e7ecf5;\n  border-left: 1px solid #e7ecf5;\n  border-right: 1px solid #e7ecf5;\n  box-shadow: 0px -8px 34px 0px rgba(0, 0, 0, 0.15);\n  overflow: auto;\n  z-index: 1;\n  cursor: default;\n  margin-top: 3px;\n  max-height: 250px;\n}\n.dropdown-content .dropdown-item[data-v-ea175bee] {\n  padding-top: 7px;\n}\n.dropdown-content .dropdown-item[data-v-ea175bee]:hover {\n  background-color: #e7ecf5;\n}\n.dropdown:hover .dropdowncontent[data-v-ea175bee] {\n  display: block;\n}", ""]);
 
 // exports
 
@@ -7517,7 +7539,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\ntable[data-v-f24648cc] {\r\n    text-align: center;\r\n    border-spacing: 0 10px;\r\n    border-collapse: unset;\r\n    border: 0;\n}\nth[data-v-f24648cc] {\r\n    background-color: #eee;\r\n    color: black;\r\n    font-weight: normal;\r\n    font-family: sans-serif;\r\n    line-height: 2em;\n}\ntd[data-v-f24648cc] {\r\n    max-width: 120px;\r\n    white-space: nowrap;\r\n    border: 0;\n}\nth[data-v-f24648cc], td[data-v-f24648cc] {\r\n    vertical-align: middle;\n}\ntr[data-v-f24648cc] {\r\n    background-color: #f1f1f1;\r\n    box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);\n}\n.animal-image-container[data-v-f24648cc] {\r\n    height: 100px;\r\n    width: 100px;\n}\n.animal-image-container .animal-image[data-v-f24648cc] {\r\n    height: 100%;\r\n    width: 100%;\r\n    -o-object-fit: cover;\r\n       object-fit: cover;\r\n    border-radius: 10%;\n}\n.column-value-container[data-v-f24648cc] {\r\n    text-align: left;\r\n    display: inline-block;\r\n    width: 75%;\n}\n.column-value[data-v-f24648cc] {\n}\r\n", ""]);
+exports.push([module.i, "\ntable[data-v-f24648cc] {\r\n    text-align: center;\r\n    border-spacing: 0 10px;\r\n    border-collapse: unset;\r\n    border: 0;\n}\nth[data-v-f24648cc] {\r\n    background-color: #eee;\r\n    color: black;\r\n    font-weight: normal;\r\n    font-family: sans-serif;\r\n    line-height: 2em;\n}\ntd[data-v-f24648cc] {\r\n    max-width: 120px;\r\n    white-space: nowrap;\r\n    border: 0;\n}\nth[data-v-f24648cc], td[data-v-f24648cc] {\r\n    vertical-align: middle;\n}\ntr[data-v-f24648cc] {\r\n    background-color: #f1f1f1;\n}\n.animal-image-container[data-v-f24648cc] {\r\n    height: 100px;\r\n    width: 100px;\n}\n.animal-image-container .animal-image[data-v-f24648cc] {\r\n    height: 100%;\r\n    width: 100%;\r\n    -o-object-fit: cover;\r\n       object-fit: cover;\r\n    border-radius: 10%;\n}\n.column-value-container[data-v-f24648cc] {\r\n    text-align: left;\r\n    display: inline-block;\r\n    width: 75%;\n}\r\n", ""]);
 
 // exports
 
@@ -39632,6 +39654,45 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "form-row" }, [
+        _c(
+          "div",
+          { staticClass: "form-group col-md-4" },
+          [
+            _c("label", { attrs: { for: "bring-in-person" } }, [
+              _vm._v("Person bringing animal in")
+            ]),
+            _vm._v(" "),
+            _c("searchable-select", {
+              attrs: {
+                options: _vm.people,
+                name: "bring-in-person",
+                display: "full_name_with_address",
+                placeholder: "Person",
+                default: _vm.oldvalues["bring-in-person"]
+              }
+            })
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "form-group col-md-4" },
+          [
+            _c("label", { attrs: { for: "call" } }, [_vm._v("Reference call")]),
+            _vm._v(" "),
+            _c("searchable-select", {
+              attrs: {
+                options: _vm.calls,
+                name: "call",
+                placeholder: "Reference call",
+                default: _vm.oldvalues["call"]
+              }
+            })
+          ],
+          1
+        ),
+        _vm._v(" "),
         _c("div", { staticClass: "form-group col-md-4" }, [
           _c("label", { attrs: { for: "intake-type" } }, [
             _vm._v("Intake type")
@@ -39665,46 +39726,7 @@ var render = function() {
             ],
             2
           )
-        ]),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "form-group col-md-4" },
-          [
-            _c("label", { attrs: { for: "call" } }, [_vm._v("Reference call")]),
-            _vm._v(" "),
-            _c("searchable-select", {
-              attrs: {
-                options: _vm.calls,
-                name: "call",
-                placeholder: "Reference call",
-                default: _vm.oldvalues["call"]
-              }
-            })
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "form-group col-md-4" },
-          [
-            _c("label", { attrs: { for: "bring-in-person" } }, [
-              _vm._v("Person bringing animal in")
-            ]),
-            _vm._v(" "),
-            _c("searchable-select", {
-              attrs: {
-                options: _vm.people,
-                name: "bring-in-person",
-                display: "full_name_with_address",
-                placeholder: "Person",
-                default: _vm.oldvalues["bring-in-person"]
-              }
-            })
-          ],
-          1
-        )
+        ])
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "form-row" }, [
@@ -40007,6 +40029,68 @@ var render = function() {
                         _vm._v(" "),
                         _c("span", { staticClass: "column-value" }, [
                           _vm._v(_vm._s(animal.intake_date.substr(0, 11)))
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c("div", { staticClass: "column-value-container" }, [
+                        _c("span", { staticClass: "bold" }, [_vm._v("Status")]),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "column-value" }, [
+                          animal.active_fosters.length
+                            ? _c(
+                                "span",
+                                {
+                                  staticClass: "badge badge-pill badge-success"
+                                },
+                                [_vm._v("In Foster")]
+                              )
+                            : _vm._e(),
+                          _vm._v(" "),
+                          animal.active_adoptions.length
+                            ? _c(
+                                "span",
+                                {
+                                  staticClass: "badge badge-pill badge-success"
+                                },
+                                [_vm._v("Adopted")]
+                              )
+                            : _vm._e(),
+                          _vm._v(" "),
+                          animal.active_reclaims.length
+                            ? _c(
+                                "span",
+                                {
+                                  staticClass: "badge badge-pill badge-success"
+                                },
+                                [_vm._v("Reclaimed")]
+                              )
+                            : _vm._e(),
+                          _vm._v(" "),
+                          !animal.active_fosters.length &&
+                          !animal.active_adoptions.length &&
+                          !animal.active_reclaims.length &&
+                          !animal.adoptable
+                            ? _c(
+                                "span",
+                                {
+                                  staticClass: "badge badge-pill badge-warning"
+                                },
+                                [_vm._v("Not For Adoption")]
+                              )
+                            : _vm._e(),
+                          _vm._v(" "),
+                          animal.adoptable
+                            ? _c(
+                                "span",
+                                {
+                                  staticClass: "badge badge-pill badge-success"
+                                },
+                                [_vm._v("For Adoption")]
+                              )
+                            : _vm._e()
                         ])
                       ])
                     ])

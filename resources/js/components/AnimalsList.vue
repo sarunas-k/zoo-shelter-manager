@@ -59,10 +59,18 @@
                             <span class="column-value">{{ (animal.intake_date).substr(0, 11) }}</span>
                         </div>
                     </td>
-                    <!-- <td><a :href="routeAnimalEditPage(animal.id)" class="btn btn-primary btn-sm">Edit</a></td>
                     <td>
-                        <delete-button :csrf="csrf" :action="routeAnimalDetailsPage(animal.id)"/>
-                    </td> -->
+                        <div class="column-value-container">
+                            <span class="bold">Status</span><br>
+                            <span class="column-value">
+                                <span v-if="animal.active_fosters.length" class="badge badge-pill badge-success">In Foster</span>
+                                <span v-if="animal.active_adoptions.length" class="badge badge-pill badge-success">Adopted</span>
+                                <span v-if="animal.active_reclaims.length" class="badge badge-pill badge-success">Reclaimed</span>
+                                <span v-if="!animal.active_fosters.length && !animal.active_adoptions.length && !animal.active_reclaims.length && !animal.adoptable" class="badge badge-pill badge-warning">Not For Adoption</span>
+                                <span v-if="animal.adoptable" class="badge badge-pill badge-success">For Adoption</span>
+                            </span>
+                        </div>
+                    </td>
                 </tr>
             </tbody>
         </table>
@@ -156,7 +164,6 @@ th, td {
 }
 tr {
     background-color: #f1f1f1;
-    box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);
 }
 .animal-image-container {
     height: 100px;
@@ -172,8 +179,5 @@ tr {
     text-align: left;
     display: inline-block;
     width: 75%;
-}
-.column-value {
-    
 }
 </style>
