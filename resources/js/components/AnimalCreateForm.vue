@@ -71,19 +71,19 @@
     </div>
     <div class="form-row">
         <div class="form-group col-md-4">
-            <label for="intake-type">Intake type</label>
-            <select class="form-control" id="intake-type" name="intake-type">
-                <option>---</option>
-                <option v-for="type in intaketypes" :key="type.id" :value="type.id" :selected="oldvalues['intake-type'] == type.id ? 'selected' : ''">{{type.name}}</option>
-            </select>
+            <label for="bring-in-person">Person bringing animal in</label>
+            <searchable-select :options="people" name="bring-in-person" display="full_name_with_address" placeholder="Person" :default="oldvalues['bring-in-person']"/>
         </div>
         <div class="form-group col-md-4">
             <label for="call">Reference call</label>
             <searchable-select :options="calls" name="call" placeholder="Reference call" :default="oldvalues['call']"/>
         </div>
         <div class="form-group col-md-4">
-            <label for="bring-in-person">Person bringing animal in</label>
-            <searchable-select :options="people" name="bring-in-person" display="full_name_with_address" placeholder="Person" :default="oldvalues['bring-in-person']"/>
+            <label for="intake-type">Intake type</label>
+            <select class="form-control" id="intake-type" name="intake-type">
+                <option>---</option>
+                <option v-for="type in intaketypes" :key="type.id" :value="type.id" :selected="oldvalues['intake-type'] == type.id ? 'selected' : ''">{{type.name}}</option>
+            </select>
         </div>
     </div>
     <div class="form-row">
