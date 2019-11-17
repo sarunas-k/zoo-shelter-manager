@@ -38,7 +38,7 @@
             </div>
             <div class="form-group col-md-4">
                 <label for="person">Person</label>
-                <searchable-select name="person" :options="{{json_encode($people)}}" placeholder="Select a person" @if(old('person')) default="{{old('person')}}" @endif/>
+                <searchable-select name="person" :options="{{json_encode($people)}}" display="full_name_with_address" placeholder="Select a person" @if(old('person')) default="{{old('person')}}" @endif/>
             </div>
             @if(isset($animal))
                 <input type="hidden" name="animal" id="animal" value="{{$animal->id}}" />

@@ -8,7 +8,7 @@ use App\Repositories\Interfaces\IPeopleRepository;
 class PeopleRepository implements IPeopleRepository {
 
     public function all() {
-        return Person::all();
+        return Person::orderBy('first_name')->get();
     }
 
     public function allPaginated($perPage = 10) {

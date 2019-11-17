@@ -154,7 +154,8 @@
     .dropdown-content {
       position: absolute;
       background-color: #fff;
-      width: 100%;
+      width: auto;
+      min-width: 100%;
       border-bottom: 1px solid #e7ecf5;
       border-left: 1px solid #e7ecf5;
       border-right: 1px solid #e7ecf5;
