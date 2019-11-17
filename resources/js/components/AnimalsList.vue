@@ -63,11 +63,11 @@
                         <div class="column-value-container">
                             <span class="bold">Status</span><br>
                             <span class="column-value">
-                                <span v-if="animal.active_fosters.length" class="badge badge-pill badge-success">In Foster</span>
+                                <span v-if="animal.active_fosters.length" class="badge badge-pill badge-primary">In Foster</span>
                                 <span v-if="animal.active_adoptions.length" class="badge badge-pill badge-success">Adopted</span>
                                 <span v-if="animal.active_reclaims.length" class="badge badge-pill badge-success">Reclaimed</span>
                                 <span v-if="!animal.active_fosters.length && !animal.active_adoptions.length && !animal.active_reclaims.length && !animal.adoptable" class="badge badge-pill badge-warning">Not For Adoption</span>
-                                <span v-if="animal.adoptable" class="badge badge-pill badge-success">For Adoption</span>
+                                <span v-if="animal.adoptable" class="badge badge-pill badge-primary">For Adoption</span>
                             </span>
                         </div>
                     </td>

@@ -2,11 +2,11 @@
     <div class="animals-wrapper">
         <list-filter :options="this.filterOptions" :checkedFilters="this.checkedFilters" @filter-change="onFilterChange"/>
 
-        <pagination-links v-if="animals.length" :currentPage="response.current_page" :totalPages="response.last_page" :navigatePrev="onNavigatePrev" :navigateNext="onNavigateNext"/>
+        <pagination-links v-if="animals.length" :currentPage="pageCurrentNum" :totalPages="pageLastNum" :navigatePrev="onNavigatePrev" :navigateNext="onNavigateNext"/>
 
         <animals-list :animals="animals" :isLoading="isLoading" :initialized="initialized" :csrf="csrf"/>
 
-        <pagination-links v-if="animals.length" :currentPage="response.current_page" :totalPages="response.last_page" :navigatePrev="onNavigatePrev" :navigateNext="onNavigateNext"/>
+        <pagination-links v-if="animals.length" :currentPage="pageCurrentNum" :totalPages="pageLastNum" :navigatePrev="onNavigatePrev" :navigateNext="onNavigateNext"/>
     </div>
 </template>
 
@@ -24,7 +24,10 @@
         data: function() {
             return {
                 animals: [],
-                response: [],
+                pageCurrentNum: null,
+                pageLastNum: null,
+                pageNextUrl: null,
+                pagePrevUrl: null,
                 isLoading: false,
                 initialized: false,
                 checkedFilters: {},
@@ -51,51 +54,40 @@
                 this.checkedFilters = {...params};
                 // Start pagination from page 1 after submitting new filter
                 params['page'] = 1;
-                console.log('Fetch with filters', params);
                 this.fetch('/api/animals', params);
                 history.pushState(params, null, null);
-                    console.log("History: pushed state: " + JSON.stringify(params));
             },
             onNavigateNext() {
-                console.log('Navigate next');
-                if (!this.response.next_page_url)
+                if (!this.pageNextUrl)
                     return;
                 
-                this.fetch(this.response.next_page_url);
-                let state = {...this.checkedFilters, 'page': this.response.current_page + 1};
+                this.fetch(this.pageNextUrl);
+                let state = {...this.checkedFilters, 'page': this.pageCurrentNum + 1};
                     history.pushState(state, null, null);
-                    console.log("History: pushed state: " + JSON.stringify(state));
             },
             onNavigatePrev() {
-                console.log('Navigate previous');
-                if (!this.response.prev_page_url)
+                if (!this.pagePrevUrl)
                     return;
                 
-                this.fetch(this.response.prev_page_url);
-                // MAYBE no need to add history item when navigating BACK through list.
-                let state = {...this.checkedFilters, 'page': this.response.current_page - 1};
+                this.fetch(this.pagePrevUrl);
+                let state = {...this.checkedFilters, 'page': this.pageCurrentNum - 1};
                     history.pushState(state, null, null);
-                    console.log("History: pushed state: " + JSON.stringify(state));
             },
             fetch(url, parameters) {
                 if (!url)
                     return;
                 
-                if (parameters) {
-                    if (this.nonshelter)
-                        parameters['nonShelter'] = true;
-                } else if (!parameters && this.nonshelter) {
-                    parameters = { 'nonShelter': true };
-                } else {
-                    parameters = null;
-                }
+                if (this.nonshelter) parameters = {...parameters, ...{nonShelter: true}};
 
                 this.isLoading = true;
 
                 axios.get(url, { params: parameters })
                 .then((response) => { // success
-                    this.response = response.data;
                     this.animals = response.data.data;
+                    this.pageCurrentNum = response.data.current_page;
+                    this.pageLastNum = response.data.last_page;
+                    this.pageNextUrl = response.data.next_page_url;
+                    this.pagePrevUrl = response.data.prev_page_url;
                     if (response.data.filters) {
                         this.filterOptions = response.data.filters;
                         this.checkedFilters = {...this.filterOptions};
@@ -108,7 +100,6 @@
                     console.log(error);
                 })
                 .then(() => { // always executed
-                    console.log('Finished axios request');
                     this.isLoading = false;
                     if (!this.initialized)
                         this.initialized = true;

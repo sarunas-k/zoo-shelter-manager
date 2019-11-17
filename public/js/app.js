@@ -1934,7 +1934,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   data: function data() {
     return {
       animals: [],
-      response: [],
+      pageCurrentNum: null,
+      pageLastNum: null,
+      pageNextUrl: null,
+      pagePrevUrl: null,
       isLoading: false,
       initialized: false,
       checkedFilters: {},
@@ -1965,57 +1968,46 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.checkedFilters = _objectSpread({}, params); // Start pagination from page 1 after submitting new filter
 
       params['page'] = 1;
-      console.log('Fetch with filters', params);
       this.fetch('/api/animals', params);
       history.pushState(params, null, null);
-      console.log("History: pushed state: " + JSON.stringify(params));
     },
     onNavigateNext: function onNavigateNext() {
-      console.log('Navigate next');
-      if (!this.response.next_page_url) return;
-      this.fetch(this.response.next_page_url);
+      if (!this.pageNextUrl) return;
+      this.fetch(this.pageNextUrl);
 
       var state = _objectSpread({}, this.checkedFilters, {
-        'page': this.response.current_page + 1
+        'page': this.pageCurrentNum + 1
       });
 
       history.pushState(state, null, null);
-      console.log("History: pushed state: " + JSON.stringify(state));
     },
     onNavigatePrev: function onNavigatePrev() {
-      console.log('Navigate previous');
-      if (!this.response.prev_page_url) return;
-      this.fetch(this.response.prev_page_url); // MAYBE no need to add history item when navigating BACK through list.
+      if (!this.pagePrevUrl) return;
+      this.fetch(this.pagePrevUrl);
 
       var state = _objectSpread({}, this.checkedFilters, {
-        'page': this.response.current_page - 1
+        'page': this.pageCurrentNum - 1
       });
 
       history.pushState(state, null, null);
-      console.log("History: pushed state: " + JSON.stringify(state));
     },
     fetch: function fetch(url, parameters) {
       var _this2 = this;
 
       if (!url) return;
-
-      if (parameters) {
-        if (this.nonshelter) parameters['nonShelter'] = true;
-      } else if (!parameters && this.nonshelter) {
-        parameters = {
-          'nonShelter': true
-        };
-      } else {
-        parameters = null;
-      }
-
+      if (this.nonshelter) parameters = _objectSpread({}, parameters, {}, {
+        nonShelter: true
+      });
       this.isLoading = true;
       axios.get(url, {
         params: parameters
       }).then(function (response) {
         // success
-        _this2.response = response.data;
         _this2.animals = response.data.data;
+        _this2.pageCurrentNum = response.data.current_page;
+        _this2.pageLastNum = response.data.last_page;
+        _this2.pageNextUrl = response.data.next_page_url;
+        _this2.pagePrevUrl = response.data.prev_page_url;
 
         if (response.data.filters) {
           _this2.filterOptions = response.data.filters;
@@ -2031,7 +2023,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         console.log(error);
       }).then(function () {
         // always executed
-        console.log('Finished axios request');
         _this2.isLoading = false;
         if (!_this2.initialized) _this2.initialized = true;
       });
@@ -39822,8 +39813,8 @@ var render = function() {
       _vm.animals.length
         ? _c("pagination-links", {
             attrs: {
-              currentPage: _vm.response.current_page,
-              totalPages: _vm.response.last_page,
+              currentPage: _vm.pageCurrentNum,
+              totalPages: _vm.pageLastNum,
               navigatePrev: _vm.onNavigatePrev,
               navigateNext: _vm.onNavigateNext
             }
@@ -39842,8 +39833,8 @@ var render = function() {
       _vm.animals.length
         ? _c("pagination-links", {
             attrs: {
-              currentPage: _vm.response.current_page,
-              totalPages: _vm.response.last_page,
+              currentPage: _vm.pageCurrentNum,
+              totalPages: _vm.pageLastNum,
               navigatePrev: _vm.onNavigatePrev,
               navigateNext: _vm.onNavigateNext
             }
@@ -40043,7 +40034,7 @@ var render = function() {
                             ? _c(
                                 "span",
                                 {
-                                  staticClass: "badge badge-pill badge-success"
+                                  staticClass: "badge badge-pill badge-primary"
                                 },
                                 [_vm._v("In Foster")]
                               )
@@ -40086,7 +40077,7 @@ var render = function() {
                             ? _c(
                                 "span",
                                 {
-                                  staticClass: "badge badge-pill badge-success"
+                                  staticClass: "badge badge-pill badge-primary"
                                 },
                                 [_vm._v("For Adoption")]
                               )
