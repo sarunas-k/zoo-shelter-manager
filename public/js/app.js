@@ -2763,6 +2763,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'SearchableSelect',
   template: 'SearchableSelect',
@@ -2812,6 +2815,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       selected: {},
+      highlighted: 0,
       optionsShown: false,
       searchFilter: ''
     };
@@ -2862,6 +2866,12 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
+    highlightNext: function highlightNext() {
+      if (this.highlighted < this.filteredOptions.length - 1) this.highlighted++;
+    },
+    highlightPrevious: function highlightPrevious() {
+      if (this.highlighted > 0) this.highlighted--;
+    },
     selectOption: function selectOption(option) {
       if (!option) return;
       this.selected = option;
@@ -2889,15 +2899,17 @@ __webpack_require__.r(__webpack_exports__);
     },
     // Selecting when pressing Enter
     keyMonitor: function keyMonitor(event) {
-      if (event.key === "Enter" && this.filteredOptions[0]) this.selectOption(this.filteredOptions[0]);
+      if (event.key === "Enter" && this.highlighted > -1) this.selectOption(this.filteredOptions[this.highlighted]);
     }
   },
   watch: {
     searchFilter: function searchFilter() {
       if (this.filteredOptions.length === 0) {
         this.selected = {};
+        this.highlighted = -1;
       } else {
         this.selected = this.filteredOptions[0];
+        this.highlighted = 0;
       }
 
       this.$emit('filter', this.searchFilter);
@@ -7492,7 +7504,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".dropdown-input[data-v-ea175bee] {\n  cursor: default;\n}\n.dropdown-content[data-v-ea175bee] {\n  position: absolute;\n  background-color: #fff;\n  width: auto;\n  min-width: 100%;\n  border-bottom: 1px solid #e7ecf5;\n  border-left: 1px solid #e7ecf5;\n  border-right: 1px solid #e7ecf5;\n  box-shadow: 0px -8px 34px 0px rgba(0, 0, 0, 0.15);\n  overflow: auto;\n  z-index: 1;\n  cursor: default;\n  margin-top: 3px;\n  max-height: 250px;\n}\n.dropdown-content .dropdown-item[data-v-ea175bee] {\n  padding-top: 7px;\n}\n.dropdown-content .dropdown-item[data-v-ea175bee]:hover {\n  background-color: #e7ecf5;\n}\n.dropdown:hover .dropdowncontent[data-v-ea175bee] {\n  display: block;\n}", ""]);
+exports.push([module.i, ".active[data-v-ea175bee] {\n  background-color: #e7ecf5 !important;\n  color: #000;\n}\n.dropdown-input[data-v-ea175bee] {\n  cursor: default;\n}\n.dropdown-content[data-v-ea175bee] {\n  position: absolute;\n  background-color: #fff;\n  width: auto;\n  min-width: 100%;\n  border-bottom: 1px solid #e7ecf5;\n  border-left: 1px solid #e7ecf5;\n  border-right: 1px solid #e7ecf5;\n  box-shadow: 0px -8px 34px 0px rgba(0, 0, 0, 0.15);\n  overflow: auto;\n  z-index: 1;\n  cursor: default;\n  margin-top: 3px;\n  max-height: 250px;\n}\n.dropdown-content .dropdown-item[data-v-ea175bee] {\n  padding-top: 7px;\n  background-color: #FFF;\n}\n.dropdown:hover .dropdowncontent[data-v-ea175bee] {\n  display: block;\n}", ""]);
 
 // exports
 
@@ -40818,6 +40830,32 @@ var render = function() {
               $event.preventDefault()
               return _vm.keyMonitor($event)
             },
+            keyup: [
+              function($event) {
+                if (
+                  !$event.type.indexOf("key") &&
+                  _vm._k($event.keyCode, "down", 40, $event.key, [
+                    "Down",
+                    "ArrowDown"
+                  ])
+                ) {
+                  return null
+                }
+                return _vm.highlightNext($event)
+              },
+              function($event) {
+                if (
+                  !$event.type.indexOf("key") &&
+                  _vm._k($event.keyCode, "up", 38, $event.key, [
+                    "Up",
+                    "ArrowUp"
+                  ])
+                ) {
+                  return null
+                }
+                return _vm.highlightPrevious($event)
+              }
+            ],
             input: function($event) {
               if ($event.target.composing) {
                 return
@@ -40846,10 +40884,14 @@ var render = function() {
               {
                 key: index,
                 staticClass: "form-control dropdown-item",
+                class: { active: _vm.highlighted == index },
                 on: {
                   mousedown: function($event) {
                     $event.preventDefault()
                     return _vm.selectOption(option)
+                  },
+                  mouseover: function($event) {
+                    _vm.highlighted = index
                   }
                 }
               },

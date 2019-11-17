@@ -7,6 +7,8 @@
       @focus="showOptions()"
       @blur="exit()"
       @keydown.enter.prevent="keyMonitor"
+      @keyup.down="highlightNext"
+      @keyup.up="highlightPrevious"
       v-model="searchFilter"
       :disabled="disabled"
       :placeholder="placeholder"
@@ -19,8 +21,9 @@
       <div
         class="form-control dropdown-item"
         @mousedown.prevent="selectOption(option)"
+        @mouseover="highlighted = index"
         v-for="(option, index) in filteredOptions"
-        :key="index">
+        :key="index" :class="{'active': highlighted == index}">
           {{ option[display] || option.id || '-' }}
       </div>
     </div>
@@ -77,6 +80,7 @@
     data() {
       return {
         selected: {},
+        highlighted: 0,
         optionsShown: false,
         searchFilter: ''
       }
@@ -102,6 +106,14 @@
       }
     },
     methods: {
+      highlightNext() {
+        if (this.highlighted < this.filteredOptions.length-1)
+          this.highlighted++;
+      },
+      highlightPrevious() {
+        if (this.highlighted > 0)
+          this.highlighted--;
+      },
       selectOption(option) {
         if (!option)
           return;
@@ -129,16 +141,18 @@
       },
       // Selecting when pressing Enter
       keyMonitor: function(event) {
-        if (event.key === "Enter" && this.filteredOptions[0])
-          this.selectOption(this.filteredOptions[0]);
+        if (event.key === "Enter" && this.highlighted > -1)
+          this.selectOption(this.filteredOptions[this.highlighted]);
       }
     },
     watch: {
       searchFilter() {
         if (this.filteredOptions.length === 0) {
           this.selected = {};
+          this.highlighted = -1;
         } else {
           this.selected = this.filteredOptions[0];
+          this.highlighted = 0;
         }
         this.$emit('filter', this.searchFilter);
       }
@@ -148,6 +162,11 @@
 
 
 <style lang="scss" scoped>
+    .active {
+      background-color: #e7ecf5 !important;
+      color: #000;
+    }
+
     .dropdown-input {
       cursor: default;
     }
@@ -167,9 +186,7 @@
       max-height: 250px;
       .dropdown-item {
         padding-top: 7px;
-        &:hover {
-          background-color: #e7ecf5;
-        }
+        background-color: #FFF;
       }
     }
     .dropdown:hover .dropdowncontent {
