@@ -1,9 +1,9 @@
 @extends('layouts/main')
-@section('title', 'New Adoption')
+@section('title', $title)
 
 @section('content')
 <br>
-<h3>New adoption @if(isset($animal)) - {{$animal->list_number}}@endif</h3>
+<h3>{{$title}}</h3>
 @if ($errors->any())
 <div class="alert alert-danger">
     <ul>
@@ -16,7 +16,7 @@
 
 @if(isset($animal))
     @include('partials/animal-card')
-    @if(!$animal->is_adoptable)
+    @if(!$animal->is_adoptable && !$animal->notInShelter())
         <div class="alert alert-warning" role="alert"><strong>Notice:</strong> Animal is set as <strong>not for adoption</strong>.</div>
     @endif
 @endif

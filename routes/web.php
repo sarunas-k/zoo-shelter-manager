@@ -30,15 +30,12 @@ Route::middleware(['web.common'])->group(function () {
 
         // ADOPTIONS ROUTES
         Route::resource('adoptions', 'AdoptionsController');
-        Route::get('/adoptions/create/{animal}', 'AdoptionsController@createWithAnimalID')->name('adoptions.create.for.animal');
 
         // FOSTERS ROUTES
         Route::resource('fosters', 'FostersController');
-        Route::get('/fosters/create/{id}', 'FostersController@createWithAnimalID')->name('fosters.create.for.animal');
 
         // RECLAIMS ROUTES
         Route::resource('reclaims', 'ReclaimsController');
-        Route::get('/reclaims/create/{id}', 'ReclaimsController@createWithAnimalID')->name('reclaims.create.for.animal');
 
         // LIVING AREAS ROUTES
         Route::resource('living-areas', 'LivingAreasController');

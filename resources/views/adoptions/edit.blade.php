@@ -1,9 +1,9 @@
 @extends('layouts/main')
-@section('title', 'Edit Adoption')
+@section('title', $title)
 
 @section('content')
 <br>
-<h3>Edit adoption</h3>
+<h3>{{$title}}</h3>
 @if ($errors->any())
 <div class="alert alert-danger">
     <ul>

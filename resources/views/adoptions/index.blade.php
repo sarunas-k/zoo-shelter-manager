@@ -1,9 +1,9 @@
 @extends('layouts/main')
-@section('title', 'Adoptions')
+@section('title', $title)
 
 @section('content')
 <br>
-<h3>Adoptions</h3>
+<h3>{{$title}}</h3>
 @if(session('success')) <div class="alert alert-success" role="alert">  {{ session('success') }}</div>@endif
 @if(session('error'))   <div class="alert alert-danger" role="alert">   {{ session('error') }}  </div>@endif
 @if(!isset($adoptions) || count($adoptions) == 0)

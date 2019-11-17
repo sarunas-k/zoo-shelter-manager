@@ -28,7 +28,10 @@ class AdoptionsController extends Controller
      */
     public function index()
     {
-        return view('adoptions/index')->with('adoptions', $this->adoptionsRepo->allPaginated());
+        return view('adoptions/index')->with([
+            'adoptions' => $this->adoptionsRepo->allPaginated(),
+            'title' => 'Adoptions'
+        ]);
     }
 
     /**
@@ -36,25 +39,22 @@ class AdoptionsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
+        if ($request->animal_id) {
+            $animal = $this->animalsRepo->get($request->animal_id);
+            if ($animal == null) return redirect()->action('AdoptionsController@create');
+
+            return view('adoptions/create')->with([
+                'animal' => $animal,
+                'people' => $this->peopleRepo->all(),
+                'title' => 'New Adoption'
+            ]);
+        }
         return view('adoptions/create')->with([
             'animals' => $this->animalsRepo->all(),
-            'people' => $this->peopleRepo->all()
-        ]);
-    }
-
-    /**
-     * Show the form for creating a new adoption for animal.
-     *
-     * @param Animal  $animal
-     * @return \Illuminate\Http\Response
-     */
-    public function createWithAnimalID(Animal $animal)
-    {
-        return view('adoptions/create')->with([
-            'animal' => $this->animalsRepo->formatFieldsForPresentation($animal),
-            'people' => $this->peopleRepo->all()
+            'people' => $this->peopleRepo->all(),
+            'title' => 'New Adoption'
         ]);
     }
 
@@ -90,7 +90,8 @@ class AdoptionsController extends Controller
     {
         return view('adoptions/show')->with([
             'adoption' => $adoption,
-            'animal' => $this->animalsRepo->formatFieldsForPresentation($adoption->animal)
+            'animal' => $this->animalsRepo->formatFieldsForPresentation($adoption->animal),
+            'title' => 'Adoptions'
             ]);
     }
 
@@ -104,7 +105,8 @@ class AdoptionsController extends Controller
     {
         return view('adoptions/edit')->with([
             'adoption' => $adoption,
-            'animal' => $this->animalsRepo->formatFieldsForPresentation($adoption->animal)
+            'animal' => $this->animalsRepo->formatFieldsForPresentation($adoption->animal),
+            'title' => 'Edit Adoption'
             ]);
     }
 

@@ -3,7 +3,7 @@
 
 @section('content')
 <br>
-<h3>New foster @if(isset($animal))- {{$animal->list_number}}@endif</h3>
+<h3>New foster</h3>
 @if ($errors->any())
 <div class="alert alert-danger">
     <ul>

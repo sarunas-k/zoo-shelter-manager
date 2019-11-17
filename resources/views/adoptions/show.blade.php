@@ -1,9 +1,9 @@
 @extends('layouts/main')
-@section('title', 'Adoptions')
+@section('title', $title)
 
 @section('content')
     <br>
-    <h3>Adoptions</h3>
+    <h3>{{$title}}</h3>
     @if(!isset($adoption))
     <p>Incorrect adoption id.</p>
     @else

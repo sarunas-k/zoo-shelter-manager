@@ -35,26 +35,20 @@ class ReclaimsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
+        if ($request->animal_id) {
+            $animal = $this->animalsRepo->get($request->animal_id);
+            if ($animal == null)
+                return redirect()->action('ReclaimsController@create');
+            
+            return view('reclaims/create')->with([
+                'animal' => $animal,
+                'people' => $this->peopleRepo->all()
+            ]);
+        }
         return view('reclaims/create')->with([
             'animals' => $this->animalsRepo->all(),
-            'people' => $this->peopleRepo->all()
-        ]);
-    }
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function createWithAnimalID($id)
-    {
-        $animal = $this->animalsRepo->get($id);
-        if ($animal == null)
-            return redirect()->action('ReclaimsController@create');
-        
-        return view('reclaims/create')->with([
-            'animal' => $animal,
             'people' => $this->peopleRepo->all()
         ]);
     }
