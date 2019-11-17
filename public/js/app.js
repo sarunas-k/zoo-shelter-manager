@@ -2000,10 +2000,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       if (!url) return;
 
       if (parameters) {
-        if (this.nonshelter) parameters['nonshelter'] = true;
+        if (this.nonshelter) parameters['nonShelter'] = true;
       } else if (!parameters && this.nonshelter) {
         parameters = {
-          'nonshelter': true
+          'nonShelter': true
         };
       } else {
         parameters = null;

@@ -43,12 +43,45 @@ class AnimalsController extends Controller
      */
     public function index(Request $request)
     {
-        return view('animals/index')->with('animals', $this->animalsRepo->allFilteredAndPaginated($request));
-    }
+        /**
+         * AJAX request
+         * @return Array of animals and pagination links
+         *        Optional parameters: 
+         *                  appendFilters - if true, append lists of all available species, colors, sizes and genders
+         *                                  to initialize ListFilter component.
+         *                  nonShelter    - if true, only get animals which are already adopted or reclaimed.
+        */
+         if ($request->ajax()) {
+            $appendFilters = $request->appendFilters;
+            unset($request['appendFilters']);
+            
+            if ($request->nonShelter)
+                $response = $this->animalsRepo->allFilteredAndPaginated($request, false, 10, true)->toArray();
+            else
+                $response = $this->animalsRepo->allFilteredAndPaginated($request)->toArray();
 
-    public function indexOffShelter(Request $request)
-    {
-        return view('animals/index-off-shelter');
+            if ($appendFilters) {
+                $speciesNames = $this->speciesRepo->getSpeciesNames();
+                $colorsNames = $this->colorsRepo->getColorsNames();
+                sort($speciesNames);
+                sort($colorsNames);
+
+                $response['filters'] = [
+                    'species' => $speciesNames,
+                    'gender' => $this->animalsRepo->getGenderNames(),
+                    'size' => $this->animalsRepo->getSizeNames(),
+                    'color' => $colorsNames ];
+            }
+
+            return response()->json($response);
+
+        } else {
+        /**
+         * WEB request
+         * @return View of animals index page
+        */
+            return view('animals/index')->with('title', $request->only_adopted_reclaimed ? 'Animals off shelter' : 'Animals');
+        }
     }
 
     /**
@@ -188,18 +221,7 @@ class AnimalsController extends Controller
     }
 
     public function getAnimalsJSON(Request $request) {
-        $appendFilters = $request->appendFilters;
-        // appendFilters parameter is only used in first request to get data to initialize ListFilter component
-        // Unset appendFilters so that Paginator doesnt use this parameter in pagination links
-        unset($request['appendFilters']);
-        if ($request->nonshelter)
-            $response = $this->animalsRepo->allFilteredAndPaginated($request, false, 10, true)->toArray();
-        else
-            $response = $this->animalsRepo->allFilteredAndPaginated($request)->toArray();
-    
-        if ($appendFilters)
-            $response['filters'] = $this->getAnimalsFilters();
-        return response()->json($response);
+        
     }
     
     public function getAnimalsFilters() {

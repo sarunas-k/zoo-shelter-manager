@@ -88,7 +88,7 @@
         </li>
        @endif
        <li class="nav-item">
-       <a class="nav-link" href="{{route('animals.indexOffShelter')}}">
+       <a class="nav-link" href="{{route('animals.index', ['only_adopted_reclaimed' => true])}}">
            <span data-feather="book"></span>
            Off-shelter animals
          </a>

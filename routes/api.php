@@ -17,7 +17,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/animals', 'AnimalsController@getAnimalsJSON')->middleware('auth:api');
+Route::get('/animals', 'AnimalsController@index')->middleware('auth:api');
 Route::get('/reports', 'ReportsController@getReportJSON')->middleware('auth:api');
 Route::patch('/users/{id}', 'UsersController@update')->middleware('auth:api');
 Route::delete('/users/{id}', 'UsersController@destroy')->middleware('auth:api');

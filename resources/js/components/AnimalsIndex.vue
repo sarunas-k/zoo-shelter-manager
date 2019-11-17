@@ -83,9 +83,9 @@
                 
                 if (parameters) {
                     if (this.nonshelter)
-                        parameters['nonshelter'] = true;
+                        parameters['nonShelter'] = true;
                 } else if (!parameters && this.nonshelter) {
-                    parameters = { 'nonshelter': true };
+                    parameters = { 'nonShelter': true };
                 } else {
                     parameters = null;
                 }
