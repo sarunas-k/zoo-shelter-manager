@@ -5,8 +5,9 @@
                 <tr v-show="initialized && animals.length == 0"><td colspan="12" class="text-center">No animal records found.</td></tr>
                 <tr v-for="(animal, index) in animals" v-bind:key="index">
                     <td class="animal-image-container">
-                        <a :href="routeAnimalDetailsPage(animal.id)" v-if="animal.images.length">
-                            <img :src="'/storage' + animal.images[0].path.substr(6)" class="animal-image"/>
+                        <a :href="routeAnimalDetailsPage(animal.id)">
+                            <img v-if="animal.images.length > 0" :src="'/storage' + animal.images[0].path.substr(6)" class="animal-image"/>
+                            <img v-if="animal.images.length == 0" src="/storage/images/no_image.jpeg" class="animal-image"/>
                         </a>
                     </td>
                     <td>

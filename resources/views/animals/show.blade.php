@@ -138,7 +138,7 @@
         </table>
     </div>
     <!-- TAB 2: Vet visits -->
-    <div class="tab-pane" id="vet-visits" role="tabpanel" aria-labelledby="vet-visits-tab">
+    <div class="tab-pane" id="vet-visits" role="tabpanel" aria-labelledby="vet-visits-tab" style="margin-left: 1rem">
         <a href="{{route('procedures.create.for.animal', ['id' => $animal->id])}}"
             class="btn btn-primary btn-sm text-center">New procedure</a><br><br>
         @if($animal->procedures->count() < 1) <p>There are no vet visit records for this animal.</p>
@@ -163,17 +163,21 @@
             @endif
     </div>
     <!-- TAB 3: Animal documents -->
-    <div class="tab-pane" id="documents" role="tabpanel" aria-labelledby="documents-tab">
+    <div class="tab-pane" id="documents" role="tabpanel" aria-labelledby="documents-tab" style="margin-left: 1rem">
         No documents yet.
     </div>
     <!-- TAB 4: Animal images -->
-    <div class="tab-pane" id="images" role="tabpanel" aria-labelledby="images-tab">
-        <div class="animal-images" style="width: 100%">
-            @foreach($animal->images as $image)
-            <div class="animal-image">
-                <img src="{{Storage::url($image->path)}}" style="width: 40%">
-            </div><br>
-            @endforeach
+    <div class="tab-pane" id="images" role="tabpanel" aria-labelledby="images-tab" style="margin-left: 1rem">
+        <div class="animal-images" style="width: 100%;">
+            @if ($animal->images->count() > 0)
+                @foreach($animal->images as $image)
+                <div class="animal-image">
+                    <img src="{{Storage::url($image->path)}}" style="width: 40%">
+                </div><br>
+                @endforeach
+            @else
+                <p>No images yet.</p>
+            @endif
         </div>
     </div>
 </div>

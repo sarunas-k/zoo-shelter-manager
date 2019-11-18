@@ -2140,6 +2140,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -39916,25 +39917,30 @@ var render = function() {
                 _vm._l(_vm.animals, function(animal, index) {
                   return _c("tr", { key: index }, [
                     _c("td", { staticClass: "animal-image-container" }, [
-                      animal.images.length
-                        ? _c(
-                            "a",
-                            {
-                              attrs: {
-                                href: _vm.routeAnimalDetailsPage(animal.id)
-                              }
-                            },
-                            [
-                              _c("img", {
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: _vm.routeAnimalDetailsPage(animal.id) }
+                        },
+                        [
+                          animal.images.length > 0
+                            ? _c("img", {
                                 staticClass: "animal-image",
                                 attrs: {
                                   src:
                                     "/storage" + animal.images[0].path.substr(6)
                                 }
                               })
-                            ]
-                          )
-                        : _vm._e()
+                            : _vm._e(),
+                          _vm._v(" "),
+                          animal.images.length == 0
+                            ? _c("img", {
+                                staticClass: "animal-image",
+                                attrs: { src: "/storage/images/no_image.jpeg" }
+                              })
+                            : _vm._e()
+                        ]
+                      )
                     ]),
                     _vm._v(" "),
                     _c("td", [

@@ -92,8 +92,6 @@ class AnimalsRepository implements IAnimalsRepository {
                 $path = $imageFile->storeAs('public/images', $fileNameToStore);
                 $animal->images()->attach(Image::create(['path' => $path]));
             }
-        } else {
-            $animal->images()->attach(Image::create(['path' => 'public/images/no_image.jpeg']));
         }
 
         return $animal->id;
@@ -122,10 +120,6 @@ class AnimalsRepository implements IAnimalsRepository {
         $animal->breeds()->sync($formFields['breed']);
         if (is_null($formFields['animal-images-list'])) {
             $animal->images()->detach();
-            $image = new Image;
-            $image->path = 'public/images/no_image.jpeg';
-            $image->save();
-            $animal->images()->sync($image);
         } else {
             $animal->images()->sync(explode(',', $formFields['animal-images-list']));
         }
