@@ -219,21 +219,4 @@ class AnimalsController extends Controller
         $this->animalsRepo->delete($animal);
         return redirect('/animals')->with('success', 'Animal delete successful');
     }
-
-    public function getAnimalsJSON(Request $request) {
-        
-    }
-    
-    public function getAnimalsFilters() {
-        $speciesNames = $this->speciesRepo->getSpeciesNames();
-        $colorsNames = $this->colorsRepo->getColorsNames();
-        sort($speciesNames);
-        sort($colorsNames);
-        return [
-            'species' => $speciesNames,
-            'gender' => $this->animalsRepo->getGenderNames(),
-            'size' => $this->animalsRepo->getSizeNames(),
-            'color' => $colorsNames
-        ];
-    }
 }

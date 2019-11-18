@@ -100,7 +100,11 @@ class LivingAreasController extends Controller
      */
     public function destroy($id)
     {
+        $livingArea = $this->areasRepo->get($id);
+        if ($livingArea->animals->count() > 0)
+            return redirect('/living-areas')->with('error', 'Living area ' . $livingArea->name . 
+                                                    ' is not empty. Assign the animals to a different living area to proceed with deletion.');
         $this->areasRepo->delete($id);
-        return redirect('/living-areas')->with('success', 'Living area deleted successfully');
+        return redirect('/living-areas')->with('success', 'Living area was deleted');
     }
 }

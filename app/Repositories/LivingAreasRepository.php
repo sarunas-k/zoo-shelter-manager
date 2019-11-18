@@ -16,7 +16,7 @@ class LivingAreasRepository implements ILivingAreasRepository {
     }
 
     public function get($id) {
-        return LivingArea::find($id);
+        return LivingArea::findOrFail($id);
     }
 
     public function addFromInput($request) {
