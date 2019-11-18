@@ -12,6 +12,7 @@
 
         <h4 class="section-title">Users</h4>
         <div class="mt-3 mb-5 section">
+            <a href="/users/create" class="btn btn-sm btn-success mb-3">New User</a>
             <table class="table table-sm" :style="{opacity: tableOpacity}">
                 <tr><th>Name</th><th>Email</th><th>Admin</th><th></th></tr>
                     <tr v-for="user in usersList" :key="user.id">

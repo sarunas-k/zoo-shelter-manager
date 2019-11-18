@@ -2967,6 +2967,7 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     console.log('Vue: Settings Component mounted.');
@@ -40978,6 +40979,15 @@ var render = function() {
     _c("h4", { staticClass: "section-title" }, [_vm._v("Users")]),
     _vm._v(" "),
     _c("div", { staticClass: "mt-3 mb-5 section" }, [
+      _c(
+        "a",
+        {
+          staticClass: "btn btn-sm btn-success mb-3",
+          attrs: { href: "/users/create" }
+        },
+        [_vm._v("New User")]
+      ),
+      _vm._v(" "),
       _c(
         "table",
         { staticClass: "table table-sm", style: { opacity: _vm.tableOpacity } },

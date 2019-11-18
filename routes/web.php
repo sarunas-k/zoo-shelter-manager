@@ -52,6 +52,9 @@ Route::middleware(['web.common'])->group(function () {
         // SETTINGS
         Route::get('/settings', 'SettingsController@index')->name('settings');
 
+        // USERS
+        Route::resource('users', 'UsersController')->except(['index']);
+
     });
 });
 
