@@ -179,6 +179,7 @@
         currentPage = 'Reports';
         break;
       case 'Settings':
+      case 'New User':
         currentPage = 'Settings';
         break;
       case 'Animals off shelter':
