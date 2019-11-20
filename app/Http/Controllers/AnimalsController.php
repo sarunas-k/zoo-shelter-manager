@@ -202,6 +202,8 @@ class AnimalsController extends Controller
             'intake-type' => 'required',
             'call' => '',
             'bring-in-person' => '',
+            'animal-image' => 'max:1999|array',
+            'animal-image.*' => 'mimes:jpeg,jpg,bmp,png'
         ]);
 
         $this->animalsRepo->updateFromInput($animal, $formFields);

@@ -17,7 +17,7 @@
 @if(!isset($animal))
 <p>Incorrect animal id.</p>
 @else
-<form method="POST" action="{{route('animals.update', ['id' => $animal->id])}}">
+<form method="POST" action="{{route('animals.update', ['id' => $animal->id])}}" enctype="multipart/form-data">
     @csrf
     @method('PATCH')
     <div class="form-row">
@@ -151,16 +151,16 @@
     <div class="form-row">
         <div class="animal-images" style="width: 100%">
             @foreach($animal->images as $image)
-            <div class="animal-image-container" style="position: relative">
+            <div class="animal-image-container" style="position: relative; float: left; width: 150px; height: 150px; margin-right: 1em; margin-bottom: 1em">
                 <span class="delete-button"
-                    style="background-color: #FFF; padding: 5px 10px; position: absolute; x: 0; y: 0">X</span>
-                <img src="{{Storage::url($image->path)}}" id="{{$image->id}}" class="animal-image" style="width: 40%">
+                    style="background-color: #FFF; padding: 2px 8px; position: absolute; x: 0; y: 0; cursor: pointer">x</span>
+                <img src="{{Storage::url($image->path)}}" id="{{$image->id}}" class="animal-image" style="width: 100%; height: 100%; object-fit: cover;">
             </div>
             @endforeach
             <input type="hidden" id="animal-images-list" name="animal-images-list" value="">
         </div>
-
     </div>
+    <image-upload></image-upload>
     <button type="submit" class="btn btn-success" style="margin: 15px 0; padding: 10px 20px">Save</button>
 </form>
 @endif
@@ -168,14 +168,6 @@
 @section('scripts')
 <script>
     window.addEventListener('load', () => {
-        // SET MENU ITEM AS ACTIVE
-        $('.sidebar .nav-link').each((i, element) => {
-            if ($(element).text().indexOf('Animals') >= 0)
-                $(element).addClass('active');
-            else
-                $(element).removeClass('active');
-        });
-
         // Attach event handlers to calculate animal images that will be saved
         $('.animal-image-container .delete-button').click(function (event) {
             $(this).parent().remove();

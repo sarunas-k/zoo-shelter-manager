@@ -93,40 +93,26 @@
             <label for="is-neutered">Spayed/neutered</label>
         </div>
     </div>
-
-    <div class="form-row">
-        <div class="form-group col-md-2">
-            <input-file name="animal-image" :multiple="true" :onlyImages="true" @inputChange="onImageInputChange">
-                Add Image
-            </input-file>
-        </div>
-        <div class="form-group col-md-10">
-            <image-upload-preview :files="files"/>
-        </div>
-    </div>
+    <image-upload/>
     <button type="submit" class="btn btn-success">Save</button>
 </form>
 </template>
 
 <script>
 import SearchableSelect from './SearchableSelect.vue';
-import ImageUploadPreview from './ImageUploadPreview.vue';
-import InputFile from './InputFile.vue';
+import ImageUpload from './ImageUpload.vue';
 export default {
     mounted() {
         console.log('Vue: AnimalCreateForm Component mounted.');
     },
     data: function() {
         return {
-            files: {}
+    
         }
     },
     methods: {
         routeAnimalsIndex() {
             return '/animals';
-        },
-        onImageInputChange(event) {
-            this.files = event.target.files;
         }
     },
     props: {
@@ -144,9 +130,7 @@ export default {
         people:      { type: Array, default: '' },
     },
     components: {
-        SearchableSelect,
-        ImageUploadPreview,
-        InputFile
+        SearchableSelect
     }
 }
 </script>

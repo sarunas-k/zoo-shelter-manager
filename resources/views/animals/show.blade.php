@@ -171,9 +171,9 @@
         <div class="animal-images" style="width: 100%;">
             @if ($animal->images->count() > 0)
                 @foreach($animal->images as $image)
-                <div class="animal-image">
-                    <img src="{{Storage::url($image->path)}}" style="width: 40%">
-                </div><br>
+                <div class="animal-image" style="margin-right: 1em; margin-bottom: 1em; float: left">
+                    <a href="{{Storage::url($image->path)}}" target="_blank"><img src="{{Storage::url($image->path)}}" style="height: 250px;"></a>
+                </div>
                 @endforeach
             @else
                 <p>No images yet.</p>

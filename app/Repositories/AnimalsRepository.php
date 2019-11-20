@@ -118,31 +118,29 @@ class AnimalsRepository implements IAnimalsRepository {
         
         // Save animal breeds to animal_breed table
         $animal->breeds()->sync($formFields['breed']);
+
+        // Check previously uploaded images list
         if (is_null($formFields['animal-images-list'])) {
-            $animal->images()->detach();
+            if ($animal->images()->count() > 0)
+                $animal->images()->detach();
         } else {
             $animal->images()->sync(explode(',', $formFields['animal-images-list']));
         }
 
-        // // Upload images to server and save animal images paths to database
-        // if ($request->hasFile('animal-image')) {
-        //     foreach($request->file('animal-image') as $imageFile) {
-        //         $fileNameWithExt = $imageFile->getClientOriginalName();
-        //         $filename = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
-        //         $extension = $imageFile->guessClientExtension();
-        //         $fileNameToStore = $filename . '_' . time() . '.' . $extension;
-        //         $path = $imageFile->storeAs('public/images', $fileNameToStore);
-        //         $image = new Image;
-        //         $image->path = $path;
-        //         $image->save();
-        //         $animal->images()->attach($image);
-        //     }
-        // } else {
-        //     $image = new Image;
-        //     $image->path = 'public/images/no_image.jpeg';
-        //     $image->save();
-        //     $animal->images()->attach($image);
-        // }
+        // Upload images to server and save animal images paths to database
+        if (isset($formFields['animal-image'])) {
+            foreach($formFields['animal-image'] as $imageFile) {
+                $fileNameWithExt = $imageFile->getClientOriginalName();
+                $filename = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
+                $extension = $imageFile->guessClientExtension();
+                $fileNameToStore = $filename . '_' . time() . '.' . $extension;
+                $path = $imageFile->storeAs('public/images', $fileNameToStore);
+                $image = new Image;
+                $image->path = $path;
+                $image->save();
+                $animal->images()->attach($image);
+            }
+        }
     }
 
     public function get($id) {
