@@ -38,8 +38,8 @@
             aria-controls="vet-visits" aria-selected="false">Vet visits</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" id="documents-tab" data-toggle="tab" href="#documents" role="tab" aria-controls="documents"
-            aria-selected="false">Documents</a>
+        <a class="nav-link" id="files-tab" data-toggle="tab" href="#files" role="tab" aria-controls="files"
+            aria-selected="false">Files</a>
     </li>
     <li class="nav-item">
         <a class="nav-link" id="images-tab" data-toggle="tab" href="#images" role="tab" aria-controls="images"
@@ -162,9 +162,9 @@
             </table>
             @endif
     </div>
-    <!-- TAB 3: Animal documents -->
-    <div class="tab-pane" id="documents" role="tabpanel" aria-labelledby="documents-tab" style="margin-left: 1rem">
-        No documents yet.
+    <!-- TAB 3: Animal files -->
+    <div class="tab-pane" id="files" role="tabpanel" aria-labelledby="files-tab" style="margin-left: 1rem">
+        No files yet.
     </div>
     <!-- TAB 4: Animal images -->
     <div class="tab-pane" id="images" role="tabpanel" aria-labelledby="images-tab" style="margin-left: 1rem">

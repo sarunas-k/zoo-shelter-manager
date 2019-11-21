@@ -52,14 +52,7 @@
         @endif
         <div class="form-group col-md-4">
             <label for="vet">Veterinarian</label>
-            <select class="form-control" id="vet" name="vet">
-                <option>---</option>
-                @foreach($vets as $vet)
-                <option value="{{$vet->id}}" @if(old('vet')==$vet->id) selected @endif>
-                    {{$vet->first_name}} {{$vet->last_name}}
-                </option>
-                @endforeach
-            </select>
+            <searchable-select name="vet" :options="{{json_encode($vets)}}" placeholder="Select a vet" @if(old('vet')) default="{{old('vet')}}" @endif/>
         </div>
     </div>
     <div class="form-row">

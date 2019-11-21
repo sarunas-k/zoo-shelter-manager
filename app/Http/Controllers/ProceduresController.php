@@ -80,12 +80,16 @@ class ProceduresController extends Controller
             'vet' => 'required',
             'notes' => 'required',
         ]);
+        $animal = $this->animalsRepo->get($request->input('animal'));
+        if ($animal !== null) {
+            $result = $this->proceduresRepo->addFromInput($request);
+            if ($result)
+                return redirect('/animals/' . $animal->id)->with('success', 'Procedure was added');
+            else
+                return redirect('/animals/' . $animal->id)->with('error', 'Error adding new procedure');
+        }
 
-        $result = $this->proceduresRepo->addFromInput($request);
-        if ($result)
-            return redirect('/animals/' . $this->animalsRepo->get($request->input('animal'))->id)->with('success', 'Procedure was added');
-        else
-            return redirect('/animals/')->with('error', 'Error adding new procedure');
+        return redirect('/animals/')->with('error', 'Error adding new procedure. Incorrect animal id.');
     }
 
     /**

@@ -25,20 +25,14 @@ class ProceduresRepository implements IProceduresRepository {
     }
 
     public function addFromInput($request) {
-        $animal = Animal::find($request->input('animal'));
-
-        if ($animal !== null) {
-            $procedure = new Procedure;
-            $procedure->date = $request->input('procedure-date');
-            $procedure->notes = $request->input('notes');
-            $procedure->animal_id = $request->input('animal');
-            $procedure->procedure_type_id = $request->input('procedure-type');
-            $procedure->vet_id = $request->input('vet');
-            $procedure->save();
-            return true;
-        } else {
-            return false;
-        }
+        $procedure = new Procedure;
+        $procedure->date = $request->input('procedure-date');
+        $procedure->notes = $request->input('notes');
+        $procedure->animal_id = $request->input('animal');
+        $procedure->procedure_type_id = $request->input('procedure-type');
+        $procedure->vet_id = $request->input('vet');
+        $result = $procedure->save();
+        return $result;
     }
 
     public function delete($id) {
