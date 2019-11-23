@@ -1799,6 +1799,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -39509,15 +39517,32 @@ var render = function() {
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "form-group col-md-4" }, [
-          _c("label", { attrs: { for: "birthdate" } }, [
-            _vm._v("Date of Birth")
-          ]),
+          _c("label", { attrs: { for: "size" } }, [_vm._v("Size")]),
           _vm._v(" "),
-          _c("input", {
-            staticClass: "form-control",
-            attrs: { type: "date", id: "birthdate", name: "birthdate" },
-            domProps: { value: _vm.oldvalues["birthdate"] }
-          })
+          _c(
+            "select",
+            {
+              staticClass: "form-control",
+              attrs: { id: "size", name: "size" }
+            },
+            [
+              _c("option", [_vm._v("---")]),
+              _vm._v(" "),
+              _vm._l(_vm.sizes, function(size, index) {
+                return _c(
+                  "option",
+                  {
+                    key: index,
+                    domProps: {
+                      selected: _vm.oldvalues["size"] == size ? "selected" : ""
+                    }
+                  },
+                  [_vm._v(_vm._s(size))]
+                )
+              })
+            ],
+            2
+          )
         ]),
         _vm._v(" "),
         _c(
@@ -39579,25 +39604,37 @@ var render = function() {
           )
         ]),
         _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "form-group col-md-4" },
-          [
-            _c("label", { attrs: { for: "staff" } }, [
-              _vm._v("Responsible staff")
-            ]),
-            _vm._v(" "),
-            _c("searchable-select", {
-              attrs: {
-                options: _vm.staff,
-                name: "staff",
-                placeholder: "Staff",
-                default: _vm.oldvalues["staff"]
-              }
-            })
-          ],
-          1
-        ),
+        _c("div", { staticClass: "form-group col-md-4" }, [
+          _c("label", { attrs: { for: "birthdate" } }, [
+            _vm._v("Date of Birth")
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "form-control",
+            attrs: { type: "date", id: "birthdate", name: "birthdate" },
+            domProps: { value: _vm.oldvalues["birthdate"] }
+          }),
+          _vm._v(" "),
+          _c(
+            "span",
+            { staticStyle: { display: "block", "text-align": "center" } },
+            [_vm._v("or")]
+          ),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "form-control",
+            staticStyle: { width: "50%", float: "left" },
+            attrs: {
+              type: "number",
+              id: "age-digit",
+              name: "age-digit",
+              min: "1",
+              value: ""
+            }
+          }),
+          _vm._v(" "),
+          _vm._m(0)
+        ]),
         _vm._v(" "),
         _c("div", { staticClass: "form-group col-md-4" }, [
           _c("label", { attrs: { for: "microchip" } }, [
@@ -39618,34 +39655,25 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "form-row" }, [
-        _c("div", { staticClass: "form-group col-md-4" }, [
-          _c("label", { attrs: { for: "size" } }, [_vm._v("Size")]),
-          _vm._v(" "),
-          _c(
-            "select",
-            {
-              staticClass: "form-control",
-              attrs: { id: "size", name: "size" }
-            },
-            [
-              _c("option", [_vm._v("---")]),
-              _vm._v(" "),
-              _vm._l(_vm.sizes, function(size, index) {
-                return _c(
-                  "option",
-                  {
-                    key: index,
-                    domProps: {
-                      selected: _vm.oldvalues["size"] == size ? "selected" : ""
-                    }
-                  },
-                  [_vm._v(_vm._s(size))]
-                )
-              })
-            ],
-            2
-          )
-        ]),
+        _c(
+          "div",
+          { staticClass: "form-group col-md-4" },
+          [
+            _c("label", { attrs: { for: "staff" } }, [
+              _vm._v("Responsible staff")
+            ]),
+            _vm._v(" "),
+            _c("searchable-select", {
+              attrs: {
+                options: _vm.staff,
+                name: "staff",
+                placeholder: "Staff",
+                default: _vm.oldvalues["staff"]
+              }
+            })
+          ],
+          1
+        ),
         _vm._v(" "),
         _c("div", { staticClass: "form-group col-md-4" }, [
           _c("label", { attrs: { for: "intake-date" } }, [
@@ -39794,7 +39822,30 @@ var render = function() {
     1
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "select",
+      {
+        staticClass: "form-control",
+        staticStyle: { width: "50%" },
+        attrs: { id: "age-unit", name: "age-unit" }
+      },
+      [
+        _c("option", [_vm._v("years")]),
+        _vm._v(" "),
+        _c("option", [_vm._v("months")]),
+        _vm._v(" "),
+        _c("option", [_vm._v("weeks")]),
+        _vm._v(" "),
+        _c("option", [_vm._v("days")])
+      ]
+    )
+  }
+]
 render._withStripped = true
 
 

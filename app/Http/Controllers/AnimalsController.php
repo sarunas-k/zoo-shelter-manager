@@ -120,7 +120,7 @@ class AnimalsController extends Controller
             'species' => 'required',
             'gender' => 'required',
             'name' => 'required',
-            'birthdate' => 'required|date',
+            'birthdate' => 'date|nullable',
             'microchip' => 'required',
             'size' => 'required',
             'intake-date' => 'required',
@@ -134,6 +134,8 @@ class AnimalsController extends Controller
             'intake-type' => 'required',
             'call' => '',
             'bring-in-person' => '',
+            'age-digit' => 'digits_between:1,100|nullable',
+            'age-unit' => ''
         ]);
 
         $animalId = $this->animalsRepo->addFromInput($formFields);
@@ -189,7 +191,7 @@ class AnimalsController extends Controller
             'species' => 'required',
             'gender' => 'required',
             'name' => 'required',
-            'birthdate' => 'required|date',
+            'birthdate' => 'date|nullable',
             'microchip' => 'required',
             'size' => 'required',
             'intake-date' => 'required',
@@ -203,7 +205,9 @@ class AnimalsController extends Controller
             'call' => '',
             'bring-in-person' => '',
             'animal-image' => 'max:1999|array',
-            'animal-image.*' => 'mimes:jpeg,jpg,bmp,png'
+            'animal-image.*' => 'mimes:jpeg,jpg,bmp,png',
+            'age-digit' => 'digits_between:1,100|nullable',
+            'age-unit' => ''
         ]);
 
         $this->animalsRepo->updateFromInput($animal, $formFields);

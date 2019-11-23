@@ -51,8 +51,14 @@
             <input type="text" id="name" name="name" class="form-control" value="{{$animal->name}}">
         </div>
         <div class="form-group col-md-4">
-            <label for="birthdate">Date of Birth</label>
-            <input type="date" class="form-control" id="birthdate" name="birthdate" value="{{$animal->birthdate}}">
+            <label for="size">Size</label>
+            <select class="form-control" id="size" name="size">
+                <option>---</option>
+                <option @if($animal->size == 'Small') selected @endif>Small</option>
+                <option @if($animal->size == 'Medium') selected @endif>Medium</option>
+                <option @if($animal->size == 'Large') selected @endif>Large</option>
+                <option @if($animal->size == 'Very large') selected @endif>Very large</option>
+            </select>
         </div>
         <div class="form-group col-md-4">
             <label for="microchip">Microchip number</label>
@@ -75,13 +81,15 @@
             </select>
         </div>
         <div class="form-group col-md-4">
-            <label for="staff">Responsible staff</label>
-            <select class="form-control" id="staff" name="staff">
-                <option>---</option>
-                @foreach($staff as $staffMember)
-                <option value="{{$staffMember->id}}" @if($animal->staff_id == $staffMember->id) selected
-                    @endif>{{$staffMember->first_name}} {{$staffMember->last_name}}</option>
-                @endforeach
+            <label for="birthdate">Date of Birth</label>
+            <input type="date" class="form-control" id="birthdate" name="birthdate" value="{{$animal->birthdate}}">
+            <span style="display: block; text-align: center">or</span>
+            <input type="number" class="form-control" id="age-digit" name="age-digit" min="1" value="" style="width: 50%; float: left">
+            <select class="form-control" id="age-unit" name="age-unit" style="width: 50%">
+                <option>years</option>
+                <option>months</option>
+                <option>weeks</option>
+                <option>days</option>
             </select>
         </div>
         <div class="form-group col-md-4">
@@ -92,16 +100,15 @@
     </div>
     <div class="form-row">
         <div class="form-group col-md-4">
-            <label for="size">Size</label>
-            <select class="form-control" id="size" name="size">
+            <label for="staff">Responsible staff</label>
+            <select class="form-control" id="staff" name="staff">
                 <option>---</option>
-                <option @if($animal->size == 'Small') selected @endif>Small</option>
-                <option @if($animal->size == 'Medium') selected @endif>Medium</option>
-                <option @if($animal->size == 'Large') selected @endif>Large</option>
-                <option @if($animal->size == 'Very large') selected @endif>Very large</option>
+                @foreach($staff as $staffMember)
+                <option value="{{$staffMember->id}}" @if($animal->staff_id == $staffMember->id) selected
+                    @endif>{{$staffMember->first_name}} {{$staffMember->last_name}}</option>
+                @endforeach
             </select>
         </div>
-        
         <div class="form-group col-md-4">
             <label for="living-area">Living area</label>
             <select class="form-control" id="living-area" name="living-area">

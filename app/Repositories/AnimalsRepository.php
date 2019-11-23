@@ -61,23 +61,39 @@ class AnimalsRepository implements IAnimalsRepository {
     }
 
     public function addFromInput($formFields) {
-        $animal = Animal::create([
-            'list_number' => $formFields['animal-number'],
-            'gender' => $formFields['gender'],
-            'birthdate' => $formFields['birthdate'],
-            'name' => $formFields['name'],
-            'chip_number' => $formFields['microchip'],
-            'size' => $formFields['size'],
-            'intake_date' => $formFields['intake-date'],
-            'species_id' => $formFields['species'],
-            'living_area_id' => $formFields['living-area'],
-            'color_id' => $formFields['color'],
-            'staff_id' => $formFields['staff'],
-            'is_neutered' => $formFields['is-neutered'],
-            'intake_type_id' => $formFields['intake-type'],
-            'call_id' => $formFields['call'],
-            'bring_in_person_id' => $formFields['bring-in-person']
-        ]);
+        $animal = new Animal;
+        $animal->list_number = $formFields['animal-number'];
+        $animal->gender = $formFields['gender'];
+        $animal->name = $formFields['name'];
+        $animal->chip_number = $formFields['microchip'];
+        $animal->size = $formFields['size'];
+        $animal->intake_date = $formFields['intake-date'];
+        $animal->species_id = $formFields['species'];
+        $animal->living_area_id = $formFields['living-area'];
+        $animal->color_id = $formFields['color'];
+        $animal->staff_id = $formFields['staff'];
+        $animal->is_neutered = $formFields['is-neutered'];
+        $animal->intake_type_id = $formFields['intake-type'];
+        $animal->call_id = $formFields['call'];
+        $animal->bring_in_person_id = $formFields['bring-in-person'];
+
+        if ($formFields['age-digit'] && $formFields['age-unit']) {
+            $birthdate = '';
+            if (strpos($formFields['age-unit'], 'year') !== false) {
+                $birthdate = now()->subYears($formFields['age-digit']);
+            } else if (strpos($formFields['age-unit'], 'month') !== false) {
+                $birthdate = now()->subMonths($formFields['age-digit']);
+            } else if (strpos($formFields['age-unit'], 'week') !== false) {
+                $birthdate = now()->subWeeks($formFields['age-digit']);
+            } else if (strpos($formFields['age-unit'], 'day') !== false) {
+                $birthdate = now()->subDays($formFields['age-digit']);
+            }
+            $animal->birthdate = $birthdate->format('Y-m-d');
+        } else if ($formFields['birthdate']) {
+            $animal->birthdate = $formFields['birthdate'];
+        }
+
+        $animal->save();
 
         // Attach Animal breeds to the Animal through animal_breed table
         $animal->breeds()->sync($formFields['breed']);
@@ -98,6 +114,20 @@ class AnimalsRepository implements IAnimalsRepository {
     }
 
     public function updateFromInput($animal, $formFields) {
+        if ($formFields['age-digit'] && $formFields['age-unit']) {
+            $birthdate = '';
+            if (strpos($formFields['age-unit'], 'year') !== false) {
+                $birthdate = now()->subYears($formFields['age-digit']);
+            } else if (strpos($formFields['age-unit'], 'month') !== false) {
+                $birthdate = now()->subMonths($formFields['age-digit']);
+            } else if (strpos($formFields['age-unit'], 'week') !== false) {
+                $birthdate = now()->subWeeks($formFields['age-digit']);
+            } else if (strpos($formFields['age-unit'], 'day') !== false) {
+                $birthdate = now()->subDays($formFields['age-digit']);
+            }
+            $formFields['birthdate'] = $birthdate->format('Y-m-d');
+        }
+
         $animal->update([
             'list_number' => $formFields['animal-number'],
             'gender' => $formFields['gender'],

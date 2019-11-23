@@ -24,8 +24,11 @@
             <input type="text" id="name" name="name" class="form-control" placeholder="Name" :value="oldvalues['name']">
         </div>
         <div class="form-group col-md-4">
-            <label for="birthdate">Date of Birth</label>
-            <input type="date" class="form-control" id="birthdate" name="birthdate" :value="oldvalues['birthdate']">
+            <label for="size">Size</label>
+            <select class="form-control" id="size" name="size">
+                <option>---</option>
+                <option v-for="(size, index) in sizes" :key="index" :selected="oldvalues['size'] == size ? 'selected' : ''">{{size}}</option>
+            </select>
         </div>
         <div class="form-group col-md-4">
             <label for="color">Color</label>
@@ -42,8 +45,16 @@
             </select>
         </div>
         <div class="form-group col-md-4">
-            <label for="staff">Responsible staff</label>
-            <searchable-select :options="staff" name="staff" placeholder="Staff" :default="oldvalues['staff']"/>
+            <label for="birthdate">Date of Birth</label>
+            <input type="date" class="form-control" id="birthdate" name="birthdate" :value="oldvalues['birthdate']">
+            <span style="display: block; text-align: center">or</span>
+            <input type="number" class="form-control" id="age-digit" name="age-digit" min="1" value="" style="width: 50%; float: left">
+            <select class="form-control" id="age-unit" name="age-unit" style="width: 50%">
+                <option>years</option>
+                <option>months</option>
+                <option>weeks</option>
+                <option>days</option>
+            </select>
         </div>
         <div class="form-group col-md-4">
             <label for="microchip">Microchip number</label>
@@ -53,11 +64,8 @@
     </div>
     <div class="form-row">
         <div class="form-group col-md-4">
-            <label for="size">Size</label>
-            <select class="form-control" id="size" name="size">
-                <option>---</option>
-                <option v-for="(size, index) in sizes" :key="index" :selected="oldvalues['size'] == size ? 'selected' : ''">{{size}}</option>
-            </select>
+            <label for="staff">Responsible staff</label>
+            <searchable-select :options="staff" name="staff" placeholder="Staff" :default="oldvalues['staff']"/>
         </div>
         <div class="form-group col-md-4">
             <label for="intake-date">Intake Date</label>
