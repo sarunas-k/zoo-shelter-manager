@@ -16,18 +16,30 @@
           </div>
         </div>
 
-        {{-- <div>
-          <div style="width: 23.75%; height:300px; border: 1px solid grey; float: left; margin-left: 1%; position: relative">
-            <span style="position: absolute; left: 50%; top: 50%; transform: translateX(-50%) translateY(-50%); font-family: 'Nunito', sans-serif; font-size: 30px; text-align: center;">Shelter view</span></div>
-          <div style="width: 23.75%; height:300px; border: 1px solid grey; float: left; margin-left: 1%; position: relative">
-            <span style="position: absolute; left: 50%; top: 50%; transform: translateX(-50%) translateY(-50%); font-family: 'Nunito', sans-serif; font-size: 30px; text-align: center;">Animal intake</span></div>
-          <div style="width: 23.75%; height:300px; border: 1px solid grey; float: left; margin-left: 1%; position: relative">
-            <span style="position: absolute; left: 50%; top: 50%; transform: translateX(-50%) translateY(-50%); font-family: 'Nunito', sans-serif; font-size: 30px; text-align: center;">Call registration</span></div>
-          <div style="width: 23.75%; height:300px; border: 1px solid grey; float: left; margin-left: 1%; position: relative">
-            <span style="position: absolute; left: 50%; top: 50%; transform: translateX(-50%) translateY(-50%); font-family: 'Nunito', sans-serif; font-size: 30px; text-align: center;">Calendar</span></div>
-        </div> --}}
+        <div style="overflow: hidden">
+          <a href="/animals" style="text-decoration: none; color: #000">
+            <div style="width: 23.75%; height:200px; background-color: #d6eef9; float: left; position: relative;">
+              <span style="position: absolute; left: 50%; top: 50%; transform: translateX(-50%) translateY(-50%); font-family: 'Nunito', sans-serif; font-size: 30px; text-align: center;">Animals in shelter</span>
+            </div>
+          </a>
+          <a href="/animals/create" style="text-decoration: none; color: #000">
+            <div style="width: 23.75%; height:200px; background-color: #d6eef9; float: left; margin-left: 1.66%; position: relative">
+              <span style="position: absolute; left: 50%; top: 50%; transform: translateX(-50%) translateY(-50%); font-family: 'Nunito', sans-serif; font-size: 30px; text-align: center;">Animal intake</span>
+            </div>
+          </a>
+          <a href="/calls/create" style="text-decoration: none; color: #000">
+            <div style="width: 23.75%; height:200px; background-color: #d6eef9; float: left; margin-left: 1.66%; position: relative">
+              <span style="position: absolute; left: 50%; top: 50%; transform: translateX(-50%) translateY(-50%); font-family: 'Nunito', sans-serif; font-size: 30px; text-align: center;">Call registration</span>
+            </div>
+          </a>
+          <a href="#" style="text-decoration: none; color: #000">
+            <div style="width: 23.75%; height:200px; background-color: #d6eef9; float: left; margin-left: 1.66%; position: relative">
+              <span style="position: absolute; left: 50%; top: 50%; transform: translateX(-50%) translateY(-50%); font-family: 'Nunito', sans-serif; font-size: 30px; text-align: center;">Calendar</span>
+            </div>
+          </a>
+        </div>
   
-        <div class="latest-animals" style="clear: left">
+        <div class="latest-animals" style="clear: left; margin-top: 2em">
           <h3>Latest animals</h3>
         <div class="table-responsive">
           <table class="table table-bordered table-sm my-4">
