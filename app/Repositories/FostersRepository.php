@@ -14,7 +14,7 @@ class FostersRepository implements IFostersRepository {
     }
 
     public function allPaginated($perPage = 10) {
-        return Foster::latest()->paginate($perPage);
+        return Foster::orderBy('foster_start_date', 'desc')->paginate($perPage);
     }
 
     public function get($id) {

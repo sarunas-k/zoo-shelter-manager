@@ -14,7 +14,7 @@ class ReclaimsRepository implements IReclaimsRepository {
     }
 
     public function allPaginated($perPage = 10) {
-        return Reclaim::latest()->paginate($perPage);
+        return Reclaim::orderBy('date', 'desc')->paginate($perPage);
     }
 
     public function get($id) {

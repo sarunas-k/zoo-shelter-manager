@@ -14,7 +14,7 @@ class AdoptionsRepository implements IAdoptionsRepository {
     }
 
     public function allPaginated($perPage = 10) {
-        return Adoption::latest()->paginate($perPage);
+        return Adoption::orderBy('adoption_date', 'desc')->paginate($perPage);
     }
 
     public function get($id) {
