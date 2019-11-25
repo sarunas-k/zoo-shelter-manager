@@ -39682,12 +39682,64 @@ var render = function() {
               type: "number",
               id: "age-digit",
               name: "age-digit",
-              min: "1",
-              value: ""
-            }
+              min: "1"
+            },
+            domProps: { value: _vm.oldvalues["age-digit"] }
           }),
           _vm._v(" "),
-          _vm._m(0)
+          _c(
+            "select",
+            {
+              staticClass: "form-control",
+              staticStyle: { width: "50%" },
+              attrs: { id: "age-unit", name: "age-unit" }
+            },
+            [
+              _c(
+                "option",
+                {
+                  domProps: {
+                    selected:
+                      _vm.oldvalues["age-unit"] == "years" ? "selected" : ""
+                  }
+                },
+                [_vm._v("years")]
+              ),
+              _vm._v(" "),
+              _c(
+                "option",
+                {
+                  domProps: {
+                    selected:
+                      _vm.oldvalues["age-unit"] == "months" ? "selected" : ""
+                  }
+                },
+                [_vm._v("months")]
+              ),
+              _vm._v(" "),
+              _c(
+                "option",
+                {
+                  domProps: {
+                    selected:
+                      _vm.oldvalues["age-unit"] == "weeks" ? "selected" : ""
+                  }
+                },
+                [_vm._v("weeks")]
+              ),
+              _vm._v(" "),
+              _c(
+                "option",
+                {
+                  domProps: {
+                    selected:
+                      _vm.oldvalues["age-unit"] == "days" ? "selected" : ""
+                  }
+                },
+                [_vm._v("days")]
+              )
+            ]
+          )
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "form-group col-md-4" }, [
@@ -39951,30 +40003,7 @@ var render = function() {
     1
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "select",
-      {
-        staticClass: "form-control",
-        staticStyle: { width: "50%" },
-        attrs: { id: "age-unit", name: "age-unit" }
-      },
-      [
-        _c("option", [_vm._v("years")]),
-        _vm._v(" "),
-        _c("option", [_vm._v("months")]),
-        _vm._v(" "),
-        _c("option", [_vm._v("weeks")]),
-        _vm._v(" "),
-        _c("option", [_vm._v("days")])
-      ]
-    )
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

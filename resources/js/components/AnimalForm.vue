@@ -49,12 +49,12 @@
             <label for="birthdate">Date of Birth</label>
             <input type="date" class="form-control" id="birthdate" name="birthdate" :value="oldvalues['birthdate']">
             <span style="display: block; text-align: center">or</span>
-            <input type="number" class="form-control" id="age-digit" name="age-digit" min="1" value="" style="width: 50%; float: left">
+            <input type="number" class="form-control" id="age-digit" name="age-digit" min="1" :value="oldvalues['age-digit']" style="width: 50%; float: left">
             <select class="form-control" id="age-unit" name="age-unit" style="width: 50%">
-                <option>years</option>
-                <option>months</option>
-                <option>weeks</option>
-                <option>days</option>
+                <option :selected="oldvalues['age-unit'] == 'years' ? 'selected' : ''">years</option>
+                <option :selected="oldvalues['age-unit'] == 'months' ? 'selected' : ''">months</option>
+                <option :selected="oldvalues['age-unit'] == 'weeks' ? 'selected' : ''">weeks</option>
+                <option :selected="oldvalues['age-unit'] == 'days' ? 'selected' : ''">days</option>
             </select>
         </div>
         <div class="form-group col-md-4">
