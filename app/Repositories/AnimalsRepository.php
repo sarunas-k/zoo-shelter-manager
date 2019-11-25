@@ -192,7 +192,6 @@ class AnimalsRepository implements IAnimalsRepository {
     public function formatFieldsForPresentation($animal) {
         // Check if animal quarantine period has passed
         $daysInShelter = date_diff(date_create($animal->intake_date), date_create(date("Y-m-d")))->format('%a');
-        $animal->is_adoptable = $daysInShelter > 14; //TODO: store this value somewhere in configuration
 
         // Check if animal is in foster care
         $animal->is_fostered = $animal->activeFosters()->count() > 0;
@@ -208,11 +207,6 @@ class AnimalsRepository implements IAnimalsRepository {
             $separator = $key == $animal->breeds->count()-1 ? '' : ' / ';
             $animal->breeds_concatenated .= $breed->name . $separator;
         } 
-
-        // $animal->imagesList = [];
-        // foreach ($animal->images as $image) {
-        //     $animal->imagesList.push($image);
-        // }
 
         return $animal;
     }

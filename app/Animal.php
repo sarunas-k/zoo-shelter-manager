@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Setting;
 
 class Animal extends Model
 {
@@ -65,9 +66,8 @@ class Animal extends Model
         return $this->reclaims()->whereNull('return_date');
     }
 
-    public function notInShelter() {
+    public function adoptedOrReclaimed() {
         return $this->activeAdoptions()->count() > 0 ||
-                $this->activeFosters()->count() > 0 ||
                 $this->activeReclaims()->count() > 0;
     }
 
@@ -120,6 +120,7 @@ class Animal extends Model
     }
 
     public function getAdoptableAttribute() {
-        return date_diff(date_create($this->intake_date), date_create(date("Y-m-d")))->format('%a') > 14 && !$this->notInShelter();
+        return date_diff(date_create($this->intake_date), date_create(date("Y-m-d")))->format('%a') > intval(Setting::where('name', 'Not for adoption period in days')->first()->value)
+                && !$this->adoptedOrReclaimed();
     }
 }

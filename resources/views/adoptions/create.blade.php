@@ -16,22 +16,18 @@
 
 @if(isset($animal))
     @include('partials/animal-card')
-    @if(!$animal->is_adoptable && !$animal->notInShelter())
+    @if(!$animal->adoptable)
         <div class="alert alert-warning" role="alert"><strong>Notice:</strong> Animal is set as <strong>not for adoption</strong>.</div>
     @endif
-@endif
 
-@if(isset($animal) && $animal->notInShelter())
-    <div class="alert alert-danger" role="alert">
-        @if($animal->is_fostered)
-            Animal is <strong>in foster</strong>. Please end current foster to proceed.
-        @elseif($animal->is_reclaimed)
-            Animal is <strong>reclaimed</strong>. Please end current reclaim to proceed.
-        @elseif($animal->is_adopted)
-            Animal is <strong>adopted</strong>. Please end current adoption to proceed.
-        @endif
-    </div>
-@else
+    @if($animal->is_fostered)
+        <div class="alert alert-danger" role="alert">Animal is <strong>in foster</strong>. Please end current foster to proceed.</div>
+    @elseif($animal->is_reclaimed)
+        <div class="alert alert-danger" role="alert">Animal is <strong>reclaimed</strong>. Please end current reclaim to proceed.</div>
+    @elseif($animal->is_adopted)
+        <div class="alert alert-danger" role="alert">Animal is <strong>adopted</strong>. Please end current adoption to proceed.</div>
+    @endif
+@endif
 <form method="POST" action="{{route('adoptions.store')}}" enctype="multipart/form-data">
     @csrf
     <div class="form-row">
@@ -61,5 +57,4 @@
     </div>
     <button type="submit" class="btn btn-success">Save</button>
 </form>
-@endif
 @endsection
