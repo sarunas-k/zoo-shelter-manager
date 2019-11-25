@@ -162,15 +162,18 @@ class AnimalsController extends Controller
      */
     public function edit(Animal $animal)
     {
+        $animal = $animal->load('images');
         return view('animals/edit')->with([
             'animal' => $this->animalsRepo->formatFieldsForPresentation($animal),
-            'species' => $this->speciesRepo->all(),
+            'species' => $this->speciesRepo->allWithBreeds(),
             'colors' => $this->colorsRepo->all(),
             'staff' => $this->staffRepo->all(),
             'livingAreas' => $this->areasRepo->all(),
             'intakeTypes' => $this->intakeTypesRepo->all(),
             'calls' => $this->callsRepo->all(),
-            'people' => $this->peopleRepo->all()
+            'people' => $this->peopleRepo->all(),
+            'sizes' => $this->animalsRepo->getSizeNames(),
+            'genders' => $this->animalsRepo->getGenderNames(),
         ]);
     }
 
@@ -200,7 +203,6 @@ class AnimalsController extends Controller
             'staff' => 'required',
             'breed' => 'required',
             'is-neutered' => 'required|boolean',
-            'animal-images-list' => '',
             'intake-type' => 'required',
             'call' => '',
             'bring-in-person' => '',

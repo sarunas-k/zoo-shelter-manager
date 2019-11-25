@@ -26,7 +26,7 @@ Vue.component('animals-index', require('./components/AnimalsIndex.vue').default)
 Vue.component('reports', require('./components/Reports.vue').default);
 Vue.component('list-filter', require('./components/ListFilter.vue').default);
 Vue.component('delete-button', require('./components/DeleteButton.vue').default);
-Vue.component('animal-create-form', require('./components/AnimalCreateForm.vue').default);
+Vue.component('animal-form', require('./components/AnimalForm.vue').default);
 Vue.component('searchable-select', require('./components/SearchableSelect.vue').default);
 Vue.component('animals-list', require('./components/AnimalsList.vue').default);
 Vue.component('pagination-links', require('./components/PaginationLinks.vue').default);

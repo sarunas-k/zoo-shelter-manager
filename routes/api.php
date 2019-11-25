@@ -22,3 +22,4 @@ Route::get('/reports', 'ReportsController@getReportJSON')->middleware('auth:api'
 Route::patch('/users/{id}', 'UsersController@update')->middleware('auth:api');
 Route::delete('/users/{id}', 'UsersController@destroy')->middleware('auth:api');
 Route::patch('/settings/{id}', 'SettingsController@update')->middleware('auth:api');
+Route::delete('/images/{id}', 'ImagesController@destroy')->middleware('auth:api');

@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Animal;
 use App\Image;
 use App\Repositories\Interfaces\IAnimalsRepository;
+use Illuminate\Support\Facades\Storage;
 
 class AnimalsRepository implements IAnimalsRepository {
 
@@ -149,14 +150,6 @@ class AnimalsRepository implements IAnimalsRepository {
         // Save animal breeds to animal_breed table
         $animal->breeds()->sync($formFields['breed']);
 
-        // Check previously uploaded images list
-        if (is_null($formFields['animal-images-list'])) {
-            if ($animal->images()->count() > 0)
-                $animal->images()->detach();
-        } else {
-            $animal->images()->sync(explode(',', $formFields['animal-images-list']));
-        }
-
         // Upload images to server and save animal images paths to database
         if (isset($formFields['animal-image'])) {
             foreach($formFields['animal-image'] as $imageFile) {
@@ -215,6 +208,11 @@ class AnimalsRepository implements IAnimalsRepository {
             $separator = $key == $animal->breeds->count()-1 ? '' : ' / ';
             $animal->breeds_concatenated .= $breed->name . $separator;
         } 
+
+        // $animal->imagesList = [];
+        // foreach ($animal->images as $image) {
+        //     $animal->imagesList.push($image);
+        // }
 
         return $animal;
     }

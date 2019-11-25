@@ -13,7 +13,7 @@
     </ul>
 </div>
 @endif
-<animal-create-form 
+<animal-form 
     :species="{{json_encode($species)}}" 
     :staff="{{json_encode($staff)}}" 
     :livingareas="{{json_encode($livingAreas)}}" 

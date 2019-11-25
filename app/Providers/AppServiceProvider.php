@@ -19,6 +19,7 @@ use App\Repositories\ProcedureTypesRepository;
 use App\Repositories\IntakeTypesRepository;
 use App\Repositories\SettingsRepository;
 use App\Repositories\UsersRepository;
+use App\Repositories\ImagesRepository;
 use App\Repositories\Interfaces\IAnimalsRepository;
 use App\Repositories\Interfaces\IAdoptionsRepository;
 use App\Repositories\Interfaces\ICallsRepository;
@@ -34,6 +35,7 @@ use App\Repositories\Interfaces\IProcedureTypesRepository;
 use App\Repositories\Interfaces\IIntakeTypesRepository;
 use App\Repositories\Interfaces\ISettingsRepository;
 use App\Repositories\Interfaces\IUsersRepository;
+use App\Repositories\Interfaces\IImagesRepository;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -127,6 +129,11 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             IUsersRepository::class, 
             UsersRepository::class
+        );
+
+        $this->app->bind(
+            IImagesRepository::class, 
+            ImagesRepository::class
         );
     }
 }
