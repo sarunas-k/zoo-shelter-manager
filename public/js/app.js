@@ -1816,6 +1816,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -39927,6 +39933,18 @@ var render = function() {
           _c("label", { attrs: { for: "is-neutered" } }, [
             _vm._v("Spayed/neutered")
           ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-row" }, [
+        _c("div", { staticClass: "form-group col-md-8" }, [
+          _c("label", { attrs: { for: "notes" } }, [_vm._v("Notes")]),
+          _vm._v(" "),
+          _c("textarea", {
+            staticClass: "form-control",
+            attrs: { name: "notes", id: "notes", rows: "4" },
+            domProps: { value: _vm.oldvalues["notes"] }
+          })
         ])
       ]),
       _vm._v(" "),

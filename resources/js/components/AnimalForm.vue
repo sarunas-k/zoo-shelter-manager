@@ -102,6 +102,12 @@
             <label for="is-neutered">Spayed/neutered</label>
         </div>
     </div>
+    <div class="form-row">
+        <div class="form-group col-md-8">
+            <label for="notes">Notes</label>
+            <textarea class="form-control" name="notes" id="notes" rows="4" :value="oldvalues['notes']"></textarea>
+        </div>
+    </div>
     <div class="form-row" v-if="editform">
         <div class="animal-images" style="width: 100%">
             <div v-for="(image, index) in oldvalues['images']" :key="'image'+index" class="animal-image-container" style="position: relative; float: left; width: 150px; height: 150px; margin-right: 1em; margin-bottom: 1em">

@@ -77,6 +77,7 @@ class AnimalsRepository implements IAnimalsRepository {
         $animal->intake_type_id = $formFields['intake-type'];
         $animal->call_id = $formFields['call'];
         $animal->bring_in_person_id = $formFields['bring-in-person'];
+        $animal->notes = $formFields['notes'];
 
         if ($formFields['age-digit'] && $formFields['age-unit']) {
             $birthdate = '';
@@ -144,7 +145,8 @@ class AnimalsRepository implements IAnimalsRepository {
             'is_neutered' => $formFields['is-neutered'] ? 1 : 0,
             'intake_type_id' => $formFields['intake-type'],
             'call_id' => $formFields['call'],
-            'bring_in_person_id' => $formFields['bring-in-person']
+            'bring_in_person_id' => $formFields['bring-in-person'],
+            'notes' => $formFields['notes']
         ]);
         
         // Save animal breeds to animal_breed table

@@ -34,6 +34,10 @@
             aria-controls="profile" aria-selected="true">Details</a>
     </li>
     <li class="nav-item">
+        <a class="nav-link" id="notes-tab" data-toggle="tab" href="#notes" role="tab"
+            aria-controls="notes" aria-selected="true">Notes</a>
+    </li>
+    <li class="nav-item">
         <a class="nav-link" id="vet-visits-tab" data-toggle="tab" href="#vet-visits" role="tab"
             aria-controls="vet-visits" aria-selected="false">Vet visits</a>
     </li>
@@ -137,7 +141,14 @@
             </tr>
         </table>
     </div>
-    <!-- TAB 2: Vet visits -->
+    <div class="tab-pane" id="notes" role="tabpanel" aria-labelledby="notes-tab" style="margin-left: 1rem">
+        @if($animal->notes)
+            {{$animal->notes}}
+        @else
+            There are no notes for this animal.
+        @endif
+    </div>
+    <!-- TAB 3: Vet visits -->
     <div class="tab-pane" id="vet-visits" role="tabpanel" aria-labelledby="vet-visits-tab" style="margin-left: 1rem">
         <a href="{{route('procedures.create.for.animal', ['id' => $animal->id])}}"
             class="btn btn-primary btn-sm text-center">New procedure</a><br><br>
@@ -162,11 +173,11 @@
             </table>
             @endif
     </div>
-    <!-- TAB 3: Animal files -->
+    <!-- TAB 4: Animal files -->
     <div class="tab-pane" id="files" role="tabpanel" aria-labelledby="files-tab" style="margin-left: 1rem">
         No files yet.
     </div>
-    <!-- TAB 4: Animal images -->
+    <!-- TAB 5: Animal images -->
     <div class="tab-pane" id="images" role="tabpanel" aria-labelledby="images-tab" style="margin-left: 1rem">
         <div class="animal-images" style="width: 100%;">
             @if ($animal->images->count() > 0)
