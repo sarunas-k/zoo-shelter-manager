@@ -34,6 +34,7 @@ Vue.component('image-upload-preview', require('./components/ImageUploadPreview.v
 Vue.component('input-file', require('./components/InputFile.vue').default);
 Vue.component('settings', require('./components/Settings.vue').default);
 Vue.component('image-upload', require('./components/ImageUpload.vue').default);
+Vue.component('dialog-box', require('./components/DialogBox.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

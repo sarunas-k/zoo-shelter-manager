@@ -24,7 +24,12 @@ class StaffRepository implements IStaffRepository {
     }
 
     public function addFromInput($request) {
-        
+        $staff = new Staff;
+        $staff->first_name = $formFields('first-name');
+        $staff->last_name = $formFields('last-name');
+        $staff->phone = $formFields('phone');
+        $staff->is_vet = $formFields('is-vet');
+        $staff->save();
     }
 
     public function updateFromInput($id, $request) {

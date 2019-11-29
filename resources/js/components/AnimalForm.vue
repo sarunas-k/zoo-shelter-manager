@@ -110,7 +110,7 @@
     </div>
     <div class="form-row" v-if="editform">
         <div class="animal-images" style="width: 100%">
-            <div v-for="(image, index) in oldvalues['images']" :key="'image'+index" class="animal-image-container" style="position: relative; float: left; width: 150px; height: 150px; margin-right: 1em; margin-bottom: 1em">
+            <div v-for="(image, index) in images" :key="'image'+index" class="animal-image-container" style="position: relative; float: left; width: 150px; height: 150px; margin-right: 1em; margin-bottom: 1em">
                 <span @click="deleteImage(image.id)" class="delete-button" style="background-color: #FFF; padding: 2px 8px; position: absolute; x: 0; y: 0; cursor: pointer">x</span>
                 <img :src="'/storage' + image.path.slice(6)" :id="image.id" class="animal-image" style="width: 100%; height: 100%; object-fit: cover;">
             </div>
@@ -127,10 +127,12 @@ import ImageUpload from './ImageUpload.vue';
 export default {
     mounted() {
         console.log('Vue: AnimalForm Component mounted.');
+        this.images = [...this.oldvalues['images']]; 
     },
     data: function() {
         return {
-            selectedSpecies: null
+            selectedSpecies: null,
+            images: null
         }
     },
     methods: {
@@ -155,7 +157,7 @@ export default {
         deleteImage(imageId) {
             axios.delete(`/api/images/${imageId}`, null, null)
             .then((response) => { // success
-                this.oldvalues['images'] = this.oldvalues['images'].filter(image => image.id !== imageId);
+                this.images = this.images.filter(image => image.id !== imageId);
             })
             .catch(function (error) {
                 console.log(error);

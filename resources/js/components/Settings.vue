@@ -13,7 +13,7 @@
         <h4 class="section-title">Users</h4>
         <div class="mt-3 mb-5 section">
             <a href="/users/create" class="btn btn-sm btn-success mb-3">New User</a>
-            <table class="table table-sm" :style="{opacity: tableOpacity}">
+            <table class="table table-sm" :style="{opacity: isUsersTableLoading ? 0.6 : 1}">
                 <tr><th>Name</th><th>Email</th><th>Admin</th><th></th></tr>
                     <tr v-for="user in usersList" :key="user.id">
                         <td>{{user.name}}</td>
@@ -27,6 +27,30 @@
                     </tr>
             </table>
         </div>
+
+        <!-- <h4 class="section-title">Staff</h4>
+        <div class="mt-3 mb-5 section">
+            <a href="/users/create" class="btn btn-sm btn-success mb-3">New Staff</a>
+            <table class="table table-sm" :style="{opacity: isStaffTableLoading ? 0.6 : 1}">
+                <tr>
+                    <th>First name</th>
+                    <th>Last name</th>
+                    <th>Phone</th>
+                    <th>Vet</th>
+                    <th></th>
+                </tr>
+                <tr v-for="user in usersList" :key="user.id">
+                    <td>{{user.name}}</td>
+                    <td>{{user.email}}</td>
+                    <td>
+                        <input type="checkbox" v-model="user.is_admin" @change="updateUserStatus(user)"/>
+                    </td>
+                    <td>
+                        <span class="delete-button" @click="deleteUser(user.id)">Delete user</span>
+                    </td>
+                </tr>
+            </table>
+        </div> -->
 </div>
 </template>
 
@@ -39,7 +63,8 @@
         data() {
             return {
                 response: [],
-                isLoading: false,
+                isUsersTableLoading: false,
+                // isStaffTableLoading: false,
                 usersList: []
             }
         },
@@ -56,7 +81,7 @@
                 });
             },
             deleteUser(id) {
-                this.isLoading = true;
+                this.isUsersTableLoading = true;
                 axios.delete(`/api/users/${id}`, null, null)
                 .then((response) => { // success
                     this.usersList = this.usersList.filter(user => user.id !== id);
@@ -66,11 +91,11 @@
                 })
                 .then(() => {
                     // always executed
-                    this.isLoading = false;
+                    this.isUsersTableLoading = false;
                 });
             },
             updateUserStatus(user) {
-                this.isLoading = true;
+                this.isUsersTableLoading = true;
                 axios.patch(`/api/users/${user.id}`, null, { params: {'is_admin': user.is_admin} })
                 .then((response) => { // success
                 })
@@ -79,12 +104,9 @@
                 })
                 .then(() => {
                     // always executed
-                    this.isLoading = false;
+                    this.isUsersTableLoading = false;
                 });
             }
-        },
-        computed: {
-            tableOpacity() { return this.isLoading ? 0.6 : 1 }
         },
         props: {
             csrf:     { type: String, default: '' },
