@@ -9,6 +9,6 @@
     @if(!isset($settings))
         <p>No settings entries found in database.</p>
     @else
-        <settings csrf="{{ csrf_token() }}" :settings="{{json_encode($settings)}}" :users="{{json_encode($users)}}"/>
+        <settings csrf="{{ csrf_token() }}" :settings="{{json_encode($settings)}}" :users="{{json_encode($users)}}" :staff="{{json_encode($staff)}}"/>
     @endif
 @endsection

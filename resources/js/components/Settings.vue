@@ -28,9 +28,9 @@
             </table>
         </div>
 
-        <!-- <h4 class="section-title">Staff</h4>
+        <h4 class="section-title">Staff</h4>
         <div class="mt-3 mb-5 section">
-            <a href="/users/create" class="btn btn-sm btn-success mb-3">New Staff</a>
+            <a href="/staff/create" class="btn btn-sm btn-success mb-3">New Staff</a>
             <table class="table table-sm" :style="{opacity: isStaffTableLoading ? 0.6 : 1}">
                 <tr>
                     <th>First name</th>
@@ -39,18 +39,21 @@
                     <th>Vet</th>
                     <th></th>
                 </tr>
-                <tr v-for="user in usersList" :key="user.id">
-                    <td>{{user.name}}</td>
-                    <td>{{user.email}}</td>
+                <tr v-for="staffMember in staffList" :key="staffMember.id">
+                    <td>{{staffMember.first_name}}</td>
+                    <td>{{staffMember.last_name}}</td>
                     <td>
-                        <input type="checkbox" v-model="user.is_admin" @change="updateUserStatus(user)"/>
+                        <input type="text" class="form-control" v-model="staffMember.phone" @change="updateStaffStatus(staffMember)"/>
                     </td>
                     <td>
-                        <span class="delete-button" @click="deleteUser(user.id)">Delete user</span>
+                        <input type="checkbox" v-model="staffMember.is_vet" @change="updateStaffStatus(staffMember)"/>
+                    </td>
+                    <td>
+                        <span class="delete-button" @click="deleteStaff(staffMember.id)">Delete staff</span>
                     </td>
                 </tr>
             </table>
-        </div> -->
+        </div>
 </div>
 </template>
 
@@ -59,13 +62,15 @@
         mounted() {
             console.log('Vue: Settings Component mounted.');
             this.usersList = [...this.users];
+            this.staffList = [...this.staff];
         },
         data() {
             return {
                 response: [],
                 isUsersTableLoading: false,
-                // isStaffTableLoading: false,
-                usersList: []
+                isStaffTableLoading: false,
+                usersList: [],
+                staffList: []
             }
         },
         methods: {
@@ -94,6 +99,20 @@
                     this.isUsersTableLoading = false;
                 });
             },
+            deleteStaff(id) {
+                this.isStaffTableLoading = true;
+                axios.delete(`/api/staff/${id}`, null, null)
+                .then((response) => { // success
+                    this.staffList = this.staffList.filter(staff => staff.id !== id);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                })
+                .then(() => {
+                    // always executed
+                    this.isStaffTableLoading = false;
+                });
+            },
             updateUserStatus(user) {
                 this.isUsersTableLoading = true;
                 axios.patch(`/api/users/${user.id}`, null, { params: {'is_admin': user.is_admin} })
@@ -106,12 +125,29 @@
                     // always executed
                     this.isUsersTableLoading = false;
                 });
+            },
+            updateStaffStatus(staff) {
+                this.isStaffTableLoading = true;
+                axios.patch(`/api/staff/${staff.id}`, null, { params: {
+                    'is_vet': staff.is_vet,
+                    'phone': staff.phone
+                } })
+                .then((response) => { // success
+                })
+                .catch(function (error) {
+                    console.log(error);
+                })
+                .then(() => {
+                    // always executed
+                    this.isStaffTableLoading = false;
+                });
             }
         },
         props: {
             csrf:     { type: String, default: '' },
             settings: { type: Array, default: '' },
-            users:    { type: Array, default: '' }
+            users:    { type: Array, default: '' },
+            staff:    { type: Array, default: '' }
         }
     }
 </script>

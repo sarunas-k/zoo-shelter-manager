@@ -180,6 +180,7 @@
         break;
       case 'Settings':
       case 'New User':
+      case 'New Staff':
         currentPage = 'Settings';
         break;
       case 'Animals off shelter':

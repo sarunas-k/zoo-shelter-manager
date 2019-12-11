@@ -3146,17 +3146,22 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     console.log('Vue: Settings Component mounted.');
     this.usersList = _toConsumableArray(this.users);
+    this.staffList = _toConsumableArray(this.staff);
   },
   data: function data() {
     return {
       response: [],
       isUsersTableLoading: false,
-      // isStaffTableLoading: false,
-      usersList: []
+      isStaffTableLoading: false,
+      usersList: [],
+      staffList: []
     };
   },
   methods: {
@@ -3187,8 +3192,24 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
         _this.isUsersTableLoading = false;
       });
     },
-    updateUserStatus: function updateUserStatus(user) {
+    deleteStaff: function deleteStaff(id) {
       var _this2 = this;
+
+      this.isStaffTableLoading = true;
+      axios["delete"]("/api/staff/".concat(id), null, null).then(function (response) {
+        // success
+        _this2.staffList = _this2.staffList.filter(function (staff) {
+          return staff.id !== id;
+        });
+      })["catch"](function (error) {
+        console.log(error);
+      }).then(function () {
+        // always executed
+        _this2.isStaffTableLoading = false;
+      });
+    },
+    updateUserStatus: function updateUserStatus(user) {
+      var _this3 = this;
 
       this.isUsersTableLoading = true;
       axios.patch("/api/users/".concat(user.id), null, {
@@ -3200,7 +3221,24 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
         console.log(error);
       }).then(function () {
         // always executed
-        _this2.isUsersTableLoading = false;
+        _this3.isUsersTableLoading = false;
+      });
+    },
+    updateStaffStatus: function updateStaffStatus(staff) {
+      var _this4 = this;
+
+      this.isStaffTableLoading = true;
+      axios.patch("/api/staff/".concat(staff.id), null, {
+        params: {
+          'is_vet': staff.is_vet,
+          'phone': staff.phone
+        }
+      }).then(function (response) {// success
+      })["catch"](function (error) {
+        console.log(error);
+      }).then(function () {
+        // always executed
+        _this4.isStaffTableLoading = false;
       });
     }
   },
@@ -3214,6 +3252,10 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
       "default": ''
     },
     users: {
+      type: Array,
+      "default": ''
+    },
+    staff: {
       type: Array,
       "default": ''
     }
@@ -41553,6 +41595,129 @@ var render = function() {
         ],
         2
       )
+    ]),
+    _vm._v(" "),
+    _c("h4", { staticClass: "section-title" }, [_vm._v("Staff")]),
+    _vm._v(" "),
+    _c("div", { staticClass: "mt-3 mb-5 section" }, [
+      _c(
+        "a",
+        {
+          staticClass: "btn btn-sm btn-success mb-3",
+          attrs: { href: "/staff/create" }
+        },
+        [_vm._v("New Staff")]
+      ),
+      _vm._v(" "),
+      _c(
+        "table",
+        {
+          staticClass: "table table-sm",
+          style: { opacity: _vm.isStaffTableLoading ? 0.6 : 1 }
+        },
+        [
+          _vm._m(1),
+          _vm._v(" "),
+          _vm._l(_vm.staffList, function(staffMember) {
+            return _c("tr", { key: staffMember.id }, [
+              _c("td", [_vm._v(_vm._s(staffMember.first_name))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(staffMember.last_name))]),
+              _vm._v(" "),
+              _c("td", [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: staffMember.phone,
+                      expression: "staffMember.phone"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { type: "text" },
+                  domProps: { value: staffMember.phone },
+                  on: {
+                    change: function($event) {
+                      return _vm.updateStaffStatus(staffMember)
+                    },
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(staffMember, "phone", $event.target.value)
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("td", [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: staffMember.is_vet,
+                      expression: "staffMember.is_vet"
+                    }
+                  ],
+                  attrs: { type: "checkbox" },
+                  domProps: {
+                    checked: Array.isArray(staffMember.is_vet)
+                      ? _vm._i(staffMember.is_vet, null) > -1
+                      : staffMember.is_vet
+                  },
+                  on: {
+                    change: [
+                      function($event) {
+                        var $$a = staffMember.is_vet,
+                          $$el = $event.target,
+                          $$c = $$el.checked ? true : false
+                        if (Array.isArray($$a)) {
+                          var $$v = null,
+                            $$i = _vm._i($$a, $$v)
+                          if ($$el.checked) {
+                            $$i < 0 &&
+                              _vm.$set(staffMember, "is_vet", $$a.concat([$$v]))
+                          } else {
+                            $$i > -1 &&
+                              _vm.$set(
+                                staffMember,
+                                "is_vet",
+                                $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                              )
+                          }
+                        } else {
+                          _vm.$set(staffMember, "is_vet", $$c)
+                        }
+                      },
+                      function($event) {
+                        return _vm.updateStaffStatus(staffMember)
+                      }
+                    ]
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("td", [
+                _c(
+                  "span",
+                  {
+                    staticClass: "delete-button",
+                    on: {
+                      click: function($event) {
+                        return _vm.deleteStaff(staffMember.id)
+                      }
+                    }
+                  },
+                  [_vm._v("Delete staff")]
+                )
+              ])
+            ])
+          })
+        ],
+        2
+      )
     ])
   ])
 }
@@ -41565,6 +41730,22 @@ var staticRenderFns = [
       _c("th", [_vm._v("Name")]),
       _c("th", [_vm._v("Email")]),
       _c("th", [_vm._v("Admin")]),
+      _c("th")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("th", [_vm._v("First name")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Last name")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Phone")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Vet")]),
+      _vm._v(" "),
       _c("th")
     ])
   }

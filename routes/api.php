@@ -21,5 +21,7 @@ Route::get('/animals', 'AnimalsController@index')->middleware('auth:api');
 Route::get('/reports', 'ReportsController@getReportJSON')->middleware('auth:api');
 Route::patch('/users/{id}', 'UsersController@update')->middleware('auth:api');
 Route::delete('/users/{id}', 'UsersController@destroy')->middleware('auth:api');
+Route::patch('/staff/{id}', 'StaffController@update')->middleware('auth:api');
+Route::delete('/staff/{id}', 'StaffController@destroy')->middleware('auth:api');
 Route::patch('/settings/{id}', 'SettingsController@update')->middleware('auth:api');
 Route::delete('/images/{id}', 'ImagesController@destroy')->middleware('auth:api');
