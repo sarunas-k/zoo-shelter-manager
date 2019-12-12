@@ -37,7 +37,11 @@ class StaffRepository implements IStaffRepository {
         if (isset($formFields['phone'])) {
             $staff->phone = $formFields['phone'];
         }
-        $staff->is_vet = $formFields['is_vet'] == 'true' ? '1' : '0';
+        if ($formFields['is_vet'] == 'true' || $formFields['is_vet'] == '1') {
+            $staff->is_vet = '1';
+        } else {
+            $staff->is_vet = '0';
+        }
         $staff->save();
     }
 
