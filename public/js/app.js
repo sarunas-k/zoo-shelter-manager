@@ -1835,7 +1835,7 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     console.log('Vue: AnimalForm Component mounted.');
-    this.images = _toConsumableArray(this.oldvalues['images']);
+    if (this.editform) this.images = _toConsumableArray(this.oldvalues['images']);
   },
   data: function data() {
     return {

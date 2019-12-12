@@ -127,7 +127,8 @@ import ImageUpload from './ImageUpload.vue';
 export default {
     mounted() {
         console.log('Vue: AnimalForm Component mounted.');
-        this.images = [...this.oldvalues['images']]; 
+        if (this.editform)
+            this.images = [...this.oldvalues['images']]; 
     },
     data: function() {
         return {
