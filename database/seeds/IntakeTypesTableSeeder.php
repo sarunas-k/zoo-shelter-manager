@@ -15,6 +15,7 @@ class IntakeTypesTableSeeder extends Seeder
             ['name' => 'Stray'],
             ['name' => 'Foster'],
             ['name' => 'Surrender'],
+            ['name' => 'Boarding'],
             ['name' => 'Confiscated']
         ]);
     }
