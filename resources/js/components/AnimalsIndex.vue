@@ -2,11 +2,11 @@
     <div class="animals-wrapper">
         <list-filter :options="this.filterOptions" :checkedFilters="this.checkedFilters" @filter-change="onFilterChange"/>
 
-        <pagination-links v-if="animals.length" :currentPage="pageCurrentNum" :totalPages="pageLastNum" :navigatePrev="onNavigatePrev" :navigateNext="onNavigateNext"/>
+        <pagination-links v-if="animals.length" :currentPage="pageCurrentNum" :totalPages="pageLastNum" :navigatePrev="onNavigatePrev" :navigateNext="onNavigateNext" :total="total"/>
 
         <animals-list :animals="animals" :isLoading="isLoading" :initialized="initialized" :csrf="csrf"/>
 
-        <pagination-links v-if="animals.length" :currentPage="pageCurrentNum" :totalPages="pageLastNum" :navigatePrev="onNavigatePrev" :navigateNext="onNavigateNext"/>
+        <pagination-links v-if="animals.length" :currentPage="pageCurrentNum" :totalPages="pageLastNum" :navigatePrev="onNavigatePrev" :navigateNext="onNavigateNext" :total="total"/>
     </div>
 </template>
 
@@ -28,6 +28,7 @@
                 pageLastNum: null,
                 pageNextUrl: null,
                 pagePrevUrl: null,
+                total: null,
                 isLoading: false,
                 initialized: false,
                 checkedFilters: {},
@@ -88,6 +89,7 @@
                     this.pageLastNum = response.data.last_page;
                     this.pageNextUrl = response.data.next_page_url;
                     this.pagePrevUrl = response.data.prev_page_url;
+                    this.total = response.data.total;
                     if (response.data.filters) {
                         this.filterOptions = response.data.filters;
                         this.checkedFilters = {...this.filterOptions};

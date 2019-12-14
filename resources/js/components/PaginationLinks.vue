@@ -14,7 +14,11 @@
               <span class="sr-only">Next</span>
             </a>
           </li>
+          <li>
+            <span class="pagination-total">Total found: {{ total }}</span>
+          </li>
         </ul>
+        
     </nav>
 </template>
 
@@ -45,11 +49,20 @@ export default {
             required: true,
             default: 1,
             note: 'Total number of pages in a list'
+        },
+        total: {
+            type: Number,
+            required: true,
+            note: 'Total number of entries in a list'
         }
     }
 }
 </script>
 
 <style scoped>
-
+.pagination-total {
+  line-height: 35px;
+  margin-left: 1em;
+  font-size: 0.9em;
+}
 </style>
