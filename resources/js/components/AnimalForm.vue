@@ -5,7 +5,7 @@
     <div class="form-row">
         <div class="form-group col-md-4">
             <label for="animal-number">Animal number</label>
-            <input type="text" class="form-control" id="animal-number" name="animal-number" placeholder="Number" :value="oldvalues[editform ? 'list_number' : 'animal-number']">
+            <input type="text" class="form-control" id="animal-number" name="animal-number" placeholder="Number" v-model="oldvalues[editform ? 'list_number' : 'animal-number']">
         </div>
         <div class="form-group col-md-4">
             <label for="species">Species</label>
@@ -22,7 +22,7 @@
     <div class="form-row">
         <div class="form-group col-md-4">
             <label for="name">Name</label>
-            <input type="text" id="name" name="name" class="form-control" placeholder="Name" :value="oldvalues['name']">
+            <input type="text" id="name" name="name" class="form-control" placeholder="Name" v-model="oldvalues['name']">
         </div>
         <div class="form-group col-md-4">
             <label for="size">Size</label>
@@ -49,7 +49,7 @@
             <label for="birthdate">Date of Birth</label>
             <input type="date" class="form-control" id="birthdate" name="birthdate" :value="oldvalues['birthdate']">
             <span style="display: block; text-align: center">or</span>
-            <input type="number" class="form-control" id="age-digit" name="age-digit" min="1" :value="oldvalues['age-digit']" style="width: 50%; float: left">
+            <input type="number" class="form-control" id="age-digit" name="age-digit" min="1" v-model="oldvalues['age-digit']" style="width: 50%; float: left">
             <select class="form-control" id="age-unit" name="age-unit" style="width: 50%">
                 <option :selected="oldvalues['age-unit'] == 'years' ? 'selected' : ''">years</option>
                 <option :selected="oldvalues['age-unit'] == 'months' ? 'selected' : ''">months</option>
@@ -60,7 +60,7 @@
         <div class="form-group col-md-4">
             <label for="microchip">Microchip number</label>
             <input type="text" class="form-control" id="microchip" name="microchip" placeholder="Microchip number"
-                :value="oldvalues[editform ? 'chip_number' : 'microchip']">
+                v-model="oldvalues[editform ? 'chip_number' : 'microchip']">
         </div>
     </div>
     <div class="form-row">
@@ -105,7 +105,7 @@
     <div class="form-row">
         <div class="form-group col-md-8">
             <label for="notes">Notes</label>
-            <textarea class="form-control" name="notes" id="notes" rows="4" :value="oldvalues['notes']"></textarea>
+            <textarea class="form-control" name="notes" id="notes" rows="4" v-model="oldvalues['notes']"></textarea>
         </div>
     </div>
     <div class="form-row" v-if="editform">

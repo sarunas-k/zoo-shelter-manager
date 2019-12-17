@@ -39732,6 +39732,16 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value:
+                  _vm.oldvalues[_vm.editform ? "list_number" : "animal-number"],
+                expression:
+                  "oldvalues[editform ? 'list_number' : 'animal-number']"
+              }
+            ],
             staticClass: "form-control",
             attrs: {
               type: "text",
@@ -39742,6 +39752,18 @@ var render = function() {
             domProps: {
               value:
                 _vm.oldvalues[_vm.editform ? "list_number" : "animal-number"]
+            },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(
+                  _vm.oldvalues,
+                  _vm.editform ? "list_number" : "animal-number",
+                  $event.target.value
+                )
+              }
             }
           })
         ]),
@@ -39801,6 +39823,14 @@ var render = function() {
           _c("label", { attrs: { for: "name" } }, [_vm._v("Name")]),
           _vm._v(" "),
           _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.oldvalues["name"],
+                expression: "oldvalues['name']"
+              }
+            ],
             staticClass: "form-control",
             attrs: {
               type: "text",
@@ -39808,7 +39838,15 @@ var render = function() {
               name: "name",
               placeholder: "Name"
             },
-            domProps: { value: _vm.oldvalues["name"] }
+            domProps: { value: _vm.oldvalues["name"] },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.oldvalues, "name", $event.target.value)
+              }
+            }
           })
         ]),
         _vm._v(" "),
@@ -39917,6 +39955,14 @@ var render = function() {
           ),
           _vm._v(" "),
           _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.oldvalues["age-digit"],
+                expression: "oldvalues['age-digit']"
+              }
+            ],
             staticClass: "form-control",
             staticStyle: { width: "50%", float: "left" },
             attrs: {
@@ -39925,7 +39971,15 @@ var render = function() {
               name: "age-digit",
               min: "1"
             },
-            domProps: { value: _vm.oldvalues["age-digit"] }
+            domProps: { value: _vm.oldvalues["age-digit"] },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.oldvalues, "age-digit", $event.target.value)
+              }
+            }
           }),
           _vm._v(" "),
           _c(
@@ -39989,6 +40043,15 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value:
+                  _vm.oldvalues[_vm.editform ? "chip_number" : "microchip"],
+                expression: "oldvalues[editform ? 'chip_number' : 'microchip']"
+              }
+            ],
             staticClass: "form-control",
             attrs: {
               type: "text",
@@ -39998,6 +40061,18 @@ var render = function() {
             },
             domProps: {
               value: _vm.oldvalues[_vm.editform ? "chip_number" : "microchip"]
+            },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(
+                  _vm.oldvalues,
+                  _vm.editform ? "chip_number" : "microchip",
+                  $event.target.value
+                )
+              }
             }
           })
         ])
@@ -40176,9 +40251,25 @@ var render = function() {
           _c("label", { attrs: { for: "notes" } }, [_vm._v("Notes")]),
           _vm._v(" "),
           _c("textarea", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.oldvalues["notes"],
+                expression: "oldvalues['notes']"
+              }
+            ],
             staticClass: "form-control",
             attrs: { name: "notes", id: "notes", rows: "4" },
-            domProps: { value: _vm.oldvalues["notes"] }
+            domProps: { value: _vm.oldvalues["notes"] },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.oldvalues, "notes", $event.target.value)
+              }
+            }
           })
         ])
       ]),
