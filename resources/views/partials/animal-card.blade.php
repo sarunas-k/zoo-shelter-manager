@@ -39,7 +39,7 @@
             @if($animal->is_fostered)<span class="badge badge-pill badge-success" style="width: 150px">In Foster</span>@endif
             @if($animal->is_adopted)<span class="badge badge-pill badge-success" style="width: 150px">Adopted</span>@endif
             @if($animal->is_reclaimed)<span class="badge badge-pill badge-success" style="width: 150px">Reclaimed</span>@endif
-            @if(!$animal->adoptable)<span class="badge badge-pill badge-danger" style="width: 150px">Not For Adoption</span>@endif
+            @if(!$animal->adoptable && !$animal->is_adopted && !$animal->is_reclaimed)<span class="badge badge-pill badge-danger" style="width: 150px">Not For Adoption</span>@endif
         </div>
     </div>
 </div>
