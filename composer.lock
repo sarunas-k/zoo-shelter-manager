@@ -3252,11 +3252,7 @@
                 "shim"
             ],
             "support": {
-<<<<<<< dependabot/composer/guzzlehttp/guzzle-6.5.8
-                "source": "https://github.com/symfony/polyfill-intl-idn/tree/v1.26.0"
-=======
                 "source": "https://github.com/symfony/polyfill-intl-idn/tree/v1.29.0"
->>>>>>> master
             },
             "funding": [
                 {
