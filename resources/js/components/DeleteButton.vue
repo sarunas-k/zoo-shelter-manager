@@ -12,7 +12,7 @@
 export default {
     mounted() {
         window.feather.replace();
-        console.log('Vue: DeleteButton Component mounted.');
+        //console.log('Vue: DeleteButton Component mounted.');
     },
     data: function() {
         return {
@@ -22,7 +22,3 @@ export default {
     props: ['csrf', 'action']
 }
 </script>
-
-<style scoped>
-
-</style>

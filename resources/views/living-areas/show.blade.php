@@ -16,7 +16,7 @@
                 <td><strong>Animals: </strong></td>
                 <td>
                     @foreach($livingArea->animals as $animal)
-                    <a href="{{route('animals.show', ['id' => $animal->id])}}">{{$animal->list_number}}</a><br>
+                    <a href="{{route('animals.show', ['animal' => $animal->id])}}">{{$animal->list_number}}</a><br>
                     @endforeach
                 </td>
             </tr>

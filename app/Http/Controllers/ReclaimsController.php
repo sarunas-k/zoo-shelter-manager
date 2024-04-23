@@ -41,7 +41,7 @@ class ReclaimsController extends Controller
             $animal = $this->animalsRepo->get($request->animal_id);
             if ($animal == null)
                 return redirect()->action('ReclaimsController@create');
-            
+
             return view('reclaims/create')->with([
                 'animal' => $animal,
                 'people' => $this->peopleRepo->all()
@@ -99,7 +99,7 @@ class ReclaimsController extends Controller
     {
         return view('reclaims/edit')->with([
             'reclaim' => $reclaim,
-            'animal' => $this->animalsRepo->formatFieldsForPresentation($reclaim->animal)  
+            'animal' => $this->animalsRepo->formatFieldsForPresentation($reclaim->animal)
         ]);
     }
 
@@ -128,9 +128,9 @@ class ReclaimsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Reclaim $reclaim)
     {
-        $this->reclaimsRepo->delete($id);
+        $this->reclaimsRepo->delete($reclaim);
         return redirect('/reclaims')->with('success', 'Reclaim deleted successfully');
     }
 }

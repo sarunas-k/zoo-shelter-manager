@@ -54,8 +54,8 @@
         @foreach($person_adoptions as $adoption)
         <tr>
             <td scope="row" style="width: 15%"><a
-                    href="{{route('adoptions.show', ['id' => $adoption->id])}}">{{ $adoption->adoption_date }}</a></td>
-            <td><a href="{{route('animals.show', ['id' => $adoption->animal->id])}}">{{ $adoption->animal->list_number }}
+                    href="{{route('adoptions.show', ['adoption' => $adoption->id])}}">{{ $adoption->adoption_date }}</a></td>
+            <td><a href="{{route('animals.show', ['animal' => $adoption->animal->id])}}">{{ $adoption->animal->list_number }}
                     {{$adoption->animal->name}}</a></td>
             <td style="width: 25%">{{ $adoption->person->first_name }} {{ $adoption->person->last_name }}</td>
         </tr>
@@ -80,9 +80,9 @@
         @foreach($person_fosters as $foster)
         <tr>
             <td scope="row" style="width: 15%"><a
-                    href="{{route('fosters.show', ['id' => $foster->id])}}">{{ $foster->foster_start_date }}</a></td>
+                    href="{{route('fosters.show', ['foster' => $foster->id])}}">{{ $foster->foster_start_date }}</a></td>
             <td style="width: 15%">{{ $foster->foster_end_date }}</td>
-            <td><a href="{{route('animals.show', ['id' => $foster->animal->id])}}">{{ $foster->animal->list_number }}
+            <td><a href="{{route('animals.show', ['animal' => $foster->animal->id])}}">{{ $foster->animal->list_number }}
                     {{$foster->animal->name}}</a></td>
             <td style="width: 25%">{{ $foster->person->first_name }} {{ $foster->person->last_name }}</td>
         </tr>
@@ -106,8 +106,8 @@
         @foreach($person_reclaims as $reclaim)
         <tr>
             <td scope="row" style="width: 15%"><a
-                    href="{{route('reclaims.show', ['id' => $reclaim->id])}}">{{ $reclaim->date }}</a></td>
-            <td><a href="{{route('animals.show', ['id' => $reclaim->animal->id])}}">{{ $reclaim->animal->list_number }}
+                    href="{{route('reclaims.show', ['reclaim' => $reclaim->id])}}">{{ $reclaim->date }}</a></td>
+            <td><a href="{{route('animals.show', ['animal' => $reclaim->animal->id])}}">{{ $reclaim->animal->list_number }}
                     {{$reclaim->animal->name}}</a></td>
             <td style="width: 25%">{{ $reclaim->person->first_name }} {{ $reclaim->person->last_name }}</td>
         </tr>
@@ -131,7 +131,7 @@
         @foreach($person->broughtInAnimals as $animal)
         <tr>
             <td scope="row" style="width: 15%">{{ $animal->intake_date }}</td>
-            <td><a href="{{route('animals.show', ['id' => $animal->id])}}">{{ $animal->list_number }}
+            <td><a href="{{route('animals.show', ['animal' => $animal->id])}}">{{ $animal->list_number }}
                     {{$animal->name}}</a></td>
             <td style="width: 25%">{{ $animal->bringInPerson->full_name }}</td>
         </tr>

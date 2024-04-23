@@ -1,8 +1,7 @@
 <div class="animal-card card mb-3">
     <div class="row no-gutters p-2">
         <div>
-            <img src="{{Storage::url($animal->images->count() > 0 ? $animal->images->first()->path : 'public/images/no_image.jpeg')}}" class="card-img" alt="Animal {{$animal->list_number}} - {{$animal->name}}"
-                style="object-fit: cover; height: 200px; width: 200px">
+            <img src="{{Storage::url($animal->images->count() > 0 ? $animal->images->first()->path : '/zoo-shelter-manager/public/images/no_image.jpeg')}}" class="card-img" alt="Animal {{$animal->list_number}} - {{$animal->name}}">
         </div>
 
         <div>
@@ -30,16 +29,14 @@
                         <td>{{substr($animal->intake_date, 0, 11)}}</td>
                     </tr>
                 </table>
-                {{-- <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> --}}
             </div>
         </div>
-        <div class="animal-badges mx-2" style="width: 150px;">
-            @if($animal->is_neutered)<span class="badge badge-pill badge-primary" style="width: 150px">Spayed/Neutered</span>@endif
-            @if($animal->is_fostered)<span class="badge badge-pill badge-success" style="width: 150px">In Foster</span>@endif
-            @if($animal->is_adopted)<span class="badge badge-pill badge-success" style="width: 150px">Adopted</span>@endif
-            @if($animal->is_reclaimed)<span class="badge badge-pill badge-success" style="width: 150px">Reclaimed</span>@endif
-            @if(!$animal->adoptable && !$animal->is_adopted && !$animal->is_reclaimed)<span class="badge badge-pill badge-danger" style="width: 150px">Not For Adoption</span>@endif
+        <div class="animal-badges mx-2">
+            @if($animal->is_neutered)<span class="badge badge-pill badge-primary">Spayed/Neutered</span>@endif
+            @if($animal->is_fostered)<span class="badge badge-pill badge-success">In Foster</span>@endif
+            @if($animal->is_adopted)<span class="badge badge-pill badge-success">Adopted</span>@endif
+            @if($animal->is_reclaimed)<span class="badge badge-pill badge-success">Reclaimed</span>@endif
+            @if(!$animal->adoptable && !$animal->is_adopted && !$animal->is_reclaimed)<span class="badge badge-pill badge-danger">Not For Adoption</span>@endif
         </div>
     </div>
 </div>

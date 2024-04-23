@@ -1,14 +1,15 @@
 @extends('layouts/main')
+
+@push('styles')
+<link rel="stylesheet" href="{{asset('css/index.css')}}">
+@endpush
+
 @section('title', 'Management App')
 
 @section('content')
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
           <h1 class="h2 bold">Dashboard</h1>
           <div class="btn-toolbar mb-2 mb-md-0">
-            <div class="btn-group mr-2">
-              <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
-              <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
-            </div>
             <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
               <span data-feather="calendar"></span>
               This week
@@ -16,30 +17,30 @@
           </div>
         </div>
 
-        <div style="overflow: hidden">
-          <a href="{{route('animals.index')}}" style="text-decoration: none; color: #000">
-            <div style="width: 23.75%; height:200px; background-color: #d6eef9; float: left; position: relative;">
-              <span style="position: absolute; left: 50%; top: 50%; transform: translateX(-50%) translateY(-50%); font-family: 'Nunito', sans-serif; font-size: 30px; text-align: center;">Animals in shelter</span>
+        <div class="admin-menu-big-buttons">
+          <a href="{{route('animals.index')}}">
+            <div class="big-button first">
+              <span>Animals in shelter</span>
             </div>
           </a>
-          <a href="{{route('animals.create')}}" style="text-decoration: none; color: #000">
-            <div style="width: 23.75%; height:200px; background-color: #d6eef9; float: left; margin-left: 1.66%; position: relative">
-              <span style="position: absolute; left: 50%; top: 50%; transform: translateX(-50%) translateY(-50%); font-family: 'Nunito', sans-serif; font-size: 30px; text-align: center;">Animal intake</span>
+          <a href="{{route('animals.create')}}">
+            <div class="big-button">
+              <span>Animal intake</span>
             </div>
           </a>
-          <a href="{{route('calls.index')}}" style="text-decoration: none; color: #000">
-            <div style="width: 23.75%; height:200px; background-color: #d6eef9; float: left; margin-left: 1.66%; position: relative">
-              <span style="position: absolute; left: 50%; top: 50%; transform: translateX(-50%) translateY(-50%); font-family: 'Nunito', sans-serif; font-size: 30px; text-align: center;">Call registration</span>
+          <a href="{{route('calls.index')}}">
+            <div class="big-button">
+              <span>Call registration</span>
             </div>
           </a>
-          <a href="#" style="text-decoration: none; color: #000">
-            <div style="width: 23.75%; height:200px; background-color: #d6eef9; float: left; margin-left: 1.66%; position: relative">
-              <span style="position: absolute; left: 50%; top: 50%; transform: translateX(-50%) translateY(-50%); font-family: 'Nunito', sans-serif; font-size: 30px; text-align: center;">Calendar</span>
+          <a href="#">
+            <div class="big-button">
+              <span>Calendar</span>
             </div>
           </a>
         </div>
 
-        <div class="latest-animals" style="clear: left; margin-top: 2em">
+        <div class="latest-animals">
           <h3>Latest animals</h3>
         <div class="table-responsive">
           <table class="table table-bordered table-sm my-4">
@@ -57,7 +58,7 @@
             <tbody>
               @foreach($latest_animals as $animal)
                   <tr>
-                      <th scope="row"><a href="{{route('animals.show', ['id' => $animal->id])}}">{{ $animal->list_number }}</a></th>
+                      <th scope="row"><a href="{{route('animals.show', ['animal' => $animal->id])}}">{{ $animal->list_number }}</a></th>
                       <td>{{ $animal->species->name}}</td>
                       <td>{{ $animal->gender}}</td>
                       <td>{{ $animal->color->name}}</td>

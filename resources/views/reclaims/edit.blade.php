@@ -1,4 +1,9 @@
 @extends('layouts/main')
+
+@push('styles')
+<link rel="stylesheet" href="{{asset('css/animals.css')}}">
+@endpush
+
 @section('title', 'Edit Reclaim')
 
 @section('content')
@@ -21,7 +26,7 @@
 @endif
 <p><strong>Person:</strong> {{$reclaim->person->first_name}} {{$reclaim->person->last_name}}</p>
 <p><strong>Animal:</strong> {{$reclaim->animal->list_number}} {{$reclaim->animal->name}}</p>
-<form method="POST" action="{{route('reclaims.update', ['id' => $reclaim->id])}}" enctype="multipart/form-data">
+<form method="POST" action="{{route('reclaims.update', ['reclaim' => $reclaim->id])}}" enctype="multipart/form-data">
     @csrf
     @method('PATCH')
     @if(!isset($reclaim->return_date))

@@ -31,7 +31,7 @@ class ReclaimsRepository implements IReclaimsRepository {
         $person = Person::find($request->input('person'));
         if ($animal !== null && $person !== null) {
             $animal->reclaimers()->attach(
-                $person->id, 
+                $person->id,
                 [
                     'date' => $request->input('date'),
                     'created_at' => now(),
@@ -51,7 +51,7 @@ class ReclaimsRepository implements IReclaimsRepository {
         $reclaim->save();
     }
 
-    public function delete($id) {
-        $this->get($id)->delete();
+    public function delete($reclaim) {
+        $reclaim->delete();
     }
 }

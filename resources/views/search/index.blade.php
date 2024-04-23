@@ -26,7 +26,7 @@
             <tbody>
               @foreach($animals_results as $animal)
                   <tr>
-                      <th scope="row"><a href="{{route('animals.show', ['id' => $animal->id])}}">{{ $animal->list_number }}</a></th>
+                      <th scope="row"><a href="{{route('animals.show', ['animal' => $animal->id])}}">{{ $animal->list_number }}</a></th>
                       <td>{{ $animal->species->name}}</td>
                       <td>{{ $animal->gender}}</td>
                       <td>{{ $animal->color->name}}</td>

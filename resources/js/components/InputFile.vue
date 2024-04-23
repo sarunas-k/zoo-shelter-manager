@@ -13,7 +13,7 @@
 <script>
 export default {
     mounted() {
-        console.log('Vue: InputFile Component mounted.');
+        //console.log('Vue: InputFile Component mounted.');
     },
     props: {
         name: {

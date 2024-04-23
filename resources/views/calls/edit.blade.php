@@ -17,7 +17,7 @@
     @if(!isset($call))
     <p>No call was found.</p>
     @else
-    <form method="POST" action="{{route('calls.update', ['id' => $call->id])}}">
+    <form method="POST" action="{{route('calls.update', ['call' => $call->id])}}">
         @csrf
         @method('PATCH')
         <div class="form-row">

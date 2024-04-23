@@ -1,4 +1,9 @@
 @extends('layouts/main')
+
+@push('styles')
+<link rel="stylesheet" href="{{asset('css/animals.css')}}">
+@endpush
+
 @section('title', 'Edit Foster')
 
 @section('content')
@@ -21,7 +26,7 @@
 @endif
 <p><strong>Person:</strong> {{$foster->person->first_name}} {{$foster->person->last_name}}</p>
 <p><strong>Animal:</strong> {{$foster->animal->list_number}} {{$foster->animal->name}}</p>
-<form method="POST" action="{{route('fosters.update', ['id' => $foster->id])}}" enctype="multipart/form-data">
+<form method="POST" action="{{route('fosters.update', ['foster' => $foster->id])}}" enctype="multipart/form-data">
     @csrf
     @method('PATCH')
     @if(!isset($foster->foster_end_date))

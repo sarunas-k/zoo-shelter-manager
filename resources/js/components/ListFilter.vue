@@ -7,7 +7,7 @@
                     <span class="filter-title">{{filterCategory}}</span>
                 </button>
                 <div class="dropdown-menu px-2" @click="$event.stopPropagation()" :aria-labelledby="`menuButton${filterCategory}`">
-                    <label v-for="(value, i) in categoryItems" :key="i" :class="['form-check', 'form-check-label', 'dropdown-item', 
+                    <label v-for="(value, i) in categoryItems" :key="i" :class="['form-check', 'form-check-label', 'dropdown-item',
                         `filter-value-${value}`, {'dropdown-item-active': isChecked(value, filterCategory)}]">
                         <input v-model="checkedFilterItems[filterCategory]" class="form-check-input" type="checkbox" :value="value" :id="value" @change="emitFilterChangeEvent">
                         {{value}}
@@ -28,9 +28,9 @@
 <script>
     export default {
         mounted() {
-            console.log('Vue: ListFilter Component mounted.');
-            console.log('[Prop] Filter options:', this.options);
-            console.log('[Prop] Checked filters:', this.checkedFilters);
+            // console.log('Vue: ListFilter Component mounted.');
+            // console.log('[Prop] Filter options:', this.options);
+            // console.log('[Prop] Checked filters:', this.checkedFilters);
         },
         data: function() {
             return {
@@ -42,7 +42,7 @@
             removeFromFilter(item, filterCategory) {
                 if (!this.checkedFilterItems || !this.checkedFilterItems[filterCategory])
                     return;
-                
+
                 this.checkedFilterItems[filterCategory] = this.checkedFilterItems[filterCategory].filter(i => i !== item);
                 this.emitFilterChangeEvent();
             },
@@ -52,7 +52,7 @@
             isChecked(item, filterCategory) {
                 if (!this.checkedFilterItems || !this.checkedFilterItems[filterCategory])
                     return false;
-                
+
                 return this.checkedFilterItems[filterCategory].includes(item);
             }
         },
@@ -69,7 +69,7 @@
                 note: 'Filters that need to be selected'
             }
         },
-        watch: { 
+        watch: {
       	    options() {
                 this.initialized = true;
             },

@@ -23,7 +23,7 @@
 <script>
 export default {
     mounted() {
-        console.log('Vue: Dialog Component mounted.');
+        //console.log('Vue: Dialog Component mounted.');
     },
     data: function() {
         return {

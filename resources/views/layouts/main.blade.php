@@ -20,12 +20,14 @@
           'apiToken' => auth()->user()->api_token ?? null,
       ]) !!};
    </script>
-    
+
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    @stack('styles')
 
     <title>{{$appName}} | @yield('title')</title>
   </head>

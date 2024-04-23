@@ -1,4 +1,9 @@
 @extends('layouts/main')
+
+@push('styles')
+<link rel="stylesheet" href="{{asset('css/adoptions.css')}}">
+@endpush
+
 @section('title', $title)
 
 @section('content')
@@ -11,7 +16,7 @@
 @else
 <a href="{{route('adoptions.create')}}" class="btn btn-success btn-sm my-3">New adoption</a>
 {{ $adoptions->links() }}
-<table class="table table-bordered table-sm my-4">
+<table class="table table-bordered table-sm my-4 adoptions-table">
     <thead class="thead-dark">
         <tr>
             <th scope="col">Adoption date</th>
@@ -23,14 +28,14 @@
     <tbody>
         @foreach($adoptions as $adoption)
         <tr>
-            <td scope="row" style="width: 10%">
-                <a href="{{route('adoptions.show', ['id' => $adoption->id])}}">{{ $adoption->adoption_date }}</a>
+            <td scope="row" class="date-row">
+                <a href="{{route('adoptions.show', ['adoption' => $adoption->id])}}">{{ $adoption->adoption_date }}</a>
             </td>
-            <td style="width: 10%">
+            <td class="date-row">
                 {{ $adoption->return_date }}
             </td>
             <td>
-                <a href="{{route('animals.show', ['id' => $adoption->animal->id])}}">
+                <a href="{{route('animals.show', ['animal' => $adoption->animal->id])}}">
                     {{ $adoption->animal->list_number }} {{$adoption->animal->name}}
                 </a>
             </td>

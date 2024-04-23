@@ -1,14 +1,14 @@
 <template>
     <nav aria-label="Pagination" class="pagination-links">
         <ul class="pagination">
-          <li class="page-item" style="cursor: pointer">
+          <li class="page-item page-item-previous">
             <a class="page-link" aria-label="Previous" @click="navigatePrev">
               <span aria-hidden="true">&laquo;</span>
               <span class="sr-only">Previous</span>
             </a>
           </li>
           <li class="page-item"><span class="page-link">Page {{ currentPage }} of {{ totalPages }}</span></li>
-          <li class="page-item" style="cursor: pointer">
+          <li class="page-item page-item-next">
             <a class="page-link" aria-label="Next" @click="navigateNext">
               <span aria-hidden="true">&raquo;</span>
               <span class="sr-only">Next</span>
@@ -18,14 +18,14 @@
             <span class="pagination-total">Total found: {{ total }}</span>
           </li>
         </ul>
-        
+
     </nav>
 </template>
 
 <script>
 export default {
     mounted() {
-        console.log('Vue: PaginationLinks Component mounted.');
+        //console.log('Vue: PaginationLinks Component mounted.');
     },
     props: {
         navigatePrev: {
@@ -64,5 +64,9 @@ export default {
   line-height: 35px;
   margin-left: 1em;
   font-size: 0.9em;
+}
+.page-item.page-item-previous,
+.page-item.page-item-next {
+   cursor: pointer;
 }
 </style>

@@ -1,4 +1,9 @@
 @extends('layouts/main')
+
+@push('styles')
+<link rel="stylesheet" href="{{asset('css/animals.css')}}">
+@endpush
+
 @section('title', $title)
 
 @section('content')
@@ -21,7 +26,7 @@
 @if(isset($adoption->return_date))
     <p><strong>Return date:</strong> {{$adoption->return_date}}</p>
 @endif
-<form method="POST" action="{{route('adoptions.update', ['id' => $adoption->id])}}" enctype="multipart/form-data">
+<form method="POST" action="{{route('adoptions.update', ['adoption' => $adoption->id])}}" enctype="multipart/form-data">
     @csrf
     @method('PATCH')
     <div class="form-row">

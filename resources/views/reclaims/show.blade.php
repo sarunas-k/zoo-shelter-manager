@@ -1,4 +1,9 @@
 @extends('layouts/main')
+
+@push('styles')
+<link rel="stylesheet" href="{{asset('css/animals.css')}}">
+@endpush
+
 @section('title', 'Reclaims')
 
 @section('content')
@@ -9,8 +14,8 @@
     @else
         @include('partials/animal-card')
         <div class="reclaim-edit-button mb-2">
-            <a href="{{route('reclaims.edit', ['id' => $reclaim->id])}}" class="btn btn-primary btn-sm">Edit</a>
-        </div>  
+            <a href="{{route('reclaims.edit', ['reclaim' => $reclaim->id])}}" class="btn btn-primary btn-sm">Edit</a>
+        </div>
         <table class="reclaim-details-table table table-bordered table-sm">
             <tr>
                 <td style="width: 15%"><strong>Date: </strong></td>
@@ -22,7 +27,7 @@
             </tr>
             <tr>
                 <td><strong>Animal: </strong></td>
-            <td><a href="{{route('animals.show', ['id' => $reclaim->animal->id])}}">{{$reclaim->animal->name}} - {{$reclaim->animal->list_number}}</a></td>
+            <td><a href="{{route('animals.show', ['animal' => $reclaim->animal->id])}}">{{$reclaim->animal->name}} - {{$reclaim->animal->list_number}}</a></td>
             </tr>
             <tr>
                 <td><strong>Reclaimer: </strong></td>

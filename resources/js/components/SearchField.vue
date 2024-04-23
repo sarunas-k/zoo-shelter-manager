@@ -8,7 +8,7 @@
 <script>
     export default {
         mounted() {
-            console.log('Vue: SearchField Component mounted.')
+            //console.log('Vue: SearchField Component mounted.')
         },
         data: function() {
             return {
@@ -20,7 +20,7 @@
                 if (!this.query)
                     return;
 
-                window.location.href = window.location.origin + '/search?q=' + this.query;
+                window.location.href = window.location.origin + '/zoo-shelter-manager/public/search?q=' + this.query;
             }
         }
     }

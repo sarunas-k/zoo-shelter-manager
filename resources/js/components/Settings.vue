@@ -4,7 +4,7 @@
         <div class="mt-3 mb-5 section">
             <table class="table table-sm">
                 <tr v-for="setting in settings" :key="setting.id">
-                    <td style="width: 25%; font-weight: bold">{{setting.name}}</td>
+                    <td class="setting-name">{{setting.name}}</td>
                     <td><input type="text" v-model="setting.value" @blur="updateSetting(setting)"/></td>
                 </tr>
             </table>
@@ -12,7 +12,7 @@
 
         <h4 class="section-title">Users</h4>
         <div class="mt-3 mb-5 section">
-            <a href="/users/create" class="btn btn-sm btn-success mb-3">New User</a>
+            <a href="/zoo-shelter-manager/public/users/create" class="btn btn-sm btn-success mb-3">New User</a>
             <table class="table table-sm" :style="{opacity: isUsersTableLoading ? 0.6 : 1}">
                 <tr><th>Name</th><th>Email</th><th>Admin</th><th></th></tr>
                     <tr v-for="user in usersList" :key="user.id">
@@ -30,7 +30,7 @@
 
         <h4 class="section-title">Staff</h4>
         <div class="mt-3 mb-5 section">
-            <a href="/staff/create" class="btn btn-sm btn-success mb-3">New Staff</a>
+            <a href="/zoo-shelter-manager/public/staff/create" class="btn btn-sm btn-success mb-3">New Staff</a>
             <table class="table table-sm" :style="{opacity: isStaffTableLoading ? 0.6 : 1}">
                 <tr>
                     <th>First name</th>
@@ -60,7 +60,7 @@
 <script>
     export default {
         mounted() {
-            console.log('Vue: Settings Component mounted.');
+            //console.log('Vue: Settings Component mounted.');
             this.usersList = [...this.users];
             this.staffList = [...this.staff];
         },
@@ -75,7 +75,7 @@
         },
         methods: {
             updateSetting(setting) {
-                axios.patch(`/api/settings/${setting.id}`, null, {params: {'value': setting.value}})
+                axios.patch(`/zoo-shelter-manager/public/api/settings/${setting.id}`, null, {params: {'value': setting.value}})
                 .then((response) => { // success
                 })
                 .catch(function (error) {
@@ -87,7 +87,7 @@
             },
             deleteUser(id) {
                 this.isUsersTableLoading = true;
-                axios.delete(`/api/users/${id}`, null, null)
+                axios.delete(`/zoo-shelter-manager/public/api/users/${id}`, null, null)
                 .then((response) => { // success
                     this.usersList = this.usersList.filter(user => user.id !== id);
                 })
@@ -101,7 +101,7 @@
             },
             deleteStaff(id) {
                 this.isStaffTableLoading = true;
-                axios.delete(`/api/staff/${id}`, null, null)
+                axios.delete(`/zoo-shelter-manager/public/api/staff/${id}`, null, null)
                 .then((response) => { // success
                     this.staffList = this.staffList.filter(staff => staff.id !== id);
                 })
@@ -115,7 +115,7 @@
             },
             updateUserStatus(user) {
                 this.isUsersTableLoading = true;
-                axios.patch(`/api/users/${user.id}`, null, { params: {'is_admin': user.is_admin} })
+                axios.patch(`/zoo-shelter-manager/public/api/users/${user.id}`, null, { params: {'is_admin': user.is_admin} })
                 .then((response) => { // success
                 })
                 .catch(function (error) {
@@ -128,7 +128,7 @@
             },
             updateStaffStatus(staff) {
                 this.isStaffTableLoading = true;
-                axios.patch(`/api/staff/${staff.id}`, null, { params: {
+                axios.patch(`/zoo-shelter-manager/public/api/staff/${staff.id}`, null, { params: {
                     'is_vet': staff.is_vet,
                     'phone': staff.phone
                 } })
@@ -163,5 +163,9 @@
 .delete-button {
     cursor: pointer;
     color: #3490dc;
+}
+td.setting-name {
+    width: 25%;
+    font-weight: bold;
 }
 </style>

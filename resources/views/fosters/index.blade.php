@@ -25,7 +25,7 @@
             @foreach($fosters as $foster)
                 <tr>
                     <td scope="row" style="width: 15%">
-                        <a href="{{route('fosters.show', ['id' => $foster->id])}}">{{ $foster->foster_start_date }}</a>
+                        <a href="{{route('fosters.show', ['foster' => $foster->id])}}">{{ $foster->foster_start_date }}</a>
                     </td>
                     <td style="width: 15%">{{ $foster->foster_end_date }}</td>
                     <td><a href="{{route('animals.show', ['id' => $foster->animal->id])}}">{{ $foster->animal->list_number }} {{$foster->animal->name}}</a></td>

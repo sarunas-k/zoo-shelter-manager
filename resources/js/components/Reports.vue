@@ -38,7 +38,7 @@
 <script>
     export default {
         mounted() {
-            console.log('Vue: Reports Component mounted.');
+            //console.log('Vue: Reports Component mounted.');
             this.params.dateFrom = this.todaysDate;
             this.params.dateTo = this.todaysDate;
         },
@@ -86,7 +86,7 @@
                         break;
                     default:
                         break;
-                } 
+                }
             },
             createReport() {
                 if (!this.params.dateFrom || !this.params.dateTo) {
@@ -98,12 +98,12 @@
             },
             fetchReport() {
                 this.isLoading = true;
-                console.log("Fetching URL: /api/reports");
+                //console.log("Fetching URL: /api/reports");
 
-                axios.get('/api/reports', { params: this.params })
+                axios.get('/zoo-shelter-manager/public/api/reports', { params: this.params })
                 .then((response) => { // success
-                    console.log("Response:");
-                    console.log(response);
+                    // console.log("Response:");
+                    // console.log(response);
                     this.response = response.data;
                     this.updateView();
                 })
@@ -112,7 +112,7 @@
                 })
                 .then(() => {
                     // always executed
-                    console.log('Finished axios request');
+                    //console.log('Finished axios request');
                     this.isLoading = false;
                 });
             }

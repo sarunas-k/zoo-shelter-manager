@@ -86,7 +86,7 @@
       }
     },
     mounted() {
-        console.log('Vue: SearchableSelect Component mounted.');
+        //console.log('Vue: SearchableSelect Component mounted.');
     },
     created() {
       this.$emit('selected', this.selected);
