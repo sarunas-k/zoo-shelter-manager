@@ -128,7 +128,7 @@ export default {
     mounted() {
         console.log('Vue: AnimalForm Component mounted.');
         if (this.editform)
-            this.images = [...this.oldvalues['images']]; 
+            this.images = [...this.oldvalues['images']];
     },
     data: function() {
         return {
@@ -138,7 +138,7 @@ export default {
     },
     methods: {
         getRouteFormSubmit() {
-            let route = '/animals';
+            let route = '/zoo-shelter-manager/public/animals';
             if (this.editform)
                 route += `/${this.oldvalues['id']}`;
             return route;
@@ -156,7 +156,7 @@ export default {
             return '';
         },
         deleteImage(imageId) {
-            axios.delete(`/api/images/${imageId}`, null, null)
+            axios.delete(`zoo-shelter-manager/api/images/${imageId}`, null, null)
             .then((response) => { // success
                 this.images = this.images.filter(image => image.id !== imageId);
             })
