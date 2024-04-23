@@ -1,5 +1,5 @@
 @extends('layouts/main')
-@section('title', 'Animal Shelter Management System')
+@section('title', 'Management App')
 
 @section('content')
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -17,17 +17,17 @@
         </div>
 
         <div style="overflow: hidden">
-          <a href="/animals" style="text-decoration: none; color: #000">
+          <a href="{{route('animals.index')}}" style="text-decoration: none; color: #000">
             <div style="width: 23.75%; height:200px; background-color: #d6eef9; float: left; position: relative;">
               <span style="position: absolute; left: 50%; top: 50%; transform: translateX(-50%) translateY(-50%); font-family: 'Nunito', sans-serif; font-size: 30px; text-align: center;">Animals in shelter</span>
             </div>
           </a>
-          <a href="/animals/create" style="text-decoration: none; color: #000">
+          <a href="{{route('animals.create')}}" style="text-decoration: none; color: #000">
             <div style="width: 23.75%; height:200px; background-color: #d6eef9; float: left; margin-left: 1.66%; position: relative">
               <span style="position: absolute; left: 50%; top: 50%; transform: translateX(-50%) translateY(-50%); font-family: 'Nunito', sans-serif; font-size: 30px; text-align: center;">Animal intake</span>
             </div>
           </a>
-          <a href="/calls/create" style="text-decoration: none; color: #000">
+          <a href="{{route('calls.index')}}" style="text-decoration: none; color: #000">
             <div style="width: 23.75%; height:200px; background-color: #d6eef9; float: left; margin-left: 1.66%; position: relative">
               <span style="position: absolute; left: 50%; top: 50%; transform: translateX(-50%) translateY(-50%); font-family: 'Nunito', sans-serif; font-size: 30px; text-align: center;">Call registration</span>
             </div>
@@ -38,7 +38,7 @@
             </div>
           </a>
         </div>
-  
+
         <div class="latest-animals" style="clear: left; margin-top: 2em">
           <h3>Latest animals</h3>
         <div class="table-responsive">

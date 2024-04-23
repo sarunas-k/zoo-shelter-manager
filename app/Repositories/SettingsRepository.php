@@ -13,7 +13,7 @@ class SettingsRepository implements ISettingsRepository {
 
     public function get($id) {
         return Setting::find($id);
-    } 
+    }
 
     public function getValue($name) {
         return Setting::where('name', $name)->first()->value;
