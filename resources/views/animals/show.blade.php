@@ -1,4 +1,9 @@
 @extends('layouts/main')
+
+@push('styles')
+<link rel="stylesheet" href="{{asset('css/animals.css')}}">
+@endpush
+
 @section('title', 'Animal details')
 
 @section('content')
@@ -18,12 +23,12 @@
 @if(!isset($animal))
 <p>Animal not found.</p>
 @else
-<div style="margin-top: 1em; margin-bottom: 1em;">
-    <a href="{{route('animals.edit', ['id' => $animal->id])}}" class="btn btn-link" style="padding-left: 0; padding-right: 0.25em">Edit</a> |
-    <form method="POST" action="{{route('animals.destroy', ['id' => $animal->id])}}" style="display: inline-block">
+<div class="animal-details-top">
+    <a href="{{route('animals.edit', ['animal' => $animal->id])}}" class="btn btn-link edit-button">Edit</a> |
+    <form method="POST" action="{{route('animals.destroy', ['animal' => $animal->id])}}">
         @csrf
         @method('DELETE')
-        <button type="submit" class="btn btn-link" style="padding-left: 0.25em">Delete</button>
+        <button type="submit" class="btn btn-link">Delete</button>
     </form>
 </div>
 @include('partials/animal-card')
@@ -66,7 +71,7 @@
     <div class="tab-pane active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
         <table class="table table-bordered table-sm animal-details-table">
             <tr>
-                <td style="width: 15%"><strong>Number: </strong></td>
+                <td class="number-column"><strong>Number: </strong></td>
                 <td>{{$animal->list_number}}</td>
             </tr>
             <tr>
@@ -121,7 +126,7 @@
                 <tr>
                     <td><strong>Reference call: </strong></td>
                     <td>
-                        <a href="{{route('calls.show', ['id' => $animal->call->id])}}">{{$animal->call->name}}</a>
+                        <a href="{{route('calls.show', ['call' => $animal->call->id])}}">{{$animal->call->name}}</a>
                     </td>
                 </tr>
             @endif
@@ -149,7 +154,7 @@
         @endif
     </div>
     <!-- TAB 3: Vet visits -->
-    <div class="tab-pane" id="vet-visits" role="tabpanel" aria-labelledby="vet-visits-tab" style="margin-left: 1rem">
+    <div class="tab-pane" id="vet-visits" role="tabpanel" aria-labelledby="vet-visits-tab">
         <a href="{{route('procedures.create.for.animal', ['id' => $animal->id])}}"
             class="btn btn-primary btn-sm text-center">New procedure</a><br><br>
         @if($animal->procedures->count() < 1) <p>There are no vet visit records for this animal.</p>
@@ -174,16 +179,16 @@
             @endif
     </div>
     <!-- TAB 4: Animal files -->
-    <div class="tab-pane" id="files" role="tabpanel" aria-labelledby="files-tab" style="margin-left: 1rem">
+    <div class="tab-pane" id="files" role="tabpanel" aria-labelledby="files-tab">
         No files yet.
     </div>
     <!-- TAB 5: Animal images -->
-    <div class="tab-pane" id="images" role="tabpanel" aria-labelledby="images-tab" style="margin-left: 1rem">
-        <div class="animal-images" style="width: 100%;">
+    <div class="tab-pane" id="images" role="tabpanel" aria-labelledby="images-tab">
+        <div class="animal-images">
             @if ($animal->images->count() > 0)
                 @foreach($animal->images as $image)
-                <div class="animal-image" style="margin-right: 1em; margin-bottom: 1em; float: left">
-                    <a href="{{Storage::url($image->path)}}" target="_blank"><img src="{{Storage::url($image->path)}}" style="height: 250px;"></a>
+                <div class="animal-image">
+                    <a href="{{Storage::url($image->path)}}" target="_blank"><img src="{{Storage::url($image->path)}}"></a>
                 </div>
                 @endforeach
             @else

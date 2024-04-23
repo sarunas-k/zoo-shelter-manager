@@ -7,16 +7,16 @@
        <li class="nav-item">
            <form class="form-inline">
                <select class="form-control mr-sm-2 text-center form-control-sm" aria-label="Group" style="width: 100%; margin-left: 15px; margin-bottom: 10px">
-                 <option>Queenstown shelter</option>
-                 <option>Cathouse in clinic</option>
-                 <option>Rundalough shelter</option>
+                 <option>Shelter for cats</option>
+                 <option>Zoo</option>
+                 <option>Hotel</option>
                </select>
              </form>
        </li> --}}
        <li class="nav-item">
-         <a class="nav-link active" href="/">
+         <a class="nav-link active" href="{{route('home')}}">
            <span data-feather="home"></span>
-           Dashboard <span class="sr-only">(current)</span>
+           Manager dashboard <span class="sr-only">(current)</span>
          </a>
        </li>
        <li class="nav-item">
@@ -94,8 +94,8 @@
          </a>
        </li>
      </ul>
-     
- 
+
+
      {{-- <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
        <span>Saved reports</span>
        <a class="d-flex align-items-center text-muted" href="#">
@@ -127,7 +127,7 @@
            Year-end sale
          </a>
        </li>
-       
+
      </ul> --}}
    </div>
  </nav>
@@ -187,7 +187,7 @@
         currentPage = 'Off-shelter animals';
         break;
     }
-    
+
     window.addEventListener('load', () => {
         $('.sidebar .nav-link').each((i, element) => {
             if ($(element).text().indexOf(currentPage) >= 0)

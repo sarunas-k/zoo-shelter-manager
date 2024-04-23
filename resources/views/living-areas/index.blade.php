@@ -37,7 +37,7 @@
                     <td>{{ $area->name}}</td>
                     <td>
                         @foreach($area->animals as $animal)
-                            <a href="{{route('animals.show', ['id' => $animal->id])}}">{{$animal->list_number}}</a><br>
+                            <a href="{{route('animals.show', ['animal' => $animal->id])}}">{{$animal->list_number}}</a><br>
                         @endforeach
                     </td>
                     <td class="text-center">

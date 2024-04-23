@@ -17,7 +17,7 @@ class AnimalsRepository implements IAnimalsRepository {
                 ->whereDoesntHave('activeReclaims')
                 ->get();
         }
-            
+
         return $animals;
     }
 
@@ -42,7 +42,7 @@ class AnimalsRepository implements IAnimalsRepository {
                     ->whereDoesntHave('activeReclaims');
         }
         $animals = $animals->with(['species', 'color', 'living_area', 'images', 'activeAdoptions', 'activeFosters', 'activeReclaims']);
-        
+
         $this->applyFilters($animals, $request);
         return $animals->paginate($perPage)->appends($request->input());
     }
@@ -54,10 +54,10 @@ class AnimalsRepository implements IAnimalsRepository {
                 ->whereDoesntHave('activeAdoptions')
                 ->whereDoesntHave('activeFosters')
                 ->whereDoesntHave('activeReclaims');
-                
+
         if (isset($number) && is_numeric($number)) {
             return $animals->take($number)->get();
-        } 
+        }
         return $animals->get();
     }
 
@@ -148,7 +148,7 @@ class AnimalsRepository implements IAnimalsRepository {
             'bring_in_person_id' => $formFields['bring-in-person'],
             'notes' => $formFields['notes']
         ]);
-        
+
         // Save animal breeds to animal_breed table
         $animal->breeds()->sync($formFields['breed']);
 
@@ -208,7 +208,7 @@ class AnimalsRepository implements IAnimalsRepository {
         foreach($animal->breeds as $key => $breed) {
             $separator = $key == $animal->breeds->count()-1 ? '' : ' / ';
             $animal->breeds_concatenated .= $breed->name . $separator;
-        } 
+        }
 
         return $animal;
     }
@@ -216,7 +216,7 @@ class AnimalsRepository implements IAnimalsRepository {
     private function applyFilters($animals, $request) {
         if (empty($request->gender) && empty($request->species) && empty($request->color) && empty($request->size))
             return;
-            
+
         // Filter by gender
         if(!empty($request->gender))
             $animals->whereIn('gender', $request->gender);

@@ -17,7 +17,7 @@
     import PaginationLinks from './PaginationLinks.vue';
     export default {
         mounted() {
-            console.log('Vue: AnimalsIndex Component mounted.');
+            //console.log('Vue: AnimalsIndex Component mounted.');
             this.fetch(this.url, {'appendFilters': true});
             this.attachOnPopStateHandler();
         },
@@ -33,7 +33,7 @@
                 initialized: false,
                 checkedFilters: {},
                 filterOptions: {},
-                url: '/api/animals'
+                url: '/zoo-shelter-manager/public/api/animals'
             }
         },
         methods: {
@@ -55,13 +55,13 @@
                 this.checkedFilters = {...params};
                 // Start pagination from page 1 after submitting new filter
                 params['page'] = 1;
-                this.fetch('/api/animals', params);
+                this.fetch('/zoo-shelter-manager/public/api/animals', params);
                 history.pushState(params, null, null);
             },
             onNavigateNext() {
                 if (!this.pageNextUrl)
                     return;
-                
+
                 this.fetch(this.pageNextUrl);
                 let state = {...this.checkedFilters, 'page': this.pageCurrentNum + 1};
                     history.pushState(state, null, null);
@@ -69,7 +69,7 @@
             onNavigatePrev() {
                 if (!this.pagePrevUrl)
                     return;
-                
+
                 this.fetch(this.pagePrevUrl);
                 let state = {...this.checkedFilters, 'page': this.pageCurrentNum - 1};
                     history.pushState(state, null, null);
@@ -77,7 +77,7 @@
             fetch(url, parameters) {
                 if (!url)
                     return;
-                
+
                 if (this.nonshelter) parameters = {...parameters, ...{nonShelter: true}};
 
                 this.isLoading = true;
@@ -130,6 +130,3 @@
         }
     }
 </script>
-
-<style scoped>
-</style>

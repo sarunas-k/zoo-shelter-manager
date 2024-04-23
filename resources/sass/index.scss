@@ -1,0 +1,36 @@
+.admin-menu-big-buttons {
+    overflow: hidden;
+
+    a {
+        text-decoration: none;
+        color: #000;
+
+        .big-button {
+            width: 23.75%;
+            height:200px;
+            background-color: #d6eef9;
+            float: left;
+            position: relative;
+            margin-left: 1.66%;
+
+            &.first {
+                margin-left: 0;
+            }
+
+            span {
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translateX(-50%) translateY(-50%);
+                font-family: 'Nunito', sans-serif;
+                font-size: 30px;
+                text-align: center;
+            }
+        }
+    }
+}
+
+.latest-animals {
+    clear: left;
+    margin-top: 2em;
+}

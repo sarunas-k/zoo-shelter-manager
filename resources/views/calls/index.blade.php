@@ -27,7 +27,7 @@
             <tbody>
             @foreach($calls as $call)
                 <tr>
-                    <td scope="row"><a href="{{route('calls.show', ['id' => $call->id])}}">{{ substr($call->date_time, 0, 10) }}<br>{{substr($call->date_time, 10, 6)}}</a></td>
+                    <td scope="row"><a href="{{route('calls.show', ['call' => $call->id])}}">{{ substr($call->date_time, 0, 10) }}<br>{{substr($call->date_time, 10, 6)}}</a></td>
                     <td>{{ $call->caller_name}}</td>
                     <td>{{ $call->caller_phone}}</td>
                     <td>{{ $call->address }}</td>
@@ -45,9 +45,9 @@
                                 @break
                         @endswitch
                     </td>
-                    <td><a href="{{route('calls.edit', ['id' => $call->id])}}" class="btn btn-primary btn-sm">Edit</a></td>
+                    <td><a href="{{route('calls.edit', ['call' => $call->id])}}" class="btn btn-primary btn-sm">Edit</a></td>
                     <td>
-                        <delete-button csrf="{{csrf_token()}}" action="{{route('calls.destroy', ['id' => $call->id])}}"/>
+                        <delete-button csrf="{{csrf_token()}}" action="{{route('calls.destroy', ['call' => $call->id])}}"/>
                     </td>
                 </tr>
             @endforeach

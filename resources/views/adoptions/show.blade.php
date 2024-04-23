@@ -1,4 +1,9 @@
 @extends('layouts/main')
+
+@push('styles')
+<link rel="stylesheet" href="{{asset('css/animals.css')}}">
+@endpush
+
 @section('title', $title)
 
 @section('content')
@@ -9,8 +14,8 @@
     @else
         @include('partials/animal-card')
         <div class="adoption-edit-button mb-2">
-            <a href="{{route('adoptions.edit', ['id' => $adoption->id])}}" class="btn btn-primary btn-sm">Edit</a>
-        </div>  
+            <a href="{{route('adoptions.edit', ['adoption' => $adoption->id])}}" class="btn btn-primary btn-sm">Edit</a>
+        </div>
         <table class="adoption-details-table table table-bordered table-sm">
             <tr>
                 <td style="width: 15%"><strong>Date: </strong></td>

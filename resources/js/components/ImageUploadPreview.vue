@@ -7,7 +7,7 @@
 <script>
 export default {
     mounted() {
-        console.log('Vue: ImageUploadPreview Component mounted.');
+        //console.log('Vue: ImageUploadPreview Component mounted.');
     },
     data: function() {
         return {
@@ -18,7 +18,7 @@ export default {
         renderImages() {
             if (!this.files)
                 return;
-            
+
             this.imageSrcs = [];
             for (let i = 0; i < this.files.length; i++) {
                 let image = this.files[i];

@@ -25,7 +25,7 @@ Route::middleware(['web.common'])->group(function () {
         Route::resource('calls', 'CallsController');
 
         // PROCEDURES ROUTES
-        Route::resource('procedures', 'ProceduresController');
+        Route::resource('procedures', 'ProceduresController')->parameters(['procedures' => 'id']);
         Route::get('/procedures/create/{id}', 'ProceduresController@createWithAnimalID')->name('procedures.create.for.animal');
 
         // ADOPTIONS ROUTES
@@ -38,13 +38,13 @@ Route::middleware(['web.common'])->group(function () {
         Route::resource('reclaims', 'ReclaimsController');
 
         // LIVING AREAS ROUTES
-        Route::resource('living-areas', 'LivingAreasController');
+        Route::resource('living-areas', 'LivingAreasController')->parameters(['living-areas' => 'id']);
 
         // PEOPLE ROUTES
-        Route::resource('people', 'PeopleController');
+        Route::resource('people', 'PeopleController')->parameters(['people' => 'id']);
 
         // REPORTS ROUTES
-        Route::resource('reports', 'ReportsController')->only(['index', 'show']);
+        Route::resource('reports', 'ReportsController')->only(['index', 'show'])->parameters(['reports' => 'id']);
 
         // SEARCH
         Route::get('/search', 'SearchController@index');
@@ -53,9 +53,9 @@ Route::middleware(['web.common'])->group(function () {
             // SETTINGS
             Route::get('/settings', 'SettingsController@index')->name('settings');
             // USERS
-            Route::resource('users', 'UsersController')->except(['index', 'show', 'edit']);
+            Route::resource('users', 'UsersController')->except(['index', 'show', 'edit'])->parameters(['users' => 'id']);
             // STAFF
-            Route::resource('staff', 'StaffController')->only(['create', 'store']);
+            Route::resource('staff', 'StaffController')->only(['create', 'store'])->parameters(['staff' => 'id']);
         });
 
     });

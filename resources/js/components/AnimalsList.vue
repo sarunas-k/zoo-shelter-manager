@@ -6,8 +6,8 @@
                 <tr v-for="(animal, index) in animals" v-bind:key="index">
                     <td class="animal-image-container">
                         <a :href="routeAnimalDetailsPage(animal.id)">
-                            <img v-if="animal.images.length > 0" :src="'/storage' + animal.images[0].path.substr(6)" class="animal-image"/>
-                            <img v-if="animal.images.length == 0" src="/storage/images/no_image.jpeg" class="animal-image"/>
+                            <img v-if="animal.images.length > 0" :src="'/zoo-shelter-manager/storage/app/' + animal.images[0].path" class="animal-image"/>
+                            <img v-if="animal.images.length == 0" src="/zoo-shelter-manager/storage/app/images/no_image.jpeg" class="animal-image"/>
                         </a>
                     </td>
                     <td>
@@ -85,7 +85,6 @@ export default {
         DeleteButton
     },
     mounted() {
-        console.log('Vue: AnimalsList Component mounted');
     },
     props: {
         animals: {
@@ -114,7 +113,7 @@ export default {
         }
     },
     computed: {
-        tableOpacity() { 
+        tableOpacity() {
             return this.isLoading ? 0.6 : 1
         },
         userIsAdmin() {
@@ -132,10 +131,10 @@ export default {
     },
     methods: {
         routeAnimalDetailsPage(id) {
-            return '/animals/' + id;
+            return '/zoo-shelter-manager/public/animals/' + id;
         },
         routeAnimalEditPage(id) {
-            return '/animals/' + id + '/edit';
+            return '/zoo-shelter-manager/public/animals/' + id + '/edit';
         },
     }
 }
@@ -173,7 +172,7 @@ tr {
 .animal-image-container .animal-image {
     height: 100%;
     width: 100%;
-    object-fit: cover;
+    object-fit: contain;
     border-radius: 10%;
 }
 .column-value-container {

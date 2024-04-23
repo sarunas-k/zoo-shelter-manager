@@ -1,0 +1,59 @@
+.animal-details-top {
+    margin-top: 1em;
+    margin-bottom: 1em;
+
+    .edit-button {
+        padding-left: 0;
+        padding-right: 0.25em;
+    }
+
+    form {
+        display: inline-block;
+
+        button {
+            padding-left: 0.25em;
+        }
+    }
+}
+
+.tab-content {
+    .number-column {
+        width: 15%;
+    }
+
+    #vet-visits {
+        margin-left: 1rem;
+    }
+
+    #files, #images {
+        margin-left: 1rem;
+    }
+
+    .animal-images {
+        width: 100%;
+
+        .animal-image {
+            margin-right: 1em;
+            margin-bottom: 1em;
+            float: left;
+
+            a {
+                height: 250px;
+            }
+        }
+    }
+}
+
+.card-img {
+    object-fit: contain;
+    height: 200px;
+    width: 200px;
+}
+
+.animal-badges {
+    width: 150px;
+
+    .badge {
+        width: 150px;
+    }
+}

@@ -17,7 +17,6 @@ import InputFile from './InputFile.vue';
 export default {
     mounted() {
         window.feather.replace();
-        console.log('Vue: ImageUpload Component mounted.');
     },
     data: function() {
         return {
@@ -35,7 +34,3 @@ export default {
     }
 }
 </script>
-
-<style scoped>
-
-</style>

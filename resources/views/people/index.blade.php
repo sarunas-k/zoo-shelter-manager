@@ -17,7 +17,6 @@
         <table class="table table-sm table-bordered my-4">
             <thead class="thead-dark">
               <tr>
-                {{-- <th scope="col">#</th> --}}
                 <th scope="col">Name</th>
                 <th scope="col">Date of Birth</th>
                 <th scope="col">Phone 1</th>
