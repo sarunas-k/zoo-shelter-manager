@@ -143,7 +143,6 @@ import ImageUpload from './ImageUpload.vue';
 export default {
     mounted() {
         this.rootPath = rootPath;
-        this.storagePath = storagePath;
         //console.log('Vue: AnimalForm Component mounted.');
         if (this.editform)
             this.images = [...this.oldvalues['images']];
@@ -200,6 +199,11 @@ export default {
         calls: { type: Array, default: '' },
         people: { type: Array, default: '' },
         editform: { type: Boolean, default: false }
+    },
+    computed: {
+        storagePath() {
+            return Vue.storagePath;
+        }
     },
     components: {
         SearchableSelect,
