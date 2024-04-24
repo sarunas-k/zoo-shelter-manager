@@ -6,8 +6,8 @@
                 <tr v-for="(animal, index) in animals" v-bind:key="index">
                     <td class="animal-image-container">
                         <a :href="routeAnimalDetailsPage(animal.id)">
-                            <img v-if="animal.images.length > 0" :src="'/zoo-shelter-manager/storage/app/' + animal.images[0].path" class="animal-image"/>
-                            <img v-if="animal.images.length == 0" src="/zoo-shelter-manager/storage/app/images/no_image.jpeg" class="animal-image"/>
+                            <img v-if="animal.images.length > 0" :src="storagePath + '/app/' + animal.images[0].path" class="animal-image"/>
+                            <img v-if="animal.images.length == 0" :src="storagePath + '/app/images/no_image.jpeg'" class="animal-image"/>
                         </a>
                     </td>
                     <td>
@@ -113,6 +113,9 @@ export default {
         }
     },
     computed: {
+        storagePath() {
+            return window.storagePath;
+        },
         tableOpacity() {
             return this.isLoading ? 0.6 : 1
         },
@@ -131,10 +134,10 @@ export default {
     },
     methods: {
         routeAnimalDetailsPage(id) {
-            return '/laravel/public/animals/' + id;
+            return rootPath + '/animals/' + id;
         },
         routeAnimalEditPage(id) {
-            return '/laravel/public/animals/' + id + '/edit';
+            return rootPath + '/animals/' + id + '/edit';
         },
     }
 }

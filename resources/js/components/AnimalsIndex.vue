@@ -17,6 +17,7 @@
     import PaginationLinks from './PaginationLinks.vue';
     export default {
         mounted() {
+            this.rootPath = rootPath;
             //console.log('Vue: AnimalsIndex Component mounted.');
             this.fetch(this.url, {'appendFilters': true});
             this.attachOnPopStateHandler();
@@ -33,7 +34,7 @@
                 initialized: false,
                 checkedFilters: {},
                 filterOptions: {},
-                url: '/laravel/public/api/animals'
+                url: rootPath + '/api/animals'
             }
         },
         methods: {
@@ -55,7 +56,7 @@
                 this.checkedFilters = {...params};
                 // Start pagination from page 1 after submitting new filter
                 params['page'] = 1;
-                this.fetch('/laravel/public/api/animals', params);
+                this.fetch(rootPath + '/api/animals', params);
                 history.pushState(params, null, null);
             },
             onNavigateNext() {

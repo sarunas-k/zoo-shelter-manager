@@ -41,6 +41,7 @@
             //console.log('Vue: Reports Component mounted.');
             this.params.dateFrom = this.todaysDate;
             this.params.dateTo = this.todaysDate;
+            this.rootPath = rootPath;
         },
         data() {
             return {
@@ -100,7 +101,7 @@
                 this.isLoading = true;
                 //console.log("Fetching URL: /api/reports");
 
-                axios.get('/laravel/public/api/reports', { params: this.params })
+                axios.get(rootPath + '/api/reports', { params: this.params })
                 .then((response) => { // success
                     // console.log("Response:");
                     // console.log(response);
