@@ -128,7 +128,7 @@
             <div class="animal-images">
                 <div v-for="(image, index) in images" :key="'image' + index" class="animal-image-container">
                     <span @click="deleteImage(image.id)" class="delete-button">x</span>
-                    <img :src="'/zoo-shelter-manager/storage/app/' + image.path" :id="image.id" class="animal-image">
+                    <img :src="storagePath + '/app/' + image.path" :id="image.id" class="animal-image">
                 </div>
             </div>
         </div>
@@ -142,6 +142,8 @@ import SearchableSelect from './SearchableSelect.vue';
 import ImageUpload from './ImageUpload.vue';
 export default {
     mounted() {
+        this.rootPath = rootPath;
+        this.storagePath = storagePath;
         //console.log('Vue: AnimalForm Component mounted.');
         if (this.editform)
             this.images = [...this.oldvalues['images']];
@@ -154,7 +156,7 @@ export default {
     },
     methods: {
         getRouteFormSubmit() {
-            let route = '/laravel/public/animals';
+            let route = rootPath + '/animals';
             if (this.editform)
                 route += `/${this.oldvalues['id']}`;
             return route;
@@ -172,7 +174,7 @@ export default {
             return '';
         },
         deleteImage(imageId) {
-            axios.delete(`/laravel/public/api/images/${imageId}`, null, null)
+            axios.delete(`${rootPath}/api/images/${imageId}`, null, null)
                 .then((response) => { // success
                     this.images = this.images.filter(image => image.id !== imageId);
                 })

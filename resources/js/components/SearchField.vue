@@ -1,6 +1,6 @@
 <template>
     <div class="search-field w-100">
-        <input class="form-control form-control-dark" type="text" placeholder="Enter animal number, name, microchip number..." aria-label="Search" @keyup.enter="submitSearch" v-model="query">
+        <input class="form-control form-control-dark" type="text" placeholder="Enter id number, name or microchip number" aria-label="Search" @keyup.enter="submitSearch" v-model="query">
         <button @click="submitSearch" class="btn btn-secondary btn-sm px-3">Search</button>
     </div>
 </template>
@@ -9,6 +9,7 @@
     export default {
         mounted() {
             //console.log('Vue: SearchField Component mounted.')
+            this.rootPath = rootPath;
         },
         data: function() {
             return {
@@ -20,7 +21,7 @@
                 if (!this.query)
                     return;
 
-                window.location.href = window.location.origin + '/laravel/public/search?q=' + this.query;
+                window.location.href = window.location.origin + rootPath + '/search?q=' + this.query;
             }
         }
     }
