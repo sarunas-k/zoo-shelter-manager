@@ -12,7 +12,7 @@
 
         <h4 class="section-title">Users</h4>
         <div class="mt-3 mb-5 section">
-            <a href="/zoo-shelter-manager/public/users/create" class="btn btn-sm btn-success mb-3">New User</a>
+            <a href="/laravel/public/users/create" class="btn btn-sm btn-success mb-3">New User</a>
             <table class="table table-sm" :style="{opacity: isUsersTableLoading ? 0.6 : 1}">
                 <tr><th>Name</th><th>Email</th><th>Admin</th><th></th></tr>
                     <tr v-for="user in usersList" :key="user.id">
@@ -30,7 +30,7 @@
 
         <h4 class="section-title">Staff</h4>
         <div class="mt-3 mb-5 section">
-            <a href="/zoo-shelter-manager/public/staff/create" class="btn btn-sm btn-success mb-3">New Staff</a>
+            <a href="/laravel/public/staff/create" class="btn btn-sm btn-success mb-3">New Staff</a>
             <table class="table table-sm" :style="{opacity: isStaffTableLoading ? 0.6 : 1}">
                 <tr>
                     <th>First name</th>
@@ -75,7 +75,7 @@
         },
         methods: {
             updateSetting(setting) {
-                axios.patch(`/zoo-shelter-manager/public/api/settings/${setting.id}`, null, {params: {'value': setting.value}})
+                axios.patch(`/laravel/public/api/settings/${setting.id}`, null, {params: {'value': setting.value}})
                 .then((response) => { // success
                 })
                 .catch(function (error) {
@@ -87,7 +87,7 @@
             },
             deleteUser(id) {
                 this.isUsersTableLoading = true;
-                axios.delete(`/zoo-shelter-manager/public/api/users/${id}`, null, null)
+                axios.delete(`/laravel/public/api/users/${id}`, null, null)
                 .then((response) => { // success
                     this.usersList = this.usersList.filter(user => user.id !== id);
                 })
@@ -101,7 +101,7 @@
             },
             deleteStaff(id) {
                 this.isStaffTableLoading = true;
-                axios.delete(`/zoo-shelter-manager/public/api/staff/${id}`, null, null)
+                axios.delete(`/laravel/public/api/staff/${id}`, null, null)
                 .then((response) => { // success
                     this.staffList = this.staffList.filter(staff => staff.id !== id);
                 })
@@ -115,7 +115,7 @@
             },
             updateUserStatus(user) {
                 this.isUsersTableLoading = true;
-                axios.patch(`/zoo-shelter-manager/public/api/users/${user.id}`, null, { params: {'is_admin': user.is_admin} })
+                axios.patch(`/laravel/public/api/users/${user.id}`, null, { params: {'is_admin': user.is_admin} })
                 .then((response) => { // success
                 })
                 .catch(function (error) {
@@ -128,7 +128,7 @@
             },
             updateStaffStatus(staff) {
                 this.isStaffTableLoading = true;
-                axios.patch(`/zoo-shelter-manager/public/api/staff/${staff.id}`, null, { params: {
+                axios.patch(`/laravel/public/api/staff/${staff.id}`, null, { params: {
                     'is_vet': staff.is_vet,
                     'phone': staff.phone
                 } })

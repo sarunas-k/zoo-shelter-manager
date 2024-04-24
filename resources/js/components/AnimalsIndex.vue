@@ -33,7 +33,7 @@
                 initialized: false,
                 checkedFilters: {},
                 filterOptions: {},
-                url: '/zoo-shelter-manager/public/api/animals'
+                url: '/laravel/public/api/animals'
             }
         },
         methods: {
@@ -55,7 +55,7 @@
                 this.checkedFilters = {...params};
                 // Start pagination from page 1 after submitting new filter
                 params['page'] = 1;
-                this.fetch('/zoo-shelter-manager/public/api/animals', params);
+                this.fetch('/laravel/public/api/animals', params);
                 history.pushState(params, null, null);
             },
             onNavigateNext() {

@@ -154,7 +154,7 @@ export default {
     },
     methods: {
         getRouteFormSubmit() {
-            let route = '/zoo-shelter-manager/public/animals';
+            let route = '/laravel/public/animals';
             if (this.editform)
                 route += `/${this.oldvalues['id']}`;
             return route;
@@ -172,7 +172,7 @@ export default {
             return '';
         },
         deleteImage(imageId) {
-            axios.delete(`/zoo-shelter-manager/public/api/images/${imageId}`, null, null)
+            axios.delete(`/laravel/public/api/images/${imageId}`, null, null)
                 .then((response) => { // success
                     this.images = this.images.filter(image => image.id !== imageId);
                 })

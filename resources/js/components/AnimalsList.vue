@@ -131,10 +131,10 @@ export default {
     },
     methods: {
         routeAnimalDetailsPage(id) {
-            return '/zoo-shelter-manager/public/animals/' + id;
+            return '/laravel/public/animals/' + id;
         },
         routeAnimalEditPage(id) {
-            return '/zoo-shelter-manager/public/animals/' + id + '/edit';
+            return '/laravel/public/animals/' + id + '/edit';
         },
     }
 }

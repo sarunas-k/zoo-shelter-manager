@@ -20,7 +20,7 @@
                 if (!this.query)
                     return;
 
-                window.location.href = window.location.origin + '/zoo-shelter-manager/public/search?q=' + this.query;
+                window.location.href = window.location.origin + '/laravel/public/search?q=' + this.query;
             }
         }
     }

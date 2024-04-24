@@ -17,3 +17,4 @@ artisan
 .env.example
 .gitattributes
 /.vscode
+/public/js/global.js
