@@ -4,6 +4,6 @@ Experimented with and learned many things client side and server side.
 
 - Prepared database structure in MySQL Workbench, built tables with Migrations. For testing added Factories and Seeders.
 - Implemented associated Models, Controllers, Repositories.
-- Tools used for views: VueJS, JQuery and Bootstrap.
-- Used AJAX in UI components for custom pagination and filtering.
+- Tools used on views: VueJS, JQuery and Bootstrap.
+- Used AJAX to make custom filtering and pagination.
 
