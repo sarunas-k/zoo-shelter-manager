@@ -47,7 +47,6 @@
     <script type="text/javascript" src="{{ URL::asset('js/feather.min.js') }}"></script>
     <script type="text/javascript">window.addEventListener('load', () => feather.replace())</script>
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-    <script src="{{URL::asset('js/global.js')}}"></script>
     @yield('scripts')
   </body>
 </html>
