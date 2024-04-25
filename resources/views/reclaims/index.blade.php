@@ -9,10 +9,10 @@
     @if(!isset($reclaims) || $reclaims->count() < 1)
         <p>No reclaim records found.</p>
     @else
-        <a href="{{route('reclaims.create')}}" class="btn btn-success btn-sm my-3">New reclaim</a>
+        <a href="{{route('reclaims.create')}}" class="btn btn-success text-white my-3">New reclaim</a>
         {{ $reclaims->links() }}
-        <table class="table table-bordered table-sm mb-4">
-            <thead class="thead-dark">
+        <table class="table table-bordered  mb-4">
+            <thead class="table-dark">
               <tr>
                 <th scope="col">Date</th>
                 <th scope="col">Return date</th>

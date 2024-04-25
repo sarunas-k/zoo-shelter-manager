@@ -14,9 +14,9 @@
     @else
         @include('partials/animal-card')
         <div class="foster-edit-button mb-2">
-            <a href="{{route('fosters.edit', ['foster' => $foster->id])}}" class="btn btn-primary btn-sm">Edit</a>
+            <a href="{{route('fosters.edit', ['foster' => $foster->id])}}" class="btn btn-primary text-white">Edit</a>
         </div>
-        <table class="foster-details-table table table-bordered table-sm">
+        <table class="foster-details-table table table-bordered ">
             <tr>
                 <td style="width: 15%"><strong>Start date: </strong></td>
                 <td>{{$foster->foster_start_date}}</td>

@@ -3,7 +3,8 @@
 
     <!-- Dropdown Input -->
     <input type="hidden" :name="name" :value="selected.id"/>
-    <input class="dropdown-input form-control"
+    <input class="dropdown-input form-control border border-dark-subtle dropdown-toggle"
+      data-bs-toggle="dropdown"
       @focus="showOptions()"
       @blur="exit()"
       @keydown.enter.prevent="keyMonitor"
@@ -16,7 +17,7 @@
       ref="input" />
 
     <!-- Dropdown Menu -->
-    <div class="dropdown-content"
+    <div class="dropdown-content dropdown-menu"
       v-show="optionsShown">
       <div
         class="form-control dropdown-item"

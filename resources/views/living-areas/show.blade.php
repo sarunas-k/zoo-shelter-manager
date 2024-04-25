@@ -7,7 +7,7 @@
     @if(!isset($livingArea))
         <p>Incorrect living-area id.</p>
     @else
-        <table class="table table-bordered table-sm">
+        <table class="table table-bordered ">
             <tr>
                 <td><strong>Living area name: </strong></td>
                 <td>{{$livingArea->name}}</td>

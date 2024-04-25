@@ -1,24 +1,24 @@
 <template>
     <div class="list-filter" v-if="initialized">
         <div class="list-filter-buttons">
-            <span v-for="(categoryItems, filterCategory, index) in options" :key="index" :class="['dropdown', `filter-${filterCategory}`]">
-                <button class="btn btn-outline-primary btn-sm dropdown-toggle" type="button" :id="`menuButton${filterCategory}`" data-toggle="dropdown"
+            <div v-for="(categoryItems, filterCategory, index) in options" :key="index" :class="['dropdown', `filter-${filterCategory}`, 'd-inline-block']">
+                <button class="btn btn-outline-primary btn-sm dropdown-toggle m-1" type="button" :id="`menuButton${filterCategory}`" data-bs-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
                     <span class="filter-title">{{filterCategory}}</span>
                 </button>
-                <div class="dropdown-menu px-2" @click="$event.stopPropagation()" :aria-labelledby="`menuButton${filterCategory}`">
-                    <label v-for="(value, i) in categoryItems" :key="i" :class="['form-check', 'form-check-label', 'dropdown-item',
-                        `filter-value-${value}`, {'dropdown-item-active': isChecked(value, filterCategory)}]">
-                        <input v-model="checkedFilterItems[filterCategory]" class="form-check-input" type="checkbox" :value="value" :id="value" @change="emitFilterChangeEvent">
+                <div class="dropdown-menu ps-2 pe-5" @click="$event.stopPropagation()" :aria-labelledby="`menuButton${filterCategory}`">
+                    <label v-for="(value, i) in categoryItems" :key="i" :class="['form-check', 'form-check-label', 'dropdown-item', 'p-1',
+                        'filter-value-' + value, {'dropdown-item-active': isChecked(value, filterCategory)}]">
+                        <input v-model="checkedFilterItems[filterCategory]" class="form-check-input ms-0 me-3" type="checkbox" :value="value" :id="value" @change="emitFilterChangeEvent">
                         {{value}}
                     </label>
                 </div>
-            </span>
+            </div>
             <br>
         </div>
         <div class="filter-badges">
             <template v-for="(categoryItems, filterCategory) in checkedFilterItems">
-                <span :key="item" v-for="item in categoryItems" class="filter-badge badge badge-pill mr-1" @click="removeFromFilter(item, filterCategory)">{{item}} X</span>
+                <span :key="item" v-for="item in categoryItems" class="filter-badge badge badge-pill m-1" @click="removeFromFilter(item, filterCategory)">{{item}} X</span>
             </template>
         </div>
     </div>

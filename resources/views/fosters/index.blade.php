@@ -9,10 +9,10 @@
     @if(!isset($fosters) || $fosters->count() < 1)
         <p>No fosters records found.</p>
     @else
-        <a href="{{route('fosters.create')}}" class="btn btn-success btn-sm my-3">New foster</a>
+        <a href="{{route('fosters.create')}}" class="btn btn-success text-white my-3">New foster</a>
         {{ $fosters->links() }}
-        <table class="table table-bordered table-sm mb-4">
-            <thead class="thead-dark">
+        <table class="table table-bordered mb-4">
+            <thead class="table-dark">
               <tr>
                 <th scope="col">Start date</th>
                 <th scope="col">End date</th>

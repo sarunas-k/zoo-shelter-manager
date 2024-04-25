@@ -10,8 +10,8 @@
     @else
         {{ $animals_results->appends(request()->input())->links() }}
         <div class="table-responsive">
-          <table class="table table-bordered table-sm my-4">
-            <thead class="thead-dark">
+          <table class="table table-bordered  my-4">
+            <thead class="table-dark">
               <tr>
                 <th scope="col">Nr</th>
                 <th scope="col">Species</th>

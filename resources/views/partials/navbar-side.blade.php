@@ -16,7 +16,7 @@
        <li class="nav-item">
          <a class="nav-link active" href="{{route('home')}}">
            <span data-feather="home"></span>
-           Manager dashboard <span class="sr-only">(current)</span>
+           Manager dashboard <span class="visually-hidden">(current)</span>
          </a>
        </li>
        <li class="nav-item">

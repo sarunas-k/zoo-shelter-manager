@@ -30,17 +30,17 @@
     @csrf
     @method('PATCH')
     @if(!isset($foster->foster_end_date))
-    <div class="form-row">
+    <div class="form-row row mb-3">
         <div class="form-group col-md-8">
-            <label for="end-date"><strong>Foster end date:</strong></label>
-            <input type="date" class="form-control" id="end-date" name="end-date">
+            <label class="form-label" for="end-date"><strong>Foster end date:</strong></label>
+            <input type="date" class="form-control border border-dark-subtle" id="end-date" name="end-date">
         </div>
     </div>
     @endif
-    <div class="form-row">
+    <div class="form-row row mb-3">
         <div class="form-group col-md-8">
-            <label for="notes"><strong>Notes:</strong></label>
-            <textarea class="form-control" rows="4" id="notes" name="notes">{{$foster->notes}}</textarea>
+            <label class="form-label" for="notes"><strong>Notes:</strong></label>
+            <textarea class="form-control border border-dark-subtle" rows="4" id="notes" name="notes">{{$foster->notes}}</textarea>
         </div>
     </div>
     <button type="submit" class="btn btn-success">Save</button>

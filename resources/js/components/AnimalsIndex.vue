@@ -1,89 +1,91 @@
 <template>
     <div class="animals-wrapper">
-        <list-filter :options="this.filterOptions" :checkedFilters="this.checkedFilters" @filter-change="onFilterChange"/>
+        <list-filter :options="this.filterOptions" :checkedFilters="this.checkedFilters"
+            @filter-change="onFilterChange" />
 
-        <pagination-links v-if="animals.length" :currentPage="pageCurrentNum" :totalPages="pageLastNum" :navigatePrev="onNavigatePrev" :navigateNext="onNavigateNext" :total="total"/>
+        <pagination-links v-if="animals.length" :currentPage="pageCurrentNum" :totalPages="pageLastNum"
+            :navigatePrev="onNavigatePrev" :navigateNext="onNavigateNext" :total="total" />
 
-        <animals-list :animals="animals" :isLoading="isLoading" :initialized="initialized" :csrf="csrf"/>
+        <animals-list :animals="animals" :isLoading="isLoading" :initialized="initialized" :csrf="csrf" />
 
-        <pagination-links v-if="animals.length" :currentPage="pageCurrentNum" :totalPages="pageLastNum" :navigatePrev="onNavigatePrev" :navigateNext="onNavigateNext" :total="total"/>
+        <pagination-links v-if="animals.length" :currentPage="pageCurrentNum" :totalPages="pageLastNum"
+            :navigatePrev="onNavigatePrev" :navigateNext="onNavigateNext" :total="total" />
     </div>
 </template>
 
 
 <script>
-    import ListFilter from './ListFilter.vue';
-    import AnimalsList from './AnimalsList.vue';
-    import PaginationLinks from './PaginationLinks.vue';
-    export default {
-        mounted() {
-            this.rootPath = rootPath;
-            //console.log('Vue: AnimalsIndex Component mounted.');
-            this.fetch(this.url, {'appendFilters': true});
-            this.attachOnPopStateHandler();
+import ListFilter from './ListFilter.vue';
+import AnimalsList from './AnimalsList.vue';
+import PaginationLinks from './PaginationLinks.vue';
+export default {
+    mounted() {
+        //console.log('Vue: AnimalsIndex Component mounted.');
+        this.fetch(this.url, { 'appendFilters': true });
+        this.attachOnPopStateHandler();
+    },
+    data: function () {
+        return {
+            animals: [],
+            pageCurrentNum: null,
+            pageLastNum: null,
+            pageNextUrl: null,
+            pagePrevUrl: null,
+            total: null,
+            isLoading: false,
+            initialized: false,
+            checkedFilters: {},
+            filterOptions: {},
+            url: window.rootPath + '/api/animals'
+        }
+    },
+    methods: {
+        attachOnPopStateHandler() {
+            window.onpopstate = (event) => {
+                console.log(`[POP STATE] location: ${document.location}, state: ${JSON.stringify(event.state)}`);
+                if (event.state) {
+                    this.checkedFilters = { ...event.state };
+                    delete this.checkedFilters.page;
+                }
+                else {
+                    for (let filterName in this.checkedFilters)
+                        this.checkedFilters[filterName] = [];
+                }
+                this.fetch(this.url, event.state);
+            };
         },
-        data: function() {
-            return {
-                animals: [],
-                pageCurrentNum: null,
-                pageLastNum: null,
-                pageNextUrl: null,
-                pagePrevUrl: null,
-                total: null,
-                isLoading: false,
-                initialized: false,
-                checkedFilters: {},
-                filterOptions: {},
-                url: rootPath + '/api/animals'
-            }
+        onFilterChange(params) {
+            this.checkedFilters = { ...params };
+            // Start pagination from page 1 after submitting new filter
+            params['page'] = 1;
+            this.fetch(this.rootPath + '/api/animals', params);
+            history.pushState(params, null, null);
         },
-        methods: {
-            attachOnPopStateHandler() {
-                window.onpopstate = (event) => {
-                    console.log(`[POP STATE] location: ${document.location}, state: ${JSON.stringify(event.state)}`);
-                    if (event.state) {
-                        this.checkedFilters = {...event.state};
-                        delete this.checkedFilters.page;
-                    }
-                    else {
-                        for (let filterName in this.checkedFilters)
-                            this.checkedFilters[filterName] = [];
-                    }
-                    this.fetch(this.url, event.state);
-                };
-            },
-            onFilterChange(params) {
-                this.checkedFilters = {...params};
-                // Start pagination from page 1 after submitting new filter
-                params['page'] = 1;
-                this.fetch(rootPath + '/api/animals', params);
-                history.pushState(params, null, null);
-            },
-            onNavigateNext() {
-                if (!this.pageNextUrl)
-                    return;
+        onNavigateNext() {
+            if (!this.pageNextUrl)
+                return;
 
-                this.fetch(this.pageNextUrl);
-                let state = {...this.checkedFilters, 'page': this.pageCurrentNum + 1};
-                    history.pushState(state, null, null);
-            },
-            onNavigatePrev() {
-                if (!this.pagePrevUrl)
-                    return;
+            this.fetch(this.pageNextUrl);
+            let state = { ...this.checkedFilters, 'page': this.pageCurrentNum + 1 };
+            history.pushState(state, null, null);
+        },
+        onNavigatePrev() {
+            if (!this.pagePrevUrl)
+                return;
 
-                this.fetch(this.pagePrevUrl);
-                let state = {...this.checkedFilters, 'page': this.pageCurrentNum - 1};
-                    history.pushState(state, null, null);
-            },
-            fetch(url, parameters) {
-                if (!url)
-                    return;
+            this.fetch(this.pagePrevUrl);
+            let state = { ...this.checkedFilters, 'page': this.pageCurrentNum - 1 };
+            history.pushState(state, null, null);
+        },
+        fetch(url, parameters) {
+            if (!url)
+                return;
 
-                if (this.nonshelter) parameters = {...parameters, ...{nonShelter: true}};
+            if (this.nonshelter) parameters = { ...parameters, ...{ nonShelter: true } };
 
-                this.isLoading = true;
+            this.isLoading = true;
 
-                axios.get(url, { params: parameters })
+            axios.get(url, { params: parameters })
                 .then((response) => { // success
                     this.animals = response.data.data;
                     this.pageCurrentNum = response.data.current_page;
@@ -93,7 +95,7 @@
                     this.total = response.data.total;
                     if (response.data.filters) {
                         this.filterOptions = response.data.filters;
-                        this.checkedFilters = {...this.filterOptions};
+                        this.checkedFilters = { ...this.filterOptions };
                         for (let name in this.checkedFilters)
                             this.checkedFilters[name] = [];
                     }
@@ -107,27 +109,32 @@
                     if (!this.initialized)
                         this.initialized = true;
                 });
-            }
+        }
+    },
+    props: {
+        csrf: {
+            type: String,
+            required: true,
+            default: '',
+            note: 'CSRF token'
         },
-        props: {
-            csrf: {
-                type: String,
-                required: true,
-                default: '',
-                note: 'CSRF token'
-            },
-            nonshelter: {
-                type: Boolean,
-                required: false,
-                default: false,
-                note: 'If true, show only non shelter animals'
+        nonshelter: {
+            type: Boolean,
+            required: false,
+            default: false,
+            note: 'If true, show only non shelter animals'
 
-            }
-        },
-        components: {
-            ListFilter,
-            AnimalsList,
-            PaginationLinks
+        }
+    },
+    components: {
+        ListFilter,
+        AnimalsList,
+        PaginationLinks
+    },
+    computed: {
+        rootPath() {
+            return window.rootPath;
         }
     }
+}
 </script>

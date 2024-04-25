@@ -8,7 +8,7 @@
 @if(!isset($person))
     <p>Incorrect person id.</p>
 @else
-<table class="table table-bordered table-sm">
+<table class="table table-bordered ">
     <tr>
         <td style="width: 15%"><strong>First name: </strong></td>
         <td>{{$person->first_name}}</td>
@@ -42,8 +42,8 @@
 {{-- PERSON ADOPTIONS --}}
 @if(isset($person_adoptions) && $person_adoptions->count() > 0)
 <h4>{{$person->first_name}} {{$person->last_name}} Adoptions</h4>
-<table class="table table-bordered table-sm">
-    <thead class="thead-dark">
+<table class="table table-bordered ">
+    <thead class="table-dark">
         <tr>
             <th scope="col">Date</th>
             <th scope="col">Animal</th>
@@ -67,8 +67,8 @@
 {{-- PERSON FOSTERS --}}
 @if(isset($person_fosters) && $person_fosters->count() > 0)
 <h4>{{$person->first_name}} {{$person->last_name}} Fosters</h4>
-<table class="table table-bordered table-sm">
-    <thead class="thead-dark">
+<table class="table table-bordered ">
+    <thead class="table-dark">
         <tr>
             <th scope="col">Start date</th>
             <th scope="col">End date</th>
@@ -94,8 +94,8 @@
 {{-- PERSON RECLAIMS --}}
 @if(isset($person_reclaims) && $person_reclaims->count() > 0)
 <h4>{{$person->first_name}} {{$person->last_name}} Reclaims</h4>
-<table class="table table-bordered table-sm">
-    <thead class="thead-dark">
+<table class="table table-bordered ">
+    <thead class="table-dark">
         <tr>
             <th scope="col">Date</th>
             <th scope="col">Animal</th>
@@ -119,8 +119,8 @@
 {{-- PERSON BRING INS --}}
 @if(isset($person->broughtInAnimals) && $person->broughtInAnimals->count() > 0)
 <h4>{{$person->first_name}} {{$person->last_name}} Bring ins</h4>
-<table class="table table-bordered table-sm">
-    <thead class="thead-dark">
+<table class="table table-bordered ">
+    <thead class="table-dark">
         <tr>
             <th scope="col">Date</th>
             <th scope="col">Animal</th>

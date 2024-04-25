@@ -14,9 +14,9 @@
     @else
         @include('partials/animal-card')
         <div class="adoption-edit-button mb-2">
-            <a href="{{route('adoptions.edit', ['adoption' => $adoption->id])}}" class="btn btn-primary btn-sm">Edit</a>
+            <a href="{{route('adoptions.edit', ['adoption' => $adoption->id])}}" class="btn btn-primary text-white">Edit</a>
         </div>
-        <table class="adoption-details-table table table-bordered table-sm">
+        <table class="adoption-details-table table table-bordered ">
             <tr>
                 <td style="width: 15%"><strong>Date: </strong></td>
                 <td>{{$adoption->adoption_date}}</td>
