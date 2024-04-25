@@ -9,3 +9,6 @@ Experimented with and learned many things client side and server side.
 - Tools used on views: VueJS, JQuery and Bootstrap.
 - Used AJAX to make custom filtering and pagination.
 
+[Live site](https://batai.w5.lt/laravel/public)
+## Login: 
+admin@admin.com | admin
