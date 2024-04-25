@@ -1,12 +1,13 @@
 
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito');
+@import '~bootstrap/dist/css/bootstrap.css';
 
 // Variables
-@import 'variables';
+// @import 'variables';
 
 // Bootstrap
-@import '~bootstrap/scss/bootstrap';
+// @import '~bootstrap/scss/bootstrap';
 
 .navbar-laravel {
   background-color: #fff;
@@ -128,4 +129,3 @@ body {
 .bold {
   font-weight: bold;
 }
-

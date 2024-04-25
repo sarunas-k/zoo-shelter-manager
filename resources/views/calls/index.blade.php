@@ -11,8 +11,8 @@
     <p>No call records found.</p>
     @else
         {{ $calls->links() }}
-        <table class="table table-bordered table-sm my-4">
-            <thead class="thead-dark">
+        <table class="table table-bordered  my-4">
+            <thead class="table-dark">
               <tr>
                 <th scope="col" style="width: 10%">Date</th>
                 <th scope="col">Name</th>
@@ -45,7 +45,7 @@
                                 @break
                         @endswitch
                     </td>
-                    <td><a href="{{route('calls.edit', ['call' => $call->id])}}" class="btn btn-primary btn-sm">Edit</a></td>
+                    <td><a href="{{route('calls.edit', ['call' => $call->id])}}" class="btn btn-primary text-white">Edit</a></td>
                     <td>
                         <delete-button csrf="{{csrf_token()}}" action="{{route('calls.destroy', ['call' => $call->id])}}"/>
                     </td>

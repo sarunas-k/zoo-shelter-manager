@@ -9,12 +9,6 @@
 @section('content')
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
           <h1 class="h2 bold">Dashboard</h1>
-          <div class="btn-toolbar mb-2 mb-md-0">
-            <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
-              <span data-feather="calendar"></span>
-              This week
-            </button>
-          </div>
         </div>
 
         <div class="admin-menu-big-buttons">
@@ -43,8 +37,8 @@
         <div class="latest-animals">
           <h3>Latest animals</h3>
         <div class="table-responsive">
-          <table class="table table-bordered table-sm my-4">
-            <thead class="thead-dark">
+          <table class="table table-bordered  my-4">
+            <thead class="table-dark">
               <tr>
                 <th scope="col">Nr</th>
                 <th scope="col">Species</th>
@@ -69,7 +63,7 @@
               @endforeach
               </tbody>
           </table>
-          <a href="{{route('animals.index')}}"><button type="button" class="btn btn-sm btn-outline-primary">
+          <a href="{{route('animals.index')}}"><button type="button" class="btn text-white btn-primary">
             More
           </button></a>
         </div>

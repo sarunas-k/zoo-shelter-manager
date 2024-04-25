@@ -14,10 +14,10 @@
 @if(!isset($adoptions) || count($adoptions) == 0)
     <p>No adoption records found.</p>
 @else
-<a href="{{route('adoptions.create')}}" class="btn btn-success btn-sm my-3">New adoption</a>
+<a href="{{route('adoptions.create')}}" class="btn btn-success text-white my-3">New adoption</a>
 {{ $adoptions->links() }}
-<table class="table table-bordered table-sm my-4 adoptions-table">
-    <thead class="thead-dark">
+<table class="table table-bordered  my-4 adoptions-table">
+    <thead class="table-dark">
         <tr>
             <th scope="col">Adoption date</th>
             <th scope="col">Return date</th>

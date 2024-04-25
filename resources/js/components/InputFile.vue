@@ -3,7 +3,7 @@
         <label :for="name" class="file-input-label">
             <p :data-feather="onlyImages ? 'image' : ''"></p>
             <p>
-                <slot></slot>
+                <slot name="text"></slot>
             </p>
         </label>
         <input type="file" class="form-control-file file-input" :name="multiple ? `${name}[]` : name" :id="name" ref="fileInput" :multiple="multiple" @change="onInputChange">

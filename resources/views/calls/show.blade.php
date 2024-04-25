@@ -7,7 +7,7 @@
     @if(!isset($call))
     <p>Incorrect call id.</p>
     @else
-        <table class="table table-bordered table-sm">
+        <table class="table table-bordered ">
             <tr>
                 <td style="width: 15%"><strong>Date: </strong></td>
                 <td>{{$call->date_time}}</td>
@@ -27,7 +27,7 @@
             <tr>
                 <td><strong>Details: </strong></td>
                 <td>{{$call->info}}</td>
-            </tr> 
+            </tr>
             <tr>
                 <td><strong>Created at: </strong></td>
                 <td>{{$call->created_at}}</td>

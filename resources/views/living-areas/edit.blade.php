@@ -20,13 +20,13 @@
         <form method="POST" action="{{route('living-areas.update', ['id' => $livingArea->id])}}">
             @csrf
             @method('PATCH')
-            <div class="form-row">
+            <div class="form-row row mb-3">
                 <div class="form-group col-md-4">
-                    <label for="area-name">Name</label>
-                    <input type="text" class="form-control" id="area-name" name="area-name" value="{{$livingArea->name}}">
+                    <label class="form-label" for="area-name">Name</label>
+                    <input type="text" class="form-control border border-dark-subtle" id="area-name" name="area-name" value="{{$livingArea->name}}">
                 </div>
             </div>
-            <button type="submit" class="btn btn-success">Save</button>
+            <button type="submit" class="btn btn-success text-white w-25 my-3">Save</button>
         </form>
     @endif
 @endsection

@@ -1,6 +1,6 @@
 <template>
   <div class="animals-list" v-if="initialized">
-      <table class="table table-sm table-bordered mb-4 table-animals-list" :style="{opacity: tableOpacity}">
+      <table class="table  table-bordered mb-4 table-animals-list" :style="{opacity: tableOpacity}">
             <tbody>
                 <tr v-show="initialized && animals.length == 0"><td colspan="12" class="text-center">No animal records found.</td></tr>
                 <tr v-for="(animal, index) in animals" v-bind:key="index">
@@ -67,8 +67,8 @@
                                 <span v-if="animal.active_fosters.length" class="badge badge-pill badge-primary">In Foster</span>
                                 <span v-if="animal.active_adoptions.length" class="badge badge-pill badge-success">Adopted</span>
                                 <span v-if="animal.active_reclaims.length" class="badge badge-pill badge-success">Reclaimed</span>
-                                <span v-if="!animal.active_fosters.length && !animal.active_adoptions.length && !animal.active_reclaims.length && !animal.adoptable" class="badge badge-pill badge-warning">Not For Adoption</span>
-                                <span v-if="animal.adoptable" class="badge badge-pill badge-primary">For Adoption</span>
+                                <span v-if="!animal.active_fosters.length && !animal.active_adoptions.length && !animal.active_reclaims.length && !animal.adoptable" class="badge rounded-pill text-bg-warning">Not For Adoption</span>
+                                <span v-if="animal.adoptable" class="badge rounded-pill text-bg-primary">For Adoption</span>
                             </span>
                         </div>
                     </td>
@@ -116,6 +116,9 @@ export default {
         storagePath() {
             return window.storagePath;
         },
+        rootPath() {
+            return window.rootPath;
+        },
         tableOpacity() {
             return this.isLoading ? 0.6 : 1
         },
@@ -134,10 +137,10 @@ export default {
     },
     methods: {
         routeAnimalDetailsPage(id) {
-            return rootPath + '/animals/' + id;
+            return this.rootPath + '/animals/' + id;
         },
         routeAnimalEditPage(id) {
-            return rootPath + '/animals/' + id + '/edit';
+            return this.rootPath + '/animals/' + id + '/edit';
         },
     }
 }

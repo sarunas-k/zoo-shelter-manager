@@ -1,12 +1,12 @@
 <template>
-    <div class="form-row mt-4">
+    <div class="form-row row mb-3 mt-4">
         <div class="form-group col-md-2">
-            <input-file name="animal-image" :multiple="true" :onlyImages="true" @inputChange="onImageInputChange">
-                Add Image
-            </input-file>
+            <InputFile name="animal-image" :multiple="true" :onlyImages="true" @inputChange="onImageInputChange">
+                <template #text>Add Image</template>
+            </InputFile>
         </div>
         <div class="form-group col-md-10">
-            <image-upload-preview :files="files"/>
+            <ImageUploadPreview :files="files"/>
         </div>
     </div>
 </template>

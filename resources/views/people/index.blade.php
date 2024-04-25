@@ -9,13 +9,13 @@
     @if(!isset($people))
         <p>No people records found.</p>
     @else
-        <a href="{{route('people.create')}}" class="btn btn-success btn-sm my-3">
+        <a href="{{route('people.create')}}" class="btn btn-success text-white my-3">
             <span data-feather="user"></span>
             New person
         </a>
         {{ $people->appends(request()->input())->links() }}
-        <table class="table table-sm table-bordered my-4">
-            <thead class="thead-dark">
+        <table class="table table-bordered my-4">
+            <thead class="table-dark">
               <tr>
                 <th scope="col">Name</th>
                 <th scope="col">Date of Birth</th>
@@ -36,7 +36,7 @@
                     <td>{{ $person->phone_second }}</td>
                     <td>{{ $person->address }}</td>
                     <td>
-                        <a href="{{route('people.edit', ['id' => $person->id])}}" class="btn btn-primary btn-sm">Edit</a>
+                        <a href="{{route('people.edit', ['id' => $person->id])}}" class="btn btn-primary text-white">Edit</a>
                     </td>
                     <td>
                         <delete-button action="{{route('people.destroy', ['id' => $person->id])}}" csrf="{{csrf_token()}}"/>

@@ -35,33 +35,33 @@
 <!-- Animal details tabs navigation -->
 <ul class="nav nav-tabs" id="animal-details-tabs" role="tablist">
     <li class="nav-item">
-        <a class="nav-link active" id="animal-profile-tab" data-toggle="tab" href="#profile" role="tab"
-            aria-controls="profile" aria-selected="true">Details</a>
+        <button class="nav-link active" id="animal-profile-tab" data-bs-toggle="tab" href="#profile" role="tab"
+            aria-controls="profile" aria-selected="true">Details</button>
     </li>
     <li class="nav-item">
-        <a class="nav-link" id="notes-tab" data-toggle="tab" href="#notes" role="tab"
-            aria-controls="notes" aria-selected="true">Notes</a>
+        <button class="nav-link" id="notes-tab" data-bs-toggle="tab" href="#notes" role="tab"
+            aria-controls="notes" aria-selected="true">Notes</button>
     </li>
     <li class="nav-item">
-        <a class="nav-link" id="vet-visits-tab" data-toggle="tab" href="#vet-visits" role="tab"
-            aria-controls="vet-visits" aria-selected="false">Vet visits</a>
+        <button class="nav-link" id="vet-visits-tab" data-bs-toggle="tab" href="#vet-visits" role="tab"
+            aria-controls="vet-visits" aria-selected="false">Vet visits</button>
     </li>
     <li class="nav-item">
-        <a class="nav-link" id="files-tab" data-toggle="tab" href="#files" role="tab" aria-controls="files"
-            aria-selected="false">Files</a>
+        <button class="nav-link" id="files-tab" data-bs-toggle="tab" href="#files" role="tab" aria-controls="files"
+            aria-selected="false">Files</button>
     </li>
     <li class="nav-item">
-        <a class="nav-link" id="images-tab" data-toggle="tab" href="#images" role="tab" aria-controls="images"
-            aria-selected="false">Images</a>
+        <button class="nav-link" id="images-tab" data-bs-toggle="tab" href="#images" role="tab" aria-controls="images"
+            aria-selected="false">Images</button>
     </li>
     <li class="nav-item">
-        <a class="nav-link" id="adopt-tab" href="{{route('adoptions.create', ['animal_id' => $animal->id])}}">Adopt</a>
+        <a class="btn nav-link" id="adopt-tab" href="{{route('adoptions.create', ['animal_id' => $animal->id])}}">Adopt</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" id="adopt-tab" href="{{route('fosters.create', ['animal_id' => $animal->id])}}">Foster</a>
+        <a class="btn nav-link" id="adopt-tab" href="{{route('fosters.create', ['animal_id' => $animal->id])}}">Foster</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" id="adopt-tab" href="{{route('reclaims.create', ['animal_id' => $animal->id])}}">Reclaim</a>
+        <a class="btn nav-link" id="adopt-tab" href="{{route('reclaims.create', ['animal_id' => $animal->id])}}">Reclaim</a>
     </li>
 </ul>
 
@@ -69,7 +69,7 @@
 <div class="tab-content my-3">
     <!-- TAB 1: Animal details -->
     <div class="tab-pane active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-        <table class="table table-bordered table-sm animal-details-table">
+        <table class="table table-bordered  animal-details-table">
             <tr>
                 <td class="number-column"><strong>Number: </strong></td>
                 <td>{{$animal->list_number}}</td>
@@ -156,10 +156,10 @@
     <!-- TAB 3: Vet visits -->
     <div class="tab-pane" id="vet-visits" role="tabpanel" aria-labelledby="vet-visits-tab">
         <a href="{{route('procedures.create.for.animal', ['id' => $animal->id])}}"
-            class="btn btn-primary btn-sm text-center">New procedure</a><br><br>
+            class="btn btn-primary text-white text-center">New procedure</a><br><br>
         @if($animal->procedures->count() < 1) <p>There are no vet visit records for this animal.</p>
             @else
-            <table class="table table-bordered table-sm">
+            <table class="table table-bordered ">
                 <thead>
                     <th style="width: 15%">Date</th>
                     <th style="width: 20%">Procedure</th>

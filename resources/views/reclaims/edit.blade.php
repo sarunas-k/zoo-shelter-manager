@@ -30,17 +30,17 @@
     @csrf
     @method('PATCH')
     @if(!isset($reclaim->return_date))
-    <div class="form-row">
+    <div class="form-row row mb-3">
         <div class="form-group col-md-8">
-            <label for="return-date"><strong>Return date:</strong></label>
-            <input type="date" class="form-control" id="return-date" name="return-date">
+            <label class="form-label" for="return-date"><strong>Return date:</strong></label>
+            <input type="date" class="form-control border border-dark-subtle" id="return-date" name="return-date">
         </div>
     </div>
     @endif
-    <div class="form-row">
+    <div class="form-row row mb-3">
         <div class="form-group col-md-8">
-            <label for="notes"><strong>Notes:</strong></label>
-            <textarea class="form-control" rows="4" id="notes" name="notes">{{$reclaim->notes}}</textarea>
+            <label class="form-label" for="notes"><strong>Notes:</strong></label>
+            <textarea class="form-control border border-dark-subtle" rows="4" id="notes" name="notes">{{$reclaim->notes}}</textarea>
         </div>
     </div>
     <button type="submit" class="btn btn-success">Save</button>

@@ -1,8 +1,8 @@
 <template>
 <div class="reports">
-    <div class="form-row">
+    <div class="row mb-3 w-50">
         <div class="form-group col-md-8">
-            <select class="custom-select" size="7" v-model="params.reportId">
+            <select class="form-select border border-dark-subtle" size="6" v-model="params.reportId">
                 <option value="0" selected>All animals in shelter</option>
                 <option value="1">Intakes</option>
                 <option value="2">Adoptions</option>
@@ -12,19 +12,19 @@
             </select>
         </div>
     </div>
-    <div class="form-row" v-if="params.reportId != 0">
+    <div class="row mb-3" v-if="params.reportId != 0">
         <div class="form-group col-md-4">
-            <label for="date-from">From:</label>
-            <input type="date" class="form-control" id="date-from" name="date-from" v-model="params.dateFrom">
+            <label class="form-label" for="date-from">From:</label>
+            <input type="date" class="form-control border border-dark-subtle" id="date-from" name="date-from" v-model="params.dateFrom">
         </div>
         <div class="form-group col-md-4">
-            <label for="date-to">Until:</label>
-            <input type="date" class="form-control" id="date-to" name="date-to" v-model="params.dateTo">
+            <label class="form-label" for="date-to">Until:</label>
+            <input type="date" class="form-control border border-dark-subtle" id="date-to" name="date-to" v-model="params.dateTo">
         </div>
     </div>
-    <div class="form-row">
+    <div class="row mb-3">
         <div class="form-group col-md-8">
-            <button class="btn btn-primary btn-block" @click="createReport">Create report</button>
+            <button class="btn btn-primary w-50 text-white my-3" @click="createReport">Create report</button>
         </div>
     </div>
     <div class="report" :style="{opacity: tableOpacity}">
@@ -41,7 +41,6 @@
             //console.log('Vue: Reports Component mounted.');
             this.params.dateFrom = this.todaysDate;
             this.params.dateTo = this.todaysDate;
-            this.rootPath = rootPath;
         },
         data() {
             return {
@@ -101,7 +100,7 @@
                 this.isLoading = true;
                 //console.log("Fetching URL: /api/reports");
 
-                axios.get(rootPath + '/api/reports', { params: this.params })
+                axios.get(this.rootPath + '/api/reports', { params: this.params })
                 .then((response) => { // success
                     // console.log("Response:");
                     // console.log(response);
@@ -127,6 +126,9 @@
                 if (month < 10) month = '0' + month;
                 if (day < 10) day = '0' + day;
                 return today.getFullYear() + '-' + month + '-' + day;
+            },
+            rootPath() {
+                return window.rootPath;
             }
         }
     }

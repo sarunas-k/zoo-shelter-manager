@@ -14,9 +14,9 @@
     @else
         @include('partials/animal-card')
         <div class="reclaim-edit-button mb-2">
-            <a href="{{route('reclaims.edit', ['reclaim' => $reclaim->id])}}" class="btn btn-primary btn-sm">Edit</a>
+            <a href="{{route('reclaims.edit', ['reclaim' => $reclaim->id])}}" class="btn btn-primary text-white">Edit</a>
         </div>
-        <table class="reclaim-details-table table table-bordered table-sm">
+        <table class="reclaim-details-table table table-bordered ">
             <tr>
                 <td style="width: 15%"><strong>Date: </strong></td>
                 <td>{{$reclaim->date}}</td>

@@ -1,5 +1,5 @@
 <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-    <a class="app-title navbar-brand col-sm-3 col-md-2 mr-0" href="/">{{$appName}}</a>
+    <a class="app-title navbar-brand col-sm-3 col-md-2 mr-0 px-3" href="{{route('home')}}">{{$appName}}</a>
     <search-field></search-field>
 <span class="nav-link col-sm-2 mr-0 text-center" style="color: #FFF">{{$user->name}}</span>
     <ul class="navbar-nav px-3">
