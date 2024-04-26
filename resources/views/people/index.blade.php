@@ -36,7 +36,7 @@
                     <td>{{ $person->phone_second }}</td>
                     <td>{{ $person->address }}</td>
                     <td>
-                        <a href="{{route('people.edit', ['id' => $person->id])}}" class="btn btn-primary text-white">Edit</a>
+                        <a href="{{route('people.edit', ['id' => $person->id])}}" class="btn btn-primary btn-sm text-white">Edit</a>
                     </td>
                     <td>
                         <delete-button action="{{route('people.destroy', ['id' => $person->id])}}" csrf="{{csrf_token()}}"/>

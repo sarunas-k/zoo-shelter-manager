@@ -35,7 +35,7 @@
           <h3>Latest</h3>
         <div class="table-responsive">
           <table class="table table-hover my-4">
-            <thead class="table-secondary">
+            <thead class="table-active">
               <tr>
                 <th scope="col">Nr</th>
                 <th scope="col">Species</th>

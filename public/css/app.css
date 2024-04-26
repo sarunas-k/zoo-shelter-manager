@@ -12097,3 +12097,7 @@ body #app a, body #app button {
 .sidebar-sticky ul li a {
   letter-spacing: -0.05rem;
 }
+
+.settings-wrapper input[type=text] {
+  text-align: left;
+}

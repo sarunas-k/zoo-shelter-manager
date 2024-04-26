@@ -45,7 +45,7 @@
                                 @break
                         @endswitch
                     </td>
-                    <td><a href="{{route('calls.edit', ['call' => $call->id])}}" class="btn btn-primary text-white">Edit</a></td>
+                    <td><a href="{{route('calls.edit', ['call' => $call->id])}}" class="btn btn-primary btn-sm text-white">Edit</a></td>
                     <td>
                         <delete-button csrf="{{csrf_token()}}" action="{{route('calls.destroy', ['call' => $call->id])}}"/>
                     </td>
