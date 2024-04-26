@@ -18,3 +18,9 @@ artisan
 .gitattributes
 /.vscode
 /public/js/global.js
+phpunit.xml
+server.php
+webpack.mix.js
+composer.lock
+package-lock.json
+.gitignore
