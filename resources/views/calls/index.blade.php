@@ -11,7 +11,7 @@
     <p>No call records found.</p>
     @else
         {{ $calls->links() }}
-        <table class="table table-bordered  my-4">
+        <table class="table table-bordered my-4">
             <thead class="table-dark">
               <tr>
                 <th scope="col" style="width: 10%">Date</th>
@@ -35,17 +35,17 @@
                     <td>
                         @switch($call->status)
                             @case('Waiting')
-                                <span class="badge badge-pill badge-success">Waiting</span>
+                                <span class="badge rounded-pill text-bg-success">Waiting</span>
                                 @break
                             @case('Finished')
-                                <span class="badge badge-pill badge-secondary">Finished</span>
+                                <span class="badge rounded-pill text-bg-secondary">Finished</span>
                                 @break
                             @case('On hold')
-                                <span class="badge badge-pill badge-warning">On hold</span>
+                                <span class="badge rounded-pill text-bg-warning">On hold</span>
                                 @break
                         @endswitch
                     </td>
-                    <td><a href="{{route('calls.edit', ['call' => $call->id])}}" class="btn btn-primary text-white">Edit</a></td>
+                    <td><a href="{{route('calls.edit', ['call' => $call->id])}}" class="btn btn-primary text-white btn-sm">Edit</a></td>
                     <td>
                         <delete-button csrf="{{csrf_token()}}" action="{{route('calls.destroy', ['call' => $call->id])}}"/>
                     </td>

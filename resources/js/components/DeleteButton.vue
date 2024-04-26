@@ -2,7 +2,7 @@
     <form method="POST" :action="action">
         <input type="hidden" name="_token" :value="csrf">
         <input type="hidden" name="_method" value="DELETE">
-        <button type="submit" class="btn btn-danger text-white">
+        <button type="submit" class="btn btn-danger btn-sm text-white">
             <slot><span data-feather="x"></span></slot>
         </button>
     </form>
