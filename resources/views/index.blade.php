@@ -7,35 +7,32 @@
 @section('title', 'Management App')
 
 @section('content')
-        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-          <h1 class="h2 bold">Dashboard</h1>
-        </div>
 
         <div class="admin-menu-big-buttons">
           <a href="{{route('animals.index')}}">
             <div class="big-button first">
-              <span>Animals in shelter</span>
+              <span>List</span>
             </div>
           </a>
           <a href="{{route('animals.create')}}">
             <div class="big-button">
-              <span>Animal intake</span>
+              <span>Intake</span>
             </div>
           </a>
           <a href="{{route('calls.index')}}">
             <div class="big-button">
-              <span>Call registration</span>
+              <span>Calls</span>
             </div>
           </a>
           <a href="#">
             <div class="big-button">
-              <span>Calendar</span>
+              <span>Reports</span>
             </div>
           </a>
         </div>
 
         <div class="latest-animals">
-          <h3>Latest animals</h3>
+          <h3>Latest</h3>
         <div class="table-responsive">
           <table class="table table-bordered  my-4">
             <thead class="table-dark">
@@ -63,7 +60,7 @@
               @endforeach
               </tbody>
           </table>
-          <a href="{{route('animals.index')}}"><button type="button" class="btn text-white btn-primary">
+          <a href="{{route('animals.index')}}"><button type="button" class="btn btn-outline-secondary">
             More
           </button></a>
         </div>

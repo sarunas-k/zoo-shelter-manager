@@ -7,14 +7,20 @@
 
         .big-button {
             width: 23.75%;
-            height:200px;
-            background-color: #d6eef9;
+            padding: 5rem 0;
             float: left;
             position: relative;
             margin-left: 1.66%;
+            transition: all .2s ease;
+            border: 2px solid #CCC;
+            border-top: 20px solid #CCC;
 
             &.first {
                 margin-left: 0;
+            }
+
+            &:hover {
+                border-color: #999;
             }
 
             span {
@@ -23,8 +29,9 @@
                 top: 50%;
                 transform: translateX(-50%) translateY(-50%);
                 font-family: 'Nunito', sans-serif;
-                font-size: 30px;
+                font-size: 1.5rem;
                 text-align: center;
+                text-transform: uppercase;
             }
         }
     }
