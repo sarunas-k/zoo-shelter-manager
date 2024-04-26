@@ -6,8 +6,8 @@
                 <tr v-for="(animal, index) in animals" v-bind:key="index">
                     <td class="animal-image-container">
                         <a :href="routeAnimalDetailsPage(animal.id)">
-                            <img v-if="animal.images.length > 0" :src="storagePath + '/app/' + animal.images[0].path" class="animal-image"/>
-                            <img v-if="animal.images.length == 0" :src="storagePath + '/app/images/no_image.jpeg'" class="animal-image"/>
+                            <img v-if="animal.images.length > 0" :src="storagePath + animal.images[0].path" class="animal-image"/>
+                            <img v-if="animal.images.length == 0" :src="storagePath + 'images/no-image.png'" class="animal-image"/>
                         </a>
                     </td>
                     <td>
@@ -137,10 +137,10 @@ export default {
     },
     methods: {
         routeAnimalDetailsPage(id) {
-            return this.rootPath + '/animals/' + id;
+            return this.rootPath + 'animals/' + id;
         },
         routeAnimalEditPage(id) {
-            return this.rootPath + '/animals/' + id + '/edit';
+            return this.rootPath + 'animals/' + id + '/edit';
         },
     }
 }

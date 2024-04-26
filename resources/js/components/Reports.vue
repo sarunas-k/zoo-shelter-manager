@@ -100,7 +100,7 @@
                 this.isLoading = true;
                 //console.log("Fetching URL: /api/reports");
 
-                axios.get(this.rootPath + '/api/reports', { params: this.params })
+                axios.get(this.rootPath + 'api/reports', { params: this.params })
                 .then((response) => { // success
                     // console.log("Response:");
                     // console.log(response);

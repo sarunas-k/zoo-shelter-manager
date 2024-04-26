@@ -25,6 +25,7 @@ export default {
     },
     methods: {
         onImageInputChange(event) {
+            console.log(this.files);
             this.files = event.target.files;
         }
     },

@@ -128,7 +128,7 @@
             <div class="animal-images">
                 <div v-for="(image, index) in images" :key="'image' + index" class="animal-image-container">
                     <span @click="deleteImage(image.id)" class="delete-button">x</span>
-                    <img :src="storagePath + '/app/' + image.path" :id="image.id" class="animal-image">
+                    <img :src="storagePath + image.path" :id="image.id" class="animal-image">
                 </div>
             </div>
         </div>
@@ -154,7 +154,7 @@ export default {
     },
     methods: {
         getRouteFormSubmit() {
-            let route = this.rootPath + '/animals';
+            let route = this.rootPath + 'animals';
             if (this.editform)
                 route += `/${this.oldvalues['id']}`;
             return route;
@@ -172,7 +172,7 @@ export default {
             return '';
         },
         deleteImage(imageId) {
-            axios.delete(`${this.rootPath}/api/images/${imageId}`, null, null)
+            axios.delete(`${this.rootPath}api/images/${imageId}`, null, null)
                 .then((response) => { // success
                     this.images = this.images.filter(image => image.id !== imageId);
                 })
@@ -201,7 +201,7 @@ export default {
     },
     computed: {
         storagePath() {
-            return window.window.storagePath;
+            return window.storagePath;
         },
         rootPath() {
             return window.rootPath;

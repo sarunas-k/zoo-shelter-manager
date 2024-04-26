@@ -1,7 +1,7 @@
 <div class="animal-card card mb-3">
     <div class="row no-gutters p-2">
         <div class="col">
-            <img src="{{Storage::url($animal->images->count() > 0 ? $animal->images->first()->path : base_url() . '/images/no_image.jpeg')}}" class="card-img" alt="Animal {{$animal->list_number}} - {{$animal->name}}">
+            <img src="{{Storage::url($animal->images->count() > 0 ? $animal->images->first()->path : '/images/no-image.png')}}" class="card-img" alt="Animal {{$animal->list_number}} - {{$animal->name}}">
         </div>
 
         <div class="col-9">

@@ -107,7 +107,7 @@ class AnimalsRepository implements IAnimalsRepository {
                 $filename = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
                 $extension = $imageFile->guessClientExtension();
                 $fileNameToStore = $filename . '_' . time() . '.' . $extension;
-                $path = $imageFile->storeAs('public/images', $fileNameToStore);
+                $path = $imageFile->store('images');
                 $animal->images()->attach(Image::create(['path' => $path]));
             }
         }
@@ -159,7 +159,7 @@ class AnimalsRepository implements IAnimalsRepository {
                 $filename = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
                 $extension = $imageFile->guessClientExtension();
                 $fileNameToStore = $filename . '_' . time() . '.' . $extension;
-                $path = $imageFile->storeAs('public/images', $fileNameToStore);
+                $path = $imageFile->store('images');
                 $image = new Image;
                 $image->path = $path;
                 $image->save();
