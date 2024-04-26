@@ -11972,7 +11972,12 @@ textarea.form-control-lg {
 }
 
 body {
-  font-size: 0.875rem;
+  font-size: 1rem;
+  background-color: #f0f0f0;
+  letter-spacing: -0.03rem;
+}
+body #app a, body #app button {
+  text-decoration: none;
 }
 
 .feather {
@@ -12083,4 +12088,12 @@ body {
 
 #app > nav.fixed-top {
   background-color: rgb(19, 153, 72);
+}
+
+.table * {
+  text-align: center;
+}
+
+.sidebar-sticky ul li a {
+  letter-spacing: -0.05rem;
 }

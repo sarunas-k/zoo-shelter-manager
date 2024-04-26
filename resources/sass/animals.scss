@@ -17,16 +17,16 @@
 }
 
 .tab-content {
+
+    .tab-pane {
+        background-color: white;
+        overflow: hidden;
+        border: 1px solid rgba(0, 0, 0, 0.175);
+        border-top: 0;
+    }
+
     .number-column {
         width: 15%;
-    }
-
-    #vet-visits {
-        margin-left: 1rem;
-    }
-
-    #files, #images {
-        margin-left: 1rem;
     }
 
     .animal-images {
@@ -51,9 +51,19 @@
 }
 
 .animal-badges {
-    width: 150px;
+    text-align: center;
 
     .badge {
         width: 150px;
     }
+}
+
+button.dropdown-toggle {
+    background-color: white;
+}
+
+.animal-card-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

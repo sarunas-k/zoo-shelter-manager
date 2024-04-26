@@ -14,6 +14,7 @@
   transition: all 0.2s ease;
   border: 2px solid #CCC;
   border-top: 20px solid #CCC;
+  background-color: white;
 }
 .admin-menu-big-buttons a .big-button.first {
   margin-left: 0;
@@ -30,9 +31,14 @@
   font-size: 1.5rem;
   text-align: center;
   text-transform: uppercase;
+  letter-spacing: -0.05rem;
 }
 
 .latest-animals {
   clear: left;
   margin-top: 2em;
+}
+
+.btn-outline-secondary {
+  background-color: white;
 }/*# sourceMappingURL=index.css.map */

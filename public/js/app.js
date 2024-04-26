@@ -8094,7 +8094,7 @@ var render = function render() {
     staticClass: "page-item"
   }, [_c("span", {
     staticClass: "page-link"
-  }, [_vm._v("Page " + _vm._s(_vm.currentPage) + " of " + _vm._s(_vm.totalPages))])]), _vm._v(" "), _c("li", {
+  }, [_vm._v(_vm._s(_vm.currentPage) + " of " + _vm._s(_vm.totalPages))])]), _vm._v(" "), _c("li", {
     staticClass: "page-item page-item-next"
   }, [_c("a", {
     staticClass: "page-link",

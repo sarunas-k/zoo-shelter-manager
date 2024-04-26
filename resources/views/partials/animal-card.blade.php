@@ -1,10 +1,10 @@
 <div class="animal-card card mb-3">
     <div class="row no-gutters p-2">
-        <div class="col">
+        <div class="col animal-card-image">
             <img src="{{Storage::url($animal->images->count() > 0 ? $animal->images->first()->path : '/images/no-image.png')}}" class="card-img" alt="Animal {{$animal->list_number}} - {{$animal->name}}">
         </div>
 
-        <div class="col-9">
+        <div class="col-9 mt-3">
             <div class="card-body px-2 py-0">
                 <h5 class="card-title">{{$animal->list_number}} - {{$animal->name}}</h5>
                 <table class="table  table-bordered">
@@ -31,7 +31,7 @@
                 </table>
             </div>
         </div>
-        <div class="animal-badges mx-2">
+        <div class="animal-badges col-3 mb-3">
             @if($animal->is_neutered)<span class="badge rounded-pill text-bg-primary">Spayed/Neutered</span>@endif
             @if($animal->is_fostered)<span class="badge rounded-pill text-bg-success">In Foster</span>@endif
             @if($animal->is_adopted)<span class="badge rounded-pill text-bg-success">Adopted</span>@endif
