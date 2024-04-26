@@ -7731,7 +7731,7 @@ var render = function render() {
       value: "DELETE"
     }
   }), _vm._v(" "), _c("button", {
-    staticClass: "btn btn-danger text-white",
+    staticClass: "btn btn-danger btn-sm text-white",
     attrs: {
       type: "submit"
     }
