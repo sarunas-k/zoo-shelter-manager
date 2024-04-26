@@ -27,7 +27,7 @@
                         <input type="checkbox" class="form-check-input" v-model="user.is_admin" @change="updateUserStatus(user)" />
                     </td>
                     <td>
-                        <span class="delete-button" @click="deleteUser(user.id)">Delete user</span>
+                        <span v-if="user.email !== 'admin@admin.com'" class="delete-button" @click="deleteUser(user.id)">Delete user</span>
                     </td>
                 </tr>
             </table>

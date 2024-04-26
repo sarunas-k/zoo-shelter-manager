@@ -8529,14 +8529,14 @@ var render = function render() {
           return _vm.updateUserStatus(user);
         }]
       }
-    })]), _vm._v(" "), _c("td", [_c("span", {
+    })]), _vm._v(" "), _c("td", [user.email !== "admin@admin.com" ? _c("span", {
       staticClass: "delete-button",
       on: {
         click: function click($event) {
           return _vm.deleteUser(user.id);
         }
       }
-    }, [_vm._v("Delete user")])])]);
+    }, [_vm._v("Delete user")]) : _vm._e()])]);
   })], 2)]), _vm._v(" "), _c("h4", {
     staticClass: "section-title"
   }, [_vm._v("Staff")]), _vm._v(" "), _c("div", {
