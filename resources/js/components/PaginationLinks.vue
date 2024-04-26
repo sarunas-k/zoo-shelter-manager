@@ -7,7 +7,7 @@
               <span class="visually-hidden">Previous</span>
             </a>
           </li>
-          <li class="page-item"><span class="page-link">Page {{ currentPage }} of {{ totalPages }}</span></li>
+          <li class="page-item"><span class="page-link">{{ currentPage }} of {{ totalPages }}</span></li>
           <li class="page-item page-item-next">
             <a class="page-link" aria-label="Next" @click="navigateNext">
               <span aria-hidden="true">&raquo;</span>

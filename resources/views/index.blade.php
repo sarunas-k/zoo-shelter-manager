@@ -34,8 +34,8 @@
         <div class="latest-animals">
           <h3>Latest</h3>
         <div class="table-responsive">
-          <table class="table table-bordered  my-4">
-            <thead class="table-dark">
+          <table class="table table-hover my-4">
+            <thead class="table-secondary">
               <tr>
                 <th scope="col">Nr</th>
                 <th scope="col">Species</th>
@@ -60,7 +60,7 @@
               @endforeach
               </tbody>
           </table>
-          <a href="{{route('animals.index')}}"><button type="button" class="btn btn-outline-secondary">
+          <a href="{{route('animals.index')}}"><button type="button" class="btn btn-outline-secondary px-5">
             More
           </button></a>
         </div>

@@ -66,9 +66,9 @@
 </ul>
 
 <!-- Tab panes -->
-<div class="tab-content my-3">
+<div class="tab-content mb-3">
     <!-- TAB 1: Animal details -->
-    <div class="tab-pane active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+    <div class="tab-pane p-3 active p-3" id="profile" role="tabpanel" aria-labelledby="profile-tab">
         <table class="table table-bordered  animal-details-table">
             <tr>
                 <td class="number-column"><strong>Number: </strong></td>
@@ -146,7 +146,7 @@
             </tr>
         </table>
     </div>
-    <div class="tab-pane" id="notes" role="tabpanel" aria-labelledby="notes-tab" style="margin-left: 1rem">
+    <div class="tab-pane p-3" id="notes" role="tabpanel" aria-labelledby="notes-tab">
         @if($animal->notes)
             {{$animal->notes}}
         @else
@@ -154,7 +154,7 @@
         @endif
     </div>
     <!-- TAB 3: Vet visits -->
-    <div class="tab-pane" id="vet-visits" role="tabpanel" aria-labelledby="vet-visits-tab">
+    <div class="tab-pane p-3" id="vet-visits" role="tabpanel" aria-labelledby="vet-visits-tab">
         <a href="{{route('procedures.create.for.animal', ['id' => $animal->id])}}"
             class="btn btn-primary text-white text-center">New procedure</a><br><br>
         @if($animal->procedures->count() < 1) <p>There are no vet visit records for this animal.</p>
@@ -179,11 +179,11 @@
             @endif
     </div>
     <!-- TAB 4: Animal files -->
-    <div class="tab-pane" id="files" role="tabpanel" aria-labelledby="files-tab">
+    <div class="tab-pane p-3" id="files" role="tabpanel" aria-labelledby="files-tab">
         No files yet.
     </div>
     <!-- TAB 5: Animal images -->
-    <div class="tab-pane" id="images" role="tabpanel" aria-labelledby="images-tab">
+    <div class="tab-pane p-3" id="images" role="tabpanel" aria-labelledby="images-tab">
         <div class="animal-images">
             @if ($animal->images->count() > 0)
                 @foreach($animal->images as $image)
