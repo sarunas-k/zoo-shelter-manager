@@ -22,7 +22,7 @@ export default {
             if (!this.query)
                 return;
 
-            window.location.href = window.location.origin + this.rootPath + '/search?q=' + this.query;
+            window.location.href = window.location.origin + this.rootPath + 'search?q=' + this.query;
         }
     },
     computed: {

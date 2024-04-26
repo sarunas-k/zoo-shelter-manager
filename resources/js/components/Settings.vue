@@ -12,7 +12,7 @@
 
         <h4 class="section-title">Users</h4>
         <div class="mt-3 mb-5 section">
-            <a :href="rootPath + '/users/create'" class="btn btn-success mb-3 text-white">New User</a>
+            <a :href="rootPath + 'users/create'" class="btn btn-success mb-3 text-white">New User</a>
             <table class="table table-bordered" :style="{ opacity: isUsersTableLoading ? 0.6 : 1 }">
                 <tr>
                     <th>Name</th>
@@ -35,7 +35,7 @@
 
         <h4 class="section-title">Staff</h4>
         <div class="mt-3 mb-5 section">
-            <a :href="rootPath + '/staff/create'" class="btn btn-success mb-3 text-white">New Staff</a>
+            <a :href="rootPath + 'staff/create'" class="btn btn-success mb-3 text-white">New Staff</a>
             <table class="table table-bordered" :style="{ opacity: isStaffTableLoading ? 0.6 : 1 }">
                 <tr>
                     <th>First name</th>
@@ -81,7 +81,7 @@ export default {
     },
     methods: {
         updateSetting(setting) {
-            axios.patch(`${this.rootPath}/api/settings/${setting.id}`, null, { params: { 'value': setting.value } })
+            axios.patch(`${this.rootPath}api/settings/${setting.id}`, null, { params: { 'value': setting.value } })
                 .then((response) => { // success
                 })
                 .catch(function (error) {
@@ -93,7 +93,7 @@ export default {
         },
         deleteUser(id) {
             this.isUsersTableLoading = true;
-            axios.delete(`${this.rootPath}/api/users/${id}`, null, null)
+            axios.delete(`${this.rootPath}api/users/${id}`, null, null)
                 .then((response) => { // success
                     this.usersList = this.usersList.filter(user => user.id !== id);
                 })
@@ -107,7 +107,7 @@ export default {
         },
         deleteStaff(id) {
             this.isStaffTableLoading = true;
-            axios.delete(`${this.rootPath}/api/staff/${id}`, null, null)
+            axios.delete(`${this.rootPath}api/staff/${id}`, null, null)
                 .then((response) => { // success
                     this.staffList = this.staffList.filter(staff => staff.id !== id);
                 })
@@ -121,7 +121,7 @@ export default {
         },
         updateUserStatus(user) {
             this.isUsersTableLoading = true;
-            axios.patch(`${this.rootPath}/api/users/${user.id}`, null, { params: { 'is_admin': user.is_admin } })
+            axios.patch(`${this.rootPath}api/users/${user.id}`, null, { params: { 'is_admin': user.is_admin } })
                 .then((response) => { // success
                 })
                 .catch(function (error) {
@@ -134,7 +134,7 @@ export default {
         },
         updateStaffStatus(staff) {
             this.isStaffTableLoading = true;
-            axios.patch(`${this.rootPath}/api/staff/${staff.id}`, null, {
+            axios.patch(`${this.rootPath}api/staff/${staff.id}`, null, {
                 params: {
                     'is_vet': staff.is_vet,
                     'phone': staff.phone

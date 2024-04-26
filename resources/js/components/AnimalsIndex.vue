@@ -36,7 +36,7 @@ export default {
             initialized: false,
             checkedFilters: {},
             filterOptions: {},
-            url: window.rootPath + '/api/animals'
+            url: window.rootPath + 'api/animals'
         }
     },
     methods: {
@@ -58,7 +58,7 @@ export default {
             this.checkedFilters = { ...params };
             // Start pagination from page 1 after submitting new filter
             params['page'] = 1;
-            this.fetch(this.rootPath + '/api/animals', params);
+            this.fetch(this.rootPath + 'api/animals', params);
             history.pushState(params, null, null);
         },
         onNavigateNext() {
