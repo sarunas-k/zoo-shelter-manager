@@ -8495,7 +8495,7 @@ var render = function render() {
   }, [_vm._m(0), _vm._v(" "), _vm._l(_vm.usersList, function (user) {
     return _c("tr", {
       key: user.id
-    }, [_c("td", [_vm._v(_vm._s(user.name))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(user.email))]), _vm._v(" "), _c("td", [_c("input", {
+    }, [_c("td", [_vm._v(_vm._s(user.name))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(user.email))]), _vm._v(" "), _c("td", [user.email !== "admin@admin.com" ? _c("input", {
       directives: [{
         name: "model",
         rawName: "v-model",
@@ -8529,7 +8529,7 @@ var render = function render() {
           return _vm.updateUserStatus(user);
         }]
       }
-    })]), _vm._v(" "), _c("td", [user.email !== "admin@admin.com" ? _c("span", {
+    }) : _vm._e()]), _vm._v(" "), _c("td", [user.email !== "admin@admin.com" ? _c("span", {
       staticClass: "delete-button",
       on: {
         click: function click($event) {

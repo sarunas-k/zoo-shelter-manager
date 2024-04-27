@@ -24,7 +24,7 @@
                     <td>{{ user.name }}</td>
                     <td>{{ user.email }}</td>
                     <td>
-                        <input type="checkbox" class="form-check-input" v-model="user.is_admin" @change="updateUserStatus(user)" />
+                        <input  v-if="user.email !== 'admin@admin.com'" type="checkbox" class="form-check-input" v-model="user.is_admin" @change="updateUserStatus(user)" />
                     </td>
                     <td>
                         <span v-if="user.email !== 'admin@admin.com'" class="delete-button" @click="deleteUser(user.id)">Delete user</span>
