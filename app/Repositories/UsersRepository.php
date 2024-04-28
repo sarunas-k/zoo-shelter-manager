@@ -20,11 +20,13 @@ class UsersRepository implements IUsersRepository {
         $user = new User;
         $user->name = $formFields['name'];
         $user->email = $formFields['email'];
+        $user->question = $formFields['question'];
+        $user->answer = $formFields['answer'];
         $user->password = bcrypt($formFields['password']);
         $user->is_admin = $formFields['is-admin'] == 'on' ? '1' : '0';
         $user->api_token = Str::random(30);
         $user->save();
-    }   
+    }
 
     public function updateFromInput($id, $formFields) {
         $user = $this->get($id);

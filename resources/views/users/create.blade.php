@@ -39,6 +39,16 @@
         </div>
         <div class="row mb-3">
             <div class="form-group col-md-4">
+                <label class="form-label" for="question">Security question</label>
+                <input type="text" class="form-control border border-dark-subtle" id="question" name="question" placeholder="Question" value="{{old('question')}}">
+            </div>
+            <div class="form-group col-md-4">
+                <label class="form-label" for="answer">Answer</label>
+                <input type="text" class="form-control border border-dark-subtle" id="answer" name="answer" placeholder="Answer" value="{{old('answer')}}">
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="form-group col-md-4">
                 <label class="form-label" for="is-admin">Admin</label>
                 <input type="hidden" name="is-admin" value="0">
                 <input type="checkbox" id="is-admin" name="is-admin" @if(old('is-admin')) checked @endif>
