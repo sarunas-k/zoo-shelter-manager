@@ -1,24 +1,30 @@
+
 .admin-menu-big-buttons {
     overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1.666%;
 
     a {
         text-decoration: none;
         color: #000;
+        overflow: hidden;
+        display: block;
+        width: 49%;
 
         .big-button {
-            width: 23.75%;
-            padding: 5rem 0;
+            display: block;
             float: left;
+            padding: 1.5rem 0;
             position: relative;
-            margin-left: 1.66%;
             transition: all .2s ease;
             border: 2px solid #CCC;
             border-top: 20px solid #CCC;
             background-color: white;
-
-            &.first {
-                margin-left: 0;
-            }
+            z-index: 100;
+            margin-bottom: .5rem;
+            width: 100%;
 
             &:hover {
                 border-color: #999;
@@ -41,7 +47,15 @@
 
 .latest-animals {
     clear: left;
-    margin-top: 2em;
+    margin-top: 1rem;
+
+    h3 {
+        text-align: center;
+    }
+    button {
+        display: block;
+        margin: 0 auto;
+    }
 }
 
 .btn-outline-secondary {

@@ -1,6 +1,6 @@
-<nav class="col-md-2 d-none d-md-block bg-light sidebar">
+<nav class="col-md-3 col-lg-2 bg-light sidebar">
     <div class="sidebar-sticky">
-        <ul class="nav flex-column">
+        <ul class="nav flex-md-column">
             {{-- <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-1 mb-2 text-muted">
          <span>Facility</span>
        </h6>
@@ -15,63 +15,63 @@
        </li> --}}
             <li class="nav-item">
                 <a class="nav-link active" href="{{ route('home') }}">
-                    <span data-feather="home"></span>
+                    <span data-feather="home"></span><p>
                     Manager dashboard <span class="visually-hidden">(current)</span>
-                </a>
+                </p></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('animals.index') }}">
-                    <span data-feather="clipboard"></span>
+                    <span data-feather="clipboard"></span><p>
                     Animals
-                </a>
+                </p></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('animals.create') }}">
-                    <span data-feather="plus"></span>
+                    <span data-feather="plus"></span><p>
                     Add Animal
-                </a>
+                </p></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('calls.index') }}">
-                    <span data-feather="list"></span>
+                    <span data-feather="list"></span><p>
                     Calls
-                </a>
+                </p></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('calls.create') }}">
-                    <span data-feather="phone"></span>
+                    <span data-feather="phone"></span><p>
                     Add Call
-                </a>
+                </p></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('adoptions.index') }}">
-                    <span data-feather="briefcase"></span>
+                    <span data-feather="briefcase"></span><p>
                     Adoptions
-                </a>
+                </p></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('fosters.index') }}">
-                    <span data-feather="sun"></span>
+                    <span data-feather="sun"></span><p>
                     Fosters
-                </a>
+                </p></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('reclaims.index') }}">
-                    <span data-feather="arrow-left-circle"></span>
+                    <span data-feather="arrow-left-circle"></span><p>
                     Reclaims
-                </a>
+                </p></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('living-areas.index') }}">
-                    <span data-feather="grid"></span>
+                    <span data-feather="grid"></span><p>
                     Living Areas
-                </a>
+                </p></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('people.index') }}">
-                    <span data-feather="user"></span>
+                    <span data-feather="user"></span><p>
                     People
-                </a>
+                </p></a>
             </li>
             <li class="nav-item">
                 @if (Auth::user()->isAdmin())
@@ -79,9 +79,9 @@
                 @else
                     <a class="nav-link disabled opacity-25" href="#">
                 @endif
-                <span data-feather="sliders"></span>
+                <span data-feather="sliders"></span><p>
                 Settings
-                </a>
+                </p></a>
             </li>
             <li class="nav-item">
                 @if (Auth::user()->isAdmin())
@@ -89,15 +89,15 @@
                 @else
                     <a class="nav-link disabled opacity-25" href="#">
                 @endif
-                    <span data-feather="bar-chart-2"></span>
+                    <span data-feather="bar-chart-2"></span><p>
                     Reports
-                </a>
+                </p></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('animals.index', ['only_adopted_reclaimed' => true]) }}">
-                    <span data-feather="book"></span>
+                    <span data-feather="book"></span><p>
                     Off-shelter animals
-                </a>
+                </p></a>
             </li>
         </ul>
 
