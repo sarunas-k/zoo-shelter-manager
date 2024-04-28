@@ -20,6 +20,8 @@ class UsersController extends Controller
         $formFields = $this->validate($request, [
             'name' => 'required|string',
             'email' => 'required|email',
+            'question' => 'required|string',
+            'answer' => 'required|string',
             'password' => 'required|confirmed',
             'is-admin' => 'required'
         ]);
@@ -28,7 +30,7 @@ class UsersController extends Controller
 
         return redirect('/settings')->with('success', 'User was created');
     }
-    
+
     public function update(Request $request, $id) {
         /**
          * AJAX Request
@@ -49,6 +51,6 @@ class UsersController extends Controller
         } else {
             return redirect('/settings')->with('success', 'User was deleted');
         }
-        
+
     }
 }
