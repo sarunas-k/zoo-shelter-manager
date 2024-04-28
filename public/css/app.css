@@ -274,10 +274,10 @@ p {
 
 abbr[title] {
   -webkit-text-decoration: underline dotted;
-  text-decoration: underline dotted;
+          text-decoration: underline dotted;
   cursor: help;
   -webkit-text-decoration-skip-ink: none;
-  text-decoration-skip-ink: none;
+          text-decoration-skip-ink: none;
 }
 
 address {
@@ -2117,8 +2117,8 @@ progress {
   line-height: 1.5;
   color: var(--bs-body-color);
   -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
+     -moz-appearance: none;
+          appearance: none;
   background-color: var(--bs-body-bg);
   background-clip: padding-box;
   border: var(--bs-border-width) solid var(--bs-border-color);
@@ -2273,8 +2273,8 @@ textarea.form-control-lg {
   line-height: 1.5;
   color: var(--bs-body-color);
   -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
+     -moz-appearance: none;
+          appearance: none;
   background-color: var(--bs-body-bg);
   background-image: var(--bs-form-select-bg-img), var(--bs-form-select-bg-icon, none);
   background-repeat: no-repeat;
@@ -2356,8 +2356,8 @@ textarea.form-control-lg {
   margin-top: 0.25em;
   vertical-align: top;
   -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
+     -moz-appearance: none;
+          appearance: none;
   background-color: var(--bs-form-check-bg);
   background-image: var(--bs-form-check-bg-image);
   background-repeat: no-repeat;
@@ -2365,7 +2365,7 @@ textarea.form-control-lg {
   background-size: contain;
   border: var(--bs-border-width) solid var(--bs-border-color);
   -webkit-print-color-adjust: exact;
-  print-color-adjust: exact;
+          print-color-adjust: exact;
 }
 .form-check-input[type=checkbox] {
   border-radius: 0.25em;
@@ -2464,8 +2464,8 @@ textarea.form-control-lg {
   height: 1.5rem;
   padding: 0;
   -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
+     -moz-appearance: none;
+          appearance: none;
   background-color: transparent;
 }
 .form-range:focus {
@@ -2485,7 +2485,7 @@ textarea.form-control-lg {
   height: 1rem;
   margin-top: -0.25rem;
   -webkit-appearance: none;
-  appearance: none;
+          appearance: none;
   background-color: #0d6efd;
   border: 0;
   border-radius: 1rem;
@@ -2514,7 +2514,7 @@ textarea.form-control-lg {
   width: 1rem;
   height: 1rem;
   -moz-appearance: none;
-  appearance: none;
+       appearance: none;
   background-color: #0d6efd;
   border: 0;
   border-radius: 1rem;
@@ -2957,8 +2957,8 @@ textarea.form-control-lg {
   vertical-align: middle;
   cursor: pointer;
   -webkit-user-select: none;
-  -moz-user-select: none;
-  user-select: none;
+     -moz-user-select: none;
+          user-select: none;
   border: var(--bs-btn-border-width) solid var(--bs-btn-border-color);
   border-radius: var(--bs-btn-border-radius);
   background-color: var(--bs-btn-bg);
@@ -5344,8 +5344,8 @@ textarea.form-control-lg {
 .btn-close:disabled, .btn-close.disabled {
   pointer-events: none;
   -webkit-user-select: none;
-  -moz-user-select: none;
-  user-select: none;
+     -moz-user-select: none;
+          user-select: none;
   opacity: var(--bs-btn-close-disabled-opacity);
 }
 
@@ -6778,16 +6778,16 @@ textarea.form-control-lg {
 }
 .placeholder-wave {
   -webkit-mask-image: linear-gradient(130deg, #000 55%, rgba(0, 0, 0, 0.8) 75%, #000 95%);
-  mask-image: linear-gradient(130deg, #000 55%, rgba(0, 0, 0, 0.8) 75%, #000 95%);
+          mask-image: linear-gradient(130deg, #000 55%, rgba(0, 0, 0, 0.8) 75%, #000 95%);
   -webkit-mask-size: 200% 100%;
-  mask-size: 200% 100%;
+          mask-size: 200% 100%;
   animation: placeholder-wave 2s linear infinite;
 }
 
 @keyframes placeholder-wave {
   100% {
     -webkit-mask-position: -200% 0%;
-    mask-position: -200% 0%;
+            mask-position: -200% 0%;
   }
 }
 .clearfix::after {
@@ -7161,27 +7161,27 @@ textarea.form-control-lg {
 
 .object-fit-contain {
   -o-object-fit: contain !important;
-  object-fit: contain !important;
+     object-fit: contain !important;
 }
 
 .object-fit-cover {
   -o-object-fit: cover !important;
-  object-fit: cover !important;
+     object-fit: cover !important;
 }
 
 .object-fit-fill {
   -o-object-fit: fill !important;
-  object-fit: fill !important;
+     object-fit: fill !important;
 }
 
 .object-fit-scale {
   -o-object-fit: scale-down !important;
-  object-fit: scale-down !important;
+     object-fit: scale-down !important;
 }
 
 .object-fit-none {
   -o-object-fit: none !important;
-  object-fit: none !important;
+     object-fit: none !important;
 }
 
 .opacity-0 {
@@ -8262,32 +8262,32 @@ textarea.form-control-lg {
 
 .column-gap-0 {
   -moz-column-gap: 0 !important;
-  column-gap: 0 !important;
+       column-gap: 0 !important;
 }
 
 .column-gap-1 {
   -moz-column-gap: 0.25rem !important;
-  column-gap: 0.25rem !important;
+       column-gap: 0.25rem !important;
 }
 
 .column-gap-2 {
   -moz-column-gap: 0.5rem !important;
-  column-gap: 0.5rem !important;
+       column-gap: 0.5rem !important;
 }
 
 .column-gap-3 {
   -moz-column-gap: 1rem !important;
-  column-gap: 1rem !important;
+       column-gap: 1rem !important;
 }
 
 .column-gap-4 {
   -moz-column-gap: 1.5rem !important;
-  column-gap: 1.5rem !important;
+       column-gap: 1.5rem !important;
 }
 
 .column-gap-5 {
   -moz-column-gap: 3rem !important;
-  column-gap: 3rem !important;
+       column-gap: 3rem !important;
 }
 
 .font-monospace {
@@ -8844,20 +8844,20 @@ textarea.form-control-lg {
 
 .user-select-all {
   -webkit-user-select: all !important;
-  -moz-user-select: all !important;
-  user-select: all !important;
+     -moz-user-select: all !important;
+          user-select: all !important;
 }
 
 .user-select-auto {
   -webkit-user-select: auto !important;
-  -moz-user-select: auto !important;
-  user-select: auto !important;
+     -moz-user-select: auto !important;
+          user-select: auto !important;
 }
 
 .user-select-none {
   -webkit-user-select: none !important;
-  -moz-user-select: none !important;
-  user-select: none !important;
+     -moz-user-select: none !important;
+          user-select: none !important;
 }
 
 .pe-none {
@@ -9124,23 +9124,23 @@ textarea.form-control-lg {
   }
   .object-fit-sm-contain {
     -o-object-fit: contain !important;
-    object-fit: contain !important;
+       object-fit: contain !important;
   }
   .object-fit-sm-cover {
     -o-object-fit: cover !important;
-    object-fit: cover !important;
+       object-fit: cover !important;
   }
   .object-fit-sm-fill {
     -o-object-fit: fill !important;
-    object-fit: fill !important;
+       object-fit: fill !important;
   }
   .object-fit-sm-scale {
     -o-object-fit: scale-down !important;
-    object-fit: scale-down !important;
+       object-fit: scale-down !important;
   }
   .object-fit-sm-none {
     -o-object-fit: none !important;
-    object-fit: none !important;
+       object-fit: none !important;
   }
   .d-sm-inline {
     display: inline !important;
@@ -9641,27 +9641,27 @@ textarea.form-control-lg {
   }
   .column-gap-sm-0 {
     -moz-column-gap: 0 !important;
-    column-gap: 0 !important;
+         column-gap: 0 !important;
   }
   .column-gap-sm-1 {
     -moz-column-gap: 0.25rem !important;
-    column-gap: 0.25rem !important;
+         column-gap: 0.25rem !important;
   }
   .column-gap-sm-2 {
     -moz-column-gap: 0.5rem !important;
-    column-gap: 0.5rem !important;
+         column-gap: 0.5rem !important;
   }
   .column-gap-sm-3 {
     -moz-column-gap: 1rem !important;
-    column-gap: 1rem !important;
+         column-gap: 1rem !important;
   }
   .column-gap-sm-4 {
     -moz-column-gap: 1.5rem !important;
-    column-gap: 1.5rem !important;
+         column-gap: 1.5rem !important;
   }
   .column-gap-sm-5 {
     -moz-column-gap: 3rem !important;
-    column-gap: 3rem !important;
+         column-gap: 3rem !important;
   }
   .text-sm-start {
     text-align: left !important;
@@ -9685,23 +9685,23 @@ textarea.form-control-lg {
   }
   .object-fit-md-contain {
     -o-object-fit: contain !important;
-    object-fit: contain !important;
+       object-fit: contain !important;
   }
   .object-fit-md-cover {
     -o-object-fit: cover !important;
-    object-fit: cover !important;
+       object-fit: cover !important;
   }
   .object-fit-md-fill {
     -o-object-fit: fill !important;
-    object-fit: fill !important;
+       object-fit: fill !important;
   }
   .object-fit-md-scale {
     -o-object-fit: scale-down !important;
-    object-fit: scale-down !important;
+       object-fit: scale-down !important;
   }
   .object-fit-md-none {
     -o-object-fit: none !important;
-    object-fit: none !important;
+       object-fit: none !important;
   }
   .d-md-inline {
     display: inline !important;
@@ -10202,27 +10202,27 @@ textarea.form-control-lg {
   }
   .column-gap-md-0 {
     -moz-column-gap: 0 !important;
-    column-gap: 0 !important;
+         column-gap: 0 !important;
   }
   .column-gap-md-1 {
     -moz-column-gap: 0.25rem !important;
-    column-gap: 0.25rem !important;
+         column-gap: 0.25rem !important;
   }
   .column-gap-md-2 {
     -moz-column-gap: 0.5rem !important;
-    column-gap: 0.5rem !important;
+         column-gap: 0.5rem !important;
   }
   .column-gap-md-3 {
     -moz-column-gap: 1rem !important;
-    column-gap: 1rem !important;
+         column-gap: 1rem !important;
   }
   .column-gap-md-4 {
     -moz-column-gap: 1.5rem !important;
-    column-gap: 1.5rem !important;
+         column-gap: 1.5rem !important;
   }
   .column-gap-md-5 {
     -moz-column-gap: 3rem !important;
-    column-gap: 3rem !important;
+         column-gap: 3rem !important;
   }
   .text-md-start {
     text-align: left !important;
@@ -10246,23 +10246,23 @@ textarea.form-control-lg {
   }
   .object-fit-lg-contain {
     -o-object-fit: contain !important;
-    object-fit: contain !important;
+       object-fit: contain !important;
   }
   .object-fit-lg-cover {
     -o-object-fit: cover !important;
-    object-fit: cover !important;
+       object-fit: cover !important;
   }
   .object-fit-lg-fill {
     -o-object-fit: fill !important;
-    object-fit: fill !important;
+       object-fit: fill !important;
   }
   .object-fit-lg-scale {
     -o-object-fit: scale-down !important;
-    object-fit: scale-down !important;
+       object-fit: scale-down !important;
   }
   .object-fit-lg-none {
     -o-object-fit: none !important;
-    object-fit: none !important;
+       object-fit: none !important;
   }
   .d-lg-inline {
     display: inline !important;
@@ -10763,27 +10763,27 @@ textarea.form-control-lg {
   }
   .column-gap-lg-0 {
     -moz-column-gap: 0 !important;
-    column-gap: 0 !important;
+         column-gap: 0 !important;
   }
   .column-gap-lg-1 {
     -moz-column-gap: 0.25rem !important;
-    column-gap: 0.25rem !important;
+         column-gap: 0.25rem !important;
   }
   .column-gap-lg-2 {
     -moz-column-gap: 0.5rem !important;
-    column-gap: 0.5rem !important;
+         column-gap: 0.5rem !important;
   }
   .column-gap-lg-3 {
     -moz-column-gap: 1rem !important;
-    column-gap: 1rem !important;
+         column-gap: 1rem !important;
   }
   .column-gap-lg-4 {
     -moz-column-gap: 1.5rem !important;
-    column-gap: 1.5rem !important;
+         column-gap: 1.5rem !important;
   }
   .column-gap-lg-5 {
     -moz-column-gap: 3rem !important;
-    column-gap: 3rem !important;
+         column-gap: 3rem !important;
   }
   .text-lg-start {
     text-align: left !important;
@@ -10807,23 +10807,23 @@ textarea.form-control-lg {
   }
   .object-fit-xl-contain {
     -o-object-fit: contain !important;
-    object-fit: contain !important;
+       object-fit: contain !important;
   }
   .object-fit-xl-cover {
     -o-object-fit: cover !important;
-    object-fit: cover !important;
+       object-fit: cover !important;
   }
   .object-fit-xl-fill {
     -o-object-fit: fill !important;
-    object-fit: fill !important;
+       object-fit: fill !important;
   }
   .object-fit-xl-scale {
     -o-object-fit: scale-down !important;
-    object-fit: scale-down !important;
+       object-fit: scale-down !important;
   }
   .object-fit-xl-none {
     -o-object-fit: none !important;
-    object-fit: none !important;
+       object-fit: none !important;
   }
   .d-xl-inline {
     display: inline !important;
@@ -11324,27 +11324,27 @@ textarea.form-control-lg {
   }
   .column-gap-xl-0 {
     -moz-column-gap: 0 !important;
-    column-gap: 0 !important;
+         column-gap: 0 !important;
   }
   .column-gap-xl-1 {
     -moz-column-gap: 0.25rem !important;
-    column-gap: 0.25rem !important;
+         column-gap: 0.25rem !important;
   }
   .column-gap-xl-2 {
     -moz-column-gap: 0.5rem !important;
-    column-gap: 0.5rem !important;
+         column-gap: 0.5rem !important;
   }
   .column-gap-xl-3 {
     -moz-column-gap: 1rem !important;
-    column-gap: 1rem !important;
+         column-gap: 1rem !important;
   }
   .column-gap-xl-4 {
     -moz-column-gap: 1.5rem !important;
-    column-gap: 1.5rem !important;
+         column-gap: 1.5rem !important;
   }
   .column-gap-xl-5 {
     -moz-column-gap: 3rem !important;
-    column-gap: 3rem !important;
+         column-gap: 3rem !important;
   }
   .text-xl-start {
     text-align: left !important;
@@ -11368,23 +11368,23 @@ textarea.form-control-lg {
   }
   .object-fit-xxl-contain {
     -o-object-fit: contain !important;
-    object-fit: contain !important;
+       object-fit: contain !important;
   }
   .object-fit-xxl-cover {
     -o-object-fit: cover !important;
-    object-fit: cover !important;
+       object-fit: cover !important;
   }
   .object-fit-xxl-fill {
     -o-object-fit: fill !important;
-    object-fit: fill !important;
+       object-fit: fill !important;
   }
   .object-fit-xxl-scale {
     -o-object-fit: scale-down !important;
-    object-fit: scale-down !important;
+       object-fit: scale-down !important;
   }
   .object-fit-xxl-none {
     -o-object-fit: none !important;
-    object-fit: none !important;
+       object-fit: none !important;
   }
   .d-xxl-inline {
     display: inline !important;
@@ -11885,27 +11885,27 @@ textarea.form-control-lg {
   }
   .column-gap-xxl-0 {
     -moz-column-gap: 0 !important;
-    column-gap: 0 !important;
+         column-gap: 0 !important;
   }
   .column-gap-xxl-1 {
     -moz-column-gap: 0.25rem !important;
-    column-gap: 0.25rem !important;
+         column-gap: 0.25rem !important;
   }
   .column-gap-xxl-2 {
     -moz-column-gap: 0.5rem !important;
-    column-gap: 0.5rem !important;
+         column-gap: 0.5rem !important;
   }
   .column-gap-xxl-3 {
     -moz-column-gap: 1rem !important;
-    column-gap: 1rem !important;
+         column-gap: 1rem !important;
   }
   .column-gap-xxl-4 {
     -moz-column-gap: 1.5rem !important;
-    column-gap: 1.5rem !important;
+         column-gap: 1.5rem !important;
   }
   .column-gap-xxl-5 {
     -moz-column-gap: 3rem !important;
-    column-gap: 3rem !important;
+         column-gap: 3rem !important;
   }
   .text-xxl-start {
     text-align: left !important;
@@ -11976,7 +11976,8 @@ body {
   background-color: #f0f0f0;
   letter-spacing: -0.03rem;
 }
-body #app a, body #app button {
+body #app a,
+body #app button {
   text-decoration: none;
 }
 
@@ -11994,8 +11995,10 @@ body #app a, body #app button {
   top: 0;
   bottom: 0;
   left: 0;
-  z-index: 100; /* Behind the navbar */
-  padding: 48px 0 0; /* Height of navbar */
+  z-index: 100;
+  /* Behind the navbar */
+  padding: 48px 0 0;
+  /* Height of navbar */
   box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.1);
 }
 
@@ -12005,7 +12008,11 @@ body #app a, body #app button {
   height: calc(100vh - 48px);
   padding-top: 0.5rem;
   overflow-x: hidden;
-  overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+  overflow-y: auto;
+  /* Scrollable contents if viewport is shorter than content. */
+}
+.sidebar-sticky .sidebar ul.nav {
+  flex-direction: column;
 }
 
 @supports (position: sticky) {
@@ -12013,9 +12020,27 @@ body #app a, body #app button {
     position: sticky;
   }
 }
+.sidebar-sticky ul {
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: nowrap;
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+.sidebar-sticky ul::-webkit-scrollbar {
+  display: none;
+}
+
 .sidebar .nav-link {
   font-weight: 500;
   color: #333;
+  text-align: center;
+}
+.sidebar .nav-link p {
+  text-wrap: nowrap;
 }
 
 .sidebar .nav-link .feather {
@@ -12042,12 +12067,15 @@ body #app a, body #app button {
  * Content
  */
 [role=main] {
-  padding-top: 133px; /* Space for fixed navbar */
+  z-index: 100;
+  padding-top: 133px;
+  /* Space for fixed navbar */
 }
 
 @media (min-width: 768px) {
   [role=main] {
-    padding-top: 48px; /* Space for fixed navbar */
+    padding-top: 48px;
+    /* Space for fixed navbar */
   }
 }
 /*
@@ -12090,6 +12118,62 @@ body #app a, body #app button {
   background-color: rgb(19, 153, 72);
 }
 
+@media (max-width: 767.98px) {
+  #app > nav.fixed-top span.nav-link {
+    display: flex;
+    flex-grow: 1;
+    justify-content: right;
+  }
+  #app > nav.fixed-top span.nav-link.first {
+    margin-left: 0;
+  }
+}
+.latest-animals .table th:nth-child(4), .latest-animals .table th:nth-child(6),
+.latest-animals .table td:nth-child(4),
+.latest-animals .table td:nth-child(6) {
+  display: none;
+}
+
+@media (min-width: 576px) {
+  div.admin-menu-big-buttons {
+    flex-wrap: nowrap;
+  }
+  div.admin-menu-big-buttons a {
+    width: 25%;
+  }
+  div.admin-menu-big-buttons a div.big-button {
+    padding: 5rem 0;
+  }
+}
+@media (min-width: 768px) {
+  main .latest-animals {
+    margin-top: 2rem;
+  }
+}
+@media (min-width: 992px) {
+  .sidebar .sidebar-sticky ul li.nav-item a {
+    text-align: left;
+    margin-left: 5px;
+  }
+  .sidebar .sidebar-sticky ul li.nav-item a svg {
+    vertical-align: middle;
+  }
+  .sidebar .sidebar-sticky ul li.nav-item a p {
+    display: inline;
+    vertical-align: text-top;
+  }
+  main div.latest-animals .table th:nth-child(4), main div.latest-animals .table th:nth-child(6),
+  main div.latest-animals .table td:nth-child(4),
+  main div.latest-animals .table td:nth-child(6) {
+    display: table-cell;
+  }
+  main div.latest-animals h3, main div.latest-animals .h3 {
+    text-align: left;
+  }
+  main div.latest-animals button {
+    margin: 0;
+  }
+}
 .table * {
   text-align: center;
 }

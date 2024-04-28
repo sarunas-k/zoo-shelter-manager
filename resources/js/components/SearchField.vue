@@ -1,5 +1,5 @@
 <template>
-    <div class="search-field w-100">
+    <div class="search-field w-100 d-none d-md-block">
         <input class="form-control form-control-dark rounded-1" type="text"
             placeholder="Enter id number, name or microchip number" aria-label="Search" @keyup.enter="submitSearch"
             v-model="query">
