@@ -35,13 +35,13 @@
                     <td>
                         @switch($call->status)
                             @case('Waiting')
-                                <span class="badge badge-pill badge-success">Waiting</span>
+                                <span class="badge rounded-pill text-bg-success">Waiting</span>
                                 @break
                             @case('Finished')
-                                <span class="badge badge-pill badge-secondary">Finished</span>
+                                <span class="badge rounded-pill text-bg-secondary">Finished</span>
                                 @break
                             @case('On hold')
-                                <span class="badge badge-pill badge-warning">On hold</span>
+                                <span class="badge rounded-pill text-bg-warning">On hold</span>
                                 @break
                         @endswitch
                     </td>
