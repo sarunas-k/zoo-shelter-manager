@@ -1,13 +1,7 @@
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito');
-@import '~bootstrap/scss/bootstrap.scss';
-// @import '~bootstrap/scss/bootstrap-grid.scss';
-
-// Variables
-// @import 'variables';
-
-// Bootstrap
-// @import '~bootstrap/scss/bootstrap';
+@import '~bootstrap/scss/bootstrap';
+@import 'variables';
 
 .navbar-laravel {
     background-color: #fff;
@@ -38,76 +32,75 @@ body {
 .sidebar {
     position: fixed;
     top: 0;
-    bottom: 0;
     left: 0;
-    z-index: 100;
+    bottom: unset;
+    right: 0;
+    z-index: 101;
     /* Behind the navbar */
     padding: 48px 0 0;
     /* Height of navbar */
     box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
-}
 
-.sidebar-sticky {
-    position: relative;
-    top: 0;
-    height: calc(100vh - 48px);
-    padding-top: .5rem;
-    overflow-x: hidden;
-    overflow-y: auto;
-    /* Scrollable contents if viewport is shorter than content. */
+    .sidebar-sticky {
+        position: relative;
+        top: 0;
+        padding-top: .5rem;
+        overflow: auto;
+        /* Scrollable contents if viewport is shorter than content. */
+        height: auto;
 
-    .sidebar ul.nav {
-        flex-direction: column;
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        &::-webkit-scrollbar {
+            display: none;
+        }
+
+        -ms-overflow-style: none;
+        /* IE and Edge */
+        scrollbar-width: none;
+        /* Firefox */
+
+        ul.nav {
+            flex-direction: row;
+            flex-wrap: nowrap;
+
+            li a.nav-link {
+                font-weight: 500;
+                color: #333;
+                text-align: center;
+                letter-spacing: -.05rem;
+
+                p {
+                    text-wrap: nowrap;
+                }
+
+                &:hover,
+                &:active {
+                    .feather {
+                        color: inherit;
+                    }
+                }
+
+                .feather {
+                    margin-right: 4px;
+                    color: #999;
+                }
+
+                &.active {
+                    color: #007bff;
+                    background-color: #e5e5e5;
+                }
+            }
+        }
     }
 }
+
+
 
 @supports ((position: -webkit-sticky) or (position: sticky)) {
     .sidebar-sticky {
         position: -webkit-sticky;
         position: sticky;
     }
-}
-
-.sidebar-sticky ul {
-    flex-direction: row;
-    justify-content: center;
-    flex-wrap: nowrap;
-
-    /* Hide scrollbar for Chrome, Safari and Opera */
-    &::-webkit-scrollbar {
-        display: none;
-    }
-
-    -ms-overflow-style: none;
-    /* IE and Edge */
-    scrollbar-width: none;
-    /* Firefox */
-}
-
-
-.sidebar .nav-link {
-    font-weight: 500;
-    color: #333;
-    text-align: center;
-
-    p {
-        text-wrap: nowrap;
-    }
-}
-
-.sidebar .nav-link .feather {
-    margin-right: 4px;
-    color: #999;
-}
-
-.sidebar .nav-link.active {
-    color: #007bff;
-    background-color: #e5e5e5;
-}
-
-.sidebar .nav-link:hover .feather,
-.sidebar .nav-link.active .feather {
-    color: inherit;
 }
 
 .sidebar-heading {
@@ -121,13 +114,13 @@ body {
 
 [role="main"] {
     z-index: 100;
-    padding-top: 133px;
+    padding: $fixed-top-height $gap-basic $gap-basic $gap-basic;
     /* Space for fixed navbar */
 }
 
 @media (min-width: 768px) {
     [role="main"] {
-        padding-top: 48px;
+        padding-top: $fixed-top-height-desktop;
         /* Space for fixed navbar */
     }
 }
@@ -185,41 +178,19 @@ body {
     }
 }
 
-.latest-animals .table {
-
-    th,
-    td {
-
-        &:nth-child(4),
-        &:nth-child(6) {
-            display: none;
-        }
-    }
-}
-
-@include media-breakpoint-up(sm) {
-    div.admin-menu-big-buttons {
-        flex-wrap: nowrap;
-
-        a {
-            width: 25%;
-
-            div.big-button {
-                padding: 5rem 0;
-            }
-        }
-    }
-
-}
-
 @include media-breakpoint-up(md) {
-    main .latest-animals {
-        margin-top: 2rem;
+    nav.sidebar {
+        bottom: 0;
+        right: unset;
+
+        .sidebar-sticky {
+            height: calc(100vh - $fixed-top-height-desktop);
+        }
     }
 }
 
 @include media-breakpoint-up(lg) {
-    .sidebar .sidebar-sticky {
+    #app .sidebar .sidebar-sticky {
         ul li.nav-item a {
             text-align: left;
             margin-left: 5px;
@@ -234,39 +205,10 @@ body {
             }
         }
     }
-
-    main div.latest-animals {
-        .table {
-
-            th,
-            td {
-
-                &:nth-child(4),
-                &:nth-child(6) {
-                    display: table-cell;
-                }
-            }
-
-        }
-
-        h3 {
-            text-align: left;
-        }
-
-        button {
-            margin: 0;
-        }
-    }
 }
 
 .table * {
     text-align: center;
-}
-
-.sidebar-sticky {
-    ul li a {
-        letter-spacing: -.05rem;
-    }
 }
 
 .settings-wrapper input[type=text] {
