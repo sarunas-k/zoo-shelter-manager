@@ -1,18 +1,97 @@
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins/breakpoints";
+@import "variables";
+
+@include media-breakpoint-up(sm) {
+    div#app main[role="main"] {
+        padding-top: $fixed-top-height;
+        padding-left: $gap-basic;
+        padding-right: $gap-basic;
+
+        div.admin-menu-big-buttons {
+            flex-wrap: nowrap;
+            gap: $gap-basic;
+
+            a {
+                width: calc(25% - ($gap-basic * 3 / 4));
+
+                div.big-button {
+                    padding: 5rem 0;
+                    margin-bottom: .5rem;
+                    border-width: 2px;
+                    border-top-width: 20px;
+                }
+            }
+        }
+    }
+}
+
+@include media-breakpoint-up(md) {
+    div#app .row main[role="main"] {
+        padding-top: $fixed-top-height-desktop;
+
+        .latest-animals {
+            margin-top: 2rem;
+        }
+    }
+}
+
+@include media-breakpoint-up(lg) {
+    main div.latest-animals {
+        .table {
+
+            th,
+            td {
+
+                &:nth-child(4),
+                &:nth-child(6) {
+                    display: table-cell;
+                }
+            }
+
+        }
+
+        h3 {
+            text-align: left;
+        }
+
+        button {
+            margin: 0;
+        }
+    }
+}
+
+#app main[role="main"] {
+    padding: calc($fixed-top-height + $gap-sm) 0 $gap-sm 0;
+}
 
 .admin-menu-big-buttons {
     overflow: hidden;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    gap: 1.666%;
+    gap: $gap-sm;
 
     a {
         text-decoration: none;
         color: #000;
         overflow: hidden;
         display: block;
-        width: 49%;
+        width: calc(50% - ($gap-sm / 2));
 
+        &:nth-of-type(1),
+        &:nth-of-type(3) {
+            .big-button {
+                border-left-width: 20px;
+            }
+        }
+        &:nth-of-type(2),
+        &:nth-of-type(4) {
+            .big-button {
+                border-right-width: 20px;
+            }
+        }
         .big-button {
             display: block;
             float: left;
@@ -20,10 +99,8 @@
             position: relative;
             transition: all .2s ease;
             border: 2px solid #CCC;
-            border-top: 20px solid #CCC;
             background-color: white;
             z-index: 100;
-            margin-bottom: .5rem;
             width: 100%;
 
             &:hover {
@@ -52,9 +129,22 @@
     h3 {
         text-align: center;
     }
+
     button {
         display: block;
         margin: 0 auto;
+    }
+
+    .table {
+
+        th,
+        td {
+
+            &:nth-child(4),
+            &:nth-child(6) {
+                display: none;
+            }
+        }
     }
 }
 
