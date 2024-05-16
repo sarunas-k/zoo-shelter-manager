@@ -1,4 +1,4 @@
-# Sandbox. Laravel and VueJS
+# Sandbox
 [<img alt="Deployed with FTP Deploy Action" src="https://img.shields.io/badge/Deployed With-FTP DEPLOY ACTION-%3CCOLOR%3E?style=for-the-badge&color=0077b6">](https://github.com/SamKirkland/FTP-Deploy-Action)
 
 Built as side project to learn about Laravel PHP framework and VueJS as well as practice UML and SQL databases.
