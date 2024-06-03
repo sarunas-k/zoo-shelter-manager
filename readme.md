@@ -5,7 +5,7 @@ This application was built using Vue.js and Laravel. Database was built by desig
 - MySQL (Workbench) database system.
 - Regular MVC structure. 
 - Frontend stack: Vue.js, Blade templates, jQuery, Bootstrap.
-- Github actions for continuous deployment.
+- Github Actions for continuous deployment.
 
 [Live site](http://sarunask.jumpingcrab.com)
 ## Login: 
